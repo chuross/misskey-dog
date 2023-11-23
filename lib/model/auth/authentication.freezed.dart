@@ -20,7 +20,7 @@ Authentication _$AuthenticationFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Authentication {
-  @JsonKey(name: 'i')
+  @JsonKey(name: 'token')
   String get token => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $AuthenticationCopyWith<$Res> {
           Authentication value, $Res Function(Authentication) then) =
       _$AuthenticationCopyWithImpl<$Res, Authentication>;
   @useResult
-  $Res call({@JsonKey(name: 'i') String token});
+  $Res call({@JsonKey(name: 'token') String token});
 }
 
 /// @nodoc
@@ -70,7 +70,7 @@ abstract class _$$AuthCompletionImplCopyWith<$Res>
       __$$AuthCompletionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'i') String token});
+  $Res call({@JsonKey(name: 'token') String token});
 }
 
 /// @nodoc
@@ -98,13 +98,13 @@ class __$$AuthCompletionImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AuthCompletionImpl implements _AuthCompletion {
-  const _$AuthCompletionImpl({@JsonKey(name: 'i') required this.token});
+  const _$AuthCompletionImpl({@JsonKey(name: 'token') required this.token});
 
   factory _$AuthCompletionImpl.fromJson(Map<String, dynamic> json) =>
       _$$AuthCompletionImplFromJson(json);
 
   @override
-  @JsonKey(name: 'i')
+  @JsonKey(name: 'token')
   final String token;
 
   @override
@@ -141,13 +141,14 @@ class _$AuthCompletionImpl implements _AuthCompletion {
 
 abstract class _AuthCompletion implements Authentication {
   const factory _AuthCompletion(
-      {@JsonKey(name: 'i') required final String token}) = _$AuthCompletionImpl;
+          {@JsonKey(name: 'token') required final String token}) =
+      _$AuthCompletionImpl;
 
   factory _AuthCompletion.fromJson(Map<String, dynamic> json) =
       _$AuthCompletionImpl.fromJson;
 
   @override
-  @JsonKey(name: 'i')
+  @JsonKey(name: 'token')
   String get token;
   @override
   @JsonKey(ignore: true)

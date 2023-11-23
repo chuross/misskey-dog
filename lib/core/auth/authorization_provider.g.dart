@@ -6,7 +6,7 @@ part of 'authorization_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authorizationHash() => r'59cf0d02323ff55a0d79bdf7f7aaaa902e486e71';
+String _$authorizationHash() => r'5803d229c666a81448a184d21ca64538cb43e19e';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -34,7 +34,7 @@ class _SystemHash {
 const authorizationProvider = AuthorizationFamily();
 
 /// See also [authorization].
-class AuthorizationFamily extends Family<AsyncValue<bool>> {
+class AuthorizationFamily extends Family<AsyncValue<Authentication?>> {
   /// See also [authorization].
   const AuthorizationFamily();
 
@@ -75,7 +75,7 @@ class AuthorizationFamily extends Family<AsyncValue<bool>> {
 }
 
 /// See also [authorization].
-class AuthorizationProvider extends AutoDisposeFutureProvider<bool> {
+class AuthorizationProvider extends AutoDisposeFutureProvider<Authentication?> {
   /// See also [authorization].
   AuthorizationProvider({
     required String host,
@@ -115,7 +115,7 @@ class AuthorizationProvider extends AutoDisposeFutureProvider<bool> {
 
   @override
   Override overrideWith(
-    FutureOr<bool> Function(AuthorizationRef provider) create,
+    FutureOr<Authentication?> Function(AuthorizationRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -133,7 +133,7 @@ class AuthorizationProvider extends AutoDisposeFutureProvider<bool> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<bool> createElement() {
+  AutoDisposeFutureProviderElement<Authentication?> createElement() {
     return _AuthorizationProviderElement(this);
   }
 
@@ -154,7 +154,7 @@ class AuthorizationProvider extends AutoDisposeFutureProvider<bool> {
   }
 }
 
-mixin AuthorizationRef on AutoDisposeFutureProviderRef<bool> {
+mixin AuthorizationRef on AutoDisposeFutureProviderRef<Authentication?> {
   /// The parameter `host` of this provider.
   String get host;
 
@@ -163,7 +163,8 @@ mixin AuthorizationRef on AutoDisposeFutureProviderRef<bool> {
 }
 
 class _AuthorizationProviderElement
-    extends AutoDisposeFutureProviderElement<bool> with AuthorizationRef {
+    extends AutoDisposeFutureProviderElement<Authentication?>
+    with AuthorizationRef {
   _AuthorizationProviderElement(super.provider);
 
   @override

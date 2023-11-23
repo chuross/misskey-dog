@@ -22,7 +22,7 @@ final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapp
     final authentication = ref.watch(authorizationProvider(host: host, session: session));
 
     ref.listen(authorizationProvider(host: host, session: session), (_, current) {
-      if (current.requireValue) {
+      if (current.value != null) {
         context.replaceRoute(const HomeRoute());
       }
     });
@@ -31,7 +31,7 @@ final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapp
       body: authentication.when(
         data: (_) => const SizedBox.shrink(),
         error: (_, __) => ErrorView(onRetry: () {
-          _ = ref.refresh(authorizationProvider(host: host, session: session));
+          ref.refresh(authorizationProvider(host: host, session: session));
         }),
         loading: () => const CircularProgressIndicator(),
       ),

@@ -15,7 +15,7 @@ final class ErrorView extends StatelessWidget {
       children: [
         Text(
           'エラーが発生しました'.i18n,
-          style: context.textTheme.displayLarge,
+          style: context.textTheme.headlineMedium,
         ),
         const SizedBox(height: 64),
         ElevatedButton(

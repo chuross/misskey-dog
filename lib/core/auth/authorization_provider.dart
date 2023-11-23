@@ -1,11 +1,12 @@
 import 'package:misskey_dog/core/api/misskey_client_provider.dart';
 import 'package:misskey_dog/core/auth/auth_state_provider.dart';
+import 'package:misskey_dog/model/auth/authentication.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'authorization_provider.g.dart';
 
 @riverpod
-Future<bool> authorization(
+Future<Authentication?> authorization(
   AuthorizationRef ref, {
   required String host,
   required String session,
@@ -18,5 +19,5 @@ Future<bool> authorization(
 
   await ref.watch(authStateProvider.notifier).setAuthentication(authentication);
 
-  return true;
+  return authentication;
 }
