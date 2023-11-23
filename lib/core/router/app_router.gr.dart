@@ -26,8 +26,18 @@ abstract class $AppRouter extends _i4.RootStackRouter {
       );
     },
     LoginCallbackRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
       final args = routeData.argsAs<LoginCallbackRouteArgs>(
-          orElse: () => const LoginCallbackRouteArgs());
+          orElse: () => LoginCallbackRouteArgs(
+                host: queryParams.getString(
+                  'host',
+                  '',
+                ),
+                session: queryParams.getString(
+                  'session',
+                  '',
+                ),
+              ));
       return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i4.WrappedRoute(
@@ -78,6 +88,10 @@ class LoginCallbackRoute extends _i4.PageRouteInfo<LoginCallbackRouteArgs> {
             host: host,
             session: session,
           ),
+          rawQueryParams: {
+            'host': host,
+            'session': session,
+          },
           initialChildren: children,
         );
 

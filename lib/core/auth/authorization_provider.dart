@@ -10,7 +10,6 @@ Future<bool> authorization(
   required String host,
   required String session,
 }) async {
-  print('authorization: host=$host, session=$session');
   if (host.isEmpty) throw ArgumentError.value(host, 'host is empty');
   if (session.isEmpty) throw ArgumentError.value(session, 'session is empty');
 

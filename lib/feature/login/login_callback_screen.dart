@@ -13,8 +13,8 @@ final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapp
 
   const LoginCallbackScreen({
     super.key,
-    this.host = '',
-    this.session = '',
+    @QueryParam() this.host = '',
+    @QueryParam() this.session = '',
   });
 
   @override
