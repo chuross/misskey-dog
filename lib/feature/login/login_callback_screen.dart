@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:i18n_extension/i18n_widget.dart';
 import 'package:misskey_dog/core/auth/authorization_provider.dart';
-import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
+import 'package:misskey_dog/core/ui/error_view.dart';
 
 @RoutePage()
 final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapper {
@@ -30,7 +30,9 @@ final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapp
     return Scaffold(
       body: authentication.when(
         data: (_) => const SizedBox.shrink(),
-        error: (_, __) => const Text('error').align(Alignment.center),
+        error: (_, __) => ErrorView(onRetry: () {
+          _ = ref.refresh(authorizationProvider(host: host, session: session));
+        }),
         loading: () => const CircularProgressIndicator(),
       ),
     );
