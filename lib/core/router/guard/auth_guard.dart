@@ -4,13 +4,13 @@ import 'package:misskey_dog/core/auth/auth_state_provider.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 
 final class AuthGuard extends AutoRouteGuard {
-  Ref ref;
+  final Ref _ref;
 
-  AuthGuard(this.ref);
+  AuthGuard(this._ref);
 
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
-    final authentication = await ref.read(authStateProvider.future);
+    final authentication = await _ref.read(authStateProvider.future);
     if (authentication != null) {
       resolver.next(true);
     } else {
