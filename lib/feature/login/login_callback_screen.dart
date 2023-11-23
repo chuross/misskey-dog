@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:i18n_extension/i18n_widget.dart';
-import 'package:misskey_dog/core/provider/auth/authorization_provider.dart';
+import 'package:misskey_dog/core/auth/authorization_provider.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 
 @RoutePage()

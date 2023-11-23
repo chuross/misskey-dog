@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:misskey_dog/core/provider/storage/secure_storage_provider.dart';
+import 'package:misskey_dog/core/storage/secure_storage_provider.dart';
 import 'package:misskey_dog/model/auth/authentication.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

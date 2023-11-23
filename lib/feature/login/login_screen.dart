@@ -7,7 +7,7 @@ import 'package:misskey_dog/core/api/misskey_client.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/core/config/config.dart';
-import 'package:misskey_dog/core/provider/ui/text_editing_controller_provider.dart';
+import 'package:misskey_dog/core/ui/text_editing_controller_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
 

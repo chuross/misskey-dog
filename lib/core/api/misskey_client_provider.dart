@@ -1,5 +1,5 @@
+import 'package:misskey_dog/core/api/dio_provider.dart';
 import 'package:misskey_dog/core/api/misskey_client.dart';
-import 'package:misskey_dog/core/provider/api/dio_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'misskey_client_provider.g.dart';
