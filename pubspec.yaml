@@ -10,7 +10,10 @@ dependencies:
   auto_route: ^7.8.4
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   flutter_riverpod: ^2.4.8
+  i18n_extension: ^10.0.1
   riverpod_annotation: ^2.3.2
 
 dev_dependencies:

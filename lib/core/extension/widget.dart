@@ -14,4 +14,10 @@ extension WidgetExt on Widget {
       child: this,
     );
   }
+
+  Widget expanded() {
+    return Expanded(
+      child: this,
+    );
+  }
 }
