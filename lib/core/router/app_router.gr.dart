@@ -19,7 +19,7 @@ abstract class $AppRouter extends _i2.RootStackRouter {
     LoginRoute.name: (routeData) {
       return _i2.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.LoginScreen(),
+        child: _i2.WrappedRoute(child: const _i1.LoginScreen()),
       );
     }
   };

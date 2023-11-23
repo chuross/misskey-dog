@@ -11,10 +11,7 @@ class LoginScreen extends ConsumerWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return I18n(
-      initialLocale: const Locale('ja', 'JP'),
-      child: this,
-    );
+    return I18n(child: this);
   }
 
   @override
