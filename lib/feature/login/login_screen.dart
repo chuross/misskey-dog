@@ -74,6 +74,6 @@ class LoginScreen extends ConsumerWidget implements AutoRouteWrapper {
       baseCallbackUrl: oauthCallbackUrl,
     );
 
-    await launchUrl(oauthUri);
+    await launchUrl(oauthUri, mode: LaunchMode.externalApplication);
   }
 }
