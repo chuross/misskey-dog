@@ -4,7 +4,7 @@ import 'package:misskey_dog/core/auth/auth_state_provider.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 
 final class AuthGuard extends AutoRouteGuard {
-  final Ref _ref;
+  final WidgetRef _ref;
 
   AuthGuard(this._ref);
 

@@ -4,18 +4,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:misskey_dog/core/router/app_router.dart';
 
 void main() {
-  runApp(ProviderScope(
+  runApp(const ProviderScope(
     child: MainApp(),
   ));
 }
 
 class MainApp extends ConsumerWidget {
-  final _appRouter = AppRouter();
-
-  MainApp({super.key});
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final appRouter = AppRouter(ref);
+
     return MaterialApp.router(
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
@@ -25,7 +25,7 @@ class MainApp extends ConsumerWidget {
       supportedLocales: const [
         Locale('ja', 'JP'),
       ],
-      routerConfig: _appRouter.config(),
+      routerConfig: appRouter.config(),
     );
   }
 }
