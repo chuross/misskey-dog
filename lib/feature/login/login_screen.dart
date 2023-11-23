@@ -6,7 +6,7 @@ import 'package:i18n_extension/i18n_widget.dart';
 import 'package:misskey_dog/core/api/misskey_client.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
-import 'package:misskey_dog/core/provider/config/oauth_callback_url_provider.dart';
+import 'package:misskey_dog/core/config/config.dart';
 import 'package:misskey_dog/core/provider/ui/text_editing_controller_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
@@ -25,7 +25,6 @@ class LoginScreen extends ConsumerWidget implements AutoRouteWrapper {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textEditingController = ref.watch(unsafeTextEditingControllerProvider(uuid: _instanceUuid));
-    final oauthCallbackUrl = ref.watch(oauthCallbackUrlProvider);
 
     return Scaffold(
       body: Column(
@@ -56,7 +55,7 @@ class LoginScreen extends ConsumerWidget implements AutoRouteWrapper {
             onPressed: () {
               _launchOAuthUrl(
                 textEditingController: textEditingController,
-                oauthCallbackUrl: oauthCallbackUrl,
+                oauthCallbackUrl: Config.oauthCallbackUrl,
               );
             },
             child: Text('ログイン'.i18n),
