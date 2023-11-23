@@ -12,9 +12,9 @@ final class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes {
     return [
-      AutoRoute(page: LoginRoute.page, initial: true),
+      AutoRoute(page: LoginRoute.page),
       AutoRoute(page: LoginCallbackRoute.page, path: '/auth/callback', fullMatch: true),
-      AutoRoute(page: HomeRoute.page, guards: [AuthGuard(_ref)]),
+      AutoRoute(page: HomeRoute.page, initial: true, guards: [AuthGuard(_ref)]),
     ];
   }
 }
