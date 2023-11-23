@@ -26,6 +26,7 @@ abstract class $AppRouter extends _i3.RootStackRouter {
         child: _i3.WrappedRoute(
             child: _i1.LoginCallbackScreen(
           key: args.key,
+          host: args.host,
           session: args.session,
         )),
       );
@@ -46,12 +47,14 @@ abstract class $AppRouter extends _i3.RootStackRouter {
 class LoginCallbackRoute extends _i3.PageRouteInfo<LoginCallbackRouteArgs> {
   LoginCallbackRoute({
     _i4.Key? key,
+    String host = '',
     String session = '',
     List<_i3.PageRouteInfo>? children,
   }) : super(
           LoginCallbackRoute.name,
           args: LoginCallbackRouteArgs(
             key: key,
+            host: host,
             session: session,
           ),
           initialChildren: children,
@@ -66,16 +69,19 @@ class LoginCallbackRoute extends _i3.PageRouteInfo<LoginCallbackRouteArgs> {
 class LoginCallbackRouteArgs {
   const LoginCallbackRouteArgs({
     this.key,
+    this.host = '',
     this.session = '',
   });
 
   final _i4.Key? key;
 
+  final String host;
+
   final String session;
 
   @override
   String toString() {
-    return 'LoginCallbackRouteArgs{key: $key, session: $session}';
+    return 'LoginCallbackRouteArgs{key: $key, host: $host, session: $session}';
   }
 }
 

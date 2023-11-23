@@ -18,11 +18,6 @@ class LoginScreen extends ConsumerWidget implements AutoRouteWrapper {
   LoginScreen({super.key});
 
   @override
-  Widget wrappedRoute(BuildContext context) {
-    return I18n(child: this);
-  }
-
-  @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textEditingController = ref.watch(unsafeTextEditingControllerProvider(uuid: _instanceUuid));
 
@@ -75,5 +70,10 @@ class LoginScreen extends ConsumerWidget implements AutoRouteWrapper {
     );
 
     await launchUrl(oauthUri, mode: LaunchMode.externalApplication);
+  }
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return I18n(child: this);
   }
 }

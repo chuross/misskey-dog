@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:misskey_dog/model/auth/authentication.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:uuid/uuid.dart';
 
@@ -14,8 +15,12 @@ abstract class MisskeyClient {
     return Uri.parse("https://$host/miauth/$session").replace(queryParameters: {
       'name': 'Misskey Dog',
       'callback': Uri.parse(baseCallbackUrl).replace(queryParameters: {
+        'host': host,
         'session': session,
       }).toString(),
     });
   }
+
+  @POST('/api/miauth/{session}/check')
+  Future<Authentication> authorize(@Path('session') String session);
 }
