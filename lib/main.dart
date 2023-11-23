@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:misskey_dog/core/router/app_router.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(ProviderScope(
+    child: MainApp(),
+  ));
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final _appRouter = AppRouter();
+
+  MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp.router(
+      routerConfig: _appRouter.config(),
     );
   }
 }
