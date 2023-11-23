@@ -12,9 +12,10 @@ abstract class MisskeyClient {
     final session = const Uuid().v4();
 
     return Uri.parse("https://$host/miauth/$session").replace(queryParameters: {
+      'name': 'Misskey Dog',
       'callback': Uri.parse(baseCallbackUrl).replace(queryParameters: {
         'session': session,
-      }),
+      }).toString(),
     });
   }
 }

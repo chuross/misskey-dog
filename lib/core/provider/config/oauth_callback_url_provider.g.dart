@@ -6,7 +6,7 @@ part of 'oauth_callback_url_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$oauthCallbackUrlHash() => r'd41a3d97d2fd9bc39a8381a25730818a77cf9a9c';
+String _$oauthCallbackUrlHash() => r'a59c63b14da5f4df649d052819bd8ad6c408b9e4';
 
 /// See also [oauthCallbackUrl].
 @ProviderFor(oauthCallbackUrl)
