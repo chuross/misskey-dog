@@ -19,6 +19,8 @@ final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapp
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final authentication = ref.watch(authorizationProvider(host: host, session: session));
+
     ref.listen(authorizationProvider(host: host, session: session), (_, current) {
       if (current.requireValue) {
         context.replaceRoute(LoginRoute());
@@ -26,7 +28,11 @@ final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapp
     });
 
     return Scaffold(
-      body: const Text('weei').align(Alignment.center),
+      body: authentication.when(
+        data: (_) => const SizedBox.shrink(),
+        error: (_, __) => const Text('error'),
+        loading: () => const CircularProgressIndicator(),
+      ),
     );
   }
 
