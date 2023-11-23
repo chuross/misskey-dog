@@ -6,7 +6,9 @@ import 'package:misskey_dog/core/extension/widget.dart';
 
 @RoutePage()
 final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapper {
-  const LoginCallbackScreen({super.key});
+  final String session;
+
+  const LoginCallbackScreen({super.key, this.session = ''});
 
   @override
   Widget wrappedRoute(BuildContext context) {

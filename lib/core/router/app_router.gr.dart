@@ -19,9 +19,15 @@ abstract class $AppRouter extends _i3.RootStackRouter {
   @override
   final Map<String, _i3.PageFactory> pagesMap = {
     LoginCallbackRoute.name: (routeData) {
+      final args = routeData.argsAs<LoginCallbackRouteArgs>(
+          orElse: () => const LoginCallbackRouteArgs());
       return _i3.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i3.WrappedRoute(child: const _i1.LoginCallbackScreen()),
+        child: _i3.WrappedRoute(
+            child: _i1.LoginCallbackScreen(
+          key: args.key,
+          session: args.session,
+        )),
       );
     },
     LoginRoute.name: (routeData) {
@@ -37,16 +43,40 @@ abstract class $AppRouter extends _i3.RootStackRouter {
 
 /// generated route for
 /// [_i1.LoginCallbackScreen]
-class LoginCallbackRoute extends _i3.PageRouteInfo<void> {
-  const LoginCallbackRoute({List<_i3.PageRouteInfo>? children})
-      : super(
+class LoginCallbackRoute extends _i3.PageRouteInfo<LoginCallbackRouteArgs> {
+  LoginCallbackRoute({
+    _i4.Key? key,
+    String session = '',
+    List<_i3.PageRouteInfo>? children,
+  }) : super(
           LoginCallbackRoute.name,
+          args: LoginCallbackRouteArgs(
+            key: key,
+            session: session,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'LoginCallbackRoute';
 
-  static const _i3.PageInfo<void> page = _i3.PageInfo<void>(name);
+  static const _i3.PageInfo<LoginCallbackRouteArgs> page =
+      _i3.PageInfo<LoginCallbackRouteArgs>(name);
+}
+
+class LoginCallbackRouteArgs {
+  const LoginCallbackRouteArgs({
+    this.key,
+    this.session = '',
+  });
+
+  final _i4.Key? key;
+
+  final String session;
+
+  @override
+  String toString() {
+    return 'LoginCallbackRouteArgs{key: $key, session: $session}';
+  }
 }
 
 /// generated route for
