@@ -31,6 +31,7 @@ final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapp
       body: authentication.when(
         data: (_) => const SizedBox.shrink(),
         error: (_, __) => ErrorView(onRetry: () {
+          // ignore: unused_result
           ref.refresh(authorizationProvider(host: host, session: session));
         }),
         loading: () => const CircularProgressIndicator(),
