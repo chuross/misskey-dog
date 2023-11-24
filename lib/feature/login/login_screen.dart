@@ -46,7 +46,7 @@ class LoginScreen extends ConsumerWidget implements AutoRouteWrapper {
             ),
           ),
           const SizedBox(height: 24),
-          ElevatedButton(
+          FilledButton(
             onPressed: () {
               _launchOAuthUrl(
                 textEditingController: textEditingController,
