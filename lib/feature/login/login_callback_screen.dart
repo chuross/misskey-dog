@@ -5,7 +5,7 @@ import 'package:i18n_extension/i18n_widget.dart';
 import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/core/ui/error_view.dart';
-import 'package:misskey_dog/model/account/authorization_provider.dart';
+import 'package:misskey_dog/model/account/account_authorization_provider.dart';
 
 @RoutePage()
 final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapper {
@@ -21,11 +21,11 @@ final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapp
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final log = ref.watch(logProvider);
-    final authentication = ref.watch(authorizationProvider(host: host, session: session));
+    final authentication = ref.watch(accountAuthorizationProvider(host: host, session: session));
 
     log.d("@@@authorize: host=$host, session=$session");
 
-    ref.listen(authorizationProvider(host: host, session: session), (_, current) {
+    ref.listen(accountAuthorizationProvider(host: host, session: session), (_, current) {
       if (current.value != null) {
         context.replaceRoute(const HomeRoute());
       }
@@ -38,7 +38,7 @@ final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapp
           log.e('@@@authorize failed', error: error, stackTrace: stackTrace);
 
           // ignore: unused_result
-          ref.refresh(authorizationProvider(host: host, session: session));
+          ref.refresh(accountAuthorizationProvider(host: host, session: session));
         }),
         loading: () => const CircularProgressIndicator(),
       ),

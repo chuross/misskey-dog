@@ -1,13 +1,13 @@
 import 'package:misskey_dog/core/api/misskey_client_provider.dart';
 import 'package:misskey_dog/model/account/account.dart';
-import 'package:misskey_dog/model/account/auth_state_provider.dart';
+import 'package:misskey_dog/model/account/account_state_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'authorization_provider.g.dart';
+part 'account_authorization_provider.g.dart';
 
 @riverpod
-Future<Account?> authorization(
-  AuthorizationRef ref, {
+Future<Account?> accountAuthorization(
+  AccountAuthorizationRef ref, {
   required String host,
   required String session,
 }) async {
@@ -17,7 +17,7 @@ Future<Account?> authorization(
   final client = ref.watch(misskeyClientProvider(baseUrl: "https://$host"));
   final authentication = await client.authorize(session);
 
-  await ref.watch(authStateProvider.notifier).setAuthentication(authentication);
+  await ref.watch(accountStateProvider.notifier).setAuthentication(authentication);
 
   return authentication;
 }

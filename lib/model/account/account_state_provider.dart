@@ -4,10 +4,10 @@ import 'package:misskey_dog/core/data/secure_storage_provider.dart';
 import 'package:misskey_dog/model/account/account.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'auth_state_provider.g.dart';
+part 'account_state_provider.g.dart';
 
 @riverpod
-final class AuthState extends _$AuthState {
+final class AccountState extends _$AccountState {
   static const _key = 'auth_state.authentication';
 
   @override
@@ -26,7 +26,5 @@ final class AuthState extends _$AuthState {
   Future<void> clear() async {
     await ref.watch(secureStorageProvider).delete(key: _key);
     state = const AsyncData(null);
-
-    ref.invalidate(authStateProvider);
   }
 }

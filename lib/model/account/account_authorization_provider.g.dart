@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'authorization_provider.dart';
+part of 'account_authorization_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authorizationHash() => r'4c1a1c15cfab6d75c834dbb9a3d45bbf521b1946';
+String _$accountAuthorizationHash() =>
+    r'a511e1193a9c0368f1bc02de23eed4b1c82a9b29';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,29 +30,29 @@ class _SystemHash {
   }
 }
 
-/// See also [authorization].
-@ProviderFor(authorization)
-const authorizationProvider = AuthorizationFamily();
+/// See also [accountAuthorization].
+@ProviderFor(accountAuthorization)
+const accountAuthorizationProvider = AccountAuthorizationFamily();
 
-/// See also [authorization].
-class AuthorizationFamily extends Family<AsyncValue<Account?>> {
-  /// See also [authorization].
-  const AuthorizationFamily();
+/// See also [accountAuthorization].
+class AccountAuthorizationFamily extends Family<AsyncValue<Account?>> {
+  /// See also [accountAuthorization].
+  const AccountAuthorizationFamily();
 
-  /// See also [authorization].
-  AuthorizationProvider call({
+  /// See also [accountAuthorization].
+  AccountAuthorizationProvider call({
     required String host,
     required String session,
   }) {
-    return AuthorizationProvider(
+    return AccountAuthorizationProvider(
       host: host,
       session: session,
     );
   }
 
   @override
-  AuthorizationProvider getProviderOverride(
-    covariant AuthorizationProvider provider,
+  AccountAuthorizationProvider getProviderOverride(
+    covariant AccountAuthorizationProvider provider,
   ) {
     return call(
       host: provider.host,
@@ -71,35 +72,35 @@ class AuthorizationFamily extends Family<AsyncValue<Account?>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'authorizationProvider';
+  String? get name => r'accountAuthorizationProvider';
 }
 
-/// See also [authorization].
-class AuthorizationProvider extends AutoDisposeFutureProvider<Account?> {
-  /// See also [authorization].
-  AuthorizationProvider({
+/// See also [accountAuthorization].
+class AccountAuthorizationProvider extends AutoDisposeFutureProvider<Account?> {
+  /// See also [accountAuthorization].
+  AccountAuthorizationProvider({
     required String host,
     required String session,
   }) : this._internal(
-          (ref) => authorization(
-            ref as AuthorizationRef,
+          (ref) => accountAuthorization(
+            ref as AccountAuthorizationRef,
             host: host,
             session: session,
           ),
-          from: authorizationProvider,
-          name: r'authorizationProvider',
+          from: accountAuthorizationProvider,
+          name: r'accountAuthorizationProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$authorizationHash,
-          dependencies: AuthorizationFamily._dependencies,
+                  : _$accountAuthorizationHash,
+          dependencies: AccountAuthorizationFamily._dependencies,
           allTransitiveDependencies:
-              AuthorizationFamily._allTransitiveDependencies,
+              AccountAuthorizationFamily._allTransitiveDependencies,
           host: host,
           session: session,
         );
 
-  AuthorizationProvider._internal(
+  AccountAuthorizationProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -115,12 +116,12 @@ class AuthorizationProvider extends AutoDisposeFutureProvider<Account?> {
 
   @override
   Override overrideWith(
-    FutureOr<Account?> Function(AuthorizationRef provider) create,
+    FutureOr<Account?> Function(AccountAuthorizationRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: AuthorizationProvider._internal(
-        (ref) => create(ref as AuthorizationRef),
+      override: AccountAuthorizationProvider._internal(
+        (ref) => create(ref as AccountAuthorizationRef),
         from: from,
         name: null,
         dependencies: null,
@@ -134,12 +135,12 @@ class AuthorizationProvider extends AutoDisposeFutureProvider<Account?> {
 
   @override
   AutoDisposeFutureProviderElement<Account?> createElement() {
-    return _AuthorizationProviderElement(this);
+    return _AccountAuthorizationProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is AuthorizationProvider &&
+    return other is AccountAuthorizationProvider &&
         other.host == host &&
         other.session == session;
   }
@@ -154,7 +155,7 @@ class AuthorizationProvider extends AutoDisposeFutureProvider<Account?> {
   }
 }
 
-mixin AuthorizationRef on AutoDisposeFutureProviderRef<Account?> {
+mixin AccountAuthorizationRef on AutoDisposeFutureProviderRef<Account?> {
   /// The parameter `host` of this provider.
   String get host;
 
@@ -162,14 +163,15 @@ mixin AuthorizationRef on AutoDisposeFutureProviderRef<Account?> {
   String get session;
 }
 
-class _AuthorizationProviderElement
-    extends AutoDisposeFutureProviderElement<Account?> with AuthorizationRef {
-  _AuthorizationProviderElement(super.provider);
+class _AccountAuthorizationProviderElement
+    extends AutoDisposeFutureProviderElement<Account?>
+    with AccountAuthorizationRef {
+  _AccountAuthorizationProviderElement(super.provider);
 
   @override
-  String get host => (origin as AuthorizationProvider).host;
+  String get host => (origin as AccountAuthorizationProvider).host;
   @override
-  String get session => (origin as AuthorizationProvider).session;
+  String get session => (origin as AccountAuthorizationProvider).session;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
