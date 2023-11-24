@@ -46,11 +46,12 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<List<Note>> notes({required GetNotesRequest request}) async {
+  Future<List<Note>> notes({required Map<String, dynamic> request}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(request);
     final _result =
         await _dio.fetch<List<dynamic>>(_setStreamType<List<Note>>(Options(
       method: 'POST',

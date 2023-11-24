@@ -20,7 +20,7 @@ final class Notes extends _$Notes {
         sinceId: sinceId,
         isLocal: isLocal,
         limit: limit,
-      ),
+      ).toJson(),
     );
 
     return notes;

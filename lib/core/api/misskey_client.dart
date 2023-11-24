@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:misskey_dog/core/api/request/get_notes_request.dart';
 import 'package:misskey_dog/model/account/account.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:retrofit/retrofit.dart';
@@ -27,5 +26,5 @@ abstract class MisskeyClient {
   Future<Account> authorize(@Path('session') String session);
 
   @POST('/api/notes')
-  Future<List<Note>> notes({required GetNotesRequest request});
+  Future<List<Note>> notes({@Body() required Map<String, dynamic> request});
 }

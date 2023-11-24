@@ -12,6 +12,8 @@ Future<Dio> dio(DioRef ref) async {
 
   dio.interceptors.add(InterceptorsWrapper(
     onRequest: (options, handler) async {
+      options.headers['Content-Type'] = 'application/json';
+
       final account = await ref.read(accountStateProvider.future);
       if (account != null && options.data is Map) {
         options.data['i'] = account.token;
