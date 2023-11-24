@@ -1,4 +1,5 @@
 import 'package:misskey_dog/core/api/api_provider.dart';
+import 'package:misskey_dog/core/api/request/get_notes_request.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -15,9 +16,11 @@ final class Notes extends _$Notes {
     final client = await ref.watch(misskeyClientProvider().future);
 
     final notes = await client.notes(
-      sinceId: sinceId,
-      isLocal: isLocal,
-      limit: limit,
+      request: GetNotesRequest(
+        sinceId: sinceId,
+        isLocal: isLocal,
+        limit: limit,
+      ),
     );
 
     return notes;

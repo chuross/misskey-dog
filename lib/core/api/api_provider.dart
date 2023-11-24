@@ -7,11 +7,22 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'api_provider.g.dart';
 
 @riverpod
-Dio dio(DioRef ref) {
+Future<Dio> dio(DioRef ref) async {
   final dio = Dio();
 
+  dio.interceptors.add(InterceptorsWrapper(
+    onRequest: (options, handler) async {
+      final account = await ref.read(accountStateProvider.future);
+      if (account != null && options.data is Map) {
+        options.data['i'] = account.token;
+      }
+
+      return handler.next(options);
+    },
+  ));
+
   if (kDebugMode) {
-    dio.interceptors.add(LogInterceptor(responseBody: true));
+    dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
   }
 
   return dio;
@@ -19,7 +30,7 @@ Dio dio(DioRef ref) {
 
 @riverpod
 Future<MisskeyClient> misskeyClient(MisskeyClientRef ref, {String? baseUrl}) async {
-  final dio = ref.watch(dioProvider);
+  final dio = await ref.watch(dioProvider.future);
   final account = await ref.watch(accountStateProvider.future);
 
   return MisskeyClient(dio, baseUrl: baseUrl ?? account?.apiBaseUrl ?? '');

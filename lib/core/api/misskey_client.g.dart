@@ -46,23 +46,14 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<List<Note>> notes({
-    String? sinceId,
-    bool isLocal = false,
-    int limit = 20,
-  }) async {
+  Future<List<Note>> notes({required GetNotesRequest request}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'sinceId': sinceId,
-      r'local': isLocal,
-      r'limit': limit,
-    };
-    queryParameters.removeWhere((k, v) => v == null);
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<List<dynamic>>(_setStreamType<List<Note>>(Options(
-      method: 'GET',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )

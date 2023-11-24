@@ -6,8 +6,6 @@ import 'package:i18n_extension/i18n_widget.dart';
 import 'package:misskey_dog/core/extension/async_value.dart';
 import 'package:misskey_dog/core/extension/bool.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
-import 'package:misskey_dog/core/ui/error_view.dart';
-import 'package:misskey_dog/core/ui/loading_view.dart';
 import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
@@ -44,9 +42,9 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
                   Tab(text: 'ローカル'.i18n),
                 ]),
               ),
-              body: TabBarView(
+              body: const TabBarView(
                 children: [
-                  _noteList(ref, isLocal: true),
+                  _NoteList(isLocal: true),
                 ],
               ),
             ),
@@ -54,16 +52,24 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
         });
   }
 
-  Widget _noteList(
-    WidgetRef ref, {
-    bool isLocal = false,
-  }) {
-    final provider = notesProvider(isLocal: isLocal);
-    final notes = ref.watch(provider);
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return I18n(child: this);
+  }
+}
 
-    return notes.when(
-      error: (_, __) => ErrorView(onRetry: () => ref.invalidate(provider)),
-      loading: () => const LoadingView(),
+final class _NoteList extends ConsumerWidget {
+  final bool isLocal;
+
+  const _NoteList({required this.isLocal});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notes = ref.watch(notesProvider(isLocal: isLocal));
+
+    return notes.whenScreenLoading(
+      ref: ref,
+      onRetry: () => ref.invalidate(notesProvider(isLocal: isLocal)),
       data: (notes) {
         return ListView.builder(
           itemCount: notes.length,
@@ -74,10 +80,5 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
         );
       },
     );
-  }
-
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return I18n(child: this);
   }
 }

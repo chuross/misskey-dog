@@ -6,11 +6,11 @@ part of 'api_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dioHash() => r'e1a2a0b91ab8bd6d21662b21bfd7abe3baaf6487';
+String _$dioHash() => r'b7d09a5eee7deb85a5295964a9da937422a1e0e7';
 
 /// See also [dio].
 @ProviderFor(dio)
-final dioProvider = AutoDisposeProvider<Dio>.internal(
+final dioProvider = AutoDisposeFutureProvider<Dio>.internal(
   dio,
   name: r'dioProvider',
   debugGetCreateSourceHash:
@@ -19,8 +19,8 @@ final dioProvider = AutoDisposeProvider<Dio>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef DioRef = AutoDisposeProviderRef<Dio>;
-String _$misskeyClientHash() => r'ce5d57107d59344f86c7e3b7d873b5d2a2437b4d';
+typedef DioRef = AutoDisposeFutureProviderRef<Dio>;
+String _$misskeyClientHash() => r'839c7d3866437a1c20d9605d8ee44bafcb2e4755';
 
 /// Copied from Dart SDK
 class _SystemHash {

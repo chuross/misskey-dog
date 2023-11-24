@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:misskey_dog/core/api/request/get_notes_request.dart';
 import 'package:misskey_dog/model/account/account.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:retrofit/retrofit.dart';
@@ -25,10 +26,6 @@ abstract class MisskeyClient {
   @POST('/api/miauth/{session}/check')
   Future<Account> authorize(@Path('session') String session);
 
-  @GET('/api/notes')
-  Future<List<Note>> notes({
-    @Query('sinceId') String? sinceId,
-    @Query('local') bool isLocal = false,
-    @Query('limit') int limit = 20,
-  });
+  @POST('/api/notes')
+  Future<List<Note>> notes({required GetNotesRequest request});
 }
