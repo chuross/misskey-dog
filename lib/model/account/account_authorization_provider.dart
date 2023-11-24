@@ -1,4 +1,4 @@
-import 'package:misskey_dog/core/api/misskey_client_provider.dart';
+import 'package:misskey_dog/core/api/api_provider.dart';
 import 'package:misskey_dog/model/account/account.dart';
 import 'package:misskey_dog/model/account/account_state_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

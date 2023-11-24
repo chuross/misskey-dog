@@ -1,9 +1,21 @@
-import 'package:misskey_dog/core/api/dio_provider.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:misskey_dog/core/api/misskey_client.dart';
 import 'package:misskey_dog/model/account/account_state_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'misskey_client_provider.g.dart';
+part 'api_provider.g.dart';
+
+@riverpod
+Dio dio(DioRef ref) {
+  final dio = Dio();
+
+  if (kDebugMode) {
+    dio.interceptors.add(LogInterceptor(responseBody: true));
+  }
+
+  return dio;
+}
 
 @riverpod
 Future<MisskeyClient> misskeyClient(MisskeyClientRef ref, {String? baseUrl}) async {

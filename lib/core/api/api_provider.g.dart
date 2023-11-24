@@ -1,11 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'misskey_client_provider.dart';
+part of 'api_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
+String _$dioHash() => r'e1a2a0b91ab8bd6d21662b21bfd7abe3baaf6487';
+
+/// See also [dio].
+@ProviderFor(dio)
+final dioProvider = AutoDisposeProvider<Dio>.internal(
+  dio,
+  name: r'dioProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$dioHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef DioRef = AutoDisposeProviderRef<Dio>;
 String _$misskeyClientHash() => r'ce5d57107d59344f86c7e3b7d873b5d2a2437b4d';
 
 /// Copied from Dart SDK
