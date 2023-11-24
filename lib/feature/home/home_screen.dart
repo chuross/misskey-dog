@@ -35,8 +35,11 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
               ),
             ],
           ),
-          body: const CustomScrollView(
-            slivers: [],
+          body: ListView.builder(
+            itemCount: 3,
+            itemBuilder: (_, __) {
+              return const Text('test');
+            },
           ),
         );
       },
