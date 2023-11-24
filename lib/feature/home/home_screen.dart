@@ -65,18 +65,22 @@ final class _NoteList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notes = ref.watch(notesProvider(isLocal: isLocal));
+    final provider = notesProvider(isLocal: isLocal);
+    final notes = ref.watch(provider);
 
     return notes.whenScreenLoading(
       ref: ref,
-      onRetry: () => ref.invalidate(notesProvider(isLocal: isLocal)),
+      onRetry: () => ref.invalidate(provider),
       data: (notes) {
-        return ListView.builder(
-          itemCount: notes.length,
-          itemBuilder: (context, index) {
-            final note = notes[index];
-            return NoteItem(key: ValueKey(note.id), note: note);
-          },
+        return RefreshIndicator(
+          onRefresh: () async => ref.invalidate(provider),
+          child: ListView.builder(
+            itemCount: notes.length,
+            itemBuilder: (context, index) {
+              final note = notes[index];
+              return NoteItem(key: ValueKey(note.id), note: note);
+            },
+          ),
         );
       },
     );
