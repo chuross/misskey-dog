@@ -13,9 +13,9 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       isBot: json['isBot'] as bool,
       bannerUrl: json['bannerUrl'] as String?,
       description: json['description'] as String?,
-      followersCount: json['followersCount'] as int,
-      followingCount: json['followingCount'] as int,
-      notesCount: json['notesCount'] as int,
+      followersCount: json['followersCount'] as int?,
+      followingCount: json['followingCount'] as int?,
+      notesCount: json['notesCount'] as int?,
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>

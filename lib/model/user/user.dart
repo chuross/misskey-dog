@@ -12,9 +12,9 @@ abstract class User with _$User {
     required bool isBot,
     String? bannerUrl,
     String? description,
-    required int followersCount,
-    required int followingCount,
-    required int notesCount,
+    int? followersCount,
+    int? followingCount,
+    int? notesCount,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

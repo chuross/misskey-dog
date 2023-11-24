@@ -26,9 +26,9 @@ mixin _$User {
   bool get isBot => throw _privateConstructorUsedError;
   String? get bannerUrl => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  int get followersCount => throw _privateConstructorUsedError;
-  int get followingCount => throw _privateConstructorUsedError;
-  int get notesCount => throw _privateConstructorUsedError;
+  int? get followersCount => throw _privateConstructorUsedError;
+  int? get followingCount => throw _privateConstructorUsedError;
+  int? get notesCount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,9 +47,9 @@ abstract class $UserCopyWith<$Res> {
       bool isBot,
       String? bannerUrl,
       String? description,
-      int followersCount,
-      int followingCount,
-      int notesCount});
+      int? followersCount,
+      int? followingCount,
+      int? notesCount});
 }
 
 /// @nodoc
@@ -71,9 +71,9 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? isBot = null,
     Object? bannerUrl = freezed,
     Object? description = freezed,
-    Object? followersCount = null,
-    Object? followingCount = null,
-    Object? notesCount = null,
+    Object? followersCount = freezed,
+    Object? followingCount = freezed,
+    Object? notesCount = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -100,18 +100,18 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      followersCount: null == followersCount
+      followersCount: freezed == followersCount
           ? _value.followersCount
           : followersCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      followingCount: null == followingCount
+              as int?,
+      followingCount: freezed == followingCount
           ? _value.followingCount
           : followingCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      notesCount: null == notesCount
+              as int?,
+      notesCount: freezed == notesCount
           ? _value.notesCount
           : notesCount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ) as $Val);
   }
 }
@@ -130,9 +130,9 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       bool isBot,
       String? bannerUrl,
       String? description,
-      int followersCount,
-      int followingCount,
-      int notesCount});
+      int? followersCount,
+      int? followingCount,
+      int? notesCount});
 }
 
 /// @nodoc
@@ -151,9 +151,9 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? isBot = null,
     Object? bannerUrl = freezed,
     Object? description = freezed,
-    Object? followersCount = null,
-    Object? followingCount = null,
-    Object? notesCount = null,
+    Object? followersCount = freezed,
+    Object? followingCount = freezed,
+    Object? notesCount = freezed,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -180,18 +180,18 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      followersCount: null == followersCount
+      followersCount: freezed == followersCount
           ? _value.followersCount
           : followersCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      followingCount: null == followingCount
+              as int?,
+      followingCount: freezed == followingCount
           ? _value.followingCount
           : followingCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      notesCount: null == notesCount
+              as int?,
+      notesCount: freezed == notesCount
           ? _value.notesCount
           : notesCount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -206,9 +206,9 @@ class _$UserImpl implements _User {
       required this.isBot,
       this.bannerUrl,
       this.description,
-      required this.followersCount,
-      required this.followingCount,
-      required this.notesCount});
+      this.followersCount,
+      this.followingCount,
+      this.notesCount});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -226,11 +226,11 @@ class _$UserImpl implements _User {
   @override
   final String? description;
   @override
-  final int followersCount;
+  final int? followersCount;
   @override
-  final int followingCount;
+  final int? followingCount;
   @override
-  final int notesCount;
+  final int? notesCount;
 
   @override
   String toString() {
@@ -287,9 +287,9 @@ abstract class _User implements User {
       required final bool isBot,
       final String? bannerUrl,
       final String? description,
-      required final int followersCount,
-      required final int followingCount,
-      required final int notesCount}) = _$UserImpl;
+      final int? followersCount,
+      final int? followingCount,
+      final int? notesCount}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -306,11 +306,11 @@ abstract class _User implements User {
   @override
   String? get description;
   @override
-  int get followersCount;
+  int? get followersCount;
   @override
-  int get followingCount;
+  int? get followingCount;
   @override
-  int get notesCount;
+  int? get notesCount;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
