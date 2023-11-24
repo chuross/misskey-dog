@@ -22,4 +22,11 @@ final class AuthState extends _$AuthState {
     await ref.watch(secureStorageProvider).write(key: _key, value: jsonEncode(authentication.toJson()));
     state = AsyncData(authentication);
   }
+
+  Future<void> clear() async {
+    await ref.watch(secureStorageProvider).delete(key: _key);
+    state = const AsyncData(null);
+
+    ref.invalidate(authStateProvider);
+  }
 }

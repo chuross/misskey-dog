@@ -30,7 +30,7 @@ final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapp
     return Scaffold(
       body: authentication.when(
         data: (_) => const SizedBox.shrink(),
-        error: (_, __) => ErrorView(onRetry: () {
+        error: (e, __) => ErrorView(onRetry: () {
           // ignore: unused_result
           ref.refresh(authorizationProvider(host: host, session: session));
         }),
