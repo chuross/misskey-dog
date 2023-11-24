@@ -27,8 +27,8 @@ abstract class MisskeyClient {
 
   @GET('/api/notes')
   Future<List<Note>> notes({
-    String? sinceId,
-    bool local = false,
-    int limit = 20,
+    @Query('sinceId') String? sinceId,
+    @Query('local') bool isLocal = false,
+    @Query('limit') int limit = 20,
   });
 }
