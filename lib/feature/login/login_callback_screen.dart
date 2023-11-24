@@ -23,6 +23,8 @@ final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapp
     final log = ref.watch(logProvider);
     final authentication = ref.watch(authorizationProvider(host: host, session: session));
 
+    log.d("@@@authorize: host=$host, session=$session");
+
     ref.listen(authorizationProvider(host: host, session: session), (_, current) {
       if (current.value != null) {
         context.replaceRoute(const HomeRoute());
@@ -33,7 +35,7 @@ final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapp
       body: authentication.when(
         data: (_) => const SizedBox.shrink(),
         error: (error, stackTrace) => ErrorView(onRetry: () {
-          log.e('authorize failed', error: error, stackTrace: stackTrace);
+          log.e('@@@authorize failed', error: error, stackTrace: stackTrace);
 
           // ignore: unused_result
           ref.refresh(authorizationProvider(host: host, session: session));
