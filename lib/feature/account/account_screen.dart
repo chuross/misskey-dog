@@ -10,15 +10,13 @@ final class AccountScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authStateNotifier = ref.watch(accountStateProvider.notifier);
-
     return Scaffold(
       appBar: AppBar(title: Text('アカウント'.i18n)),
       body: ListView(
         children: [
           OutlinedButton(
             onPressed: () async {
-              await authStateNotifier.clear();
+              await ref.read(accountStateProvider.notifier).clear();
             },
             child: Text('ログアウト'.i18n),
           )

@@ -7,7 +7,7 @@ import 'package:misskey_dog/core/api/misskey_client.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/core/config/config.dart';
-import 'package:misskey_dog/core/ui/text_editing_controller_provider.dart';
+import 'package:misskey_dog/core/ui/text_state_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
 
@@ -19,7 +19,7 @@ class LoginScreen extends ConsumerWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final textEditingController = ref.watch(unsafeTextEditingControllerProvider(uuid: _instanceUuid));
+    final hostTextState = ref.watch(textStateProvider(instanceUuid: _instanceUuid));
 
     return Scaffold(
       body: Column(
@@ -38,21 +38,25 @@ class LoginScreen extends ConsumerWidget implements AutoRouteWrapper {
           ),
           const SizedBox(height: 64),
           TextField(
-            controller: textEditingController,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               labelText: 'Misskey host'.i18n,
               hintText: 'sushi.ski, misskey.ioなど'.i18n,
             ),
+            onChanged: (text) {
+              ref.watch(textStateProvider(instanceUuid: _instanceUuid).notifier).setText(text);
+            },
           ),
           const SizedBox(height: 24),
           FilledButton(
-            onPressed: () {
-              _launchOAuthUrl(
-                textEditingController: textEditingController,
-                oauthCallbackUrl: Config.oauthCallbackUrl,
-              );
-            },
+            onPressed: hostTextState.isNotEmpty
+                ? () {
+                    _launchOAuthUrl(
+                      host: hostTextState,
+                      oauthCallbackUrl: Config.oauthCallbackUrl,
+                    );
+                  }
+                : null,
             child: Text('ログイン'.i18n),
           ).expandWidth(),
         ],
@@ -61,11 +65,11 @@ class LoginScreen extends ConsumerWidget implements AutoRouteWrapper {
   }
 
   void _launchOAuthUrl({
-    required TextEditingController textEditingController,
+    required String host,
     required String oauthCallbackUrl,
   }) async {
     final oauthUri = MisskeyClient.oauthUri(
-      host: textEditingController.text,
+      host: host,
       baseCallbackUrl: oauthCallbackUrl,
     );
 

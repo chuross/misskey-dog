@@ -35,6 +35,9 @@ class MainApp extends ConsumerWidget {
         Locale('ja', 'JP'),
       ],
       routerConfig: appRouter.config(),
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
     );
   }
 }
