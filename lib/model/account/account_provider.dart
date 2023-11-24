@@ -28,7 +28,7 @@ Future<Account?> accountAuthorization(
 
 @riverpod
 final class AccountState extends _$AccountState {
-  static const _key = 'auth_state.authentication';
+  static const _key = 'account_state.account';
 
   @override
   Future<Account?> build() async {
