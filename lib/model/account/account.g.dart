@@ -1,18 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'authentication.dart';
+part of 'account.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$AuthCompletionImpl _$$AuthCompletionImplFromJson(Map<String, dynamic> json) =>
-    _$AuthCompletionImpl(
+_$AccountImpl _$$AccountImplFromJson(Map<String, dynamic> json) =>
+    _$AccountImpl(
       token: json['token'] as String,
     );
 
-Map<String, dynamic> _$$AuthCompletionImplToJson(
-        _$AuthCompletionImpl instance) =>
+Map<String, dynamic> _$$AccountImplToJson(_$AccountImpl instance) =>
     <String, dynamic>{
       'token': instance.token,
     };

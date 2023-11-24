@@ -6,7 +6,7 @@ part of 'authorization_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authorizationHash() => r'5803d229c666a81448a184d21ca64538cb43e19e';
+String _$authorizationHash() => r'4c1a1c15cfab6d75c834dbb9a3d45bbf521b1946';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -34,7 +34,7 @@ class _SystemHash {
 const authorizationProvider = AuthorizationFamily();
 
 /// See also [authorization].
-class AuthorizationFamily extends Family<AsyncValue<Authentication?>> {
+class AuthorizationFamily extends Family<AsyncValue<Account?>> {
   /// See also [authorization].
   const AuthorizationFamily();
 
@@ -75,7 +75,7 @@ class AuthorizationFamily extends Family<AsyncValue<Authentication?>> {
 }
 
 /// See also [authorization].
-class AuthorizationProvider extends AutoDisposeFutureProvider<Authentication?> {
+class AuthorizationProvider extends AutoDisposeFutureProvider<Account?> {
   /// See also [authorization].
   AuthorizationProvider({
     required String host,
@@ -115,7 +115,7 @@ class AuthorizationProvider extends AutoDisposeFutureProvider<Authentication?> {
 
   @override
   Override overrideWith(
-    FutureOr<Authentication?> Function(AuthorizationRef provider) create,
+    FutureOr<Account?> Function(AuthorizationRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -133,7 +133,7 @@ class AuthorizationProvider extends AutoDisposeFutureProvider<Authentication?> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<Authentication?> createElement() {
+  AutoDisposeFutureProviderElement<Account?> createElement() {
     return _AuthorizationProviderElement(this);
   }
 
@@ -154,7 +154,7 @@ class AuthorizationProvider extends AutoDisposeFutureProvider<Authentication?> {
   }
 }
 
-mixin AuthorizationRef on AutoDisposeFutureProviderRef<Authentication?> {
+mixin AuthorizationRef on AutoDisposeFutureProviderRef<Account?> {
   /// The parameter `host` of this provider.
   String get host;
 
@@ -163,8 +163,7 @@ mixin AuthorizationRef on AutoDisposeFutureProviderRef<Authentication?> {
 }
 
 class _AuthorizationProviderElement
-    extends AutoDisposeFutureProviderElement<Authentication?>
-    with AuthorizationRef {
+    extends AutoDisposeFutureProviderElement<Account?> with AuthorizationRef {
   _AuthorizationProviderElement(super.provider);
 
   @override

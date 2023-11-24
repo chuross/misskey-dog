@@ -1,12 +1,12 @@
 import 'package:misskey_dog/core/api/misskey_client_provider.dart';
-import 'package:misskey_dog/core/auth/auth_state_provider.dart';
-import 'package:misskey_dog/model/auth/authentication.dart';
+import 'package:misskey_dog/model/account/account.dart';
+import 'package:misskey_dog/model/account/auth_state_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'authorization_provider.g.dart';
 
 @riverpod
-Future<Authentication?> authorization(
+Future<Account?> authorization(
   AuthorizationRef ref, {
   required String host,
   required String session,

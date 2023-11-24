@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'authentication.dart';
+part of 'account.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,34 +14,32 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Authentication _$AuthenticationFromJson(Map<String, dynamic> json) {
-  return _AuthCompletion.fromJson(json);
+Account _$AccountFromJson(Map<String, dynamic> json) {
+  return _Account.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Authentication {
+mixin _$Account {
   @JsonKey(name: 'token')
   String get token => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AuthenticationCopyWith<Authentication> get copyWith =>
-      throw _privateConstructorUsedError;
+  $AccountCopyWith<Account> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AuthenticationCopyWith<$Res> {
-  factory $AuthenticationCopyWith(
-          Authentication value, $Res Function(Authentication) then) =
-      _$AuthenticationCopyWithImpl<$Res, Authentication>;
+abstract class $AccountCopyWith<$Res> {
+  factory $AccountCopyWith(Account value, $Res Function(Account) then) =
+      _$AccountCopyWithImpl<$Res, Account>;
   @useResult
   $Res call({@JsonKey(name: 'token') String token});
 }
 
 /// @nodoc
-class _$AuthenticationCopyWithImpl<$Res, $Val extends Authentication>
-    implements $AuthenticationCopyWith<$Res> {
-  _$AuthenticationCopyWithImpl(this._value, this._then);
+class _$AccountCopyWithImpl<$Res, $Val extends Account>
+    implements $AccountCopyWith<$Res> {
+  _$AccountCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -63,22 +61,21 @@ class _$AuthenticationCopyWithImpl<$Res, $Val extends Authentication>
 }
 
 /// @nodoc
-abstract class _$$AuthCompletionImplCopyWith<$Res>
-    implements $AuthenticationCopyWith<$Res> {
-  factory _$$AuthCompletionImplCopyWith(_$AuthCompletionImpl value,
-          $Res Function(_$AuthCompletionImpl) then) =
-      __$$AuthCompletionImplCopyWithImpl<$Res>;
+abstract class _$$AccountImplCopyWith<$Res> implements $AccountCopyWith<$Res> {
+  factory _$$AccountImplCopyWith(
+          _$AccountImpl value, $Res Function(_$AccountImpl) then) =
+      __$$AccountImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'token') String token});
 }
 
 /// @nodoc
-class __$$AuthCompletionImplCopyWithImpl<$Res>
-    extends _$AuthenticationCopyWithImpl<$Res, _$AuthCompletionImpl>
-    implements _$$AuthCompletionImplCopyWith<$Res> {
-  __$$AuthCompletionImplCopyWithImpl(
-      _$AuthCompletionImpl _value, $Res Function(_$AuthCompletionImpl) _then)
+class __$$AccountImplCopyWithImpl<$Res>
+    extends _$AccountCopyWithImpl<$Res, _$AccountImpl>
+    implements _$$AccountImplCopyWith<$Res> {
+  __$$AccountImplCopyWithImpl(
+      _$AccountImpl _value, $Res Function(_$AccountImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -86,7 +83,7 @@ class __$$AuthCompletionImplCopyWithImpl<$Res>
   $Res call({
     Object? token = null,
   }) {
-    return _then(_$AuthCompletionImpl(
+    return _then(_$AccountImpl(
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -97,11 +94,11 @@ class __$$AuthCompletionImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$AuthCompletionImpl implements _AuthCompletion {
-  const _$AuthCompletionImpl({@JsonKey(name: 'token') required this.token});
+class _$AccountImpl implements _Account {
+  const _$AccountImpl({@JsonKey(name: 'token') required this.token});
 
-  factory _$AuthCompletionImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AuthCompletionImplFromJson(json);
+  factory _$AccountImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AccountImplFromJson(json);
 
   @override
   @JsonKey(name: 'token')
@@ -109,14 +106,14 @@ class _$AuthCompletionImpl implements _AuthCompletion {
 
   @override
   String toString() {
-    return 'Authentication(token: $token)';
+    return 'Account(token: $token)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AuthCompletionImpl &&
+            other is _$AccountImpl &&
             (identical(other.token, token) || other.token == token));
   }
 
@@ -127,31 +124,28 @@ class _$AuthCompletionImpl implements _AuthCompletion {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AuthCompletionImplCopyWith<_$AuthCompletionImpl> get copyWith =>
-      __$$AuthCompletionImplCopyWithImpl<_$AuthCompletionImpl>(
-          this, _$identity);
+  _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
+      __$$AccountImplCopyWithImpl<_$AccountImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AuthCompletionImplToJson(
+    return _$$AccountImplToJson(
       this,
     );
   }
 }
 
-abstract class _AuthCompletion implements Authentication {
-  const factory _AuthCompletion(
-          {@JsonKey(name: 'token') required final String token}) =
-      _$AuthCompletionImpl;
+abstract class _Account implements Account {
+  const factory _Account(
+      {@JsonKey(name: 'token') required final String token}) = _$AccountImpl;
 
-  factory _AuthCompletion.fromJson(Map<String, dynamic> json) =
-      _$AuthCompletionImpl.fromJson;
+  factory _Account.fromJson(Map<String, dynamic> json) = _$AccountImpl.fromJson;
 
   @override
   @JsonKey(name: 'token')
   String get token;
   @override
   @JsonKey(ignore: true)
-  _$$AuthCompletionImplCopyWith<_$AuthCompletionImpl> get copyWith =>
+  _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

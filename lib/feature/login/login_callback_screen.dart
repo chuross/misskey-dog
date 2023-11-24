@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:i18n_extension/i18n_widget.dart';
-import 'package:misskey_dog/core/auth/authorization_provider.dart';
 import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/core/ui/error_view.dart';
+import 'package:misskey_dog/model/account/authorization_provider.dart';
 
 @RoutePage()
 final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapper {

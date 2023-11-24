@@ -19,13 +19,13 @@ class _MisskeyClient implements MisskeyClient {
   String? baseUrl;
 
   @override
-  Future<Authentication> authorize(String session) async {
+  Future<Account> authorize(String session) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<Authentication>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Account>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -41,7 +41,7 @@ class _MisskeyClient implements MisskeyClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = Authentication.fromJson(_result.data!);
+    final value = Account.fromJson(_result.data!);
     return value;
   }
 
