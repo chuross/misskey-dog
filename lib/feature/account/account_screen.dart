@@ -17,7 +17,9 @@ final class AccountScreen extends ConsumerWidget {
       body: ListView(
         children: [
           OutlinedButton(
-            onPressed: () => authStateNotifier.clear(),
+            onPressed: () async {
+              await authStateNotifier.clear();
+            },
             child: Text('ログアウト'.i18n),
           )
         ],
