@@ -22,6 +22,7 @@ Account _$AccountFromJson(Map<String, dynamic> json) {
 mixin _$Account {
   String get token => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
+  String? get apiBaseUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +34,7 @@ abstract class $AccountCopyWith<$Res> {
   factory $AccountCopyWith(Account value, $Res Function(Account) then) =
       _$AccountCopyWithImpl<$Res, Account>;
   @useResult
-  $Res call({String token, User user});
+  $Res call({String token, User user, String? apiBaseUrl});
 
   $UserCopyWith<$Res> get user;
 }
@@ -53,6 +54,7 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
   $Res call({
     Object? token = null,
     Object? user = null,
+    Object? apiBaseUrl = freezed,
   }) {
     return _then(_value.copyWith(
       token: null == token
@@ -63,6 +65,10 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      apiBaseUrl: freezed == apiBaseUrl
+          ? _value.apiBaseUrl
+          : apiBaseUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -82,7 +88,7 @@ abstract class _$$AccountImplCopyWith<$Res> implements $AccountCopyWith<$Res> {
       __$$AccountImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String token, User user});
+  $Res call({String token, User user, String? apiBaseUrl});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -101,6 +107,7 @@ class __$$AccountImplCopyWithImpl<$Res>
   $Res call({
     Object? token = null,
     Object? user = null,
+    Object? apiBaseUrl = freezed,
   }) {
     return _then(_$AccountImpl(
       token: null == token
@@ -111,6 +118,10 @@ class __$$AccountImplCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      apiBaseUrl: freezed == apiBaseUrl
+          ? _value.apiBaseUrl
+          : apiBaseUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -118,7 +129,8 @@ class __$$AccountImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AccountImpl implements _Account {
-  const _$AccountImpl({required this.token, required this.user});
+  const _$AccountImpl(
+      {required this.token, required this.user, this.apiBaseUrl});
 
   factory _$AccountImpl.fromJson(Map<String, dynamic> json) =>
       _$$AccountImplFromJson(json);
@@ -127,10 +139,12 @@ class _$AccountImpl implements _Account {
   final String token;
   @override
   final User user;
+  @override
+  final String? apiBaseUrl;
 
   @override
   String toString() {
-    return 'Account(token: $token, user: $user)';
+    return 'Account(token: $token, user: $user, apiBaseUrl: $apiBaseUrl)';
   }
 
   @override
@@ -139,12 +153,14 @@ class _$AccountImpl implements _Account {
         (other.runtimeType == runtimeType &&
             other is _$AccountImpl &&
             (identical(other.token, token) || other.token == token) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.apiBaseUrl, apiBaseUrl) ||
+                other.apiBaseUrl == apiBaseUrl));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, token, user);
+  int get hashCode => Object.hash(runtimeType, token, user, apiBaseUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -162,7 +178,9 @@ class _$AccountImpl implements _Account {
 
 abstract class _Account implements Account {
   const factory _Account(
-      {required final String token, required final User user}) = _$AccountImpl;
+      {required final String token,
+      required final User user,
+      final String? apiBaseUrl}) = _$AccountImpl;
 
   factory _Account.fromJson(Map<String, dynamic> json) = _$AccountImpl.fromJson;
 
@@ -170,6 +188,8 @@ abstract class _Account implements Account {
   String get token;
   @override
   User get user;
+  @override
+  String? get apiBaseUrl;
   @override
   @JsonKey(ignore: true)
   _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>

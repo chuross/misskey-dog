@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:misskey_dog/model/account/account.dart';
+import 'package:misskey_dog/model/note/note.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:uuid/uuid.dart';
 
@@ -23,4 +24,7 @@ abstract class MisskeyClient {
 
   @POST('/api/miauth/{session}/check')
   Future<Account> authorize(@Path('session') String session);
+
+  @GET('/api/notes')
+  Future<List<Note>> notes();
 }

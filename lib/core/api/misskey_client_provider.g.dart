@@ -6,7 +6,7 @@ part of 'misskey_client_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$misskeyClientHash() => r'2bbcbfaa66f06588c4aa072f23bae86e53a630c1';
+String _$misskeyClientHash() => r'ce5d57107d59344f86c7e3b7d873b5d2a2437b4d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -34,7 +34,7 @@ class _SystemHash {
 const misskeyClientProvider = MisskeyClientFamily();
 
 /// See also [misskeyClient].
-class MisskeyClientFamily extends Family<MisskeyClient> {
+class MisskeyClientFamily extends Family<AsyncValue<MisskeyClient>> {
   /// See also [misskeyClient].
   const MisskeyClientFamily();
 
@@ -72,7 +72,7 @@ class MisskeyClientFamily extends Family<MisskeyClient> {
 }
 
 /// See also [misskeyClient].
-class MisskeyClientProvider extends AutoDisposeProvider<MisskeyClient> {
+class MisskeyClientProvider extends AutoDisposeFutureProvider<MisskeyClient> {
   /// See also [misskeyClient].
   MisskeyClientProvider({
     String? baseUrl,
@@ -107,7 +107,7 @@ class MisskeyClientProvider extends AutoDisposeProvider<MisskeyClient> {
 
   @override
   Override overrideWith(
-    MisskeyClient Function(MisskeyClientRef provider) create,
+    FutureOr<MisskeyClient> Function(MisskeyClientRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -124,7 +124,7 @@ class MisskeyClientProvider extends AutoDisposeProvider<MisskeyClient> {
   }
 
   @override
-  AutoDisposeProviderElement<MisskeyClient> createElement() {
+  AutoDisposeFutureProviderElement<MisskeyClient> createElement() {
     return _MisskeyClientProviderElement(this);
   }
 
@@ -142,13 +142,14 @@ class MisskeyClientProvider extends AutoDisposeProvider<MisskeyClient> {
   }
 }
 
-mixin MisskeyClientRef on AutoDisposeProviderRef<MisskeyClient> {
+mixin MisskeyClientRef on AutoDisposeFutureProviderRef<MisskeyClient> {
   /// The parameter `baseUrl` of this provider.
   String? get baseUrl;
 }
 
 class _MisskeyClientProviderElement
-    extends AutoDisposeProviderElement<MisskeyClient> with MisskeyClientRef {
+    extends AutoDisposeFutureProviderElement<MisskeyClient>
+    with MisskeyClientRef {
   _MisskeyClientProviderElement(super.provider);
 
   @override

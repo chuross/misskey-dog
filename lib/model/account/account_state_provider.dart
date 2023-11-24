@@ -18,7 +18,7 @@ final class AccountState extends _$AccountState {
     return Account.fromJson(jsonDecode(json));
   }
 
-  Future<void> setAuthentication(Account account) async {
+  Future<void> setAccount(Account account) async {
     await ref.watch(secureStorageProvider).write(key: _key, value: jsonEncode(account.toJson()));
     state = AsyncData(account);
   }

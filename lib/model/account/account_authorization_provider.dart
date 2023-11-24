@@ -14,10 +14,12 @@ Future<Account?> accountAuthorization(
   if (host.isEmpty) throw ArgumentError.value(host, 'host is empty');
   if (session.isEmpty) throw ArgumentError.value(session, 'session is empty');
 
-  final client = ref.watch(misskeyClientProvider(baseUrl: "https://$host"));
-  final authentication = await client.authorize(session);
+  final apiBaseUrl = "https://$host";
 
-  await ref.watch(accountStateProvider.notifier).setAuthentication(authentication);
+  final client = await ref.watch(misskeyClientProvider(baseUrl: apiBaseUrl).future);
+  final account = await client.authorize(session);
 
-  return authentication;
+  await ref.watch(accountStateProvider.notifier).setAccount(account.copyWith(apiBaseUrl: apiBaseUrl));
+
+  return account;
 }
