@@ -46,9 +46,14 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<List<Note>> notes() async {
+  Future<List<Note>> notes({
+    String? sinceId,
+    bool local = false,
+    int limit = 20,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =

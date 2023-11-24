@@ -26,5 +26,9 @@ abstract class MisskeyClient {
   Future<Account> authorize(@Path('session') String session);
 
   @GET('/api/notes')
-  Future<List<Note>> notes();
+  Future<List<Note>> notes({
+    String? sinceId,
+    bool local = false,
+    int limit = 20,
+  });
 }
