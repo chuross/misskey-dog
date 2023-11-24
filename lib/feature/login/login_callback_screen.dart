@@ -6,6 +6,7 @@ import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/core/ui/error_view.dart';
 import 'package:misskey_dog/model/account/account_authorization_provider.dart';
+import 'package:misskey_dog/model/account/account_state_provider.dart';
 
 @RoutePage()
 final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapper {
@@ -25,8 +26,8 @@ final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapp
 
     log.d("@@@authorize: host=$host, session=$session");
 
-    ref.listen(accountAuthorizationProvider(host: host, session: session), (_, current) {
-      if (current.value != null) {
+    ref.listen(accountStateProvider, (_, next) {
+      if (next.value != null) {
         context.replaceRoute(const HomeRoute());
       }
     });

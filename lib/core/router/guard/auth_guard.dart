@@ -14,7 +14,7 @@ final class AuthGuard extends AutoRouteGuard {
     if (authentication != null) {
       resolver.next(true);
     } else {
-      router.replace(LoginRoute());
+      router.replaceAll([LoginRoute()]);
       resolver.next(false);
     }
   }
