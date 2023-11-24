@@ -58,7 +58,7 @@ class LoginScreen extends ConsumerWidget implements AutoRouteWrapper {
                   }
                 : null,
             child: Text('ログイン'.i18n),
-          ).expandWidth(),
+          ),
         ],
       ).align(Alignment.center).padding(const EdgeInsets.all(64)),
     );

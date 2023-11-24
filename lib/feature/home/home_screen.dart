@@ -75,7 +75,7 @@ final class _NoteList extends ConsumerWidget {
           itemCount: notes.length,
           itemBuilder: (context, index) {
             final note = notes[index];
-            return NoteItem(note: note);
+            return NoteItem(key: ValueKey(note.id), note: note);
           },
         );
       },
