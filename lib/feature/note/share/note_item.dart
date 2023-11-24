@@ -31,6 +31,6 @@ final class NoteItem extends StatelessWidget {
           ],
         ).expanded()
       ],
-    ).padding(const EdgeInsets.all(16));
+    ).padding(const EdgeInsets.symmetric(vertical: 24, horizontal: 16));
   }
 }
