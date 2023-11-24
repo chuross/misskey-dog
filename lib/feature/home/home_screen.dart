@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:i18n_extension/i18n_widget.dart';
 import 'package:misskey_dog/core/extension/async_value.dart';
-import 'package:misskey_dog/core/extension/bool.dart';
+import 'package:misskey_dog/core/extension/dynamic.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
@@ -29,11 +29,11 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
                 title: const Text('Misskey Dog'),
                 actions: [
                   IconButton(
-                    icon: (account?.user.avatarUrl != null).when(
-                      tru: () => CircleAvatar(
-                        foregroundImage: NetworkImage(account?.user.avatarUrl ?? ''),
+                    icon: account.mapOrElse(
+                      func: (account) => CircleAvatar(
+                        foregroundImage: NetworkImage(account.user.avatarUrl ?? ''),
                       ),
-                      fals: () => const Icon(Icons.person),
+                      elseFunc: () => const Icon(Icons.person),
                     ),
                     onPressed: () => context.router.push(const AccountRoute()),
                   ),
