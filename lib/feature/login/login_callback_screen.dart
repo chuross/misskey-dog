@@ -5,8 +5,7 @@ import 'package:i18n_extension/i18n_widget.dart';
 import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/core/ui/error_view.dart';
-import 'package:misskey_dog/model/account/account_authorization_provider.dart';
-import 'package:misskey_dog/model/account/account_state_provider.dart';
+import 'package:misskey_dog/model/account/account_provider.dart';
 
 @RoutePage()
 final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapper {

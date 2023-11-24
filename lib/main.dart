@@ -3,7 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:misskey_dog/core/router/app_router.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
-import 'package:misskey_dog/model/account/account_state_provider.dart';
+import 'package:misskey_dog/model/account/account_provider.dart';
 
 void main() {
   runApp(const ProviderScope(
