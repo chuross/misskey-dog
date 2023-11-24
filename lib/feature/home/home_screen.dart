@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:i18n_extension/i18n_widget.dart';
+import 'package:misskey_dog/core/extension/async_value.dart';
 import 'package:misskey_dog/core/extension/bool.dart';
-import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/core/ui/error_view.dart';
 import 'package:misskey_dog/core/ui/loading_view.dart';
@@ -20,39 +20,38 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
   Widget build(BuildContext context, WidgetRef ref) {
     final account = ref.watch(accountStateProvider);
 
-    return account.when(
-      error: (_, __) => ErrorView(onRetry: () {}),
-      loading: () => const CircularProgressIndicator().align(Alignment.center),
-      data: (account) {
-        return DefaultTabController(
-          length: 1,
-          child: Scaffold(
-            appBar: AppBar(
-              title: const Text('Misskey Dog'),
-              actions: [
-                IconButton(
-                  icon: (account?.user.avatarUrl != null).when(
-                    tru: () => CircleAvatar(
-                      foregroundImage: NetworkImage(account?.user.avatarUrl ?? ''),
+    return account.whenScreenLoading(
+        ref: ref,
+        onRetry: () => ref.invalidate(accountStateProvider),
+        data: (account) {
+          return DefaultTabController(
+            length: 1,
+            child: Scaffold(
+              appBar: AppBar(
+                title: const Text('Misskey Dog'),
+                actions: [
+                  IconButton(
+                    icon: (account?.user.avatarUrl != null).when(
+                      tru: () => CircleAvatar(
+                        foregroundImage: NetworkImage(account?.user.avatarUrl ?? ''),
+                      ),
+                      fals: () => const Icon(Icons.person),
                     ),
-                    fals: () => const Icon(Icons.person),
+                    onPressed: () => context.router.push(const AccountRoute()),
                   ),
-                  onPressed: () => context.router.push(const AccountRoute()),
-                ),
-              ],
-              bottom: TabBar(tabs: [
-                Tab(text: 'ローカル'.i18n),
-              ]),
+                ],
+                bottom: TabBar(tabs: [
+                  Tab(text: 'ローカル'.i18n),
+                ]),
+              ),
+              body: TabBarView(
+                children: [
+                  _noteList(ref, isLocal: true),
+                ],
+              ),
             ),
-            body: TabBarView(
-              children: [
-                _noteList(ref, isLocal: true),
-              ],
-            ),
-          ),
-        );
-      },
-    );
+          );
+        });
   }
 
   Widget _noteList(
