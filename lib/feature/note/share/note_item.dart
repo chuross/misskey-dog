@@ -69,7 +69,7 @@ final class NoteItem extends StatelessWidget {
                   children: note.reactions.map((reaction) {
                     return _Reaction(key: "${note.id}_${reaction.name}".toKey(), reaction: reaction);
                   }).toList(),
-                ),
+                ).expanded(),
               ],
             );
           },
@@ -100,7 +100,9 @@ final class _RenotedInfo extends StatelessWidget {
         Text(
           "%sさんがリノートしました".i18n.fill([note.user.username]),
           style: context.textTheme.bodySmall,
-        ),
+          textAlign: TextAlign.start,
+          overflow: TextOverflow.ellipsis,
+        ).expanded(),
       ],
     );
   }
