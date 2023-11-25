@@ -21,6 +21,7 @@ final class NoteItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         note.renote.mapOrElse(
           func: (_) => Column(
@@ -59,10 +60,15 @@ final class NoteItem extends StatelessWidget {
         ),
         note.reactions.isNotEmpty.mapOrElse(
           func: (_) {
-            return Wrap(
-              children: note.reactions.map((reaction) {
-                return _Reaction(key: reaction.name.toKey(), reaction: reaction);
-              }).toList(),
+            return Row(
+              children: [
+                const SizedBox(width: 56),
+                Wrap(
+                  children: note.reactions.map((reaction) {
+                    return _Reaction(key: "${note.id}_${reaction.name}".toKey(), reaction: reaction);
+                  }).toList(),
+                ),
+              ],
             );
           },
           elseValue: const SizedBox.shrink(),
