@@ -125,10 +125,7 @@ final class _Reaction extends ConsumerWidget {
           border: Border.all(color: context.dividerColorWithOpacity10),
           borderRadius: BorderRadius.circular(4),
         ),
-        child: SizedBox(
-          height: 20,
-          child: Image.network(emoji.url, fit: BoxFit.fitHeight),
-        ),
+        child: Image.network(emoji.url, height: 20, fit: BoxFit.fitHeight),
       ),
     );
   }
