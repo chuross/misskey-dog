@@ -14,6 +14,7 @@ _$NoteImpl _$$NoteImplFromJson(Map<String, dynamic> json) => _$NoteImpl(
           : Note.fromJson(json['renote'] as Map<String, dynamic>),
       repliesCount: json['repliesCount'] as int,
       renoteCount: json['renoteCount'] as int,
+      reactions: Map<String, int>.from(json['reactions'] as Map),
       text: json['text'] as String?,
     );
 
@@ -24,5 +25,16 @@ Map<String, dynamic> _$$NoteImplToJson(_$NoteImpl instance) =>
       'renote': instance.renote,
       'repliesCount': instance.repliesCount,
       'renoteCount': instance.renoteCount,
+      'reactions': instance.reactions,
       'text': instance.text,
+    };
+
+_$NoteReactionImpl _$$NoteReactionImplFromJson(Map<String, dynamic> json) =>
+    _$NoteReactionImpl(
+      name: json['name'] as String,
+    );
+
+Map<String, dynamic> _$$NoteReactionImplToJson(_$NoteReactionImpl instance) =>
+    <String, dynamic>{
+      'name': instance.name,
     };

@@ -34,7 +34,7 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
                       func: (account) => CircleAvatar(
                         foregroundImage: NetworkImage(account.user.avatarUrl ?? ''),
                       ),
-                      elseFunc: () => const Icon(Icons.person),
+                      elseValue: const Icon(Icons.person),
                     ),
                     onPressed: () => context.router.push(const AccountRoute()),
                   ),

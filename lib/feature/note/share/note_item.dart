@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/dynamic.dart';
@@ -25,7 +26,7 @@ final class NoteItem extends StatelessWidget {
               const SizedBox(height: 12),
             ],
           ),
-          elseFunc: () => const SizedBox.shrink(),
+          elseValue: const SizedBox.shrink(),
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,6 +53,10 @@ final class NoteItem extends StatelessWidget {
               ],
             ).expanded()
           ],
+        ),
+        note.reactions.isNotEmpty.mapOrElse(
+          func: (_) => SizedBox.shrink(),
+          elseValue: const SizedBox.shrink(),
         ),
         _ActionButtons(),
       ],
@@ -82,6 +87,17 @@ final class _RenotedInfo extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+final class _Reaction extends ConsumerWidget {
+  final NoteReaction reaction;
+
+  _Reaction({super.key, required this.reaction});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Text('');
   }
 }
 

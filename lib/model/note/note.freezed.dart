@@ -25,6 +25,7 @@ mixin _$Note {
   Note? get renote => throw _privateConstructorUsedError;
   int get repliesCount => throw _privateConstructorUsedError;
   int get renoteCount => throw _privateConstructorUsedError;
+  Map<String, int> get reactions => throw _privateConstructorUsedError;
   String? get text => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $NoteCopyWith<$Res> {
       Note? renote,
       int repliesCount,
       int renoteCount,
+      Map<String, int> reactions,
       String? text});
 
   $UserCopyWith<$Res> get user;
@@ -67,6 +69,7 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
     Object? renote = freezed,
     Object? repliesCount = null,
     Object? renoteCount = null,
+    Object? reactions = null,
     Object? text = freezed,
   }) {
     return _then(_value.copyWith(
@@ -90,6 +93,10 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
           ? _value.renoteCount
           : renoteCount // ignore: cast_nullable_to_non_nullable
               as int,
+      reactions: null == reactions
+          ? _value.reactions
+          : reactions // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -131,6 +138,7 @@ abstract class _$$NoteImplCopyWith<$Res> implements $NoteCopyWith<$Res> {
       Note? renote,
       int repliesCount,
       int renoteCount,
+      Map<String, int> reactions,
       String? text});
 
   @override
@@ -154,6 +162,7 @@ class __$$NoteImplCopyWithImpl<$Res>
     Object? renote = freezed,
     Object? repliesCount = null,
     Object? renoteCount = null,
+    Object? reactions = null,
     Object? text = freezed,
   }) {
     return _then(_$NoteImpl(
@@ -177,6 +186,10 @@ class __$$NoteImplCopyWithImpl<$Res>
           ? _value.renoteCount
           : renoteCount // ignore: cast_nullable_to_non_nullable
               as int,
+      reactions: null == reactions
+          ? _value._reactions
+          : reactions // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -194,7 +207,9 @@ class _$NoteImpl implements _Note {
       this.renote,
       required this.repliesCount,
       required this.renoteCount,
-      this.text});
+      required final Map<String, int> reactions,
+      this.text})
+      : _reactions = reactions;
 
   factory _$NoteImpl.fromJson(Map<String, dynamic> json) =>
       _$$NoteImplFromJson(json);
@@ -209,12 +224,20 @@ class _$NoteImpl implements _Note {
   final int repliesCount;
   @override
   final int renoteCount;
+  final Map<String, int> _reactions;
+  @override
+  Map<String, int> get reactions {
+    if (_reactions is EqualUnmodifiableMapView) return _reactions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_reactions);
+  }
+
   @override
   final String? text;
 
   @override
   String toString() {
-    return 'Note(id: $id, user: $user, renote: $renote, repliesCount: $repliesCount, renoteCount: $renoteCount, text: $text)';
+    return 'Note(id: $id, user: $user, renote: $renote, repliesCount: $repliesCount, renoteCount: $renoteCount, reactions: $reactions, text: $text)';
   }
 
   @override
@@ -229,13 +252,15 @@ class _$NoteImpl implements _Note {
                 other.repliesCount == repliesCount) &&
             (identical(other.renoteCount, renoteCount) ||
                 other.renoteCount == renoteCount) &&
+            const DeepCollectionEquality()
+                .equals(other._reactions, _reactions) &&
             (identical(other.text, text) || other.text == text));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, user, renote, repliesCount, renoteCount, text);
+  int get hashCode => Object.hash(runtimeType, id, user, renote, repliesCount,
+      renoteCount, const DeepCollectionEquality().hash(_reactions), text);
 
   @JsonKey(ignore: true)
   @override
@@ -258,6 +283,7 @@ abstract class _Note implements Note {
       final Note? renote,
       required final int repliesCount,
       required final int renoteCount,
+      required final Map<String, int> reactions,
       final String? text}) = _$NoteImpl;
 
   factory _Note.fromJson(Map<String, dynamic> json) = _$NoteImpl.fromJson;
@@ -273,9 +299,148 @@ abstract class _Note implements Note {
   @override
   int get renoteCount;
   @override
+  Map<String, int> get reactions;
+  @override
   String? get text;
   @override
   @JsonKey(ignore: true)
   _$$NoteImplCopyWith<_$NoteImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+NoteReaction _$NoteReactionFromJson(Map<String, dynamic> json) {
+  return _NoteReaction.fromJson(json);
+}
+
+/// @nodoc
+mixin _$NoteReaction {
+  String get name => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $NoteReactionCopyWith<NoteReaction> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NoteReactionCopyWith<$Res> {
+  factory $NoteReactionCopyWith(
+          NoteReaction value, $Res Function(NoteReaction) then) =
+      _$NoteReactionCopyWithImpl<$Res, NoteReaction>;
+  @useResult
+  $Res call({String name});
+}
+
+/// @nodoc
+class _$NoteReactionCopyWithImpl<$Res, $Val extends NoteReaction>
+    implements $NoteReactionCopyWith<$Res> {
+  _$NoteReactionCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+  }) {
+    return _then(_value.copyWith(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$NoteReactionImplCopyWith<$Res>
+    implements $NoteReactionCopyWith<$Res> {
+  factory _$$NoteReactionImplCopyWith(
+          _$NoteReactionImpl value, $Res Function(_$NoteReactionImpl) then) =
+      __$$NoteReactionImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String name});
+}
+
+/// @nodoc
+class __$$NoteReactionImplCopyWithImpl<$Res>
+    extends _$NoteReactionCopyWithImpl<$Res, _$NoteReactionImpl>
+    implements _$$NoteReactionImplCopyWith<$Res> {
+  __$$NoteReactionImplCopyWithImpl(
+      _$NoteReactionImpl _value, $Res Function(_$NoteReactionImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+  }) {
+    return _then(_$NoteReactionImpl(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$NoteReactionImpl implements _NoteReaction {
+  const _$NoteReactionImpl({required this.name});
+
+  factory _$NoteReactionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NoteReactionImplFromJson(json);
+
+  @override
+  final String name;
+
+  @override
+  String toString() {
+    return 'NoteReaction(name: $name)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NoteReactionImpl &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, name);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NoteReactionImplCopyWith<_$NoteReactionImpl> get copyWith =>
+      __$$NoteReactionImplCopyWithImpl<_$NoteReactionImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NoteReactionImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _NoteReaction implements NoteReaction {
+  const factory _NoteReaction({required final String name}) =
+      _$NoteReactionImpl;
+
+  factory _NoteReaction.fromJson(Map<String, dynamic> json) =
+      _$NoteReactionImpl.fromJson;
+
+  @override
+  String get name;
+  @override
+  @JsonKey(ignore: true)
+  _$$NoteReactionImplCopyWith<_$NoteReactionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
