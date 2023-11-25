@@ -14,23 +14,52 @@ final class NoteItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
       children: [
-        SizedBox(
-          width: 56,
-          height: 56,
-          child: CircleAvatar(foregroundImage: NetworkImage(note.user.avatarUrl ?? '')),
-        ),
-        const SizedBox(width: 12),
-        Column(
+        Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(note.user.username, style: context.textTheme.bodySmall),
-            Text(note.text ?? '', softWrap: true),
+            SizedBox(
+              width: 56,
+              height: 56,
+              child: CircleAvatar(foregroundImage: NetworkImage(note.user.avatarUrl ?? '')),
+            ),
+            const SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(note.user.username, style: context.textTheme.bodySmall),
+                Text(note.text ?? '', softWrap: true),
+              ],
+            ).expanded()
           ],
-        ).expanded()
+        ),
+        Row(
+          children: [
+            const SizedBox(width: 56),
+            IconButton(
+              onPressed: () {},
+              iconSize: 20,
+              icon: const Icon(Icons.reply_rounded),
+            ),
+            IconButton(
+              onPressed: () {},
+              iconSize: 20,
+              icon: const Icon(Icons.repeat_rounded),
+            ),
+            IconButton(
+              onPressed: () {},
+              iconSize: 20,
+              icon: const Icon(Icons.add),
+            ),
+            IconButton(
+              onPressed: () {},
+              iconSize: 20,
+              icon: const Icon(Icons.more_horiz_rounded),
+            ),
+          ],
+        ),
       ],
-    ).padding(const EdgeInsets.symmetric(vertical: 24, horizontal: 16));
+    ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
   }
 }

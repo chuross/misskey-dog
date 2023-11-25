@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:i18n_extension/i18n_widget.dart';
 import 'package:misskey_dog/core/extension/async_value.dart';
+import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/dynamic.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/feature/note/share/note_item.dart';
@@ -78,7 +79,14 @@ final class _NoteList extends ConsumerWidget {
             itemCount: notes.length,
             itemBuilder: (context, index) {
               final note = notes[index];
-              return NoteItem(key: ValueKey(note.id), note: note);
+              return Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: Divider.createBorderSide(context, color: context.dividerColor.withOpacity(0.2)),
+                  ),
+                ),
+                child: NoteItem(key: ValueKey(note.id), note: note),
+              );
             },
           ),
         );
