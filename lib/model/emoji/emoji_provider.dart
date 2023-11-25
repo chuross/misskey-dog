@@ -8,6 +8,8 @@ part 'emoji_provider.g.dart';
 
 @riverpod
 Future<Emoji> emoji(EmojiRef ref, {required String emojiName}) async {
+  ref.keepAlive();
+
   final client = await ref.watch(misskeyClientProvider().future);
   return await client.getEmoji(request: GetEmojiRequest(name: emojiName).toJson().removeAllNullValueKeys());
 }

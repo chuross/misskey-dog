@@ -109,8 +109,7 @@ final class _Reaction extends ConsumerWidget {
 
     return emoji.whenPartialLoading(
       data: (emoji) => SizedBox(
-        width: 16,
-        height: 16,
+        height: 24,
         child: Image.network(emoji.url, fit: BoxFit.fitHeight),
       ),
     );
