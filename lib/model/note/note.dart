@@ -10,6 +10,8 @@ abstract class Note with _$Note {
     required String id,
     required User user,
     Note? renote,
+    required int repliesCount,
+    required int renoteCount,
     String? text,
   }) = _Note;
 

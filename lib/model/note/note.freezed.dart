@@ -23,6 +23,8 @@ mixin _$Note {
   String get id => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
   Note? get renote => throw _privateConstructorUsedError;
+  int get repliesCount => throw _privateConstructorUsedError;
+  int get renoteCount => throw _privateConstructorUsedError;
   String? get text => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +37,13 @@ abstract class $NoteCopyWith<$Res> {
   factory $NoteCopyWith(Note value, $Res Function(Note) then) =
       _$NoteCopyWithImpl<$Res, Note>;
   @useResult
-  $Res call({String id, User user, Note? renote, String? text});
+  $Res call(
+      {String id,
+      User user,
+      Note? renote,
+      int repliesCount,
+      int renoteCount,
+      String? text});
 
   $UserCopyWith<$Res> get user;
   $NoteCopyWith<$Res>? get renote;
@@ -57,6 +65,8 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
     Object? id = null,
     Object? user = null,
     Object? renote = freezed,
+    Object? repliesCount = null,
+    Object? renoteCount = null,
     Object? text = freezed,
   }) {
     return _then(_value.copyWith(
@@ -72,6 +82,14 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
           ? _value.renote
           : renote // ignore: cast_nullable_to_non_nullable
               as Note?,
+      repliesCount: null == repliesCount
+          ? _value.repliesCount
+          : repliesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      renoteCount: null == renoteCount
+          ? _value.renoteCount
+          : renoteCount // ignore: cast_nullable_to_non_nullable
+              as int,
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -107,7 +125,13 @@ abstract class _$$NoteImplCopyWith<$Res> implements $NoteCopyWith<$Res> {
       __$$NoteImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, User user, Note? renote, String? text});
+  $Res call(
+      {String id,
+      User user,
+      Note? renote,
+      int repliesCount,
+      int renoteCount,
+      String? text});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -128,6 +152,8 @@ class __$$NoteImplCopyWithImpl<$Res>
     Object? id = null,
     Object? user = null,
     Object? renote = freezed,
+    Object? repliesCount = null,
+    Object? renoteCount = null,
     Object? text = freezed,
   }) {
     return _then(_$NoteImpl(
@@ -143,6 +169,14 @@ class __$$NoteImplCopyWithImpl<$Res>
           ? _value.renote
           : renote // ignore: cast_nullable_to_non_nullable
               as Note?,
+      repliesCount: null == repliesCount
+          ? _value.repliesCount
+          : repliesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      renoteCount: null == renoteCount
+          ? _value.renoteCount
+          : renoteCount // ignore: cast_nullable_to_non_nullable
+              as int,
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -155,7 +189,12 @@ class __$$NoteImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$NoteImpl implements _Note {
   const _$NoteImpl(
-      {required this.id, required this.user, this.renote, this.text});
+      {required this.id,
+      required this.user,
+      this.renote,
+      required this.repliesCount,
+      required this.renoteCount,
+      this.text});
 
   factory _$NoteImpl.fromJson(Map<String, dynamic> json) =>
       _$$NoteImplFromJson(json);
@@ -167,11 +206,15 @@ class _$NoteImpl implements _Note {
   @override
   final Note? renote;
   @override
+  final int repliesCount;
+  @override
+  final int renoteCount;
+  @override
   final String? text;
 
   @override
   String toString() {
-    return 'Note(id: $id, user: $user, renote: $renote, text: $text)';
+    return 'Note(id: $id, user: $user, renote: $renote, repliesCount: $repliesCount, renoteCount: $renoteCount, text: $text)';
   }
 
   @override
@@ -182,12 +225,17 @@ class _$NoteImpl implements _Note {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.renote, renote) || other.renote == renote) &&
+            (identical(other.repliesCount, repliesCount) ||
+                other.repliesCount == repliesCount) &&
+            (identical(other.renoteCount, renoteCount) ||
+                other.renoteCount == renoteCount) &&
             (identical(other.text, text) || other.text == text));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, user, renote, text);
+  int get hashCode => Object.hash(
+      runtimeType, id, user, renote, repliesCount, renoteCount, text);
 
   @JsonKey(ignore: true)
   @override
@@ -208,6 +256,8 @@ abstract class _Note implements Note {
       {required final String id,
       required final User user,
       final Note? renote,
+      required final int repliesCount,
+      required final int renoteCount,
       final String? text}) = _$NoteImpl;
 
   factory _Note.fromJson(Map<String, dynamic> json) = _$NoteImpl.fromJson;
@@ -218,6 +268,10 @@ abstract class _Note implements Note {
   User get user;
   @override
   Note? get renote;
+  @override
+  int get repliesCount;
+  @override
+  int get renoteCount;
   @override
   String? get text;
   @override
