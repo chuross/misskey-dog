@@ -26,6 +26,8 @@ final class Notes extends _$Notes {
   }
 
   Future<void> fetchNext() async {
+    if (state.isLoading) return;
+
     final lastNote = state.value?.lastOrNull;
     if (lastNote == null) return;
 
