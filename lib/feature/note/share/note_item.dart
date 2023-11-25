@@ -28,8 +28,16 @@ final class NoteItem extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(note.user.username, style: context.textTheme.bodySmall),
-                Text(note.text ?? '', softWrap: true),
+                Text(
+                  note.user.username,
+                  style: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  note.text ?? '',
+                  softWrap: true,
+                  style: context.textTheme.bodyMedium,
+                ),
               ],
             ).expanded()
           ],
