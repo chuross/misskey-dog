@@ -21,4 +21,20 @@ extension AsyncValueExt<T> on AsyncValue<T> {
       },
     );
   }
+
+  Widget whenPartialLoading({
+    required WidgetRef ref,
+    required Function(T) data,
+  }) {
+    final log = ref.watch(logProvider);
+
+    return when(
+      data: (d) => data(d),
+      loading: () => const LoadingView(),
+      error: (e, s) {
+        log.e('partial loading error', error: e, stackTrace: s);
+        return const SizedBox.shrink();
+      },
+    );
+  }
 }

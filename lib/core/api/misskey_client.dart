@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:misskey_dog/model/account/account.dart';
+import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:uuid/uuid.dart';
@@ -26,5 +27,8 @@ abstract class MisskeyClient {
   Future<Account> authorize(@Path('session') String session);
 
   @POST('/api/notes')
-  Future<List<Note>> notes({@Body() required Map<String, dynamic> request});
+  Future<List<Note>> getNotes({@Body() required Map<String, dynamic> request});
+
+  @POST('/api/emoji')
+  Future<Emoji> getEmoji({@Body() required Map<String, dynamic> request});
 }

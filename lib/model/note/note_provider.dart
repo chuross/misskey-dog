@@ -15,7 +15,7 @@ final class Notes extends _$Notes {
   }) async {
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final notes = await client.notes(
+    final notes = await client.getNotes(
       request: GetNotesRequest(
         isLocal: isLocal,
         limit: limit,
@@ -33,7 +33,7 @@ final class Notes extends _$Notes {
 
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final newNotes = await client.notes(
+    final newNotes = await client.getNotes(
       request: GetNotesRequest(
         sinceId: lastNote.id,
         isLocal: isLocal,

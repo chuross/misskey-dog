@@ -4,6 +4,6 @@ extension DynamicExt<I> on dynamic {
   }
 
   T mapOrElse<T>({required T Function(I) func, required T elseValue}) {
-    return this != null ? func(this) : elseValue;
+    return this != null || (this is bool && this) ? func(this as I) : elseValue;
   }
 }

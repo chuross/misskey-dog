@@ -25,7 +25,8 @@ mixin _$Note {
   Note? get renote => throw _privateConstructorUsedError;
   int get repliesCount => throw _privateConstructorUsedError;
   int get renoteCount => throw _privateConstructorUsedError;
-  Map<String, int> get reactions => throw _privateConstructorUsedError;
+  @JsonKey(name: 'reactions')
+  Map<String, int> get rawReactions => throw _privateConstructorUsedError;
   String? get text => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,7 +45,7 @@ abstract class $NoteCopyWith<$Res> {
       Note? renote,
       int repliesCount,
       int renoteCount,
-      Map<String, int> reactions,
+      @JsonKey(name: 'reactions') Map<String, int> rawReactions,
       String? text});
 
   $UserCopyWith<$Res> get user;
@@ -69,7 +70,7 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
     Object? renote = freezed,
     Object? repliesCount = null,
     Object? renoteCount = null,
-    Object? reactions = null,
+    Object? rawReactions = null,
     Object? text = freezed,
   }) {
     return _then(_value.copyWith(
@@ -93,9 +94,9 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
           ? _value.renoteCount
           : renoteCount // ignore: cast_nullable_to_non_nullable
               as int,
-      reactions: null == reactions
-          ? _value.reactions
-          : reactions // ignore: cast_nullable_to_non_nullable
+      rawReactions: null == rawReactions
+          ? _value.rawReactions
+          : rawReactions // ignore: cast_nullable_to_non_nullable
               as Map<String, int>,
       text: freezed == text
           ? _value.text
@@ -138,7 +139,7 @@ abstract class _$$NoteImplCopyWith<$Res> implements $NoteCopyWith<$Res> {
       Note? renote,
       int repliesCount,
       int renoteCount,
-      Map<String, int> reactions,
+      @JsonKey(name: 'reactions') Map<String, int> rawReactions,
       String? text});
 
   @override
@@ -162,7 +163,7 @@ class __$$NoteImplCopyWithImpl<$Res>
     Object? renote = freezed,
     Object? repliesCount = null,
     Object? renoteCount = null,
-    Object? reactions = null,
+    Object? rawReactions = null,
     Object? text = freezed,
   }) {
     return _then(_$NoteImpl(
@@ -186,9 +187,9 @@ class __$$NoteImplCopyWithImpl<$Res>
           ? _value.renoteCount
           : renoteCount // ignore: cast_nullable_to_non_nullable
               as int,
-      reactions: null == reactions
-          ? _value._reactions
-          : reactions // ignore: cast_nullable_to_non_nullable
+      rawReactions: null == rawReactions
+          ? _value._rawReactions
+          : rawReactions // ignore: cast_nullable_to_non_nullable
               as Map<String, int>,
       text: freezed == text
           ? _value.text
@@ -207,9 +208,9 @@ class _$NoteImpl extends _Note {
       this.renote,
       required this.repliesCount,
       required this.renoteCount,
-      required final Map<String, int> reactions,
+      @JsonKey(name: 'reactions') required final Map<String, int> rawReactions,
       this.text})
-      : _reactions = reactions,
+      : _rawReactions = rawReactions,
         super._();
 
   factory _$NoteImpl.fromJson(Map<String, dynamic> json) =>
@@ -225,12 +226,13 @@ class _$NoteImpl extends _Note {
   final int repliesCount;
   @override
   final int renoteCount;
-  final Map<String, int> _reactions;
+  final Map<String, int> _rawReactions;
   @override
-  Map<String, int> get reactions {
-    if (_reactions is EqualUnmodifiableMapView) return _reactions;
+  @JsonKey(name: 'reactions')
+  Map<String, int> get rawReactions {
+    if (_rawReactions is EqualUnmodifiableMapView) return _rawReactions;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_reactions);
+    return EqualUnmodifiableMapView(_rawReactions);
   }
 
   @override
@@ -238,7 +240,7 @@ class _$NoteImpl extends _Note {
 
   @override
   String toString() {
-    return 'Note(id: $id, user: $user, renote: $renote, repliesCount: $repliesCount, renoteCount: $renoteCount, reactions: $reactions, text: $text)';
+    return 'Note(id: $id, user: $user, renote: $renote, repliesCount: $repliesCount, renoteCount: $renoteCount, rawReactions: $rawReactions, text: $text)';
   }
 
   @override
@@ -254,14 +256,14 @@ class _$NoteImpl extends _Note {
             (identical(other.renoteCount, renoteCount) ||
                 other.renoteCount == renoteCount) &&
             const DeepCollectionEquality()
-                .equals(other._reactions, _reactions) &&
+                .equals(other._rawReactions, _rawReactions) &&
             (identical(other.text, text) || other.text == text));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, user, renote, repliesCount,
-      renoteCount, const DeepCollectionEquality().hash(_reactions), text);
+      renoteCount, const DeepCollectionEquality().hash(_rawReactions), text);
 
   @JsonKey(ignore: true)
   @override
@@ -284,7 +286,7 @@ abstract class _Note extends Note {
       final Note? renote,
       required final int repliesCount,
       required final int renoteCount,
-      required final Map<String, int> reactions,
+      @JsonKey(name: 'reactions') required final Map<String, int> rawReactions,
       final String? text}) = _$NoteImpl;
   const _Note._() : super._();
 
@@ -301,7 +303,8 @@ abstract class _Note extends Note {
   @override
   int get renoteCount;
   @override
-  Map<String, int> get reactions;
+  @JsonKey(name: 'reactions')
+  Map<String, int> get rawReactions;
   @override
   String? get text;
   @override

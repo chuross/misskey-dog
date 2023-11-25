@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
+import 'package:misskey_dog/core/extension/async_value.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/dynamic.dart';
+import 'package:misskey_dog/core/extension/string.dart';
 
 import 'package:misskey_dog/core/extension/widget.dart';
+import 'package:misskey_dog/model/emoji/emoji_provider.dart';
 import 'package:misskey_dog/model/note/note.dart';
 
 final class NoteItem extends StatelessWidget {
@@ -55,7 +58,13 @@ final class NoteItem extends StatelessWidget {
           ],
         ),
         note.reactions.isNotEmpty.mapOrElse(
-          func: (_) => SizedBox.shrink(),
+          func: (_) {
+            return Wrap(
+              children: note.reactions.map((reaction) {
+                return _Reaction(key: reaction.name.toKey(), reaction: reaction);
+              }).toList(),
+            );
+          },
           elseValue: const SizedBox.shrink(),
         ),
         _ActionButtons(),
@@ -93,11 +102,20 @@ final class _RenotedInfo extends StatelessWidget {
 final class _Reaction extends ConsumerWidget {
   final NoteReaction reaction;
 
-  _Reaction({super.key, required this.reaction});
+  const _Reaction({super.key, required this.reaction});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Text('');
+    final emoji = ref.watch(emojiProvider(emojiName: reaction.name));
+
+    return emoji.whenPartialLoading(
+      ref: ref,
+      data: (emoji) => SizedBox(
+        width: 16,
+        height: 16,
+        child: Image.network(emoji.url),
+      ),
+    );
   }
 }
 
