@@ -82,7 +82,7 @@ final class _NoteList extends ConsumerWidget {
               return Container(
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: Divider.createBorderSide(context, color: context.dividerColor.withOpacity(0.1)),
+                    bottom: Divider.createBorderSide(context, color: context.dividerColorWithOpacity10),
                   ),
                 ),
                 child: NoteItem(key: ValueKey(note.id), note: note),
