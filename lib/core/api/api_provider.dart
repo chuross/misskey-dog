@@ -8,7 +8,11 @@ part 'api_provider.g.dart';
 
 @riverpod
 Future<Dio> dio(DioRef ref) async {
-  final dio = Dio();
+  final dio = Dio(BaseOptions(
+    connectTimeout: const Duration(seconds: 3),
+    receiveTimeout: const Duration(seconds: 3),
+    sendTimeout: const Duration(seconds: 10),
+  ));
 
   dio.interceptors.add(InterceptorsWrapper(
     onRequest: (options, handler) async {
