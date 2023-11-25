@@ -85,7 +85,6 @@ final class _RenotedInfo extends StatelessWidget {
         const Icon(Icons.repeat_rounded, size: 16),
         const SizedBox(width: 4),
         SizedBox(
-          width: 24,
           height: 24,
           child: CircleAvatar(foregroundImage: NetworkImage(note.user.avatarUrl ?? '')),
         ),
@@ -109,11 +108,10 @@ final class _Reaction extends ConsumerWidget {
     final emoji = ref.watch(emojiProvider(emojiName: reaction.name));
 
     return emoji.whenPartialLoading(
-      ref: ref,
       data: (emoji) => SizedBox(
         width: 16,
         height: 16,
-        child: Image.network(emoji.url),
+        child: Image.network(emoji.url, fit: BoxFit.fitHeight),
       ),
     );
   }
