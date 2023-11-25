@@ -26,7 +26,7 @@ Future<Dio> dio(DioRef ref) async {
   ));
 
   if (kDebugMode) {
-    dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+    dio.interceptors.add(LogInterceptor(requestBody: true));
   }
 
   return dio;

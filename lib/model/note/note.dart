@@ -19,7 +19,8 @@ abstract class Note with _$Note {
     String? text,
   }) = _Note;
 
-  List<NoteReaction> get reactions => rawReactions.keys.map((key) => NoteReaction.resolved(key)).toList();
+  List<NoteReaction> get reactions =>
+      rawReactions.keys.where((element) => element.startsWith(':')).map((key) => NoteReaction.resolved(key)).toList();
 
   factory Note.fromJson(Map<String, dynamic> json) => _$NoteFromJson(json);
 }
