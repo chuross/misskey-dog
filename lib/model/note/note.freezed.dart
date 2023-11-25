@@ -200,7 +200,7 @@ class __$$NoteImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NoteImpl implements _Note {
+class _$NoteImpl extends _Note {
   const _$NoteImpl(
       {required this.id,
       required this.user,
@@ -209,7 +209,8 @@ class _$NoteImpl implements _Note {
       required this.renoteCount,
       required final Map<String, int> reactions,
       this.text})
-      : _reactions = reactions;
+      : _reactions = reactions,
+        super._();
 
   factory _$NoteImpl.fromJson(Map<String, dynamic> json) =>
       _$$NoteImplFromJson(json);
@@ -276,7 +277,7 @@ class _$NoteImpl implements _Note {
   }
 }
 
-abstract class _Note implements Note {
+abstract class _Note extends Note {
   const factory _Note(
       {required final String id,
       required final User user,
@@ -285,6 +286,7 @@ abstract class _Note implements Note {
       required final int renoteCount,
       required final Map<String, int> reactions,
       final String? text}) = _$NoteImpl;
+  const _Note._() : super._();
 
   factory _Note.fromJson(Map<String, dynamic> json) = _$NoteImpl.fromJson;
 

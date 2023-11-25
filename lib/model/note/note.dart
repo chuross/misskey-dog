@@ -6,6 +6,7 @@ part 'note.g.dart';
 
 @freezed
 abstract class Note with _$Note {
+  const Note._();
   const factory Note({
     required String id,
     required User user,
@@ -15,6 +16,10 @@ abstract class Note with _$Note {
     required Map<String, int> reactions,
     String? text,
   }) = _Note;
+
+  List<NoteReaction> resolvedReactions() {
+    return reactions.keys.map((key) => NoteReaction.resolved(key)).toList();
+  }
 
   factory Note.fromJson(Map<String, dynamic> json) => _$NoteFromJson(json);
 }
