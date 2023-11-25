@@ -6,7 +6,7 @@ part of 'note_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$notesHash() => r'abf80df72ecfb4af12f5f7f0a6b482f3e9b2f73d';
+String _$notesHash() => r'5b96a467eebfd5914fe02cd841b21a99c90aa085';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,12 +30,10 @@ class _SystemHash {
 }
 
 abstract class _$Notes extends BuildlessAutoDisposeAsyncNotifier<List<Note>> {
-  late final String? sinceId;
   late final bool isLocal;
   late final int limit;
 
   FutureOr<List<Note>> build({
-    String? sinceId,
     bool isLocal = false,
     int limit = 30,
   });
@@ -52,12 +50,10 @@ class NotesFamily extends Family<AsyncValue<List<Note>>> {
 
   /// See also [Notes].
   NotesProvider call({
-    String? sinceId,
     bool isLocal = false,
     int limit = 30,
   }) {
     return NotesProvider(
-      sinceId: sinceId,
       isLocal: isLocal,
       limit: limit,
     );
@@ -68,7 +64,6 @@ class NotesFamily extends Family<AsyncValue<List<Note>>> {
     covariant NotesProvider provider,
   ) {
     return call(
-      sinceId: provider.sinceId,
       isLocal: provider.isLocal,
       limit: provider.limit,
     );
@@ -94,12 +89,10 @@ class NotesProvider
     extends AutoDisposeAsyncNotifierProviderImpl<Notes, List<Note>> {
   /// See also [Notes].
   NotesProvider({
-    String? sinceId,
     bool isLocal = false,
     int limit = 30,
   }) : this._internal(
           () => Notes()
-            ..sinceId = sinceId
             ..isLocal = isLocal
             ..limit = limit,
           from: notesProvider,
@@ -110,7 +103,6 @@ class NotesProvider
                   : _$notesHash,
           dependencies: NotesFamily._dependencies,
           allTransitiveDependencies: NotesFamily._allTransitiveDependencies,
-          sinceId: sinceId,
           isLocal: isLocal,
           limit: limit,
         );
@@ -122,12 +114,10 @@ class NotesProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.sinceId,
     required this.isLocal,
     required this.limit,
   }) : super.internal();
 
-  final String? sinceId;
   final bool isLocal;
   final int limit;
 
@@ -136,7 +126,6 @@ class NotesProvider
     covariant Notes notifier,
   ) {
     return notifier.build(
-      sinceId: sinceId,
       isLocal: isLocal,
       limit: limit,
     );
@@ -148,7 +137,6 @@ class NotesProvider
       origin: this,
       override: NotesProvider._internal(
         () => create()
-          ..sinceId = sinceId
           ..isLocal = isLocal
           ..limit = limit,
         from: from,
@@ -156,7 +144,6 @@ class NotesProvider
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        sinceId: sinceId,
         isLocal: isLocal,
         limit: limit,
       ),
@@ -171,7 +158,6 @@ class NotesProvider
   @override
   bool operator ==(Object other) {
     return other is NotesProvider &&
-        other.sinceId == sinceId &&
         other.isLocal == isLocal &&
         other.limit == limit;
   }
@@ -179,7 +165,6 @@ class NotesProvider
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, sinceId.hashCode);
     hash = _SystemHash.combine(hash, isLocal.hashCode);
     hash = _SystemHash.combine(hash, limit.hashCode);
 
@@ -188,9 +173,6 @@ class NotesProvider
 }
 
 mixin NotesRef on AutoDisposeAsyncNotifierProviderRef<List<Note>> {
-  /// The parameter `sinceId` of this provider.
-  String? get sinceId;
-
   /// The parameter `isLocal` of this provider.
   bool get isLocal;
 
@@ -203,8 +185,6 @@ class _NotesProviderElement
     with NotesRef {
   _NotesProviderElement(super.provider);
 
-  @override
-  String? get sinceId => (origin as NotesProvider).sinceId;
   @override
   bool get isLocal => (origin as NotesProvider).isLocal;
   @override

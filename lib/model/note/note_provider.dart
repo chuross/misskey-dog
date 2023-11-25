@@ -10,7 +10,6 @@ part 'note_provider.g.dart';
 final class Notes extends _$Notes {
   @override
   Future<List<Note>> build({
-    String? sinceId,
     bool isLocal = false,
     int limit = 30,
   }) async {
@@ -18,12 +17,28 @@ final class Notes extends _$Notes {
 
     final notes = await client.notes(
       request: GetNotesRequest(
-        sinceId: sinceId,
         isLocal: isLocal,
         limit: limit,
       ).toJson().removeAllNullValueKeys(),
     );
 
     return notes;
+  }
+
+  Future<void> fetchNext() async {
+    final lastNote = state.value?.lastOrNull;
+    if (lastNote == null) return;
+
+    final client = await ref.watch(misskeyClientProvider().future);
+
+    final newNotes = await client.notes(
+      request: GetNotesRequest(
+        sinceId: lastNote.id,
+        isLocal: isLocal,
+        limit: limit,
+      ).toJson().removeAllNullValueKeys(),
+    );
+
+    state = AsyncData([...state.value!, ...newNotes]);
   }
 }
