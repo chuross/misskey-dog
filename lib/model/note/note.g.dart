@@ -28,13 +28,3 @@ Map<String, dynamic> _$$NoteImplToJson(_$NoteImpl instance) =>
       'reactions': instance.rawReactions,
       'text': instance.text,
     };
-
-_$NoteReactionImpl _$$NoteReactionImplFromJson(Map<String, dynamic> json) =>
-    _$NoteReactionImpl(
-      name: json['name'] as String,
-    );
-
-Map<String, dynamic> _$$NoteReactionImplToJson(_$NoteReactionImpl instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-    };
