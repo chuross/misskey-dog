@@ -65,6 +65,7 @@ final class NoteItem extends StatelessWidget {
               children: [
                 const SizedBox(width: 68),
                 Wrap(
+                  spacing: 4,
                   children: note.reactions.map((reaction) {
                     return _Reaction(key: "${note.id}_${reaction.name}".toKey(), reaction: reaction);
                   }).toList(),
@@ -118,11 +119,11 @@ final class _Reaction extends ConsumerWidget {
       data: (emoji) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 4),
         decoration: BoxDecoration(
-          border: Border.all(color: context.dividerColorWithOpacity50),
+          border: Border.all(color: context.dividerColorWithOpacity10),
           borderRadius: BorderRadius.circular(4),
         ),
         child: SizedBox(
-          height: 24,
+          height: 20,
           child: Image.network(emoji.url, fit: BoxFit.fitHeight),
         ),
       ),
