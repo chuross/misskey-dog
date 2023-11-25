@@ -9,6 +9,7 @@ abstract class Note with _$Note {
   const factory Note({
     required String id,
     required User user,
+    Note? renote,
     String? text,
   }) = _Note;
 

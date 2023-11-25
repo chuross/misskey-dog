@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
+import 'package:misskey_dog/core/extension/dynamic.dart';
 
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/model/note/note.dart';
@@ -16,25 +18,34 @@ final class NoteItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        note.renote.mapOrElse(
+          func: (_) => Column(
+            children: [
+              _RenotedInfo(note: note),
+              const SizedBox(height: 12),
+            ],
+          ),
+          elseFunc: () => const SizedBox.shrink(),
+        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               width: 56,
               height: 56,
-              child: CircleAvatar(foregroundImage: NetworkImage(note.user.avatarUrl ?? '')),
+              child: CircleAvatar(foregroundImage: NetworkImage(note.renote?.user.avatarUrl ?? note.user.avatarUrl ?? '')),
             ),
             const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  note.user.username,
+                  note.renote?.user.username ?? note.user.username,
                   style: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  note.text ?? '',
+                  note.renote?.text ?? note.text ?? '',
                   softWrap: true,
                   style: context.textTheme.bodyMedium,
                 ),
@@ -42,32 +53,65 @@ final class NoteItem extends StatelessWidget {
             ).expanded()
           ],
         ),
-        Row(
-          children: [
-            const SizedBox(width: 56),
-            IconButton(
-              onPressed: () {},
-              iconSize: 20,
-              icon: const Icon(Icons.reply_rounded),
-            ),
-            IconButton(
-              onPressed: () {},
-              iconSize: 20,
-              icon: const Icon(Icons.repeat_rounded),
-            ),
-            IconButton(
-              onPressed: () {},
-              iconSize: 20,
-              icon: const Icon(Icons.add),
-            ),
-            IconButton(
-              onPressed: () {},
-              iconSize: 20,
-              icon: const Icon(Icons.more_horiz_rounded),
-            ),
-          ],
-        ),
+        _ActionButtons(),
       ],
     ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
+  }
+}
+
+final class _RenotedInfo extends StatelessWidget {
+  final Note note;
+
+  const _RenotedInfo({required this.note});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Icon(Icons.repeat_rounded, size: 16),
+        const SizedBox(width: 4),
+        SizedBox(
+          width: 24,
+          height: 24,
+          child: CircleAvatar(foregroundImage: NetworkImage(note.user.avatarUrl ?? '')),
+        ),
+        const SizedBox(width: 8),
+        Text(
+          "%sさんがリノートしました".i18n.fill([note.user.username]),
+          style: context.textTheme.bodySmall,
+        ),
+      ],
+    );
+  }
+}
+
+final class _ActionButtons extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const SizedBox(width: 56),
+        IconButton(
+          onPressed: () {},
+          iconSize: 20,
+          icon: const Icon(Icons.reply_rounded),
+        ),
+        IconButton(
+          onPressed: () {},
+          iconSize: 20,
+          icon: const Icon(Icons.repeat_rounded),
+        ),
+        IconButton(
+          onPressed: () {},
+          iconSize: 20,
+          icon: const Icon(Icons.add),
+        ),
+        IconButton(
+          onPressed: () {},
+          iconSize: 20,
+          icon: const Icon(Icons.more_horiz_rounded),
+        ),
+      ],
+    );
   }
 }

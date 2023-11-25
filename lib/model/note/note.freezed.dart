@@ -22,6 +22,7 @@ Note _$NoteFromJson(Map<String, dynamic> json) {
 mixin _$Note {
   String get id => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
+  Note? get renote => throw _privateConstructorUsedError;
   String? get text => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,9 +35,10 @@ abstract class $NoteCopyWith<$Res> {
   factory $NoteCopyWith(Note value, $Res Function(Note) then) =
       _$NoteCopyWithImpl<$Res, Note>;
   @useResult
-  $Res call({String id, User user, String? text});
+  $Res call({String id, User user, Note? renote, String? text});
 
   $UserCopyWith<$Res> get user;
+  $NoteCopyWith<$Res>? get renote;
 }
 
 /// @nodoc
@@ -54,6 +56,7 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
   $Res call({
     Object? id = null,
     Object? user = null,
+    Object? renote = freezed,
     Object? text = freezed,
   }) {
     return _then(_value.copyWith(
@@ -65,6 +68,10 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      renote: freezed == renote
+          ? _value.renote
+          : renote // ignore: cast_nullable_to_non_nullable
+              as Note?,
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -79,6 +86,18 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $NoteCopyWith<$Res>? get renote {
+    if (_value.renote == null) {
+      return null;
+    }
+
+    return $NoteCopyWith<$Res>(_value.renote!, (value) {
+      return _then(_value.copyWith(renote: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -88,10 +107,12 @@ abstract class _$$NoteImplCopyWith<$Res> implements $NoteCopyWith<$Res> {
       __$$NoteImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, User user, String? text});
+  $Res call({String id, User user, Note? renote, String? text});
 
   @override
   $UserCopyWith<$Res> get user;
+  @override
+  $NoteCopyWith<$Res>? get renote;
 }
 
 /// @nodoc
@@ -106,6 +127,7 @@ class __$$NoteImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? user = null,
+    Object? renote = freezed,
     Object? text = freezed,
   }) {
     return _then(_$NoteImpl(
@@ -117,6 +139,10 @@ class __$$NoteImplCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      renote: freezed == renote
+          ? _value.renote
+          : renote // ignore: cast_nullable_to_non_nullable
+              as Note?,
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -128,7 +154,8 @@ class __$$NoteImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$NoteImpl implements _Note {
-  const _$NoteImpl({required this.id, required this.user, this.text});
+  const _$NoteImpl(
+      {required this.id, required this.user, this.renote, this.text});
 
   factory _$NoteImpl.fromJson(Map<String, dynamic> json) =>
       _$$NoteImplFromJson(json);
@@ -138,11 +165,13 @@ class _$NoteImpl implements _Note {
   @override
   final User user;
   @override
+  final Note? renote;
+  @override
   final String? text;
 
   @override
   String toString() {
-    return 'Note(id: $id, user: $user, text: $text)';
+    return 'Note(id: $id, user: $user, renote: $renote, text: $text)';
   }
 
   @override
@@ -152,12 +181,13 @@ class _$NoteImpl implements _Note {
             other is _$NoteImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.user, user) || other.user == user) &&
+            (identical(other.renote, renote) || other.renote == renote) &&
             (identical(other.text, text) || other.text == text));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, user, text);
+  int get hashCode => Object.hash(runtimeType, id, user, renote, text);
 
   @JsonKey(ignore: true)
   @override
@@ -177,6 +207,7 @@ abstract class _Note implements Note {
   const factory _Note(
       {required final String id,
       required final User user,
+      final Note? renote,
       final String? text}) = _$NoteImpl;
 
   factory _Note.fromJson(Map<String, dynamic> json) = _$NoteImpl.fromJson;
@@ -185,6 +216,8 @@ abstract class _Note implements Note {
   String get id;
   @override
   User get user;
+  @override
+  Note? get renote;
   @override
   String? get text;
   @override
