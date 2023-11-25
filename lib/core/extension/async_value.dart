@@ -24,10 +24,17 @@ extension AsyncValueExt<T> on AsyncValue<T> {
 
   Widget whenPartialLoading({
     required Function(T) data,
+    Size progressIndicatorSize = const Size(24, 24),
   }) {
     return when(
       data: (d) => data(d),
-      loading: () => const LoadingView(),
+      loading: () {
+        return SizedBox(
+          width: progressIndicatorSize.width,
+          height: progressIndicatorSize.height,
+          child: const LoadingView(),
+        );
+      },
       error: (e, s) {
         return const SizedBox.shrink();
       },

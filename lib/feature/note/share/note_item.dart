@@ -118,6 +118,7 @@ final class _Reaction extends ConsumerWidget {
     final emoji = ref.watch(emojiProvider(emojiName: reaction.name));
 
     return emoji.whenPartialLoading(
+      progressIndicatorSize: const Size(16, 16),
       data: (emoji) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 4),
         decoration: BoxDecoration(
