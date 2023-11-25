@@ -58,11 +58,12 @@ final class NoteItem extends StatelessWidget {
             ).expanded()
           ],
         ),
+        const SizedBox(height: 12),
         note.reactions.isNotEmpty.mapOrElse(
           func: (_) {
             return Row(
               children: [
-                const SizedBox(width: 56),
+                const SizedBox(width: 68),
                 Wrap(
                   children: note.reactions.map((reaction) {
                     return _Reaction(key: "${note.id}_${reaction.name}".toKey(), reaction: reaction);
@@ -114,9 +115,16 @@ final class _Reaction extends ConsumerWidget {
     final emoji = ref.watch(emojiProvider(emojiName: reaction.name));
 
     return emoji.whenPartialLoading(
-      data: (emoji) => SizedBox(
-        height: 24,
-        child: Image.network(emoji.url, fit: BoxFit.fitHeight),
+      data: (emoji) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        decoration: BoxDecoration(
+          border: Border.all(color: context.dividerColorWithOpacity50),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: SizedBox(
+          height: 24,
+          child: Image.network(emoji.url, fit: BoxFit.fitHeight),
+        ),
       ),
     );
   }
