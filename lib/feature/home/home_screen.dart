@@ -26,29 +26,32 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
           return DefaultTabController(
             length: 1,
             child: Scaffold(
-              appBar: AppBar(
-                title: const Text('Misskey Dog'),
-                actions: [
-                  IconButton(
-                    icon: account.mapOrElse(
-                      func: (account) => CircleAvatar(
-                        foregroundImage: NetworkImage(account.user.avatarUrl ?? ''),
+                appBar: AppBar(
+                  title: const Text('Misskey Dog'),
+                  actions: [
+                    IconButton(
+                      icon: account.mapOrElse(
+                        func: (account) => CircleAvatar(
+                          foregroundImage: NetworkImage(account.user.avatarUrl ?? ''),
+                        ),
+                        elseValue: const Icon(Icons.person),
                       ),
-                      elseValue: const Icon(Icons.person),
+                      onPressed: () => context.router.push(const AccountRoute()),
                     ),
-                    onPressed: () => context.router.push(const AccountRoute()),
-                  ),
-                ],
-                bottom: TabBar(tabs: [
-                  Tab(text: 'ローカル'.i18n),
-                ]),
-              ),
-              body: const TabBarView(
-                children: [
-                  _NoteList(isLocal: true),
-                ],
-              ),
-            ),
+                  ],
+                  bottom: TabBar(tabs: [
+                    Tab(text: 'ローカル'.i18n),
+                  ]),
+                ),
+                body: const TabBarView(
+                  children: [
+                    _NoteList(isLocal: true),
+                  ],
+                ),
+                floatingActionButton: FloatingActionButton(
+                  child: const Icon(Icons.edit),
+                  onPressed: () {},
+                )),
           );
         });
   }
