@@ -34,7 +34,7 @@ abstract class NoteReaction with _$NoteReaction {
   }) = _NoteReactionLocalEmoji;
 
   // localEmoji => :ohayougozaimasu@.:
-  // PlainEmoji => :ohayougozaimasu@.:
+  // PlainEmoji => 😀:@.:
   factory NoteReaction.resolved(String key, Map<String, int> rawReactions) {
     final emojiName = key.split('@').first;
 
