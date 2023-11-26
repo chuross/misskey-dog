@@ -16,15 +16,15 @@ List<InlineSpan> _separateInlineSpans(
   required double height,
 }) {
   // RegExpはマルチバイト文字のインデックスが計算できないので、マルチバイト文字をシングルバイトの文字に変換する
-  final emojiMatches = _emojiReget.allMatches(String.fromCharCodes(text.runes.map((rune) {
-    return rune > 0x7F ? '_'.codeUnitAt(0) : rune;
-  })));
+  final emojiMatches = _emojiReget.allMatches((String.fromCharCodes(text.runes.map((rune) {
+    return rune > 0x7F ? 'A'.codeUnitAt(0) : rune;
+  }))));
 
   var spans = <InlineSpan>[];
 
   final remnants = text.characters.foldIndexed('', (index, previousValue, char) {
     final match = emojiMatches.firstWhereOrNull((element) {
-      return element.start <= index && index <= element.end;
+      return element.start <= index && index < element.end;
     });
 
     // 絵文字にマッチしている間は無視
