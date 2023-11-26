@@ -29,7 +29,7 @@ final class HomeNoteCreationScreen extends ConsumerWidget {
               func: (_) => () => ref.read(noteProvider().notifier).create(text: textState),
               elseValue: null,
             ),
-            child: Text('ポスト'.i18n),
+            child: Text('投稿'.i18n),
           ).padding(const EdgeInsets.only(right: 16)),
         ],
       ),
