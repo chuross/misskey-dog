@@ -7,7 +7,7 @@ import 'package:misskey_dog/core/extension/async_value.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/dynamic.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
-import 'package:misskey_dog/feature/home/home_note_creation_modal.dart';
+import 'package:misskey_dog/feature/home/home_note_creation_modal_screen.dart';
 import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
@@ -25,8 +25,8 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
         onRetry: () => ref.invalidate(accountStateProvider),
         data: (account) {
           return DefaultTabController(
-            length: 1,
-            child: Scaffold(
+              length: 1,
+              child: Scaffold(
                 appBar: AppBar(
                   title: const Text('Misskey Dog'),
                   actions: [
@@ -49,15 +49,11 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
                     _NoteList(isLocal: true),
                   ],
                 ),
-                floatingActionButton: Builder(builder: (context) {
-                  return FloatingActionButton(
-                    child: const Icon(Icons.edit),
-                    onPressed: () => Scaffold.of(context).showBottomSheet(
-                      (context) => HomeNoteCreationModalScreen(),
-                    ),
-                  );
-                })),
-          );
+                floatingActionButton: FloatingActionButton(
+                  child: const Icon(Icons.edit),
+                  onPressed: () => context.pushRoute(HomeNoteCreationModalRoute()),
+                ),
+              ));
         });
   }
 
