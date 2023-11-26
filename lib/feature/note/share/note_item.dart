@@ -7,6 +7,7 @@ import 'package:misskey_dog/core/extension/dynamic.dart';
 import 'package:misskey_dog/core/extension/string.dart';
 
 import 'package:misskey_dog/core/extension/widget.dart';
+import 'package:misskey_dog/feature/emoji/share/emoji_view.dart';
 import 'package:misskey_dog/model/emoji/emoji_provider.dart';
 import 'package:misskey_dog/model/note/note.dart';
 
@@ -67,7 +68,7 @@ final class NoteItem extends StatelessWidget {
                 Wrap(
                   spacing: 4,
                   children: note.reactions.map((reaction) {
-                    return _Reaction(key: "${note.id}_${reaction.emoji.toString()}".toKey(), reaction: reaction);
+                    return _Reaction(key: "${note.id}_${reaction.emoji.id}".toKey(), reaction: reaction);
                   }).toList(),
                 ).expanded(),
               ],
@@ -108,25 +109,17 @@ final class _RenotedInfo extends StatelessWidget {
   }
 }
 
-final class _Reaction extends ConsumerWidget {
+final class _Reaction extends StatelessWidget {
   final NoteReaction reaction;
 
   const _Reaction({super.key, required this.reaction});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final emoji = ref.watch(localEmojiProvider(emojiName: reaction.emoji.toString()));
-
-    return emoji.whenPartialLoading(
-      progressIndicatorSize: const Size(16, 16),
-      data: (emoji) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 4),
-        decoration: BoxDecoration(
-          border: Border.all(color: context.dividerColorWithOpacity10),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Image.network(emoji.toString(), height: 20, fit: BoxFit.fitHeight),
-      ),
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        EmojiView(emoji: reaction.emoji, size: const Size.square(20)),
+      ],
     );
   }
 }

@@ -19,7 +19,7 @@ final class EmojiView extends StatelessWidget {
             emoji: emoji as LocalEmoji,
             size: size,
           ),
-        PlainEmoji() => Text((emoji as PlainEmoji).text),
+        PlainEmoji() => Text((emoji as PlainEmoji).text, style: TextStyle(fontSize: size.height)),
       },
     );
   }
@@ -35,7 +35,7 @@ final class _LocalEmojiView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final localEmoji = ref.watch(localEmojiProvider(emojiName: emoji.name));
     return localEmoji.whenPartialLoading(
-      data: (localEmoji) => Image.network(emoji.toString(), height: size.height, fit: BoxFit.fitHeight),
+      data: (localEmoji) => Image.network(localEmoji.url ?? '', height: size.height, fit: BoxFit.fitHeight),
     );
   }
 }

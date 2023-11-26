@@ -9,7 +9,7 @@ part of 'emoji.dart';
 _$LocalEmojiImpl _$$LocalEmojiImplFromJson(Map<String, dynamic> json) =>
     _$LocalEmojiImpl(
       name: json['name'] as String,
-      url: json['url'] as String,
+      url: json['url'] as String?,
     );
 
 Map<String, dynamic> _$$LocalEmojiImplToJson(_$LocalEmojiImpl instance) =>

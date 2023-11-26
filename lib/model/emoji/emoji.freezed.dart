@@ -21,7 +21,7 @@ LocalEmoji _$LocalEmojiFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$LocalEmoji {
   String get name => throw _privateConstructorUsedError;
-  String get url => throw _privateConstructorUsedError;
+  String? get url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $LocalEmojiCopyWith<$Res> {
           LocalEmoji value, $Res Function(LocalEmoji) then) =
       _$LocalEmojiCopyWithImpl<$Res, LocalEmoji>;
   @useResult
-  $Res call({String name, String url});
+  $Res call({String name, String? url});
 }
 
 /// @nodoc
@@ -52,17 +52,17 @@ class _$LocalEmojiCopyWithImpl<$Res, $Val extends LocalEmoji>
   @override
   $Res call({
     Object? name = null,
-    Object? url = null,
+    Object? url = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      url: null == url
+      url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -75,7 +75,7 @@ abstract class _$$LocalEmojiImplCopyWith<$Res>
       __$$LocalEmojiImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String url});
+  $Res call({String name, String? url});
 }
 
 /// @nodoc
@@ -90,25 +90,25 @@ class __$$LocalEmojiImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? url = null,
+    Object? url = freezed,
   }) {
     return _then(_$LocalEmojiImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      url: null == url
+      url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$LocalEmojiImpl implements _LocalEmoji {
-  const _$LocalEmojiImpl({required this.name, required this.url});
+class _$LocalEmojiImpl extends _LocalEmoji {
+  const _$LocalEmojiImpl({required this.name, this.url}) : super._();
 
   factory _$LocalEmojiImpl.fromJson(Map<String, dynamic> json) =>
       _$$LocalEmojiImplFromJson(json);
@@ -116,7 +116,7 @@ class _$LocalEmojiImpl implements _LocalEmoji {
   @override
   final String name;
   @override
-  final String url;
+  final String? url;
 
   @override
   String toString() {
@@ -150,10 +150,10 @@ class _$LocalEmojiImpl implements _LocalEmoji {
   }
 }
 
-abstract class _LocalEmoji implements LocalEmoji {
-  const factory _LocalEmoji(
-      {required final String name,
-      required final String url}) = _$LocalEmojiImpl;
+abstract class _LocalEmoji extends LocalEmoji {
+  const factory _LocalEmoji({required final String name, final String? url}) =
+      _$LocalEmojiImpl;
+  const _LocalEmoji._() : super._();
 
   factory _LocalEmoji.fromJson(Map<String, dynamic> json) =
       _$LocalEmojiImpl.fromJson;
@@ -161,7 +161,7 @@ abstract class _LocalEmoji implements LocalEmoji {
   @override
   String get name;
   @override
-  String get url;
+  String? get url;
   @override
   @JsonKey(ignore: true)
   _$$LocalEmojiImplCopyWith<_$LocalEmojiImpl> get copyWith =>
@@ -250,8 +250,8 @@ class __$$PlainEmojiImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PlainEmojiImpl implements _PlainEmoji {
-  const _$PlainEmojiImpl({required this.text});
+class _$PlainEmojiImpl extends _PlainEmoji {
+  const _$PlainEmojiImpl({required this.text}) : super._();
 
   factory _$PlainEmojiImpl.fromJson(Map<String, dynamic> json) =>
       _$$PlainEmojiImplFromJson(json);
@@ -290,8 +290,9 @@ class _$PlainEmojiImpl implements _PlainEmoji {
   }
 }
 
-abstract class _PlainEmoji implements PlainEmoji {
+abstract class _PlainEmoji extends PlainEmoji {
   const factory _PlainEmoji({required final String text}) = _$PlainEmojiImpl;
+  const _PlainEmoji._() : super._();
 
   factory _PlainEmoji.fromJson(Map<String, dynamic> json) =
       _$PlainEmojiImpl.fromJson;

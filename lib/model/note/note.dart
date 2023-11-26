@@ -3,6 +3,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/user/user.dart';
+import 'package:uuid/uuid.dart';
 
 part 'note.freezed.dart';
 part 'note.g.dart';
@@ -20,8 +21,7 @@ abstract class Note with _$Note {
     String? text,
   }) = _Note;
 
-  List<NoteReaction> get reactions =>
-      rawReactions.keys.where((element) => element.startsWith(':')).map((key) => NoteReaction.resolved(key, rawReactions)).toList();
+  List<NoteReaction> get reactions => rawReactions.keys.map((key) => NoteReaction.resolved(key, rawReactions)).toList();
 
   factory Note.fromJson(Map<String, dynamic> json) => _$NoteFromJson(json);
 }
@@ -33,10 +33,21 @@ abstract class NoteReaction with _$NoteReaction {
     required int reactionCount,
   }) = _NoteReactionLocalEmoji;
 
+  // localEmoji => :ohayougozaimasu@.:
+  // PlainEmoji => :ohayougozaimasu@.:
   factory NoteReaction.resolved(String key, Map<String, int> rawReactions) {
-    return NoteReaction(
-      emoji: const PlainEmoji(text: ''),
-      reactionCount: rawReactions[key] ?? 0,
-    );
+    final emojiName = key.split('@').first;
+
+    if (emojiName.startsWith(':')) {
+      return NoteReaction(
+        emoji: LocalEmoji(name: emojiName.substring(1)),
+        reactionCount: rawReactions[key] ?? 0,
+      );
+    } else {
+      return NoteReaction(
+        emoji: PlainEmoji(text: emojiName),
+        reactionCount: rawReactions[key] ?? 0,
+      );
+    }
   }
 }
