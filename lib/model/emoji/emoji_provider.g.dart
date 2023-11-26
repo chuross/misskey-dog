@@ -6,7 +6,7 @@ part of 'emoji_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$emojiHash() => r'aaba69333b220e4aa3f05735c3f60d15ec6ee8a6';
+String _$localEmojiHash() => r'5fb57851adfdef595f6e40e3ce51a0457248f438';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,27 +29,27 @@ class _SystemHash {
   }
 }
 
-/// See also [emoji].
-@ProviderFor(emoji)
-const emojiProvider = EmojiFamily();
+/// See also [localEmoji].
+@ProviderFor(localEmoji)
+const localEmojiProvider = LocalEmojiFamily();
 
-/// See also [emoji].
-class EmojiFamily extends Family<AsyncValue<Emoji>> {
-  /// See also [emoji].
-  const EmojiFamily();
+/// See also [localEmoji].
+class LocalEmojiFamily extends Family<AsyncValue<LocalEmoji>> {
+  /// See also [localEmoji].
+  const LocalEmojiFamily();
 
-  /// See also [emoji].
-  EmojiProvider call({
+  /// See also [localEmoji].
+  LocalEmojiProvider call({
     required String emojiName,
   }) {
-    return EmojiProvider(
+    return LocalEmojiProvider(
       emojiName: emojiName,
     );
   }
 
   @override
-  EmojiProvider getProviderOverride(
-    covariant EmojiProvider provider,
+  LocalEmojiProvider getProviderOverride(
+    covariant LocalEmojiProvider provider,
   ) {
     return call(
       emojiName: provider.emojiName,
@@ -68,31 +68,32 @@ class EmojiFamily extends Family<AsyncValue<Emoji>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'emojiProvider';
+  String? get name => r'localEmojiProvider';
 }
 
-/// See also [emoji].
-class EmojiProvider extends AutoDisposeFutureProvider<Emoji> {
-  /// See also [emoji].
-  EmojiProvider({
+/// See also [localEmoji].
+class LocalEmojiProvider extends AutoDisposeFutureProvider<LocalEmoji> {
+  /// See also [localEmoji].
+  LocalEmojiProvider({
     required String emojiName,
   }) : this._internal(
-          (ref) => emoji(
-            ref as EmojiRef,
+          (ref) => localEmoji(
+            ref as LocalEmojiRef,
             emojiName: emojiName,
           ),
-          from: emojiProvider,
-          name: r'emojiProvider',
+          from: localEmojiProvider,
+          name: r'localEmojiProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$emojiHash,
-          dependencies: EmojiFamily._dependencies,
-          allTransitiveDependencies: EmojiFamily._allTransitiveDependencies,
+                  : _$localEmojiHash,
+          dependencies: LocalEmojiFamily._dependencies,
+          allTransitiveDependencies:
+              LocalEmojiFamily._allTransitiveDependencies,
           emojiName: emojiName,
         );
 
-  EmojiProvider._internal(
+  LocalEmojiProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -106,12 +107,12 @@ class EmojiProvider extends AutoDisposeFutureProvider<Emoji> {
 
   @override
   Override overrideWith(
-    FutureOr<Emoji> Function(EmojiRef provider) create,
+    FutureOr<LocalEmoji> Function(LocalEmojiRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: EmojiProvider._internal(
-        (ref) => create(ref as EmojiRef),
+      override: LocalEmojiProvider._internal(
+        (ref) => create(ref as LocalEmojiRef),
         from: from,
         name: null,
         dependencies: null,
@@ -123,13 +124,13 @@ class EmojiProvider extends AutoDisposeFutureProvider<Emoji> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<Emoji> createElement() {
-    return _EmojiProviderElement(this);
+  AutoDisposeFutureProviderElement<LocalEmoji> createElement() {
+    return _LocalEmojiProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is EmojiProvider && other.emojiName == emojiName;
+    return other is LocalEmojiProvider && other.emojiName == emojiName;
   }
 
   @override
@@ -141,17 +142,17 @@ class EmojiProvider extends AutoDisposeFutureProvider<Emoji> {
   }
 }
 
-mixin EmojiRef on AutoDisposeFutureProviderRef<Emoji> {
+mixin LocalEmojiRef on AutoDisposeFutureProviderRef<LocalEmoji> {
   /// The parameter `emojiName` of this provider.
   String get emojiName;
 }
 
-class _EmojiProviderElement extends AutoDisposeFutureProviderElement<Emoji>
-    with EmojiRef {
-  _EmojiProviderElement(super.provider);
+class _LocalEmojiProviderElement
+    extends AutoDisposeFutureProviderElement<LocalEmoji> with LocalEmojiRef {
+  _LocalEmojiProviderElement(super.provider);
 
   @override
-  String get emojiName => (origin as EmojiProvider).emojiName;
+  String get emojiName => (origin as LocalEmojiProvider).emojiName;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

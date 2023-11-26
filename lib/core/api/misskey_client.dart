@@ -30,5 +30,5 @@ abstract class MisskeyClient {
   Future<List<Note>> getNotes({@Body() required Map<String, dynamic> request});
 
   @POST('/api/emoji')
-  Future<Emoji> getEmoji({@Body() required Map<String, dynamic> request});
+  Future<LocalEmoji> getLocalEmoji({@Body() required Map<String, dynamic> request});
 }

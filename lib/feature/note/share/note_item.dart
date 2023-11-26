@@ -67,7 +67,7 @@ final class NoteItem extends StatelessWidget {
                 Wrap(
                   spacing: 4,
                   children: note.reactions.map((reaction) {
-                    return _Reaction(key: "${note.id}_${reaction.name}".toKey(), reaction: reaction);
+                    return _Reaction(key: "${note.id}_${reaction.emoji.toString()}".toKey(), reaction: reaction);
                   }).toList(),
                 ).expanded(),
               ],
@@ -115,7 +115,7 @@ final class _Reaction extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final emoji = ref.watch(emojiProvider(emojiName: reaction.name));
+    final emoji = ref.watch(localEmojiProvider(emojiName: reaction.emoji.toString()));
 
     return emoji.whenPartialLoading(
       progressIndicatorSize: const Size(16, 16),
@@ -125,7 +125,7 @@ final class _Reaction extends ConsumerWidget {
           border: Border.all(color: context.dividerColorWithOpacity10),
           borderRadius: BorderRadius.circular(4),
         ),
-        child: Image.network(emoji.url, height: 20, fit: BoxFit.fitHeight),
+        child: Image.network(emoji.toString(), height: 20, fit: BoxFit.fitHeight),
       ),
     );
   }

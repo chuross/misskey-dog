@@ -7,9 +7,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'emoji_provider.g.dart';
 
 @riverpod
-Future<Emoji> emoji(EmojiRef ref, {required String emojiName}) async {
+Future<LocalEmoji> localEmoji(LocalEmojiRef ref, {required String emojiName}) async {
   ref.keepAlive();
 
   final client = await ref.watch(misskeyClientProvider().future);
-  return await client.getEmoji(request: GetEmojiRequest(name: emojiName).toJson().removeAllNullValueKeys());
+  return await client.getLocalEmoji(request: GetEmojiRequest(name: emojiName).toJson().removeAllNullValueKeys());
 }

@@ -14,33 +14,30 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Emoji _$EmojiFromJson(Map<String, dynamic> json) {
-  return _Emoji.fromJson(json);
+LocalEmoji _$LocalEmojiFromJson(Map<String, dynamic> json) {
+  return _LocalEmoji.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Emoji {
-  String get id => throw _privateConstructorUsedError;
+mixin _$LocalEmoji {
   String get name => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $EmojiCopyWith<Emoji> get copyWith => throw _privateConstructorUsedError;
+  $LocalEmojiCopyWith<LocalEmoji> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $EmojiCopyWith<$Res> {
-  factory $EmojiCopyWith(Emoji value, $Res Function(Emoji) then) =
-      _$EmojiCopyWithImpl<$Res, Emoji>;
+abstract class $LocalEmojiCopyWith<$Res> {
+  factory $LocalEmojiCopyWith(LocalEmoji value, $Res Function(LocalEmoji) then) = _$LocalEmojiCopyWithImpl<$Res, LocalEmoji>;
   @useResult
-  $Res call({String id, String name, String url});
+  $Res call({String name, String url});
 }
 
 /// @nodoc
-class _$EmojiCopyWithImpl<$Res, $Val extends Emoji>
-    implements $EmojiCopyWith<$Res> {
-  _$EmojiCopyWithImpl(this._value, this._then);
+class _$LocalEmojiCopyWithImpl<$Res, $Val extends LocalEmoji> implements $LocalEmojiCopyWith<$Res> {
+  _$LocalEmojiCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -50,15 +47,10 @@ class _$EmojiCopyWithImpl<$Res, $Val extends Emoji>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? name = null,
     Object? url = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -72,35 +64,25 @@ class _$EmojiCopyWithImpl<$Res, $Val extends Emoji>
 }
 
 /// @nodoc
-abstract class _$$EmojiImplCopyWith<$Res> implements $EmojiCopyWith<$Res> {
-  factory _$$EmojiImplCopyWith(
-          _$EmojiImpl value, $Res Function(_$EmojiImpl) then) =
-      __$$EmojiImplCopyWithImpl<$Res>;
+abstract class _$$LocalEmojiImplCopyWith<$Res> implements $LocalEmojiCopyWith<$Res> {
+  factory _$$LocalEmojiImplCopyWith(_$LocalEmojiImpl value, $Res Function(_$LocalEmojiImpl) then) = __$$LocalEmojiImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String url});
+  $Res call({String name, String url});
 }
 
 /// @nodoc
-class __$$EmojiImplCopyWithImpl<$Res>
-    extends _$EmojiCopyWithImpl<$Res, _$EmojiImpl>
-    implements _$$EmojiImplCopyWith<$Res> {
-  __$$EmojiImplCopyWithImpl(
-      _$EmojiImpl _value, $Res Function(_$EmojiImpl) _then)
-      : super(_value, _then);
+class __$$LocalEmojiImplCopyWithImpl<$Res> extends _$LocalEmojiCopyWithImpl<$Res, _$LocalEmojiImpl>
+    implements _$$LocalEmojiImplCopyWith<$Res> {
+  __$$LocalEmojiImplCopyWithImpl(_$LocalEmojiImpl _value, $Res Function(_$LocalEmojiImpl) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? name = null,
     Object? url = null,
   }) {
-    return _then(_$EmojiImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$LocalEmojiImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -115,14 +97,11 @@ class __$$EmojiImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$EmojiImpl implements _Emoji {
-  const _$EmojiImpl({required this.id, required this.name, required this.url});
+class _$LocalEmojiImpl implements _LocalEmoji {
+  const _$LocalEmojiImpl({required this.name, required this.url});
 
-  factory _$EmojiImpl.fromJson(Map<String, dynamic> json) =>
-      _$$EmojiImplFromJson(json);
+  factory _$LocalEmojiImpl.fromJson(Map<String, dynamic> json) => _$$LocalEmojiImplFromJson(json);
 
-  @override
-  final String id;
   @override
   final String name;
   @override
@@ -130,53 +109,165 @@ class _$EmojiImpl implements _Emoji {
 
   @override
   String toString() {
-    return 'Emoji(id: $id, name: $name, url: $url)';
+    return 'LocalEmoji(name: $name, url: $url)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$EmojiImpl &&
-            (identical(other.id, id) || other.id == id) &&
+            other is _$LocalEmojiImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.url, url) || other.url == url));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, url);
+  int get hashCode => Object.hash(runtimeType, name, url);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$EmojiImplCopyWith<_$EmojiImpl> get copyWith =>
-      __$$EmojiImplCopyWithImpl<_$EmojiImpl>(this, _$identity);
+  _$$LocalEmojiImplCopyWith<_$LocalEmojiImpl> get copyWith => __$$LocalEmojiImplCopyWithImpl<_$LocalEmojiImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$EmojiImplToJson(
+    return _$$LocalEmojiImplToJson(
       this,
     );
   }
 }
 
-abstract class _Emoji implements Emoji {
-  const factory _Emoji(
-      {required final String id,
-      required final String name,
-      required final String url}) = _$EmojiImpl;
+abstract class _LocalEmoji implements LocalEmoji {
+  const factory _LocalEmoji({required final String name, required final String url}) = _$LocalEmojiImpl;
 
-  factory _Emoji.fromJson(Map<String, dynamic> json) = _$EmojiImpl.fromJson;
+  factory _LocalEmoji.fromJson(Map<String, dynamic> json) = _$LocalEmojiImpl.fromJson;
 
-  @override
-  String get id;
   @override
   String get name;
   @override
   String get url;
   @override
   @JsonKey(ignore: true)
-  _$$EmojiImplCopyWith<_$EmojiImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$LocalEmojiImplCopyWith<_$LocalEmojiImpl> get copyWith => throw _privateConstructorUsedError;
+}
+
+PlainEmoji _$PlainEmojiFromJson(Map<String, dynamic> json) {
+  return _PlainEmoji.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PlainEmoji {
+  String get text => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PlainEmojiCopyWith<PlainEmoji> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PlainEmojiCopyWith<$Res> {
+  factory $PlainEmojiCopyWith(PlainEmoji value, $Res Function(PlainEmoji) then) = _$PlainEmojiCopyWithImpl<$Res, PlainEmoji>;
+  @useResult
+  $Res call({String text});
+}
+
+/// @nodoc
+class _$PlainEmojiCopyWithImpl<$Res, $Val extends PlainEmoji> implements $PlainEmojiCopyWith<$Res> {
+  _$PlainEmojiCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? text = null,
+  }) {
+    return _then(_value.copyWith(
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$PlainEmojiImplCopyWith<$Res> implements $PlainEmojiCopyWith<$Res> {
+  factory _$$PlainEmojiImplCopyWith(_$PlainEmojiImpl value, $Res Function(_$PlainEmojiImpl) then) = __$$PlainEmojiImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String text});
+}
+
+/// @nodoc
+class __$$PlainEmojiImplCopyWithImpl<$Res> extends _$PlainEmojiCopyWithImpl<$Res, _$PlainEmojiImpl>
+    implements _$$PlainEmojiImplCopyWith<$Res> {
+  __$$PlainEmojiImplCopyWithImpl(_$PlainEmojiImpl _value, $Res Function(_$PlainEmojiImpl) _then) : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? text = null,
+  }) {
+    return _then(_$PlainEmojiImpl(
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$PlainEmojiImpl implements _PlainEmoji {
+  const _$PlainEmojiImpl({required this.text});
+
+  factory _$PlainEmojiImpl.fromJson(Map<String, dynamic> json) => _$$PlainEmojiImplFromJson(json);
+
+  @override
+  final String text;
+
+  @override
+  String toString() {
+    return 'PlainEmoji(text: $text)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$PlainEmojiImpl && (identical(other.text, text) || other.text == text));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, text);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PlainEmojiImplCopyWith<_$PlainEmojiImpl> get copyWith => __$$PlainEmojiImplCopyWithImpl<_$PlainEmojiImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PlainEmojiImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PlainEmoji implements PlainEmoji {
+  const factory _PlainEmoji({required final String text}) = _$PlainEmojiImpl;
+
+  factory _PlainEmoji.fromJson(Map<String, dynamic> json) = _$PlainEmojiImpl.fromJson;
+
+  @override
+  String get text;
+  @override
+  @JsonKey(ignore: true)
+  _$$PlainEmojiImplCopyWith<_$PlainEmojiImpl> get copyWith => throw _privateConstructorUsedError;
 }
