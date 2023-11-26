@@ -21,6 +21,10 @@ abstract class MisskeyClient {
         'host': host,
         'session': session,
       }).toString(),
+      'permission': [
+        'read:account',
+        'write:notes',
+      ].join(','),
     });
   }
 
