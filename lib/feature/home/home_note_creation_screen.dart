@@ -10,10 +10,10 @@ import 'package:misskey_dog/model/note/note_provider.dart';
 import 'package:uuid/uuid.dart';
 
 @RoutePage()
-final class HomeNoteCreationModalScreen extends ConsumerWidget {
+final class HomeNoteCreationScreen extends ConsumerWidget {
   final String _instanceUuid = const Uuid().v4().toString();
 
-  HomeNoteCreationModalScreen({super.key});
+  HomeNoteCreationScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

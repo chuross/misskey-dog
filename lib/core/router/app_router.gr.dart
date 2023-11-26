@@ -11,8 +11,7 @@
 import 'package:auto_route/auto_route.dart' as _i6;
 import 'package:flutter/material.dart' as _i7;
 import 'package:misskey_dog/feature/account/account_screen.dart' as _i1;
-import 'package:misskey_dog/feature/home/home_note_creation_modal_screen.dart'
-    as _i2;
+import 'package:misskey_dog/feature/home/home_note_creation_screen.dart' as _i2;
 import 'package:misskey_dog/feature/home/home_screen.dart' as _i3;
 import 'package:misskey_dog/feature/login/login_callback_screen.dart' as _i4;
 import 'package:misskey_dog/feature/login/login_screen.dart' as _i5;
@@ -28,12 +27,12 @@ abstract class $AppRouter extends _i6.RootStackRouter {
         child: const _i1.AccountScreen(),
       );
     },
-    HomeNoteCreationModalRoute.name: (routeData) {
-      final args = routeData.argsAs<HomeNoteCreationModalRouteArgs>(
-          orElse: () => const HomeNoteCreationModalRouteArgs());
+    HomeNoteCreationRoute.name: (routeData) {
+      final args = routeData.argsAs<HomeNoteCreationRouteArgs>(
+          orElse: () => const HomeNoteCreationRouteArgs());
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i2.HomeNoteCreationModalScreen(key: args.key),
+        child: _i2.HomeNoteCreationScreen(key: args.key),
       );
     },
     HomeRoute.name: (routeData) {
@@ -91,32 +90,32 @@ class AccountRoute extends _i6.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.HomeNoteCreationModalScreen]
-class HomeNoteCreationModalRoute
-    extends _i6.PageRouteInfo<HomeNoteCreationModalRouteArgs> {
-  HomeNoteCreationModalRoute({
+/// [_i2.HomeNoteCreationScreen]
+class HomeNoteCreationRoute
+    extends _i6.PageRouteInfo<HomeNoteCreationRouteArgs> {
+  HomeNoteCreationRoute({
     _i7.Key? key,
     List<_i6.PageRouteInfo>? children,
   }) : super(
-          HomeNoteCreationModalRoute.name,
-          args: HomeNoteCreationModalRouteArgs(key: key),
+          HomeNoteCreationRoute.name,
+          args: HomeNoteCreationRouteArgs(key: key),
           initialChildren: children,
         );
 
-  static const String name = 'HomeNoteCreationModalRoute';
+  static const String name = 'HomeNoteCreationRoute';
 
-  static const _i6.PageInfo<HomeNoteCreationModalRouteArgs> page =
-      _i6.PageInfo<HomeNoteCreationModalRouteArgs>(name);
+  static const _i6.PageInfo<HomeNoteCreationRouteArgs> page =
+      _i6.PageInfo<HomeNoteCreationRouteArgs>(name);
 }
 
-class HomeNoteCreationModalRouteArgs {
-  const HomeNoteCreationModalRouteArgs({this.key});
+class HomeNoteCreationRouteArgs {
+  const HomeNoteCreationRouteArgs({this.key});
 
   final _i7.Key? key;
 
   @override
   String toString() {
-    return 'HomeNoteCreationModalRouteArgs{key: $key}';
+    return 'HomeNoteCreationRouteArgs{key: $key}';
   }
 }
 
