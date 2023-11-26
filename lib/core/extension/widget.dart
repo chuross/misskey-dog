@@ -15,6 +15,13 @@ extension WidgetExt on Widget {
     );
   }
 
+  Widget fillWidth() {
+    return SizedBox(
+      width: double.infinity,
+      child: this,
+    );
+  }
+
   Widget expanded() {
     return Expanded(
       child: this,

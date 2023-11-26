@@ -7,6 +7,7 @@ import 'package:misskey_dog/core/extension/async_value.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/dynamic.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
+import 'package:misskey_dog/feature/home/home_note_creation_modal.dart';
 import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
@@ -48,10 +49,14 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
                     _NoteList(isLocal: true),
                   ],
                 ),
-                floatingActionButton: FloatingActionButton(
-                  child: const Icon(Icons.edit),
-                  onPressed: () {},
-                )),
+                floatingActionButton: Builder(builder: (context) {
+                  return FloatingActionButton(
+                    child: const Icon(Icons.edit),
+                    onPressed: () => Scaffold.of(context).showBottomSheet(
+                      (context) => const HomeNoteCreationModalScreen(),
+                    ),
+                  );
+                })),
           );
         });
   }
@@ -79,6 +84,7 @@ final class _NoteList extends ConsumerWidget {
         return RefreshIndicator(
           onRefresh: () async => ref.invalidate(provider),
           child: ListView.builder(
+            padding: const EdgeInsets.only(bottom: 80),
             itemCount: notes.length,
             itemBuilder: (context, index) {
               final note = notes[index];
