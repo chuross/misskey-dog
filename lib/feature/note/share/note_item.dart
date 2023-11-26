@@ -54,6 +54,7 @@ final class NoteItem extends StatelessWidget {
                   text: note.renote?.text ?? note.text ?? '',
                   baseTextStyle: context.textTheme.bodyMedium!,
                 ),
+                const SizedBox(height: 16),
                 note.files.firstOrNull.mapOrElse(
                   func: (file) => Image.network(file.url, width: double.infinity, height: 300, fit: BoxFit.cover),
                   elseValue: const SizedBox.shrink(),
@@ -77,7 +78,7 @@ final class NoteItem extends StatelessWidget {
                       reaction: reaction,
                     );
                   }).toList(),
-                ),
+                ).expanded(),
               ],
             );
           },
@@ -98,15 +99,14 @@ final class _RenotedInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        const SizedBox(width: 12),
         const Icon(Icons.repeat_rounded, size: 16),
-        const SizedBox(width: 4),
         SizedBox(
           height: 24,
           child: CircleAvatar(foregroundImage: NetworkImage(note.user.avatarUrl ?? '')),
         ),
-        const SizedBox(width: 8),
         Text(
-          "%sさんがリノートしました".i18n.fill([note.user.username]),
+          "%sがリノートしました".i18n.fill([note.user.username]),
           style: context.textTheme.bodySmall,
           textAlign: TextAlign.start,
           overflow: TextOverflow.ellipsis,
@@ -130,6 +130,7 @@ final class _Reaction extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
       ),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           MisskeyEmoji(emoji: reaction.emoji, height: 20),
           const SizedBox(width: 4),
