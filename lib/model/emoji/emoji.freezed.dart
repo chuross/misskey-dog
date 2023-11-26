@@ -25,18 +25,22 @@ mixin _$LocalEmoji {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $LocalEmojiCopyWith<LocalEmoji> get copyWith => throw _privateConstructorUsedError;
+  $LocalEmojiCopyWith<LocalEmoji> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $LocalEmojiCopyWith<$Res> {
-  factory $LocalEmojiCopyWith(LocalEmoji value, $Res Function(LocalEmoji) then) = _$LocalEmojiCopyWithImpl<$Res, LocalEmoji>;
+  factory $LocalEmojiCopyWith(
+          LocalEmoji value, $Res Function(LocalEmoji) then) =
+      _$LocalEmojiCopyWithImpl<$Res, LocalEmoji>;
   @useResult
   $Res call({String name, String url});
 }
 
 /// @nodoc
-class _$LocalEmojiCopyWithImpl<$Res, $Val extends LocalEmoji> implements $LocalEmojiCopyWith<$Res> {
+class _$LocalEmojiCopyWithImpl<$Res, $Val extends LocalEmoji>
+    implements $LocalEmojiCopyWith<$Res> {
   _$LocalEmojiCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -64,17 +68,23 @@ class _$LocalEmojiCopyWithImpl<$Res, $Val extends LocalEmoji> implements $LocalE
 }
 
 /// @nodoc
-abstract class _$$LocalEmojiImplCopyWith<$Res> implements $LocalEmojiCopyWith<$Res> {
-  factory _$$LocalEmojiImplCopyWith(_$LocalEmojiImpl value, $Res Function(_$LocalEmojiImpl) then) = __$$LocalEmojiImplCopyWithImpl<$Res>;
+abstract class _$$LocalEmojiImplCopyWith<$Res>
+    implements $LocalEmojiCopyWith<$Res> {
+  factory _$$LocalEmojiImplCopyWith(
+          _$LocalEmojiImpl value, $Res Function(_$LocalEmojiImpl) then) =
+      __$$LocalEmojiImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name, String url});
 }
 
 /// @nodoc
-class __$$LocalEmojiImplCopyWithImpl<$Res> extends _$LocalEmojiCopyWithImpl<$Res, _$LocalEmojiImpl>
+class __$$LocalEmojiImplCopyWithImpl<$Res>
+    extends _$LocalEmojiCopyWithImpl<$Res, _$LocalEmojiImpl>
     implements _$$LocalEmojiImplCopyWith<$Res> {
-  __$$LocalEmojiImplCopyWithImpl(_$LocalEmojiImpl _value, $Res Function(_$LocalEmojiImpl) _then) : super(_value, _then);
+  __$$LocalEmojiImplCopyWithImpl(
+      _$LocalEmojiImpl _value, $Res Function(_$LocalEmojiImpl) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -100,7 +110,8 @@ class __$$LocalEmojiImplCopyWithImpl<$Res> extends _$LocalEmojiCopyWithImpl<$Res
 class _$LocalEmojiImpl implements _LocalEmoji {
   const _$LocalEmojiImpl({required this.name, required this.url});
 
-  factory _$LocalEmojiImpl.fromJson(Map<String, dynamic> json) => _$$LocalEmojiImplFromJson(json);
+  factory _$LocalEmojiImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LocalEmojiImplFromJson(json);
 
   @override
   final String name;
@@ -128,7 +139,8 @@ class _$LocalEmojiImpl implements _LocalEmoji {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LocalEmojiImplCopyWith<_$LocalEmojiImpl> get copyWith => __$$LocalEmojiImplCopyWithImpl<_$LocalEmojiImpl>(this, _$identity);
+  _$$LocalEmojiImplCopyWith<_$LocalEmojiImpl> get copyWith =>
+      __$$LocalEmojiImplCopyWithImpl<_$LocalEmojiImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -139,9 +151,12 @@ class _$LocalEmojiImpl implements _LocalEmoji {
 }
 
 abstract class _LocalEmoji implements LocalEmoji {
-  const factory _LocalEmoji({required final String name, required final String url}) = _$LocalEmojiImpl;
+  const factory _LocalEmoji(
+      {required final String name,
+      required final String url}) = _$LocalEmojiImpl;
 
-  factory _LocalEmoji.fromJson(Map<String, dynamic> json) = _$LocalEmojiImpl.fromJson;
+  factory _LocalEmoji.fromJson(Map<String, dynamic> json) =
+      _$LocalEmojiImpl.fromJson;
 
   @override
   String get name;
@@ -149,7 +164,8 @@ abstract class _LocalEmoji implements LocalEmoji {
   String get url;
   @override
   @JsonKey(ignore: true)
-  _$$LocalEmojiImplCopyWith<_$LocalEmojiImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$LocalEmojiImplCopyWith<_$LocalEmojiImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 PlainEmoji _$PlainEmojiFromJson(Map<String, dynamic> json) {
@@ -162,18 +178,22 @@ mixin _$PlainEmoji {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PlainEmojiCopyWith<PlainEmoji> get copyWith => throw _privateConstructorUsedError;
+  $PlainEmojiCopyWith<PlainEmoji> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PlainEmojiCopyWith<$Res> {
-  factory $PlainEmojiCopyWith(PlainEmoji value, $Res Function(PlainEmoji) then) = _$PlainEmojiCopyWithImpl<$Res, PlainEmoji>;
+  factory $PlainEmojiCopyWith(
+          PlainEmoji value, $Res Function(PlainEmoji) then) =
+      _$PlainEmojiCopyWithImpl<$Res, PlainEmoji>;
   @useResult
   $Res call({String text});
 }
 
 /// @nodoc
-class _$PlainEmojiCopyWithImpl<$Res, $Val extends PlainEmoji> implements $PlainEmojiCopyWith<$Res> {
+class _$PlainEmojiCopyWithImpl<$Res, $Val extends PlainEmoji>
+    implements $PlainEmojiCopyWith<$Res> {
   _$PlainEmojiCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -196,17 +216,23 @@ class _$PlainEmojiCopyWithImpl<$Res, $Val extends PlainEmoji> implements $PlainE
 }
 
 /// @nodoc
-abstract class _$$PlainEmojiImplCopyWith<$Res> implements $PlainEmojiCopyWith<$Res> {
-  factory _$$PlainEmojiImplCopyWith(_$PlainEmojiImpl value, $Res Function(_$PlainEmojiImpl) then) = __$$PlainEmojiImplCopyWithImpl<$Res>;
+abstract class _$$PlainEmojiImplCopyWith<$Res>
+    implements $PlainEmojiCopyWith<$Res> {
+  factory _$$PlainEmojiImplCopyWith(
+          _$PlainEmojiImpl value, $Res Function(_$PlainEmojiImpl) then) =
+      __$$PlainEmojiImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String text});
 }
 
 /// @nodoc
-class __$$PlainEmojiImplCopyWithImpl<$Res> extends _$PlainEmojiCopyWithImpl<$Res, _$PlainEmojiImpl>
+class __$$PlainEmojiImplCopyWithImpl<$Res>
+    extends _$PlainEmojiCopyWithImpl<$Res, _$PlainEmojiImpl>
     implements _$$PlainEmojiImplCopyWith<$Res> {
-  __$$PlainEmojiImplCopyWithImpl(_$PlainEmojiImpl _value, $Res Function(_$PlainEmojiImpl) _then) : super(_value, _then);
+  __$$PlainEmojiImplCopyWithImpl(
+      _$PlainEmojiImpl _value, $Res Function(_$PlainEmojiImpl) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -227,7 +253,8 @@ class __$$PlainEmojiImplCopyWithImpl<$Res> extends _$PlainEmojiCopyWithImpl<$Res
 class _$PlainEmojiImpl implements _PlainEmoji {
   const _$PlainEmojiImpl({required this.text});
 
-  factory _$PlainEmojiImpl.fromJson(Map<String, dynamic> json) => _$$PlainEmojiImplFromJson(json);
+  factory _$PlainEmojiImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PlainEmojiImplFromJson(json);
 
   @override
   final String text;
@@ -240,7 +267,9 @@ class _$PlainEmojiImpl implements _PlainEmoji {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$PlainEmojiImpl && (identical(other.text, text) || other.text == text));
+        (other.runtimeType == runtimeType &&
+            other is _$PlainEmojiImpl &&
+            (identical(other.text, text) || other.text == text));
   }
 
   @JsonKey(ignore: true)
@@ -250,7 +279,8 @@ class _$PlainEmojiImpl implements _PlainEmoji {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PlainEmojiImplCopyWith<_$PlainEmojiImpl> get copyWith => __$$PlainEmojiImplCopyWithImpl<_$PlainEmojiImpl>(this, _$identity);
+  _$$PlainEmojiImplCopyWith<_$PlainEmojiImpl> get copyWith =>
+      __$$PlainEmojiImplCopyWithImpl<_$PlainEmojiImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -263,11 +293,13 @@ class _$PlainEmojiImpl implements _PlainEmoji {
 abstract class _PlainEmoji implements PlainEmoji {
   const factory _PlainEmoji({required final String text}) = _$PlainEmojiImpl;
 
-  factory _PlainEmoji.fromJson(Map<String, dynamic> json) = _$PlainEmojiImpl.fromJson;
+  factory _PlainEmoji.fromJson(Map<String, dynamic> json) =
+      _$PlainEmojiImpl.fromJson;
 
   @override
   String get text;
   @override
   @JsonKey(ignore: true)
-  _$$PlainEmojiImplCopyWith<_$PlainEmojiImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$PlainEmojiImplCopyWith<_$PlainEmojiImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

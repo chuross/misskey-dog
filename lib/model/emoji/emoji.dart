@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'emoji.freezed.dart';
+part 'emoji.g.dart';
 
 sealed class Emoji {}
 
