@@ -15,7 +15,11 @@ List<InlineSpan> _separateInlineSpans(
   required String text,
   required double height,
 }) {
-  final emojiMatches = _emojiReget.allMatches(text);
+  // RegExpはマルチバイト文字のインデックスが計算できないので、マルチバイト文字をシングルバイトの文字に変換する
+  final formattedText = String.fromCharCodes(text.runes.map((rune) {
+    return rune > 0x7F ? '_'.codeUnitAt(0) : rune;
+  }));
+  final emojiMatches = _emojiReget.allMatches(formattedText);
 
   var spans = <InlineSpan>[];
 
