@@ -5,6 +5,8 @@ part 'note_file.g.dart';
 
 @freezed
 abstract class NoteFile with _$NoteFile {
+  const NoteFile._();
+
   const factory NoteFile({
     required String id,
     required String type,
@@ -12,6 +14,8 @@ abstract class NoteFile with _$NoteFile {
     required String thumbnailUrl,
     required bool isSensitive,
   }) = _NoteFile;
+
+  bool get isImage => type.startsWith('image/');
 
   factory NoteFile.fromJson(Map<String, dynamic> json) => _$NoteFileFromJson(json);
 }

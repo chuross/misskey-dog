@@ -149,13 +149,14 @@ class __$$NoteFileImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NoteFileImpl implements _NoteFile {
+class _$NoteFileImpl extends _NoteFile {
   const _$NoteFileImpl(
       {required this.id,
       required this.type,
       required this.url,
       required this.thumbnailUrl,
-      required this.isSensitive});
+      required this.isSensitive})
+      : super._();
 
   factory _$NoteFileImpl.fromJson(Map<String, dynamic> json) =>
       _$$NoteFileImplFromJson(json);
@@ -209,13 +210,14 @@ class _$NoteFileImpl implements _NoteFile {
   }
 }
 
-abstract class _NoteFile implements NoteFile {
+abstract class _NoteFile extends NoteFile {
   const factory _NoteFile(
       {required final String id,
       required final String type,
       required final String url,
       required final String thumbnailUrl,
       required final bool isSensitive}) = _$NoteFileImpl;
+  const _NoteFile._() : super._();
 
   factory _NoteFile.fromJson(Map<String, dynamic> json) =
       _$NoteFileImpl.fromJson;
