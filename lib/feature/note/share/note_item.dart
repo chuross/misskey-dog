@@ -66,11 +66,15 @@ final class NoteItem extends StatelessWidget {
               children: [
                 const SizedBox(width: 68),
                 Wrap(
-                  spacing: 4,
+                  spacing: 8,
+                  runSpacing: 4,
                   children: note.reactions.map((reaction) {
-                    return _Reaction(key: "${note.id}_${reaction.emoji.id}".toKey(), reaction: reaction);
+                    return _Reaction(
+                      key: "${note.id}_${reaction.emoji.id}".toKey(),
+                      reaction: reaction,
+                    );
                   }).toList(),
-                ).expanded(),
+                ),
               ],
             );
           },
@@ -103,7 +107,7 @@ final class _RenotedInfo extends StatelessWidget {
           style: context.textTheme.bodySmall,
           textAlign: TextAlign.start,
           overflow: TextOverflow.ellipsis,
-        ).expanded(),
+        ).flexible(),
       ],
     );
   }
@@ -117,14 +121,15 @@ final class _Reaction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
       decoration: BoxDecoration(
-        border: Border.all(color: context.dividerColorWithOpacity10),
+        border: Border.all(color: context.dividerColorWithOpacity20),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Row(
         children: [
           EmojiView(emoji: reaction.emoji, height: 20),
-          const SizedBox(width: 2),
+          const SizedBox(width: 4),
           Text(
             reaction.reactionCount.toString(),
             style: context.textTheme.bodyLarge,
