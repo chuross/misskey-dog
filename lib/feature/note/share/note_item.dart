@@ -23,70 +23,82 @@ final class NoteItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        note.renote.mapOrElse(
-          func: (_) => Column(
-            children: [
-              _RenotedInfo(note: note),
-              const SizedBox(height: 12),
-            ],
-          ),
-          elseValue: const SizedBox.shrink(),
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 56,
-              height: 56,
-              child: CircleAvatar(foregroundImage: NetworkImage(note.renote?.user.avatarUrl ?? note.user.avatarUrl ?? '')),
-            ),
-            const SizedBox(width: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  note.renote?.user.username ?? note.user.username,
-                  style: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 4),
-                MisskeyText(
-                  key: "${note.id}_${note.renote?.text ?? note.text ?? ''}".toKey(),
-                  text: note.renote?.text ?? note.text ?? '',
-                  baseTextStyle: context.textTheme.bodyMedium!,
-                ),
-                const SizedBox(height: 16),
-                note.files.firstOrNull.mapOrElse(
-                  func: (file) => Image.network(file.url, width: double.infinity, height: 300, fit: BoxFit.cover),
-                  elseValue: const SizedBox.shrink(),
-                ),
-              ],
-            ).expanded()
-          ],
-        ),
+        _renotedInfo(),
+        _mainContent(context),
         const SizedBox(height: 12),
-        note.reactions.isNotEmpty.mapOrElse(
-          func: (_) {
-            return Row(
-              children: [
-                const SizedBox(width: 68),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 4,
-                  children: note.reactions.map((reaction) {
-                    return _Reaction(
-                      key: "${note.id}_${reaction.emoji.id}".toKey(),
-                      reaction: reaction,
-                    );
-                  }).toList(),
-                ).expanded(),
-              ],
-            );
-          },
-          elseValue: const SizedBox.shrink(),
-        ),
+        _reactions(),
         _ActionButtons(),
       ],
     ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
+  }
+
+  Widget _renotedInfo() {
+    return note.renote.mapOrElse(
+      func: (_) => Column(
+        children: [
+          _RenotedInfo(note: note),
+          const SizedBox(height: 12),
+        ],
+      ),
+      elseValue: const SizedBox.shrink(),
+    );
+  }
+
+  Widget _mainContent(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 56,
+          height: 56,
+          child: CircleAvatar(foregroundImage: NetworkImage(note.renote?.user.avatarUrl ?? note.user.avatarUrl ?? '')),
+        ),
+        const SizedBox(width: 12),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              note.renote?.user.username ?? note.user.username,
+              style: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 4),
+            MisskeyText(
+              key: "${note.id}_${note.renote?.text ?? note.text ?? ''}".toKey(),
+              text: note.renote?.text ?? note.text ?? '',
+              baseTextStyle: context.textTheme.bodyMedium!,
+            ),
+            const SizedBox(height: 16),
+            note.files.firstOrNull.mapOrElse(
+              func: (file) => Image.network(file.url, width: double.infinity, height: 300, fit: BoxFit.cover),
+              elseValue: const SizedBox.shrink(),
+            ),
+          ],
+        ).expanded()
+      ],
+    );
+  }
+
+  Widget _reactions() {
+    return note.reactions.isNotEmpty.mapOrElse(
+      func: (_) {
+        return Row(
+          children: [
+            const SizedBox(width: 68),
+            Wrap(
+              spacing: 8,
+              runSpacing: 4,
+              children: note.reactions.map((reaction) {
+                return _Reaction(
+                  key: "${note.id}_${reaction.emoji.id}".toKey(),
+                  reaction: reaction,
+                );
+              }).toList(),
+            ).expanded(),
+          ],
+        );
+      },
+      elseValue: const SizedBox.shrink(),
+    );
   }
 }
 
