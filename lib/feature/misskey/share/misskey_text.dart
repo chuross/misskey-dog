@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'misskey_text.g.dart';
 
-final RegExp _emojiReget = RegExp(r':([a-z0-9_]+):');
+final RegExp _emojiReget = RegExp(r':([A-Za-z0-9_]+):');
 
 @riverpod
 List<InlineSpan> _separateInlineSpans(
