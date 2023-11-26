@@ -123,7 +123,7 @@ final class _Reaction extends StatelessWidget {
       ),
       child: Row(
         children: [
-          EmojiView(emoji: reaction.emoji, size: const Size.square(20)),
+          EmojiView(emoji: reaction.emoji, height: 20),
           const SizedBox(width: 2),
           Text(
             reaction.reactionCount.toString(),

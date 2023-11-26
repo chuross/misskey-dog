@@ -6,36 +6,33 @@ import 'package:misskey_dog/model/emoji/emoji_provider.dart';
 
 final class EmojiView extends StatelessWidget {
   final Emoji emoji;
-  final Size size;
+  final double height;
 
-  const EmojiView({super.key, required this.emoji, required this.size});
+  const EmojiView({super.key, required this.emoji, required this.height});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.fromSize(
-      size: size,
-      child: switch (emoji) {
-        LocalEmoji() => _LocalEmojiView(
-            emoji: emoji as LocalEmoji,
-            size: size,
-          ),
-        PlainEmoji() => Text((emoji as PlainEmoji).text, style: TextStyle(fontSize: size.height)),
-      },
-    );
+    return switch (emoji) {
+      LocalEmoji() => _LocalEmojiView(
+          emoji: emoji as LocalEmoji,
+          height: height,
+        ),
+      PlainEmoji() => Text((emoji as PlainEmoji).text, style: TextStyle(fontSize: height)),
+    };
   }
 }
 
 final class _LocalEmojiView extends ConsumerWidget {
   final LocalEmoji emoji;
-  final Size size;
+  final double height;
 
-  const _LocalEmojiView({required this.emoji, required this.size});
+  const _LocalEmojiView({required this.emoji, required this.height});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localEmoji = ref.watch(localEmojiProvider(emojiName: emoji.name));
     return localEmoji.whenPartialLoading(
-      data: (localEmoji) => Image.network(localEmoji.url ?? '', height: size.height, fit: BoxFit.fitHeight),
+      data: (localEmoji) => Image.network(localEmoji.url ?? '', height: height, fit: BoxFit.fitHeight),
     );
   }
 }
