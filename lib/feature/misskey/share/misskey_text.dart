@@ -19,9 +19,9 @@ List<InlineSpan> _separateInlineSpans(
 
   var spans = <InlineSpan>[];
 
-  final remnants = text.runes.foldIndexed('', (index, previousValue, rune) {
+  final remnants = text.characters.foldIndexed('', (index, previousValue, char) {
     final match = emojiMatches.firstWhereOrNull((element) {
-      return element.start <= index && index < element.end;
+      return element.start <= index && index <= element.end;
     });
 
     // 絵文字にマッチしている間は無視
@@ -42,7 +42,7 @@ List<InlineSpan> _separateInlineSpans(
     }
 
     // マッチしたものがなければ文字を積んで次のループへ
-    return previousValue + String.fromCharCode(rune);
+    return previousValue + char;
   });
 
   // 余った文字列があればTextSpanに変換して追加する
