@@ -49,6 +49,7 @@ final class NoteItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 MisskeyText(
+                  key: "${note.id}_${note.renote?.text ?? note.text ?? ''}".toKey(),
                   text: note.renote?.text ?? note.text ?? '',
                   baseTextStyle: context.textTheme.bodyMedium,
                 )
