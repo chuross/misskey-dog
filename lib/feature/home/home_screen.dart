@@ -7,7 +7,6 @@ import 'package:misskey_dog/core/extension/async_value.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/dynamic.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
-import 'package:misskey_dog/feature/home/home_note_creation_screen.dart';
 import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
