@@ -6,6 +6,7 @@ import 'package:misskey_dog/core/extension/string.dart';
 
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/feature/emoji/share/misskey_emoji.dart';
+import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
 import 'package:misskey_dog/model/note/note.dart';
 
 final class NoteItem extends StatelessWidget {
@@ -47,11 +48,10 @@ final class NoteItem extends StatelessWidget {
                   style: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 4),
-                Text(
-                  note.renote?.text ?? note.text ?? '',
-                  softWrap: true,
-                  style: context.textTheme.bodyMedium,
-                ),
+                MisskeyText(
+                  text: note.renote?.text ?? note.text ?? '',
+                  baseTextStyle: context.textTheme.bodyMedium,
+                )
               ],
             ).expanded()
           ],
