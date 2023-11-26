@@ -53,7 +53,11 @@ final class NoteItem extends StatelessWidget {
                   key: "${note.id}_${note.renote?.text ?? note.text ?? ''}".toKey(),
                   text: note.renote?.text ?? note.text ?? '',
                   baseTextStyle: context.textTheme.bodyMedium!,
-                )
+                ),
+                note.files.firstOrNull.mapOrElse(
+                  func: (file) => Image.network(file.url, width: double.infinity, height: 300, fit: BoxFit.cover),
+                  elseValue: const SizedBox.shrink(),
+                ),
               ],
             ).expanded()
           ],

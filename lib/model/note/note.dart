@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:misskey_dog/model/note/note_file.dart';
 import 'package:misskey_dog/model/note/note_reaction.dart';
 import 'package:misskey_dog/model/user/user.dart';
 
@@ -18,6 +19,7 @@ abstract class Note with _$Note {
     required int renoteCount,
     @JsonKey(name: 'reactions') required Map<String, int> rawReactions,
     String? text,
+    required List<NoteFile> files,
   }) = _Note;
 
   List<NoteReaction> get reactions => rawReactions.keys.map((key) => NoteReaction.resolved(key, rawReactions)).toList();

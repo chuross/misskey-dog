@@ -16,6 +16,9 @@ _$NoteImpl _$$NoteImplFromJson(Map<String, dynamic> json) => _$NoteImpl(
       renoteCount: json['renoteCount'] as int,
       rawReactions: Map<String, int>.from(json['reactions'] as Map),
       text: json['text'] as String?,
+      files: (json['files'] as List<dynamic>)
+          .map((e) => NoteFile.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$NoteImplToJson(_$NoteImpl instance) =>
@@ -27,4 +30,5 @@ Map<String, dynamic> _$$NoteImplToJson(_$NoteImpl instance) =>
       'renoteCount': instance.renoteCount,
       'reactions': instance.rawReactions,
       'text': instance.text,
+      'files': instance.files,
     };

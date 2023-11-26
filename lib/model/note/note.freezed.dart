@@ -28,6 +28,7 @@ mixin _$Note {
   @JsonKey(name: 'reactions')
   Map<String, int> get rawReactions => throw _privateConstructorUsedError;
   String? get text => throw _privateConstructorUsedError;
+  List<NoteFile> get files => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,7 +47,8 @@ abstract class $NoteCopyWith<$Res> {
       int repliesCount,
       int renoteCount,
       @JsonKey(name: 'reactions') Map<String, int> rawReactions,
-      String? text});
+      String? text,
+      List<NoteFile> files});
 
   $UserCopyWith<$Res> get user;
   $NoteCopyWith<$Res>? get renote;
@@ -72,6 +74,7 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
     Object? renoteCount = null,
     Object? rawReactions = null,
     Object? text = freezed,
+    Object? files = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -102,6 +105,10 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String?,
+      files: null == files
+          ? _value.files
+          : files // ignore: cast_nullable_to_non_nullable
+              as List<NoteFile>,
     ) as $Val);
   }
 
@@ -140,7 +147,8 @@ abstract class _$$NoteImplCopyWith<$Res> implements $NoteCopyWith<$Res> {
       int repliesCount,
       int renoteCount,
       @JsonKey(name: 'reactions') Map<String, int> rawReactions,
-      String? text});
+      String? text,
+      List<NoteFile> files});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -165,6 +173,7 @@ class __$$NoteImplCopyWithImpl<$Res>
     Object? renoteCount = null,
     Object? rawReactions = null,
     Object? text = freezed,
+    Object? files = null,
   }) {
     return _then(_$NoteImpl(
       id: null == id
@@ -195,6 +204,10 @@ class __$$NoteImplCopyWithImpl<$Res>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String?,
+      files: null == files
+          ? _value._files
+          : files // ignore: cast_nullable_to_non_nullable
+              as List<NoteFile>,
     ));
   }
 }
@@ -209,8 +222,10 @@ class _$NoteImpl extends _Note {
       required this.repliesCount,
       required this.renoteCount,
       @JsonKey(name: 'reactions') required final Map<String, int> rawReactions,
-      this.text})
+      this.text,
+      required final List<NoteFile> files})
       : _rawReactions = rawReactions,
+        _files = files,
         super._();
 
   factory _$NoteImpl.fromJson(Map<String, dynamic> json) =>
@@ -237,10 +252,17 @@ class _$NoteImpl extends _Note {
 
   @override
   final String? text;
+  final List<NoteFile> _files;
+  @override
+  List<NoteFile> get files {
+    if (_files is EqualUnmodifiableListView) return _files;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_files);
+  }
 
   @override
   String toString() {
-    return 'Note(id: $id, user: $user, renote: $renote, repliesCount: $repliesCount, renoteCount: $renoteCount, rawReactions: $rawReactions, text: $text)';
+    return 'Note(id: $id, user: $user, renote: $renote, repliesCount: $repliesCount, renoteCount: $renoteCount, rawReactions: $rawReactions, text: $text, files: $files)';
   }
 
   @override
@@ -257,13 +279,22 @@ class _$NoteImpl extends _Note {
                 other.renoteCount == renoteCount) &&
             const DeepCollectionEquality()
                 .equals(other._rawReactions, _rawReactions) &&
-            (identical(other.text, text) || other.text == text));
+            (identical(other.text, text) || other.text == text) &&
+            const DeepCollectionEquality().equals(other._files, _files));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, user, renote, repliesCount,
-      renoteCount, const DeepCollectionEquality().hash(_rawReactions), text);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      user,
+      renote,
+      repliesCount,
+      renoteCount,
+      const DeepCollectionEquality().hash(_rawReactions),
+      text,
+      const DeepCollectionEquality().hash(_files));
 
   @JsonKey(ignore: true)
   @override
@@ -287,7 +318,8 @@ abstract class _Note extends Note {
       required final int repliesCount,
       required final int renoteCount,
       @JsonKey(name: 'reactions') required final Map<String, int> rawReactions,
-      final String? text}) = _$NoteImpl;
+      final String? text,
+      required final List<NoteFile> files}) = _$NoteImpl;
   const _Note._() : super._();
 
   factory _Note.fromJson(Map<String, dynamic> json) = _$NoteImpl.fromJson;
@@ -307,6 +339,8 @@ abstract class _Note extends Note {
   Map<String, int> get rawReactions;
   @override
   String? get text;
+  @override
+  List<NoteFile> get files;
   @override
   @JsonKey(ignore: true)
   _$$NoteImplCopyWith<_$NoteImpl> get copyWith =>
