@@ -68,10 +68,15 @@ final class NoteItem extends StatelessWidget {
               baseTextStyle: context.textTheme.bodyMedium!,
             ),
             const SizedBox(height: 16),
-            note.files.firstOrNull.mapOrElse(
-              func: (file) => Image.network(file.url, width: double.infinity, height: 300, fit: BoxFit.cover),
-              elseValue: const SizedBox.shrink(),
-            ),
+            note.files
+                .where((element) {
+                  return element.type.startsWith('image/');
+                })
+                .firstOrNull
+                .mapOrElse(
+                  func: (file) => Image.network(file.url, width: double.infinity, height: 250, fit: BoxFit.cover),
+                  elseValue: const SizedBox.shrink(),
+                ),
           ],
         ).expanded()
       ],
@@ -118,7 +123,7 @@ final class _RenotedInfo extends StatelessWidget {
           child: CircleAvatar(foregroundImage: NetworkImage(note.user.avatarUrl ?? '')),
         ),
         Text(
-          "%sがリノートしました".i18n.fill([note.user.username]),
+          "%sがリノート".i18n.fill([note.user.username]),
           style: context.textTheme.bodySmall,
           textAlign: TextAlign.start,
           overflow: TextOverflow.ellipsis,
@@ -160,6 +165,7 @@ final class _ActionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         const SizedBox(width: 56),
         IconButton(
