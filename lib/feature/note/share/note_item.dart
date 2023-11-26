@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
-import 'package:misskey_dog/core/extension/async_value.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/dynamic.dart';
 import 'package:misskey_dog/core/extension/string.dart';
 
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/feature/emoji/share/misskey_emoji.dart';
-import 'package:misskey_dog/model/emoji/emoji_provider.dart';
 import 'package:misskey_dog/model/note/note.dart';
 
 final class NoteItem extends StatelessWidget {

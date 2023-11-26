@@ -3,7 +3,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/user/user.dart';
-import 'package:uuid/uuid.dart';
 
 part 'note.freezed.dart';
 part 'note.g.dart';
