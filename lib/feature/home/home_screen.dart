@@ -53,7 +53,7 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
                   return FloatingActionButton(
                     child: const Icon(Icons.edit),
                     onPressed: () => Scaffold.of(context).showBottomSheet(
-                      (context) => const HomeNoteCreationModalScreen(),
+                      (context) => HomeNoteCreationModalScreen(),
                     ),
                   );
                 })),

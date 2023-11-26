@@ -6,7 +6,7 @@ part of 'note_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$noteHash() => r'071c617cda361cc877db6050b3abc59205e2dc93';
+String _$noteHash() => r'7db3528adfdcf775552d00c34599d71e036fac2c';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -32,9 +32,9 @@ class _SystemHash {
 abstract class _$Note extends BuildlessAutoDisposeAsyncNotifier<model.Note?> {
   late final String? id;
 
-  FutureOr<model.Note?> build(
+  FutureOr<model.Note?> build({
     String? id,
-  );
+  });
 }
 
 /// See also [Note].
@@ -47,11 +47,11 @@ class NoteFamily extends Family<AsyncValue<model.Note?>> {
   const NoteFamily();
 
   /// See also [Note].
-  NoteProvider call(
+  NoteProvider call({
     String? id,
-  ) {
+  }) {
     return NoteProvider(
-      id,
+      id: id,
     );
   }
 
@@ -60,7 +60,7 @@ class NoteFamily extends Family<AsyncValue<model.Note?>> {
     covariant NoteProvider provider,
   ) {
     return call(
-      provider.id,
+      id: provider.id,
     );
   }
 
@@ -83,9 +83,9 @@ class NoteFamily extends Family<AsyncValue<model.Note?>> {
 class NoteProvider
     extends AutoDisposeAsyncNotifierProviderImpl<Note, model.Note?> {
   /// See also [Note].
-  NoteProvider(
+  NoteProvider({
     String? id,
-  ) : this._internal(
+  }) : this._internal(
           () => Note()..id = id,
           from: noteProvider,
           name: r'noteProvider',
@@ -113,7 +113,7 @@ class NoteProvider
     covariant Note notifier,
   ) {
     return notifier.build(
-      id,
+      id: id,
     );
   }
 

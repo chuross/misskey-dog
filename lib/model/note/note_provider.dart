@@ -10,7 +10,7 @@ part 'note_provider.g.dart';
 @riverpod
 final class Note extends _$Note {
   @override
-  Future<model.Note?> build(String? id) async {
+  Future<model.Note?> build({String? id}) async {
     return null;
   }
 

@@ -19,7 +19,8 @@ class LoginScreen extends ConsumerWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hostTextState = ref.watch(textStateProvider(instanceUuid: _instanceUuid));
+    final hostTextStateProvider = TextStateProvider(instanceUuid: _instanceUuid);
+    final hostTextState = ref.watch(hostTextStateProvider);
 
     return Scaffold(
       body: Column(
@@ -44,7 +45,7 @@ class LoginScreen extends ConsumerWidget implements AutoRouteWrapper {
               hintText: 'sushi.ski, misskey.ioなど'.i18n,
             ),
             onChanged: (text) {
-              ref.watch(textStateProvider(instanceUuid: _instanceUuid).notifier).setText(text);
+              ref.read(hostTextStateProvider.notifier).setText(text);
             },
           ),
           const SizedBox(height: 24),

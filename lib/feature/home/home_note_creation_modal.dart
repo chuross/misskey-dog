@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
+import 'package:misskey_dog/core/extension/dynamic.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
+import 'package:misskey_dog/core/ui/ui_provider.dart';
+import 'package:misskey_dog/model/note/note_provider.dart';
+import 'package:uuid/uuid.dart';
 
-final class HomeNoteCreationModalScreen extends StatelessWidget {
-  const HomeNoteCreationModalScreen({super.key});
+final class HomeNoteCreationModalScreen extends ConsumerWidget {
+  final String _instanceUuid = const Uuid().v4().toString();
+
+  HomeNoteCreationModalScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final textProvider = TextStateProvider(instanceUuid: _instanceUuid);
+    final textState = ref.watch(textProvider);
+
     return Column(
       children: [
         const SizedBox(height: 28),
@@ -18,6 +28,14 @@ final class HomeNoteCreationModalScreen extends StatelessWidget {
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
           ),
           maxLines: null,
+          onChanged: (text) => ref.read(textProvider.notifier).setText(text),
+        ),
+        ElevatedButton(
+          onPressed: textState.isNotEmpty.mapOrElse(
+            func: (_) => () => ref.read(noteProvider().notifier).create(text: textState),
+            elseValue: null,
+          ),
+          child: Text('ポスト'.i18n),
         )
       ],
     ).padding(const EdgeInsets.all(16));
