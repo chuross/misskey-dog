@@ -21,7 +21,7 @@ List<InlineSpan> _separateInlineSpans(
 
   final remnants = text.runes.foldIndexed('', (index, previousValue, rune) {
     final match = emojiMatches.firstWhereOrNull((element) {
-      return element.start <= index && index <= element.end;
+      return element.start <= index && index < element.end;
     });
 
     // 絵文字にマッチしている間は無視
