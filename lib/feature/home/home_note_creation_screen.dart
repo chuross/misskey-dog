@@ -7,6 +7,7 @@ import 'package:misskey_dog/core/extension/dynamic.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/core/ui/ui_provider.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
+import 'package:riverpod_mutations_annotation/riverpod_mutations_annotation.dart';
 import 'package:uuid/uuid.dart';
 
 @RoutePage()
@@ -19,14 +20,19 @@ final class HomeNoteCreationScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textProvider = TextStateProvider(instanceUuid: _instanceUuid);
     final textState = ref.watch(textProvider);
+    final createNote = ref.watch(noteProvider().create);
+
+    if (createNote is CreateMutationSuccess) {
+      context.popRoute();
+    }
 
     return Scaffold(
       appBar: AppBar(
         title: const SizedBox.shrink(),
         actions: [
           FilledButton(
-            onPressed: textState.isNotEmpty.mapOrElse(
-              func: (_) => () => ref.read(noteProvider().notifier).create(text: textState),
+            onPressed: (textState.isNotEmpty || createNote is MutationLoading).mapOrElse(
+              func: (_) => () => createNote(text: textState),
               elseValue: null,
             ),
             child: Text('投稿'.i18n),

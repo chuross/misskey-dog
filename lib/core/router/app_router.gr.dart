@@ -28,7 +28,8 @@ abstract class $AppRouter extends _i6.RootStackRouter {
       );
     },
     HomeNoteCreationRoute.name: (routeData) {
-      final args = routeData.argsAs<HomeNoteCreationRouteArgs>(orElse: () => const HomeNoteCreationRouteArgs());
+      final args = routeData.argsAs<HomeNoteCreationRouteArgs>(
+          orElse: () => const HomeNoteCreationRouteArgs());
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i2.HomeNoteCreationScreen(key: args.key),
@@ -64,7 +65,8 @@ abstract class $AppRouter extends _i6.RootStackRouter {
       );
     },
     LoginRoute.name: (routeData) {
-      final args = routeData.argsAs<LoginRouteArgs>(orElse: () => const LoginRouteArgs());
+      final args = routeData.argsAs<LoginRouteArgs>(
+          orElse: () => const LoginRouteArgs());
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i6.WrappedRoute(child: _i5.LoginScreen(key: args.key)),
@@ -89,7 +91,8 @@ class AccountRoute extends _i6.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.HomeNoteCreationScreen]
-class HomeNoteCreationRoute extends _i6.PageRouteInfo<HomeNoteCreationRouteArgs> {
+class HomeNoteCreationRoute
+    extends _i6.PageRouteInfo<HomeNoteCreationRouteArgs> {
   HomeNoteCreationRoute({
     _i7.Key? key,
     List<_i6.PageRouteInfo>? children,
@@ -101,7 +104,8 @@ class HomeNoteCreationRoute extends _i6.PageRouteInfo<HomeNoteCreationRouteArgs>
 
   static const String name = 'HomeNoteCreationRoute';
 
-  static const _i6.PageInfo<HomeNoteCreationRouteArgs> page = _i6.PageInfo<HomeNoteCreationRouteArgs>(name);
+  static const _i6.PageInfo<HomeNoteCreationRouteArgs> page =
+      _i6.PageInfo<HomeNoteCreationRouteArgs>(name);
 }
 
 class HomeNoteCreationRouteArgs {
@@ -153,7 +157,8 @@ class LoginCallbackRoute extends _i6.PageRouteInfo<LoginCallbackRouteArgs> {
 
   static const String name = 'LoginCallbackRoute';
 
-  static const _i6.PageInfo<LoginCallbackRouteArgs> page = _i6.PageInfo<LoginCallbackRouteArgs>(name);
+  static const _i6.PageInfo<LoginCallbackRouteArgs> page =
+      _i6.PageInfo<LoginCallbackRouteArgs>(name);
 }
 
 class LoginCallbackRouteArgs {
@@ -189,7 +194,8 @@ class LoginRoute extends _i6.PageRouteInfo<LoginRouteArgs> {
 
   static const String name = 'LoginRoute';
 
-  static const _i6.PageInfo<LoginRouteArgs> page = _i6.PageInfo<LoginRouteArgs>(name);
+  static const _i6.PageInfo<LoginRouteArgs> page =
+      _i6.PageInfo<LoginRouteArgs>(name);
 }
 
 class LoginRouteArgs {

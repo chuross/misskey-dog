@@ -4,6 +4,7 @@ import 'package:misskey_dog/core/api/request/get_notes_request.dart';
 import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/model/note/note.dart' as model;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:riverpod_mutations_annotation/riverpod_mutations_annotation.dart';
 
 part 'note_provider.g.dart';
 
@@ -14,6 +15,7 @@ final class Note extends _$Note {
     return null;
   }
 
+  @mutation
   Future<void> create({required String text}) async {
     final client = await ref.watch(misskeyClientProvider().future);
 
@@ -22,8 +24,6 @@ final class Note extends _$Note {
         text: text,
       ).toJson().removeAllNullValueKeys(),
     );
-
-    // ID未確定のProviderFamilyが最後に作成したNoteを持つようになるのは直感に反するのでstateは更新しない
   }
 }
 

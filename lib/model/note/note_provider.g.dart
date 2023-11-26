@@ -6,7 +6,7 @@ part of 'note_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$noteHash() => r'7db3528adfdcf775552d00c34599d71e036fac2c';
+String _$noteHash() => r'd5d5e9eb3a29e97ca029f22372fafa72a49f7f0a';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -333,3 +333,156 @@ class _NotesProviderElement
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+
+// **************************************************************************
+// RiverpodMutationsGenerator
+// **************************************************************************
+
+typedef NoteFamilyParams = ({
+  String? id,
+});
+
+extension NoteMutationExtension on NoteProvider {
+  NoteFamilyParams get _params => (id: this.id,);
+
+  Refreshable<CreateMutation> get create => _createProvider(_params);
+}
+
+// Could have extras in the future when @mutationKey gets added. for now identical to the class one.
+typedef _CreateFamilyParameters = ({
+  String? id,
+});
+
+final _createProvider =
+    Provider.autoDispose.family((ref, _CreateFamilyParameters _params) {
+  final notifier = ref.watch(noteProvider(
+    id: _params.id,
+  ).notifier);
+  return CreateMutation(
+    (newState) => ref.state = newState,
+    notifier.create,
+  );
+}, dependencies: [noteProvider]);
+
+typedef CreateSignature = Future<void> Function({required String text});
+typedef CreateStateSetter = void Function(CreateMutation newState);
+
+sealed class CreateMutation with AsyncMutation {
+  factory CreateMutation(
+    CreateStateSetter updateState,
+    CreateSignature fn,
+  ) = CreateMutationIdle._;
+
+  CreateMutation._(this._updateState, this._fn);
+
+  final CreateStateSetter _updateState;
+  final CreateSignature _fn;
+
+  Object? get error;
+  StackTrace? get stackTrace;
+
+  Future<void> call({required String text}) async {
+    try {
+      _updateState(CreateMutationLoading.from(this));
+      await _fn(text: text);
+      _updateState(CreateMutationSuccess.from(this));
+    } catch (e, s) {
+      _updateState(CreateMutationFailure.from(this, error: e, stackTrace: s));
+    }
+  }
+}
+
+final class CreateMutationIdle extends CreateMutation with MutationIdle {
+  CreateMutationIdle._(
+    super._updateState,
+    super._fn, {
+    this.error,
+    this.stackTrace,
+  }) : super._();
+
+  factory CreateMutationIdle.from(CreateMutation other) => CreateMutationIdle._(
+        other._updateState,
+        other._fn,
+        error: other.error,
+        stackTrace: other.stackTrace,
+      );
+
+  @override
+  final Object? error;
+
+  @override
+  final StackTrace? stackTrace;
+}
+
+final class CreateMutationLoading extends CreateMutation with MutationLoading {
+  CreateMutationLoading._(
+    super._updateState,
+    super._fn, {
+    this.error,
+    this.stackTrace,
+  }) : super._();
+
+  factory CreateMutationLoading.from(CreateMutation other) =>
+      CreateMutationLoading._(
+        other._updateState,
+        other._fn,
+        error: other.error,
+        stackTrace: other.stackTrace,
+      );
+
+  @override
+  final Object? error;
+
+  @override
+  final StackTrace? stackTrace;
+}
+
+final class CreateMutationSuccess extends CreateMutation with MutationSuccess {
+  CreateMutationSuccess._(
+    super._updateState,
+    super._fn, {
+    this.error,
+    this.stackTrace,
+  }) : super._();
+
+  factory CreateMutationSuccess.from(CreateMutation other) =>
+      CreateMutationSuccess._(
+        other._updateState,
+        other._fn,
+        error: other.error,
+        stackTrace: other.stackTrace,
+      );
+
+  @override
+  final Object? error;
+
+  @override
+  final StackTrace? stackTrace;
+}
+
+final class CreateMutationFailure extends CreateMutation with MutationFailure {
+  CreateMutationFailure._(
+    super._updateState,
+    super._fn, {
+    required this.error,
+    required this.stackTrace,
+  }) : super._();
+
+  factory CreateMutationFailure.from(
+    CreateMutation other, {
+    required Object error,
+    required StackTrace stackTrace,
+  }) =>
+      CreateMutationFailure._(
+        other._updateState,
+        other._fn,
+        error: error,
+        stackTrace: stackTrace,
+      );
+
+  @override
+  final Object error;
+
+  @override
+  final StackTrace stackTrace;
+}
