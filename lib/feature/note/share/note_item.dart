@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
+import 'package:misskey_dog/core/extension/date_time.dart';
 import 'package:misskey_dog/core/extension/dynamic.dart';
 import 'package:misskey_dog/core/extension/string.dart';
 
@@ -57,9 +58,19 @@ final class NoteItem extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              note.renote?.user.username ?? note.user.username,
-              style: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  note.renote?.user.username ?? note.user.username,
+                  style: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+                ).flexible(),
+                const SizedBox(width: 8),
+                Text(
+                  note.renote?.createdAt.elapsedTimeLabel ?? note.createdAt.elapsedTimeLabel,
+                  style: context.textTheme.bodySmall,
+                ),
+              ],
             ),
             const SizedBox(height: 4),
             MisskeyText(

@@ -13,6 +13,7 @@ abstract class Note with _$Note {
   const Note._();
   const factory Note({
     required String id,
+    required DateTime createdAt,
     required User user,
     Note? renote,
     required int repliesCount,

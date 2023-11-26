@@ -21,6 +21,7 @@ Note _$NoteFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Note {
   String get id => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
   Note? get renote => throw _privateConstructorUsedError;
   int get repliesCount => throw _privateConstructorUsedError;
@@ -42,6 +43,7 @@ abstract class $NoteCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      DateTime createdAt,
       User user,
       Note? renote,
       int repliesCount,
@@ -68,6 +70,7 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
   @override
   $Res call({
     Object? id = null,
+    Object? createdAt = null,
     Object? user = null,
     Object? renote = freezed,
     Object? repliesCount = null,
@@ -81,6 +84,10 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -142,6 +149,7 @@ abstract class _$$NoteImplCopyWith<$Res> implements $NoteCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      DateTime createdAt,
       User user,
       Note? renote,
       int repliesCount,
@@ -167,6 +175,7 @@ class __$$NoteImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? createdAt = null,
     Object? user = null,
     Object? renote = freezed,
     Object? repliesCount = null,
@@ -180,6 +189,10 @@ class __$$NoteImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -217,6 +230,7 @@ class __$$NoteImplCopyWithImpl<$Res>
 class _$NoteImpl extends _Note {
   const _$NoteImpl(
       {required this.id,
+      required this.createdAt,
       required this.user,
       this.renote,
       required this.repliesCount,
@@ -233,6 +247,8 @@ class _$NoteImpl extends _Note {
 
   @override
   final String id;
+  @override
+  final DateTime createdAt;
   @override
   final User user;
   @override
@@ -262,7 +278,7 @@ class _$NoteImpl extends _Note {
 
   @override
   String toString() {
-    return 'Note(id: $id, user: $user, renote: $renote, repliesCount: $repliesCount, renoteCount: $renoteCount, rawReactions: $rawReactions, text: $text, files: $files)';
+    return 'Note(id: $id, createdAt: $createdAt, user: $user, renote: $renote, repliesCount: $repliesCount, renoteCount: $renoteCount, rawReactions: $rawReactions, text: $text, files: $files)';
   }
 
   @override
@@ -271,6 +287,8 @@ class _$NoteImpl extends _Note {
         (other.runtimeType == runtimeType &&
             other is _$NoteImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.renote, renote) || other.renote == renote) &&
             (identical(other.repliesCount, repliesCount) ||
@@ -288,6 +306,7 @@ class _$NoteImpl extends _Note {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      createdAt,
       user,
       renote,
       repliesCount,
@@ -313,6 +332,7 @@ class _$NoteImpl extends _Note {
 abstract class _Note extends Note {
   const factory _Note(
       {required final String id,
+      required final DateTime createdAt,
       required final User user,
       final Note? renote,
       required final int repliesCount,
@@ -326,6 +346,8 @@ abstract class _Note extends Note {
 
   @override
   String get id;
+  @override
+  DateTime get createdAt;
   @override
   User get user;
   @override
