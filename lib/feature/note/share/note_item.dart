@@ -7,7 +7,7 @@ import 'package:misskey_dog/core/extension/dynamic.dart';
 import 'package:misskey_dog/core/extension/string.dart';
 
 import 'package:misskey_dog/core/extension/widget.dart';
-import 'package:misskey_dog/feature/emoji/share/emoji_view.dart';
+import 'package:misskey_dog/feature/emoji/share/misskey_emoji.dart';
 import 'package:misskey_dog/model/emoji/emoji_provider.dart';
 import 'package:misskey_dog/model/note/note.dart';
 
@@ -128,7 +128,7 @@ final class _Reaction extends StatelessWidget {
       ),
       child: Row(
         children: [
-          EmojiView(emoji: reaction.emoji, height: 20),
+          MisskeyEmoji(emoji: reaction.emoji, height: 20),
           const SizedBox(width: 4),
           Text(
             reaction.reactionCount.toString(),

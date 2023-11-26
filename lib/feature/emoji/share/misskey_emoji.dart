@@ -4,11 +4,11 @@ import 'package:misskey_dog/core/extension/async_value.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/emoji/emoji_provider.dart';
 
-final class EmojiView extends StatelessWidget {
+final class MisskeyEmoji extends StatelessWidget {
   final Emoji emoji;
   final double height;
 
-  const EmojiView({super.key, required this.emoji, required this.height});
+  const MisskeyEmoji({super.key, required this.emoji, required this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +33,7 @@ final class _LocalEmojiView extends ConsumerWidget {
     final localEmoji = ref.watch(localEmojiProvider(emojiName: emoji.name));
     return localEmoji.whenPartialLoading(
       data: (localEmoji) => Image.network(localEmoji.url ?? '', height: height, fit: BoxFit.fitHeight),
+      progressIndicatorSize: Size.square(height),
     );
   }
 }
