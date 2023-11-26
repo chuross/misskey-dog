@@ -116,10 +116,21 @@ final class _Reaction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        EmojiView(emoji: reaction.emoji, size: const Size.square(20)),
-      ],
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: context.dividerColorWithOpacity10),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Row(
+        children: [
+          EmojiView(emoji: reaction.emoji, size: const Size.square(20)),
+          const SizedBox(width: 2),
+          Text(
+            reaction.reactionCount.toString(),
+            style: context.textTheme.bodyLarge,
+          ),
+        ],
+      ),
     );
   }
 }
