@@ -9,8 +9,11 @@ final class MisskeyText extends ConsumerWidget {
 
   final String text;
   final TextStyle baseTextStyle;
+  late final List<InlineSpan> inlineSpans;
 
-  const MisskeyText({super.key, required this.text, required this.baseTextStyle});
+  MisskeyText({super.key, required this.text, required this.baseTextStyle}) {
+    inlineSpans = _separateSpans(text: text, height: baseTextStyle.fontSize ?? 0);
+  }
 
   static List<InlineSpan> _separateSpans({required String text, required height}) {
     final emojiMatches = _emojiReget.allMatches(text);
@@ -53,7 +56,7 @@ final class MisskeyText extends ConsumerWidget {
       softWrap: true,
       text: TextSpan(
         style: baseTextStyle,
-        children: _separateSpans(text: text, height: baseTextStyle.fontSize ?? 0),
+        children: inlineSpans,
       ),
     );
   }
