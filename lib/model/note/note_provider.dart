@@ -2,35 +2,35 @@ import 'package:misskey_dog/core/api/api_provider.dart';
 import 'package:misskey_dog/core/api/request/create_note_request.dart';
 import 'package:misskey_dog/core/api/request/get_notes_request.dart';
 import 'package:misskey_dog/core/extension/map.dart';
-import 'package:misskey_dog/model/note/note.dart';
+import 'package:misskey_dog/model/note/note.dart' as model;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'note_provider.g.dart';
 
-// @riverpod
-// final class Note extends _$Note {
-//   @override
-//   Future<Note?> build(String? id) async {
-//     return null;
-//   }
+@riverpod
+final class Note extends _$Note {
+  @override
+  Future<model.Note?> build(String? id) async {
+    return null;
+  }
 
-//   Future<void> create({required String text}) async {
-//     final client = await ref.watch(misskeyClientProvider().future);
+  Future<void> create({required String text}) async {
+    final client = await ref.watch(misskeyClientProvider().future);
 
-//     await client.createNote(
-//       request: CreateNoteRequest(
-//         text: text,
-//       ).toJson().removeAllNullValueKeys(),
-//     );
+    await client.createNote(
+      request: CreateNoteRequest(
+        text: text,
+      ).toJson().removeAllNullValueKeys(),
+    );
 
-//     // ID未確定のProviderFamilyが最後に作成したNoteを持つようになるのは直感に反するのでstateは更新しない
-//   }
-// }
+    // ID未確定のProviderFamilyが最後に作成したNoteを持つようになるのは直感に反するのでstateは更新しない
+  }
+}
 
 @riverpod
 final class Notes extends _$Notes {
   @override
-  Future<List<Note>> build({
+  Future<List<model.Note>> build({
     bool isLocal = false,
     int limit = 30,
   }) async {

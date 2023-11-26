@@ -6,7 +6,7 @@ part of 'note_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$notesHash() => r'5dc49791d6fb7fa7b40ca97bf1df397bd95f6aa8';
+String _$noteHash() => r'071c617cda361cc877db6050b3abc59205e2dc93';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,11 +29,151 @@ class _SystemHash {
   }
 }
 
-abstract class _$Notes extends BuildlessAutoDisposeAsyncNotifier<List<Note>> {
+abstract class _$Note extends BuildlessAutoDisposeAsyncNotifier<model.Note?> {
+  late final String? id;
+
+  FutureOr<model.Note?> build(
+    String? id,
+  );
+}
+
+/// See also [Note].
+@ProviderFor(Note)
+const noteProvider = NoteFamily();
+
+/// See also [Note].
+class NoteFamily extends Family<AsyncValue<model.Note?>> {
+  /// See also [Note].
+  const NoteFamily();
+
+  /// See also [Note].
+  NoteProvider call(
+    String? id,
+  ) {
+    return NoteProvider(
+      id,
+    );
+  }
+
+  @override
+  NoteProvider getProviderOverride(
+    covariant NoteProvider provider,
+  ) {
+    return call(
+      provider.id,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'noteProvider';
+}
+
+/// See also [Note].
+class NoteProvider
+    extends AutoDisposeAsyncNotifierProviderImpl<Note, model.Note?> {
+  /// See also [Note].
+  NoteProvider(
+    String? id,
+  ) : this._internal(
+          () => Note()..id = id,
+          from: noteProvider,
+          name: r'noteProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product') ? null : _$noteHash,
+          dependencies: NoteFamily._dependencies,
+          allTransitiveDependencies: NoteFamily._allTransitiveDependencies,
+          id: id,
+        );
+
+  NoteProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.id,
+  }) : super.internal();
+
+  final String? id;
+
+  @override
+  FutureOr<model.Note?> runNotifierBuild(
+    covariant Note notifier,
+  ) {
+    return notifier.build(
+      id,
+    );
+  }
+
+  @override
+  Override overrideWith(Note Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: NoteProvider._internal(
+        () => create()..id = id,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        id: id,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeAsyncNotifierProviderElement<Note, model.Note?> createElement() {
+    return _NoteProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is NoteProvider && other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, id.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin NoteRef on AutoDisposeAsyncNotifierProviderRef<model.Note?> {
+  /// The parameter `id` of this provider.
+  String? get id;
+}
+
+class _NoteProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<Note, model.Note?>
+    with NoteRef {
+  _NoteProviderElement(super.provider);
+
+  @override
+  String? get id => (origin as NoteProvider).id;
+}
+
+String _$notesHash() => r'f30e7b16e64fd39e145264d71a7fbd30fd94e0a4';
+
+abstract class _$Notes
+    extends BuildlessAutoDisposeAsyncNotifier<List<model.Note>> {
   late final bool isLocal;
   late final int limit;
 
-  FutureOr<List<Note>> build({
+  FutureOr<List<model.Note>> build({
     bool isLocal = false,
     int limit = 30,
   });
@@ -44,7 +184,7 @@ abstract class _$Notes extends BuildlessAutoDisposeAsyncNotifier<List<Note>> {
 const notesProvider = NotesFamily();
 
 /// See also [Notes].
-class NotesFamily extends Family<AsyncValue<List<Note>>> {
+class NotesFamily extends Family<AsyncValue<List<model.Note>>> {
   /// See also [Notes].
   const NotesFamily();
 
@@ -86,7 +226,7 @@ class NotesFamily extends Family<AsyncValue<List<Note>>> {
 
 /// See also [Notes].
 class NotesProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<Notes, List<Note>> {
+    extends AutoDisposeAsyncNotifierProviderImpl<Notes, List<model.Note>> {
   /// See also [Notes].
   NotesProvider({
     bool isLocal = false,
@@ -122,7 +262,7 @@ class NotesProvider
   final int limit;
 
   @override
-  FutureOr<List<Note>> runNotifierBuild(
+  FutureOr<List<model.Note>> runNotifierBuild(
     covariant Notes notifier,
   ) {
     return notifier.build(
@@ -151,7 +291,8 @@ class NotesProvider
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<Notes, List<Note>> createElement() {
+  AutoDisposeAsyncNotifierProviderElement<Notes, List<model.Note>>
+      createElement() {
     return _NotesProviderElement(this);
   }
 
@@ -172,7 +313,7 @@ class NotesProvider
   }
 }
 
-mixin NotesRef on AutoDisposeAsyncNotifierProviderRef<List<Note>> {
+mixin NotesRef on AutoDisposeAsyncNotifierProviderRef<List<model.Note>> {
   /// The parameter `isLocal` of this provider.
   bool get isLocal;
 
@@ -181,7 +322,7 @@ mixin NotesRef on AutoDisposeAsyncNotifierProviderRef<List<Note>> {
 }
 
 class _NotesProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<Notes, List<Note>>
+    extends AutoDisposeAsyncNotifierProviderElement<Notes, List<model.Note>>
     with NotesRef {
   _NotesProviderElement(super.provider);
 
