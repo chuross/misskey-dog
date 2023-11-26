@@ -7,7 +7,7 @@ part of 'misskey_text.dart';
 // **************************************************************************
 
 String _$separateInlineSpansHash() =>
-    r'b9c520721292f66bf62e67eb0396d31e16c9d7f1';
+    r'1d39ad0954e61f327fc240e6eafde94935431b2d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -35,7 +35,7 @@ class _SystemHash {
 const _separateInlineSpansProvider = _SeparateInlineSpansFamily();
 
 /// See also [_separateInlineSpans].
-class _SeparateInlineSpansFamily extends Family<AsyncValue<List<InlineSpan>>> {
+class _SeparateInlineSpansFamily extends Family<List<InlineSpan>> {
   /// See also [_separateInlineSpans].
   const _SeparateInlineSpansFamily();
 
@@ -77,7 +77,7 @@ class _SeparateInlineSpansFamily extends Family<AsyncValue<List<InlineSpan>>> {
 
 /// See also [_separateInlineSpans].
 class _SeparateInlineSpansProvider
-    extends AutoDisposeFutureProvider<List<InlineSpan>> {
+    extends AutoDisposeProvider<List<InlineSpan>> {
   /// See also [_separateInlineSpans].
   _SeparateInlineSpansProvider({
     required String text,
@@ -117,8 +117,7 @@ class _SeparateInlineSpansProvider
 
   @override
   Override overrideWith(
-    FutureOr<List<InlineSpan>> Function(_SeparateInlineSpansRef provider)
-        create,
+    List<InlineSpan> Function(_SeparateInlineSpansRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -136,7 +135,7 @@ class _SeparateInlineSpansProvider
   }
 
   @override
-  AutoDisposeFutureProviderElement<List<InlineSpan>> createElement() {
+  AutoDisposeProviderElement<List<InlineSpan>> createElement() {
     return _SeparateInlineSpansProviderElement(this);
   }
 
@@ -157,8 +156,7 @@ class _SeparateInlineSpansProvider
   }
 }
 
-mixin _SeparateInlineSpansRef
-    on AutoDisposeFutureProviderRef<List<InlineSpan>> {
+mixin _SeparateInlineSpansRef on AutoDisposeProviderRef<List<InlineSpan>> {
   /// The parameter `text` of this provider.
   String get text;
 
@@ -167,7 +165,7 @@ mixin _SeparateInlineSpansRef
 }
 
 class _SeparateInlineSpansProviderElement
-    extends AutoDisposeFutureProviderElement<List<InlineSpan>>
+    extends AutoDisposeProviderElement<List<InlineSpan>>
     with _SeparateInlineSpansRef {
   _SeparateInlineSpansProviderElement(super.provider);
 

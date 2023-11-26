@@ -8,14 +8,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'misskey_text.g.dart';
 
-final RegExp _emojiReget = RegExp(r':([a-z_]+):');
+final RegExp _emojiReget = RegExp(r':([a-z0-9_]+):');
 
 @riverpod
-Future<List<InlineSpan>> _separateInlineSpans(
+List<InlineSpan> _separateInlineSpans(
   _SeparateInlineSpansRef ref, {
   required String text,
   required double height,
-}) async {
+}) {
   final emojiMatches = _emojiReget.allMatches(text);
 
   var spans = <InlineSpan>[];
@@ -60,13 +60,11 @@ final class MisskeyText extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final inlineSpans = ref.watch(_separateInlineSpansProvider(text: text, height: baseTextStyle.fontSize ?? 14));
 
-    return inlineSpans.whenPartialLoading(
-      data: (inlineSpans) => RichText(
-        softWrap: true,
-        text: TextSpan(
-          style: baseTextStyle,
-          children: inlineSpans,
-        ),
+    return RichText(
+      softWrap: true,
+      text: TextSpan(
+        style: baseTextStyle,
+        children: inlineSpans,
       ),
     );
   }
