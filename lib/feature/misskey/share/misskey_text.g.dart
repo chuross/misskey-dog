@@ -7,7 +7,7 @@ part of 'misskey_text.dart';
 // **************************************************************************
 
 String _$separateInlineSpansHash() =>
-    r'5b4e27cd51b7ba2cecc9b12bf914e77894701e0a';
+    r'8ccda90bf96c4c78e844cf078d47257a6e8f7b0b';
 
 /// Copied from Dart SDK
 class _SystemHash {
