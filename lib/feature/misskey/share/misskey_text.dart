@@ -37,7 +37,7 @@ List<InlineSpan> _separateInlineSpans(
       final emoji = LocalEmoji(name: match?.group(1) ?? '');
       if (previousValue.isNotEmpty) spans.add(TextSpan(text: previousValue));
       spans.add(WidgetSpan(
-        child: MisskeyEmoji(emoji: emoji, height: height),
+        child: MisskeyEmoji(emoji: emoji, height: height + 4),
         alignment: PlaceholderAlignment.middle,
         baseline: TextBaseline.alphabetic,
       ));

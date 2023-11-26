@@ -155,11 +155,11 @@ final class _Reaction extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          MisskeyEmoji(emoji: reaction.emoji, height: 20),
+          MisskeyEmoji(emoji: reaction.emoji, height: 18),
           const SizedBox(width: 4),
           Text(
             reaction.reactionCount.toString(),
-            style: context.textTheme.bodyLarge,
+            style: context.textTheme.bodyMedium,
           ),
         ],
       ),
