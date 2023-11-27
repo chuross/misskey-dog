@@ -166,7 +166,7 @@ class _NoteProviderElement
   String? get id => (origin as NoteProvider).id;
 }
 
-String _$notesHash() => r'f634d994a787890380dd4f55c1807bb2e09f1e18';
+String _$notesHash() => r'9186d6511a820ac104881b95ae296825f244f763';
 
 abstract class _$Notes
     extends BuildlessAutoDisposeAsyncNotifier<List<model.Note>> {
@@ -175,7 +175,7 @@ abstract class _$Notes
 
   FutureOr<List<model.Note>> build({
     bool isLocal = false,
-    int limit = 50,
+    int limit = 200,
   });
 }
 
@@ -191,7 +191,7 @@ class NotesFamily extends Family<AsyncValue<List<model.Note>>> {
   /// See also [Notes].
   NotesProvider call({
     bool isLocal = false,
-    int limit = 50,
+    int limit = 200,
   }) {
     return NotesProvider(
       isLocal: isLocal,
@@ -230,7 +230,7 @@ class NotesProvider
   /// See also [Notes].
   NotesProvider({
     bool isLocal = false,
-    int limit = 50,
+    int limit = 200,
   }) : this._internal(
           () => Notes()
             ..isLocal = isLocal

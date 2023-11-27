@@ -32,7 +32,7 @@ final class Notes extends _$Notes {
   @override
   Future<List<model.Note>> build({
     bool isLocal = false,
-    int limit = 50,
+    int limit = 200,
   }) async {
     final client = await ref.watch(misskeyClientProvider().future);
 
