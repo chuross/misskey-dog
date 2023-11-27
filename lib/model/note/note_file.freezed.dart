@@ -23,7 +23,7 @@ mixin _$NoteFile {
   String get id => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
-  String get thumbnailUrl => throw _privateConstructorUsedError;
+  String? get thumbnailUrl => throw _privateConstructorUsedError;
   bool get isSensitive => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $NoteFileCopyWith<$Res> {
       {String id,
       String type,
       String url,
-      String thumbnailUrl,
+      String? thumbnailUrl,
       bool isSensitive});
 }
 
@@ -61,7 +61,7 @@ class _$NoteFileCopyWithImpl<$Res, $Val extends NoteFile>
     Object? id = null,
     Object? type = null,
     Object? url = null,
-    Object? thumbnailUrl = null,
+    Object? thumbnailUrl = freezed,
     Object? isSensitive = null,
   }) {
     return _then(_value.copyWith(
@@ -77,10 +77,10 @@ class _$NoteFileCopyWithImpl<$Res, $Val extends NoteFile>
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      thumbnailUrl: null == thumbnailUrl
+      thumbnailUrl: freezed == thumbnailUrl
           ? _value.thumbnailUrl
           : thumbnailUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       isSensitive: null == isSensitive
           ? _value.isSensitive
           : isSensitive // ignore: cast_nullable_to_non_nullable
@@ -101,7 +101,7 @@ abstract class _$$NoteFileImplCopyWith<$Res>
       {String id,
       String type,
       String url,
-      String thumbnailUrl,
+      String? thumbnailUrl,
       bool isSensitive});
 }
 
@@ -119,7 +119,7 @@ class __$$NoteFileImplCopyWithImpl<$Res>
     Object? id = null,
     Object? type = null,
     Object? url = null,
-    Object? thumbnailUrl = null,
+    Object? thumbnailUrl = freezed,
     Object? isSensitive = null,
   }) {
     return _then(_$NoteFileImpl(
@@ -135,10 +135,10 @@ class __$$NoteFileImplCopyWithImpl<$Res>
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      thumbnailUrl: null == thumbnailUrl
+      thumbnailUrl: freezed == thumbnailUrl
           ? _value.thumbnailUrl
           : thumbnailUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       isSensitive: null == isSensitive
           ? _value.isSensitive
           : isSensitive // ignore: cast_nullable_to_non_nullable
@@ -168,7 +168,7 @@ class _$NoteFileImpl extends _NoteFile {
   @override
   final String url;
   @override
-  final String thumbnailUrl;
+  final String? thumbnailUrl;
   @override
   final bool isSensitive;
 
@@ -215,7 +215,7 @@ abstract class _NoteFile extends NoteFile {
       {required final String id,
       required final String type,
       required final String url,
-      required final String thumbnailUrl,
+      required final String? thumbnailUrl,
       required final bool isSensitive}) = _$NoteFileImpl;
   const _NoteFile._() : super._();
 
@@ -229,7 +229,7 @@ abstract class _NoteFile extends NoteFile {
   @override
   String get url;
   @override
-  String get thumbnailUrl;
+  String? get thumbnailUrl;
   @override
   bool get isSensitive;
   @override

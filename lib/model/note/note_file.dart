@@ -11,7 +11,7 @@ abstract class NoteFile with _$NoteFile {
     required String id,
     required String type,
     required String url,
-    required String thumbnailUrl,
+    required String? thumbnailUrl,
     required bool isSensitive,
   }) = _NoteFile;
 

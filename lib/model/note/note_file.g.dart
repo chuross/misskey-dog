@@ -11,7 +11,7 @@ _$NoteFileImpl _$$NoteFileImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       type: json['type'] as String,
       url: json['url'] as String,
-      thumbnailUrl: json['thumbnailUrl'] as String,
+      thumbnailUrl: json['thumbnailUrl'] as String?,
       isSensitive: json['isSensitive'] as bool,
     );
 
