@@ -80,7 +80,10 @@ final class NoteItem extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             note.files.where((element) => element.isImage).firstOrNull.mapOrElse(
-                  func: (file) => Image.network(file.url, width: double.infinity, height: 250, fit: BoxFit.cover),
+                  func: (file) => ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.network(file.url, width: double.infinity, height: 250, fit: BoxFit.cover),
+                  ),
                   elseValue: const SizedBox.shrink(),
                 ),
           ],
