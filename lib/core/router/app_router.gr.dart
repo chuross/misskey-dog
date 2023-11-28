@@ -8,35 +8,28 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i6;
-import 'package:flutter/material.dart' as _i7;
+import 'package:auto_route/auto_route.dart' as _i5;
+import 'package:flutter/material.dart' as _i6;
 import 'package:misskey_dog/feature/account/account_screen.dart' as _i1;
-import 'package:misskey_dog/feature/home/home_note_creation_screen.dart' as _i2;
-import 'package:misskey_dog/feature/home/home_screen.dart' as _i3;
-import 'package:misskey_dog/feature/login/login_callback_screen.dart' as _i4;
-import 'package:misskey_dog/feature/login/login_screen.dart' as _i5;
+import 'package:misskey_dog/feature/home/home_screen.dart' as _i2;
+import 'package:misskey_dog/feature/login/login_callback_screen.dart' as _i3;
+import 'package:misskey_dog/feature/login/login_screen.dart' as _i4;
 
-abstract class $AppRouter extends _i6.RootStackRouter {
+abstract class $AppRouter extends _i5.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i6.PageFactory> pagesMap = {
+  final Map<String, _i5.PageFactory> pagesMap = {
     AccountRoute.name: (routeData) {
-      return _i6.AutoRoutePage<dynamic>(
+      return _i5.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i1.AccountScreen(),
       );
     },
-    HomeNoteCreationRoute.name: (routeData) {
-      return _i6.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i2.HomeNoteCreationScreen(),
-      );
-    },
     HomeRoute.name: (routeData) {
-      return _i6.AutoRoutePage<dynamic>(
+      return _i5.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i6.WrappedRoute(child: const _i3.HomeScreen()),
+        child: _i5.WrappedRoute(child: const _i2.HomeScreen()),
       );
     },
     LoginCallbackRoute.name: (routeData) {
@@ -52,10 +45,10 @@ abstract class $AppRouter extends _i6.RootStackRouter {
                   '',
                 ),
               ));
-      return _i6.AutoRoutePage<dynamic>(
+      return _i5.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i6.WrappedRoute(
-            child: _i4.LoginCallbackScreen(
+        child: _i5.WrappedRoute(
+            child: _i3.LoginCallbackScreen(
           key: args.key,
           host: args.host,
           session: args.session,
@@ -63,9 +56,9 @@ abstract class $AppRouter extends _i6.RootStackRouter {
       );
     },
     LoginRoute.name: (routeData) {
-      return _i6.AutoRoutePage<dynamic>(
+      return _i5.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i6.WrappedRoute(child: const _i5.LoginScreen()),
+        child: _i5.WrappedRoute(child: const _i4.LoginScreen()),
       );
     },
   };
@@ -73,8 +66,8 @@ abstract class $AppRouter extends _i6.RootStackRouter {
 
 /// generated route for
 /// [_i1.AccountScreen]
-class AccountRoute extends _i6.PageRouteInfo<void> {
-  const AccountRoute({List<_i6.PageRouteInfo>? children})
+class AccountRoute extends _i5.PageRouteInfo<void> {
+  const AccountRoute({List<_i5.PageRouteInfo>? children})
       : super(
           AccountRoute.name,
           initialChildren: children,
@@ -82,27 +75,13 @@ class AccountRoute extends _i6.PageRouteInfo<void> {
 
   static const String name = 'AccountRoute';
 
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+  static const _i5.PageInfo<void> page = _i5.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i2.HomeNoteCreationScreen]
-class HomeNoteCreationRoute extends _i6.PageRouteInfo<void> {
-  const HomeNoteCreationRoute({List<_i6.PageRouteInfo>? children})
-      : super(
-          HomeNoteCreationRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'HomeNoteCreationRoute';
-
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i3.HomeScreen]
-class HomeRoute extends _i6.PageRouteInfo<void> {
-  const HomeRoute({List<_i6.PageRouteInfo>? children})
+/// [_i2.HomeScreen]
+class HomeRoute extends _i5.PageRouteInfo<void> {
+  const HomeRoute({List<_i5.PageRouteInfo>? children})
       : super(
           HomeRoute.name,
           initialChildren: children,
@@ -110,17 +89,17 @@ class HomeRoute extends _i6.PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+  static const _i5.PageInfo<void> page = _i5.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i4.LoginCallbackScreen]
-class LoginCallbackRoute extends _i6.PageRouteInfo<LoginCallbackRouteArgs> {
+/// [_i3.LoginCallbackScreen]
+class LoginCallbackRoute extends _i5.PageRouteInfo<LoginCallbackRouteArgs> {
   LoginCallbackRoute({
-    _i7.Key? key,
+    _i6.Key? key,
     String host = '',
     String session = '',
-    List<_i6.PageRouteInfo>? children,
+    List<_i5.PageRouteInfo>? children,
   }) : super(
           LoginCallbackRoute.name,
           args: LoginCallbackRouteArgs(
@@ -137,8 +116,8 @@ class LoginCallbackRoute extends _i6.PageRouteInfo<LoginCallbackRouteArgs> {
 
   static const String name = 'LoginCallbackRoute';
 
-  static const _i6.PageInfo<LoginCallbackRouteArgs> page =
-      _i6.PageInfo<LoginCallbackRouteArgs>(name);
+  static const _i5.PageInfo<LoginCallbackRouteArgs> page =
+      _i5.PageInfo<LoginCallbackRouteArgs>(name);
 }
 
 class LoginCallbackRouteArgs {
@@ -148,7 +127,7 @@ class LoginCallbackRouteArgs {
     this.session = '',
   });
 
-  final _i7.Key? key;
+  final _i6.Key? key;
 
   final String host;
 
@@ -161,9 +140,9 @@ class LoginCallbackRouteArgs {
 }
 
 /// generated route for
-/// [_i5.LoginScreen]
-class LoginRoute extends _i6.PageRouteInfo<void> {
-  const LoginRoute({List<_i6.PageRouteInfo>? children})
+/// [_i4.LoginScreen]
+class LoginRoute extends _i5.PageRouteInfo<void> {
+  const LoginRoute({List<_i5.PageRouteInfo>? children})
       : super(
           LoginRoute.name,
           initialChildren: children,
@@ -171,5 +150,5 @@ class LoginRoute extends _i6.PageRouteInfo<void> {
 
   static const String name = 'LoginRoute';
 
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+  static const _i5.PageInfo<void> page = _i5.PageInfo<void>(name);
 }

@@ -22,7 +22,6 @@ import 'package:misskey_dog/core/extension/widget.dart';
   return (result.value, func);
 }
 
-@RoutePage()
 final class HomeNoteCreationScreen extends HookConsumerWidget {
   const HomeNoteCreationScreen({super.key});
 
@@ -35,33 +34,27 @@ final class HomeNoteCreationScreen extends HookConsumerWidget {
       context.popRoute();
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const SizedBox.shrink(),
-        actions: [
-          FilledButton(
-            onPressed: (text.value.isNotEmpty).mapOrElse(
-              func: (_) => () => createNote(text.value),
-              elseValue: null,
-            ),
-            child: Text('投稿'.i18n),
-          ).padding(const EdgeInsets.only(right: 16)),
-        ],
-      ),
-      body: Column(
-        children: [
-          const SizedBox(height: 28),
-          TextField(
-            style: context.textTheme.bodyMedium,
-            decoration: InputDecoration(
-              hintText: 'いまどうしてる?'.i18n,
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
-            ),
-            maxLines: null,
-            onChanged: (newText) => text.value = newText,
-          )
-        ],
-      ).padding(const EdgeInsets.all(16)),
-    );
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        TextField(
+          style: context.textTheme.bodyMedium,
+          decoration: InputDecoration(
+            hintText: 'いまどうしてる?'.i18n,
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
+          ),
+          maxLines: null,
+          onChanged: (newText) => text.value = newText,
+        ),
+        const SizedBox(height: 32),
+        FilledButton(
+          onPressed: (text.value.isNotEmpty).mapOrElse(
+            func: (_) => () => createNote(text.value),
+            elseValue: null,
+          ),
+          child: Text('投稿'.i18n),
+        ).padding(const EdgeInsets.symmetric(horizontal: 64)).fillWidth(),
+      ],
+    ).padding(const EdgeInsets.symmetric(horizontal: 16, vertical: 48));
   }
 }

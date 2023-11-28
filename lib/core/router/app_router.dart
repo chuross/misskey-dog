@@ -14,7 +14,6 @@ final class AppRouter extends $AppRouter {
   List<AutoRoute> get routes {
     return [
       AutoRoute(page: HomeRoute.page, initial: true, guards: [InitialScreenGuard(), AuthGuard(_ref)]),
-      AutoRoute(page: HomeNoteCreationRoute.page, guards: [AuthGuard(_ref)], fullscreenDialog: true),
       AutoRoute(page: AccountRoute.page, guards: [AuthGuard(_ref)]),
       // Login
       AutoRoute(page: LoginRoute.page),
