@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/date_time.dart';
@@ -10,35 +9,31 @@ import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/feature/emoji/share/misskey_emoji.dart';
 import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
 import 'package:misskey_dog/model/note/note.dart';
-import 'package:misskey_dog/model/note/note_provider.dart';
 import 'package:misskey_dog/model/note/note_reaction.dart';
 
-final class NoteItem extends ConsumerWidget {
-  final String noteId;
+final class NoteItem extends StatelessWidget {
+  final Note note;
 
   const NoteItem({
     super.key,
-    required this.noteId,
+    required this.note,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final note = ref.watch(cachedNoteProvider(id: noteId));
-    if (note == null) return const SizedBox.shrink();
-
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _renotedInfo(note),
-        _mainContent(context, note),
+        _renotedInfo(),
+        _mainContent(context),
         const SizedBox(height: 12),
-        _reactions(note),
+        _reactions(),
         _ActionButtons(),
       ],
     ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
   }
 
-  Widget _renotedInfo(Note note) {
+  Widget _renotedInfo() {
     return note.renote.mapOrElse(
       func: (_) => Column(
         children: [
@@ -50,7 +45,7 @@ final class NoteItem extends ConsumerWidget {
     );
   }
 
-  Widget _mainContent(BuildContext context, Note note) {
+  Widget _mainContent(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -97,7 +92,7 @@ final class NoteItem extends ConsumerWidget {
     );
   }
 
-  Widget _reactions(Note note) {
+  Widget _reactions() {
     return note.reactions.isNotEmpty.mapOrElse(
       func: (_) {
         return Row(

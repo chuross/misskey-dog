@@ -82,7 +82,8 @@ final class _NoteList extends ConsumerWidget {
             padding: const EdgeInsets.only(bottom: 80),
             itemCount: notesIds.length,
             itemBuilder: (context, index) {
-              final noteId = notesIds[index];
+              final note = ref.watch(cachedNoteProvider(id: notesIds[index]));
+              if (note == null) return const SizedBox.shrink();
 
               return Container(
                 decoration: BoxDecoration(
@@ -90,7 +91,7 @@ final class _NoteList extends ConsumerWidget {
                     bottom: Divider.createBorderSide(context, color: context.dividerColorWithOpacity30),
                   ),
                 ),
-                child: NoteItem(key: ValueKey(noteId), noteId: noteId),
+                child: NoteItem(key: ValueKey(note.id), note: note),
               );
             },
           ),
