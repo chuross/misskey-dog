@@ -7,9 +7,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'note_provider.g.dart';
 
 @riverpod
-final class Notes extends _$Notes {
+final class NoteIds extends _$NoteIds {
   @override
-  Future<List<Note>> build({
+  Future<List<String>> build({
     bool isLocal = false,
     int limit = 100,
   }) async {
@@ -22,25 +22,48 @@ final class Notes extends _$Notes {
       ).toJson().removeAllNullValueKeys(),
     );
 
-    return notes;
+    for (var note in notes) {
+      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+    }
+
+    return notes.map((note) => note.id).toList();
   }
 
   Future<void> fetchNext() async {
     if (state.isLoading) return;
 
-    final lastNote = state.value?.lastOrNull;
-    if (lastNote == null) return;
+    final lastNoteId = state.value?.lastOrNull;
+    if (lastNoteId == null) return;
 
     final client = await ref.watch(misskeyClientProvider().future);
 
     final newNotes = await client.getNotes(
       request: GetNotesRequest(
-        sinceId: lastNote.id,
+        sinceId: lastNoteId,
         isLocal: isLocal,
         limit: limit,
       ).toJson().removeAllNullValueKeys(),
     );
 
-    state = AsyncData([...state.value!, ...newNotes]);
+    for (var note in newNotes) {
+      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+    }
+
+    state = AsyncData([...state.value!, ...newNotes.map((note) => note.id)]);
   }
+}
+
+@riverpod
+final class CachedNote extends _$CachedNote {
+  @override
+  Note? build({required String id}) {
+    ref.keepAlive();
+    return null;
+  }
+
+  void update(Note note) {
+    state = note;
+  }
+
+  Future<void> reaction() async {}
 }

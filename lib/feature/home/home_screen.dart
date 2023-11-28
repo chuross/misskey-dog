@@ -69,27 +69,28 @@ final class _NoteList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = notesProvider(isLocal: isLocal);
-    final notes = ref.watch(provider);
+    final provider = noteIdsProvider(isLocal: isLocal);
+    final noteIds = ref.watch(provider);
 
-    return notes.whenScreenLoading(
+    return noteIds.whenScreenLoading(
       ref: ref,
       onRetry: () => ref.invalidate(provider),
-      data: (notes) {
+      data: (notesIds) {
         return RefreshIndicator(
           onRefresh: () async => ref.invalidate(provider),
           child: ListView.builder(
             padding: const EdgeInsets.only(bottom: 80),
-            itemCount: notes.length,
+            itemCount: notesIds.length,
             itemBuilder: (context, index) {
-              final note = notes[index];
+              final noteId = notesIds[index];
+
               return Container(
                 decoration: BoxDecoration(
                   border: Border(
                     bottom: Divider.createBorderSide(context, color: context.dividerColorWithOpacity30),
                   ),
                 ),
-                child: NoteItem(key: ValueKey(note.id), note: note),
+                child: NoteItem(key: ValueKey(noteId), noteId: noteId),
               );
             },
           ),

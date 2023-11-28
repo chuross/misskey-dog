@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/date_time.dart';
@@ -9,31 +10,35 @@ import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/feature/emoji/share/misskey_emoji.dart';
 import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
 import 'package:misskey_dog/model/note/note.dart';
+import 'package:misskey_dog/model/note/note_provider.dart';
 import 'package:misskey_dog/model/note/note_reaction.dart';
 
-final class NoteItem extends StatelessWidget {
-  final Note note;
+final class NoteItem extends ConsumerWidget {
+  final String noteId;
 
   const NoteItem({
     super.key,
-    required this.note,
+    required this.noteId,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final note = ref.watch(cachedNoteProvider(id: noteId));
+    if (note == null) return const SizedBox.shrink();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _renotedInfo(),
-        _mainContent(context),
+        _renotedInfo(note),
+        _mainContent(context, note),
         const SizedBox(height: 12),
-        _reactions(),
+        _reactions(note),
         _ActionButtons(),
       ],
     ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
   }
 
-  Widget _renotedInfo() {
+  Widget _renotedInfo(Note note) {
     return note.renote.mapOrElse(
       func: (_) => Column(
         children: [
@@ -45,7 +50,7 @@ final class NoteItem extends StatelessWidget {
     );
   }
 
-  Widget _mainContent(BuildContext context) {
+  Widget _mainContent(BuildContext context, Note note) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -92,7 +97,7 @@ final class NoteItem extends StatelessWidget {
     );
   }
 
-  Widget _reactions() {
+  Widget _reactions(Note note) {
     return note.reactions.isNotEmpty.mapOrElse(
       func: (_) {
         return Row(
