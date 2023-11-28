@@ -1,28 +1,37 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
+import 'package:misskey_dog/core/api/api_provider.dart';
+import 'package:misskey_dog/core/api/request/create_note_request.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/dynamic.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
-import 'package:misskey_dog/core/ui/ui_provider.dart';
-import 'package:misskey_dog/model/note/note_provider.dart';
-import 'package:riverpod_mutations_annotation/riverpod_mutations_annotation.dart';
-import 'package:uuid/uuid.dart';
+
+(AsyncValue<bool>, Function(String)) useNoteCreation(WidgetRef ref) {
+  final result = useState<AsyncValue<bool>>(const AsyncLoading<bool>());
+
+  func(String text) async {
+    final client = await ref.read(misskeyClientProvider().future);
+    await client.createNote(request: CreateNoteRequest(text: text).toJson());
+
+    result.value = const AsyncData(true);
+  }
+
+  return (result.value, func);
+}
 
 @RoutePage()
-final class HomeNoteCreationScreen extends ConsumerWidget {
-  final String _instanceUuid = const Uuid().v4().toString();
-
-  HomeNoteCreationScreen({super.key});
+final class HomeNoteCreationScreen extends HookConsumerWidget {
+  const HomeNoteCreationScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final textProvider = TextStateProvider(instanceUuid: _instanceUuid);
-    final textState = ref.watch(textProvider);
-    final createNote = ref.watch(noteProvider().create);
+    final text = useState('');
+    final (creationResult, createNote) = useNoteCreation(ref);
 
-    if (createNote is CreateMutationSuccess) {
+    if (creationResult.value == true) {
       context.popRoute();
     }
 
@@ -31,8 +40,8 @@ final class HomeNoteCreationScreen extends ConsumerWidget {
         title: const SizedBox.shrink(),
         actions: [
           FilledButton(
-            onPressed: (textState.isNotEmpty || createNote is MutationLoading).mapOrElse(
-              func: (_) => () => createNote(text: textState),
+            onPressed: (text.value.isNotEmpty).mapOrElse(
+              func: (_) => () => createNote(text.value),
               elseValue: null,
             ),
             child: Text('投稿'.i18n),
@@ -49,7 +58,7 @@ final class HomeNoteCreationScreen extends ConsumerWidget {
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
             ),
             maxLines: null,
-            onChanged: (text) => ref.read(textProvider.notifier).setText(text),
+            onChanged: (newText) => text.value = newText,
           )
         ],
       ).padding(const EdgeInsets.all(16)),

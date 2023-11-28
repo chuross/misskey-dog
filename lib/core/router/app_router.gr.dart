@@ -28,11 +28,9 @@ abstract class $AppRouter extends _i6.RootStackRouter {
       );
     },
     HomeNoteCreationRoute.name: (routeData) {
-      final args = routeData.argsAs<HomeNoteCreationRouteArgs>(
-          orElse: () => const HomeNoteCreationRouteArgs());
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i2.HomeNoteCreationScreen(key: args.key),
+        child: const _i2.HomeNoteCreationScreen(),
       );
     },
     HomeRoute.name: (routeData) {
@@ -91,32 +89,16 @@ class AccountRoute extends _i6.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.HomeNoteCreationScreen]
-class HomeNoteCreationRoute
-    extends _i6.PageRouteInfo<HomeNoteCreationRouteArgs> {
-  HomeNoteCreationRoute({
-    _i7.Key? key,
-    List<_i6.PageRouteInfo>? children,
-  }) : super(
+class HomeNoteCreationRoute extends _i6.PageRouteInfo<void> {
+  const HomeNoteCreationRoute({List<_i6.PageRouteInfo>? children})
+      : super(
           HomeNoteCreationRoute.name,
-          args: HomeNoteCreationRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'HomeNoteCreationRoute';
 
-  static const _i6.PageInfo<HomeNoteCreationRouteArgs> page =
-      _i6.PageInfo<HomeNoteCreationRouteArgs>(name);
-}
-
-class HomeNoteCreationRouteArgs {
-  const HomeNoteCreationRouteArgs({this.key});
-
-  final _i7.Key? key;
-
-  @override
-  String toString() {
-    return 'HomeNoteCreationRouteArgs{key: $key}';
-  }
+  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
 }
 
 /// generated route for
