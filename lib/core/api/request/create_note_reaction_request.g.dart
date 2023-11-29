@@ -10,12 +10,12 @@ _$CreateNoteReactionRequestImpl _$$CreateNoteReactionRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$CreateNoteReactionRequestImpl(
       noteId: json['noteId'] as String,
-      emojiId: json['emojiId'] as String,
+      emojiId: json['reaction'] as String,
     );
 
 Map<String, dynamic> _$$CreateNoteReactionRequestImplToJson(
         _$CreateNoteReactionRequestImpl instance) =>
     <String, dynamic>{
       'noteId': instance.noteId,
-      'emojiId': instance.emojiId,
+      'reaction': instance.emojiId,
     };

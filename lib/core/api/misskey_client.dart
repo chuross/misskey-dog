@@ -24,6 +24,7 @@ abstract class MisskeyClient {
       'permission': [
         'read:account',
         'write:notes',
+        'write:reactions',
       ].join(','),
     });
   }

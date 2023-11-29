@@ -14,12 +14,12 @@ import 'package:misskey_dog/model/note/note_reaction.dart';
 
 final class NoteItem extends StatelessWidget {
   final Note note;
-  final Function(Emoji emoji) onReactionPressed;
+  final Function(Emoji emoji) onReactionTap;
 
   const NoteItem({
     super.key,
     required this.note,
-    required this.onReactionPressed,
+    required this.onReactionTap,
   });
 
   @override
@@ -30,7 +30,7 @@ final class NoteItem extends StatelessWidget {
         _renotedInfo(),
         _mainContent(context),
         const SizedBox(height: 12),
-        _reactions(onReactionPressed),
+        _reactions(onReactionTap),
         _ActionButtons(),
       ],
     ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
@@ -95,7 +95,7 @@ final class NoteItem extends StatelessWidget {
     );
   }
 
-  Widget _reactions(Function(Emoji emoji) onReactionPressed) {
+  Widget _reactions(Function(Emoji emoji) onReactionTap) {
     return note.reactions.isNotEmpty.mapOrElse(
       func: (_) {
         return Row(
@@ -108,7 +108,7 @@ final class NoteItem extends StatelessWidget {
                 return _Reaction(
                   key: "${note.id}_${reaction.emoji.id}".toKey(),
                   reaction: reaction,
-                  onReactionPressed: onReactionPressed,
+                  onReactionTap: onReactionTap,
                 );
               }).toList(),
             ).expanded(),
@@ -148,18 +148,18 @@ final class _RenotedInfo extends StatelessWidget {
 
 final class _Reaction extends StatelessWidget {
   final NoteReaction reaction;
-  final Function(Emoji emoji) onReactionPressed;
+  final Function(Emoji emoji) onReactionTap;
 
   const _Reaction({
     super.key,
     required this.reaction,
-    required this.onReactionPressed,
+    required this.onReactionTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => onReactionPressed(reaction.emoji),
+    return InkWell(
+      onTap: () => onReactionTap(reaction.emoji),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         decoration: BoxDecoration(

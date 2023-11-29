@@ -22,6 +22,7 @@ CreateNoteReactionRequest _$CreateNoteReactionRequestFromJson(
 /// @nodoc
 mixin _$CreateNoteReactionRequest {
   String get noteId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'reaction')
   String get emojiId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +37,7 @@ abstract class $CreateNoteReactionRequestCopyWith<$Res> {
           $Res Function(CreateNoteReactionRequest) then) =
       _$CreateNoteReactionRequestCopyWithImpl<$Res, CreateNoteReactionRequest>;
   @useResult
-  $Res call({String noteId, String emojiId});
+  $Res call({String noteId, @JsonKey(name: 'reaction') String emojiId});
 }
 
 /// @nodoc
@@ -78,7 +79,7 @@ abstract class _$$CreateNoteReactionRequestImplCopyWith<$Res>
       __$$CreateNoteReactionRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String noteId, String emojiId});
+  $Res call({String noteId, @JsonKey(name: 'reaction') String emojiId});
 }
 
 /// @nodoc
@@ -114,7 +115,7 @@ class __$$CreateNoteReactionRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CreateNoteReactionRequestImpl implements _CreateNoteReactionRequest {
   const _$CreateNoteReactionRequestImpl(
-      {required this.noteId, required this.emojiId});
+      {required this.noteId, @JsonKey(name: 'reaction') required this.emojiId});
 
   factory _$CreateNoteReactionRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$CreateNoteReactionRequestImplFromJson(json);
@@ -122,6 +123,7 @@ class _$CreateNoteReactionRequestImpl implements _CreateNoteReactionRequest {
   @override
   final String noteId;
   @override
+  @JsonKey(name: 'reaction')
   final String emojiId;
 
   @override
@@ -159,8 +161,9 @@ class _$CreateNoteReactionRequestImpl implements _CreateNoteReactionRequest {
 
 abstract class _CreateNoteReactionRequest implements CreateNoteReactionRequest {
   const factory _CreateNoteReactionRequest(
-      {required final String noteId,
-      required final String emojiId}) = _$CreateNoteReactionRequestImpl;
+          {required final String noteId,
+          @JsonKey(name: 'reaction') required final String emojiId}) =
+      _$CreateNoteReactionRequestImpl;
 
   factory _CreateNoteReactionRequest.fromJson(Map<String, dynamic> json) =
       _$CreateNoteReactionRequestImpl.fromJson;
@@ -168,6 +171,7 @@ abstract class _CreateNoteReactionRequest implements CreateNoteReactionRequest {
   @override
   String get noteId;
   @override
+  @JsonKey(name: 'reaction')
   String get emojiId;
   @override
   @JsonKey(ignore: true)

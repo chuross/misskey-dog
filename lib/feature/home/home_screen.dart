@@ -109,7 +109,7 @@ final class _NoteList extends ConsumerWidget {
                 child: NoteItem(
                   key: ValueKey(note.id),
                   note: note,
-                  onReactionPressed: (emoji) {
+                  onReactionTap: (emoji) {
                     ref.read(cachedNoteProvider(id: note.id).notifier).reaction(emoji);
                   },
                 ),
