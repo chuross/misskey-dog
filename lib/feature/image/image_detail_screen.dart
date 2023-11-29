@@ -15,17 +15,16 @@ final class ImageDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          color: Colors.blueGrey[700],
-          child: InteractiveViewer(
-            minScale: 1.0,
-            maxScale: 5.0,
-            panEnabled: true,
+        InteractiveViewer(
+          minScale: 1.0,
+          maxScale: 5.0,
+          child: Container(
+            color: Colors.blueGrey[700],
             child: Hero(
               tag: imageUrl,
               child: Image.network(imageUrl),
-            ),
-          ).align(Alignment.center),
+            ).align(Alignment.center),
+          ),
         ),
         Positioned(
           top: 0,
@@ -33,7 +32,7 @@ final class ImageDetailScreen extends StatelessWidget {
           right: 0.0,
           child: AppBar(
             iconTheme: const IconThemeData(color: Colors.white),
-            backgroundColor: Colors.blueGrey[700],
+            backgroundColor: Colors.transparent,
           ),
         ),
       ],
