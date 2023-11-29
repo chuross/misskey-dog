@@ -15,7 +15,7 @@ abstract class NoteReaction with _$NoteReaction {
   // PlainEmoji => 😀:@.:
   factory NoteReaction.resolved(String key, Map<String, int> rawReactions) {
     return NoteReaction(
-      emoji: Emoji.resolve(rawEmojiWithHost: key),
+      emoji: Emoji.resolve(rawEmoji: key),
       reactionCount: rawReactions[key] ?? 0,
     );
   }

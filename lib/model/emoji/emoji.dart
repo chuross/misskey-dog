@@ -8,14 +8,13 @@ sealed class Emoji {
 
   // localEmoji => :ohayougozaimasu@.:
   // externalEmoji => :ohayougozaimasu@misskey.io:
-  // PlainEmoji => 😀:@.:
-  factory Emoji.resolve({required String rawEmojiWithHost}) {
-    final [rawEmoji, host] = rawEmojiWithHost.split('@');
-
+  // PlainEmoji => 😀
+  factory Emoji.resolve({required String rawEmoji}) {
     if (rawEmoji.startsWith(':')) {
-      return CustomEmoji(name: rawEmoji.substring(1), host: host);
+      final [emojiName, host] = rawEmoji.split('@');
+      return CustomEmoji(name: emojiName.substring(1), host: host);
     } else {
-      return PlainEmoji(text: rawEmoji, host: host);
+      return PlainEmoji(text: rawEmoji);
     }
   }
 }
@@ -44,11 +43,10 @@ abstract class PlainEmoji with _$PlainEmoji implements Emoji {
 
   const factory PlainEmoji({
     required String text,
-    required String host,
   }) = _PlainEmoji;
 
   @override
-  String get id => "$text@$host";
+  String get id => text;
 
   factory PlainEmoji.fromJson(Map<String, dynamic> json) => _$PlainEmojiFromJson(json);
 }

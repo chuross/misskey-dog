@@ -196,7 +196,6 @@ PlainEmoji _$PlainEmojiFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PlainEmoji {
   String get text => throw _privateConstructorUsedError;
-  String get host => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -210,7 +209,7 @@ abstract class $PlainEmojiCopyWith<$Res> {
           PlainEmoji value, $Res Function(PlainEmoji) then) =
       _$PlainEmojiCopyWithImpl<$Res, PlainEmoji>;
   @useResult
-  $Res call({String text, String host});
+  $Res call({String text});
 }
 
 /// @nodoc
@@ -227,16 +226,11 @@ class _$PlainEmojiCopyWithImpl<$Res, $Val extends PlainEmoji>
   @override
   $Res call({
     Object? text = null,
-    Object? host = null,
   }) {
     return _then(_value.copyWith(
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      host: null == host
-          ? _value.host
-          : host // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -250,7 +244,7 @@ abstract class _$$PlainEmojiImplCopyWith<$Res>
       __$$PlainEmojiImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String text, String host});
+  $Res call({String text});
 }
 
 /// @nodoc
@@ -265,16 +259,11 @@ class __$$PlainEmojiImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? text = null,
-    Object? host = null,
   }) {
     return _then(_$PlainEmojiImpl(
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      host: null == host
-          ? _value.host
-          : host // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -283,19 +272,17 @@ class __$$PlainEmojiImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$PlainEmojiImpl extends _PlainEmoji {
-  const _$PlainEmojiImpl({required this.text, required this.host}) : super._();
+  const _$PlainEmojiImpl({required this.text}) : super._();
 
   factory _$PlainEmojiImpl.fromJson(Map<String, dynamic> json) =>
       _$$PlainEmojiImplFromJson(json);
 
   @override
   final String text;
-  @override
-  final String host;
 
   @override
   String toString() {
-    return 'PlainEmoji(text: $text, host: $host)';
+    return 'PlainEmoji(text: $text)';
   }
 
   @override
@@ -303,13 +290,12 @@ class _$PlainEmojiImpl extends _PlainEmoji {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PlainEmojiImpl &&
-            (identical(other.text, text) || other.text == text) &&
-            (identical(other.host, host) || other.host == host));
+            (identical(other.text, text) || other.text == text));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, text, host);
+  int get hashCode => Object.hash(runtimeType, text);
 
   @JsonKey(ignore: true)
   @override
@@ -326,9 +312,7 @@ class _$PlainEmojiImpl extends _PlainEmoji {
 }
 
 abstract class _PlainEmoji extends PlainEmoji {
-  const factory _PlainEmoji(
-      {required final String text,
-      required final String host}) = _$PlainEmojiImpl;
+  const factory _PlainEmoji({required final String text}) = _$PlainEmojiImpl;
   const _PlainEmoji._() : super._();
 
   factory _PlainEmoji.fromJson(Map<String, dynamic> json) =
@@ -336,8 +320,6 @@ abstract class _PlainEmoji extends PlainEmoji {
 
   @override
   String get text;
-  @override
-  String get host;
   @override
   @JsonKey(ignore: true)
   _$$PlainEmojiImplCopyWith<_$PlainEmojiImpl> get copyWith =>

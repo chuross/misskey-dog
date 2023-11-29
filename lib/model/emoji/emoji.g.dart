@@ -23,11 +23,9 @@ Map<String, dynamic> _$$CustomEmojiImplToJson(_$CustomEmojiImpl instance) =>
 _$PlainEmojiImpl _$$PlainEmojiImplFromJson(Map<String, dynamic> json) =>
     _$PlainEmojiImpl(
       text: json['text'] as String,
-      host: json['host'] as String,
     );
 
 Map<String, dynamic> _$$PlainEmojiImplToJson(_$PlainEmojiImpl instance) =>
     <String, dynamic>{
       'text': instance.text,
-      'host': instance.host,
     };
