@@ -21,7 +21,7 @@ class MainApp extends ConsumerWidget {
     ref.listen(accountStateProvider, (prev, next) {
       // 認証状態が無くなったらログイン画面
       if (prev?.value != null && next.value == null) {
-        appRouter.replaceAll([LoginRoute()]);
+        appRouter.replaceAll([const LoginRoute()]);
       }
     });
 

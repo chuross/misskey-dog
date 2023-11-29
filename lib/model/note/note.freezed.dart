@@ -28,6 +28,8 @@ mixin _$Note {
   int get renoteCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'reactions')
   Map<String, int> get rawReactions => throw _privateConstructorUsedError;
+  @JsonKey(name: 'myReaction')
+  String? get myRawReactionEmoji => throw _privateConstructorUsedError;
   String? get text => throw _privateConstructorUsedError;
   List<NoteFile> get files => throw _privateConstructorUsedError;
 
@@ -49,6 +51,7 @@ abstract class $NoteCopyWith<$Res> {
       int repliesCount,
       int renoteCount,
       @JsonKey(name: 'reactions') Map<String, int> rawReactions,
+      @JsonKey(name: 'myReaction') String? myRawReactionEmoji,
       String? text,
       List<NoteFile> files});
 
@@ -76,6 +79,7 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
     Object? repliesCount = null,
     Object? renoteCount = null,
     Object? rawReactions = null,
+    Object? myRawReactionEmoji = freezed,
     Object? text = freezed,
     Object? files = null,
   }) {
@@ -108,6 +112,10 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
           ? _value.rawReactions
           : rawReactions // ignore: cast_nullable_to_non_nullable
               as Map<String, int>,
+      myRawReactionEmoji: freezed == myRawReactionEmoji
+          ? _value.myRawReactionEmoji
+          : myRawReactionEmoji // ignore: cast_nullable_to_non_nullable
+              as String?,
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -155,6 +163,7 @@ abstract class _$$NoteImplCopyWith<$Res> implements $NoteCopyWith<$Res> {
       int repliesCount,
       int renoteCount,
       @JsonKey(name: 'reactions') Map<String, int> rawReactions,
+      @JsonKey(name: 'myReaction') String? myRawReactionEmoji,
       String? text,
       List<NoteFile> files});
 
@@ -181,6 +190,7 @@ class __$$NoteImplCopyWithImpl<$Res>
     Object? repliesCount = null,
     Object? renoteCount = null,
     Object? rawReactions = null,
+    Object? myRawReactionEmoji = freezed,
     Object? text = freezed,
     Object? files = null,
   }) {
@@ -213,6 +223,10 @@ class __$$NoteImplCopyWithImpl<$Res>
           ? _value._rawReactions
           : rawReactions // ignore: cast_nullable_to_non_nullable
               as Map<String, int>,
+      myRawReactionEmoji: freezed == myRawReactionEmoji
+          ? _value.myRawReactionEmoji
+          : myRawReactionEmoji // ignore: cast_nullable_to_non_nullable
+              as String?,
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -236,6 +250,7 @@ class _$NoteImpl extends _Note {
       required this.repliesCount,
       required this.renoteCount,
       @JsonKey(name: 'reactions') required final Map<String, int> rawReactions,
+      @JsonKey(name: 'myReaction') this.myRawReactionEmoji,
       this.text,
       required final List<NoteFile> files})
       : _rawReactions = rawReactions,
@@ -267,6 +282,9 @@ class _$NoteImpl extends _Note {
   }
 
   @override
+  @JsonKey(name: 'myReaction')
+  final String? myRawReactionEmoji;
+  @override
   final String? text;
   final List<NoteFile> _files;
   @override
@@ -278,7 +296,7 @@ class _$NoteImpl extends _Note {
 
   @override
   String toString() {
-    return 'Note(id: $id, createdAt: $createdAt, user: $user, renote: $renote, repliesCount: $repliesCount, renoteCount: $renoteCount, rawReactions: $rawReactions, text: $text, files: $files)';
+    return 'Note(id: $id, createdAt: $createdAt, user: $user, renote: $renote, repliesCount: $repliesCount, renoteCount: $renoteCount, rawReactions: $rawReactions, myRawReactionEmoji: $myRawReactionEmoji, text: $text, files: $files)';
   }
 
   @override
@@ -297,6 +315,8 @@ class _$NoteImpl extends _Note {
                 other.renoteCount == renoteCount) &&
             const DeepCollectionEquality()
                 .equals(other._rawReactions, _rawReactions) &&
+            (identical(other.myRawReactionEmoji, myRawReactionEmoji) ||
+                other.myRawReactionEmoji == myRawReactionEmoji) &&
             (identical(other.text, text) || other.text == text) &&
             const DeepCollectionEquality().equals(other._files, _files));
   }
@@ -312,6 +332,7 @@ class _$NoteImpl extends _Note {
       repliesCount,
       renoteCount,
       const DeepCollectionEquality().hash(_rawReactions),
+      myRawReactionEmoji,
       text,
       const DeepCollectionEquality().hash(_files));
 
@@ -338,6 +359,7 @@ abstract class _Note extends Note {
       required final int repliesCount,
       required final int renoteCount,
       @JsonKey(name: 'reactions') required final Map<String, int> rawReactions,
+      @JsonKey(name: 'myReaction') final String? myRawReactionEmoji,
       final String? text,
       required final List<NoteFile> files}) = _$NoteImpl;
   const _Note._() : super._();
@@ -359,6 +381,9 @@ abstract class _Note extends Note {
   @override
   @JsonKey(name: 'reactions')
   Map<String, int> get rawReactions;
+  @override
+  @JsonKey(name: 'myReaction')
+  String? get myRawReactionEmoji;
   @override
   String? get text;
   @override

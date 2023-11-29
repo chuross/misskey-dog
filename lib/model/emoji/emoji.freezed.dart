@@ -20,7 +20,7 @@ LocalEmoji _$LocalEmojiFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LocalEmoji {
-  String get name => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError; // ex) ohayougozaimasu
   String? get url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -115,6 +115,7 @@ class _$LocalEmojiImpl extends _LocalEmoji {
 
   @override
   final String name;
+// ex) ohayougozaimasu
   @override
   final String? url;
 
@@ -160,7 +161,7 @@ abstract class _LocalEmoji extends LocalEmoji {
 
   @override
   String get name;
-  @override
+  @override // ex) ohayougozaimasu
   String? get url;
   @override
   @JsonKey(ignore: true)

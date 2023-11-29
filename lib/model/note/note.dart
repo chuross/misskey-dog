@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note_file.dart';
 import 'package:misskey_dog/model/note/note_reaction.dart';
 import 'package:misskey_dog/model/user/user.dart';
@@ -19,6 +20,7 @@ abstract class Note with _$Note {
     required int repliesCount,
     required int renoteCount,
     @JsonKey(name: 'reactions') required Map<String, int> rawReactions,
+    @JsonKey(name: 'myReaction') String? myRawReactionEmoji,
     String? text,
     required List<NoteFile> files,
   }) = _Note;

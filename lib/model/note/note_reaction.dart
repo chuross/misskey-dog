@@ -10,21 +10,13 @@ abstract class NoteReaction with _$NoteReaction {
     required int reactionCount,
   }) = _NoteReactionLocalEmoji;
 
+  // key:
   // localEmoji => :ohayougozaimasu@.:
   // PlainEmoji => 😀:@.:
   factory NoteReaction.resolved(String key, Map<String, int> rawReactions) {
-    final emojiName = key.split('@').first;
-
-    if (emojiName.startsWith(':')) {
-      return NoteReaction(
-        emoji: LocalEmoji(name: emojiName.substring(1)),
-        reactionCount: rawReactions[key] ?? 0,
-      );
-    } else {
-      return NoteReaction(
-        emoji: PlainEmoji(text: emojiName),
-        reactionCount: rawReactions[key] ?? 0,
-      );
-    }
+    return NoteReaction(
+      emoji: Emoji.resolve(rawEmojiWithHost: key),
+      reactionCount: rawReactions[key] ?? 0,
+    );
   }
 }
