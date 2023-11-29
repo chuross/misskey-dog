@@ -105,12 +105,13 @@ final class NoteItem extends StatelessWidget {
               spacing: 8,
               runSpacing: 4,
               children: note.reactions.map((reaction) {
-                return _Reaction(
-                  key: "${note.id}_${reaction.emoji.id}".toKey(),
-                  reaction: reaction,
-                  isReacted: reaction.emoji.id == myReactionEmoji?.id,
-                  onReactionTap: onReactionTap,
-                );
+                return const SizedBox.shrink();
+                // return _Reaction(
+                //   key: "${note.id}_${reaction.emoji.id}".toKey(),
+                //   reaction: reaction,
+                //   isReacted: reaction.emoji.id == myReactionEmoji?.id,
+                //   onReactionTap: onReactionTap,
+                // );
               }).toList(),
             ).expanded(),
           ],

@@ -84,7 +84,7 @@ final class _NoteList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = noteIdsWithCacheProvider(isLocal: isLocal);
+    final provider = localNoteIdsWithCacheProvider();
     final noteIds = ref.watch(provider);
 
     return noteIds.whenScreenLoading(
