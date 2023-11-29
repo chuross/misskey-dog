@@ -6,7 +6,7 @@ part of 'note_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$noteIdsHash() => r'5ed2f0723c0551c3b503b429b98b90b772f536de';
+String _$noteIdsWithCacheHash() => r'b2f77a2556cafd03439696e5ffaafd940460a94c';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-abstract class _$NoteIds
+abstract class _$NoteIdsWithCache
     extends BuildlessAutoDisposeAsyncNotifier<List<String>> {
   late final bool isLocal;
   late final int limit;
@@ -40,29 +40,29 @@ abstract class _$NoteIds
   });
 }
 
-/// See also [NoteIds].
-@ProviderFor(NoteIds)
-const noteIdsProvider = NoteIdsFamily();
+/// See also [NoteIdsWithCache].
+@ProviderFor(NoteIdsWithCache)
+const noteIdsWithCacheProvider = NoteIdsWithCacheFamily();
 
-/// See also [NoteIds].
-class NoteIdsFamily extends Family<AsyncValue<List<String>>> {
-  /// See also [NoteIds].
-  const NoteIdsFamily();
+/// See also [NoteIdsWithCache].
+class NoteIdsWithCacheFamily extends Family<AsyncValue<List<String>>> {
+  /// See also [NoteIdsWithCache].
+  const NoteIdsWithCacheFamily();
 
-  /// See also [NoteIds].
-  NoteIdsProvider call({
+  /// See also [NoteIdsWithCache].
+  NoteIdsWithCacheProvider call({
     bool isLocal = false,
     int limit = 100,
   }) {
-    return NoteIdsProvider(
+    return NoteIdsWithCacheProvider(
       isLocal: isLocal,
       limit: limit,
     );
   }
 
   @override
-  NoteIdsProvider getProviderOverride(
-    covariant NoteIdsProvider provider,
+  NoteIdsWithCacheProvider getProviderOverride(
+    covariant NoteIdsWithCacheProvider provider,
   ) {
     return call(
       isLocal: provider.isLocal,
@@ -82,33 +82,34 @@ class NoteIdsFamily extends Family<AsyncValue<List<String>>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'noteIdsProvider';
+  String? get name => r'noteIdsWithCacheProvider';
 }
 
-/// See also [NoteIds].
-class NoteIdsProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<NoteIds, List<String>> {
-  /// See also [NoteIds].
-  NoteIdsProvider({
+/// See also [NoteIdsWithCache].
+class NoteIdsWithCacheProvider extends AutoDisposeAsyncNotifierProviderImpl<
+    NoteIdsWithCache, List<String>> {
+  /// See also [NoteIdsWithCache].
+  NoteIdsWithCacheProvider({
     bool isLocal = false,
     int limit = 100,
   }) : this._internal(
-          () => NoteIds()
+          () => NoteIdsWithCache()
             ..isLocal = isLocal
             ..limit = limit,
-          from: noteIdsProvider,
-          name: r'noteIdsProvider',
+          from: noteIdsWithCacheProvider,
+          name: r'noteIdsWithCacheProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$noteIdsHash,
-          dependencies: NoteIdsFamily._dependencies,
-          allTransitiveDependencies: NoteIdsFamily._allTransitiveDependencies,
+                  : _$noteIdsWithCacheHash,
+          dependencies: NoteIdsWithCacheFamily._dependencies,
+          allTransitiveDependencies:
+              NoteIdsWithCacheFamily._allTransitiveDependencies,
           isLocal: isLocal,
           limit: limit,
         );
 
-  NoteIdsProvider._internal(
+  NoteIdsWithCacheProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -124,7 +125,7 @@ class NoteIdsProvider
 
   @override
   FutureOr<List<String>> runNotifierBuild(
-    covariant NoteIds notifier,
+    covariant NoteIdsWithCache notifier,
   ) {
     return notifier.build(
       isLocal: isLocal,
@@ -133,10 +134,10 @@ class NoteIdsProvider
   }
 
   @override
-  Override overrideWith(NoteIds Function() create) {
+  Override overrideWith(NoteIdsWithCache Function() create) {
     return ProviderOverride(
       origin: this,
-      override: NoteIdsProvider._internal(
+      override: NoteIdsWithCacheProvider._internal(
         () => create()
           ..isLocal = isLocal
           ..limit = limit,
@@ -152,14 +153,14 @@ class NoteIdsProvider
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<NoteIds, List<String>>
+  AutoDisposeAsyncNotifierProviderElement<NoteIdsWithCache, List<String>>
       createElement() {
-    return _NoteIdsProviderElement(this);
+    return _NoteIdsWithCacheProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is NoteIdsProvider &&
+    return other is NoteIdsWithCacheProvider &&
         other.isLocal == isLocal &&
         other.limit == limit;
   }
@@ -174,7 +175,7 @@ class NoteIdsProvider
   }
 }
 
-mixin NoteIdsRef on AutoDisposeAsyncNotifierProviderRef<List<String>> {
+mixin NoteIdsWithCacheRef on AutoDisposeAsyncNotifierProviderRef<List<String>> {
   /// The parameter `isLocal` of this provider.
   bool get isLocal;
 
@@ -182,15 +183,15 @@ mixin NoteIdsRef on AutoDisposeAsyncNotifierProviderRef<List<String>> {
   int get limit;
 }
 
-class _NoteIdsProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<NoteIds, List<String>>
-    with NoteIdsRef {
-  _NoteIdsProviderElement(super.provider);
+class _NoteIdsWithCacheProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<NoteIdsWithCache,
+        List<String>> with NoteIdsWithCacheRef {
+  _NoteIdsWithCacheProviderElement(super.provider);
 
   @override
-  bool get isLocal => (origin as NoteIdsProvider).isLocal;
+  bool get isLocal => (origin as NoteIdsWithCacheProvider).isLocal;
   @override
-  int get limit => (origin as NoteIdsProvider).limit;
+  int get limit => (origin as NoteIdsWithCacheProvider).limit;
 }
 
 String _$cachedNoteHash() => r'a2b4a391ef8bd9b7337f0ede717557cf558e011d';

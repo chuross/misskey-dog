@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'note_provider.g.dart';
 
 @riverpod
-final class NoteIds extends _$NoteIds {
+final class NoteIdsWithCache extends _$NoteIdsWithCache {
   @override
   Future<List<String>> build({
     bool isLocal = false,
