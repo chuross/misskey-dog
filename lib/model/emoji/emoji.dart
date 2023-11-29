@@ -12,7 +12,7 @@ sealed class Emoji {
   factory Emoji.resolve({required String rawEmoji}) {
     if (rawEmoji.startsWith(':')) {
       final [emojiName, host] = rawEmoji.split('@');
-      return CustomEmoji(name: emojiName.substring(1), host: host);
+      return CustomEmoji(name: emojiName.substring(1), host: host.substring(0, host.length - 1));
     } else {
       return PlainEmoji(text: rawEmoji);
     }
