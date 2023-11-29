@@ -106,7 +106,13 @@ final class _NoteList extends ConsumerWidget {
                     bottom: Divider.createBorderSide(context, color: context.dividerColorWithOpacity30),
                   ),
                 ),
-                child: NoteItem(key: ValueKey(note.id), note: note),
+                child: NoteItem(
+                  key: ValueKey(note.id),
+                  note: note,
+                  onReactionPressed: (emoji) {
+                    ref.read(cachedNoteProvider(id: note.id).notifier).reaction(emoji);
+                  },
+                ),
               );
             },
           ),

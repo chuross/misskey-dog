@@ -8,15 +8,18 @@ import 'package:misskey_dog/core/extension/string.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/feature/emoji/share/misskey_emoji.dart';
 import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
+import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/note/note_reaction.dart';
 
 final class NoteItem extends StatelessWidget {
   final Note note;
+  final Function(Emoji emoji) onReactionPressed;
 
   const NoteItem({
     super.key,
     required this.note,
+    required this.onReactionPressed,
   });
 
   @override
@@ -27,7 +30,7 @@ final class NoteItem extends StatelessWidget {
         _renotedInfo(),
         _mainContent(context),
         const SizedBox(height: 12),
-        _reactions(),
+        _reactions(onReactionPressed),
         _ActionButtons(),
       ],
     ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
@@ -92,7 +95,7 @@ final class NoteItem extends StatelessWidget {
     );
   }
 
-  Widget _reactions() {
+  Widget _reactions(Function(Emoji emoji) onReactionPressed) {
     return note.reactions.isNotEmpty.mapOrElse(
       func: (_) {
         return Row(
@@ -105,6 +108,7 @@ final class NoteItem extends StatelessWidget {
                 return _Reaction(
                   key: "${note.id}_${reaction.emoji.id}".toKey(),
                   reaction: reaction,
+                  onReactionPressed: onReactionPressed,
                 );
               }).toList(),
             ).expanded(),
@@ -144,27 +148,35 @@ final class _RenotedInfo extends StatelessWidget {
 
 final class _Reaction extends StatelessWidget {
   final NoteReaction reaction;
+  final Function(Emoji emoji) onReactionPressed;
 
-  const _Reaction({super.key, required this.reaction});
+  const _Reaction({
+    super.key,
+    required this.reaction,
+    required this.onReactionPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
-      decoration: BoxDecoration(
-        border: Border.all(color: context.dividerColorWithOpacity20),
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          MisskeyEmoji(emoji: reaction.emoji, height: 18),
-          const SizedBox(width: 4),
-          Text(
-            reaction.reactionCount.toString(),
-            style: context.textTheme.bodyMedium,
-          ),
-        ],
+    return GestureDetector(
+      onTap: () => onReactionPressed(reaction.emoji),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
+        decoration: BoxDecoration(
+          border: Border.all(color: context.dividerColorWithOpacity20),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            MisskeyEmoji(emoji: reaction.emoji, height: 18),
+            const SizedBox(width: 4),
+            Text(
+              reaction.reactionCount.toString(),
+              style: context.textTheme.bodyMedium,
+            ),
+          ],
+        ),
       ),
     );
   }
