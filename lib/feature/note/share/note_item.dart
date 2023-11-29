@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
@@ -6,6 +7,7 @@ import 'package:misskey_dog/core/extension/dynamic.dart';
 import 'package:misskey_dog/core/extension/string.dart';
 
 import 'package:misskey_dog/core/extension/widget.dart';
+import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/feature/emoji/share/misskey_emoji.dart';
 import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
@@ -85,7 +87,13 @@ final class NoteItem extends StatelessWidget {
             note.files.where((element) => element.isImage).firstOrNull.mapOrElse(
                   func: (file) => ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: Image.network(file.url, width: double.infinity, height: 250, fit: BoxFit.cover),
+                    child: InkWell(
+                      onTap: () => context.pushRoute(ImageDetailRoute(imageUrl: file.url)),
+                      child: Hero(
+                        tag: file.url,
+                        child: Image.network(file.url, width: double.infinity, height: 250, fit: BoxFit.cover),
+                      ),
+                    ),
                   ),
                   elseValue: const SizedBox.shrink(),
                 ),

@@ -15,6 +15,7 @@ final class AppRouter extends $AppRouter {
     return [
       AutoRoute(page: HomeRoute.page, initial: true, guards: [InitialScreenGuard(), AuthGuard(_ref)]),
       AutoRoute(page: AccountRoute.page, guards: [AuthGuard(_ref)]),
+      AutoRoute(page: ImageDetailRoute.page, guards: [AuthGuard(_ref)], fullscreenDialog: true),
       // Login
       AutoRoute(page: LoginRoute.page),
       AutoRoute(page: LoginCallbackRoute.page, path: '/auth/callback', fullMatch: true),
