@@ -31,11 +31,17 @@ abstract class MisskeyClient {
   @POST('/api/miauth/{session}/check')
   Future<Account> authorize(@Path('session') String session);
 
+  @POST('/api/notes/show')
+  Future<Note> getNote({@Body() required Map<String, dynamic> request});
+
   @POST('/api/notes')
   Future<List<Note>> getNotes({@Body() required Map<String, dynamic> request});
 
   @POST('/api/notes/create')
   Future<CreateNoteResponse> createNote({@Body() required Map<String, dynamic> request});
+
+  @POST('/api/notes/reactions/create')
+  Future<void> createNoteReaction({@Body() required Map<String, dynamic> request});
 
   @POST('/api/emoji')
   Future<LocalEmoji> getLocalEmoji({@Body() required Map<String, dynamic> request});

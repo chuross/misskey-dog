@@ -1,6 +1,9 @@
 import 'package:misskey_dog/core/api/api_provider.dart';
+import 'package:misskey_dog/core/api/request/create_note_reaction_request.dart';
+import 'package:misskey_dog/core/api/request/get_note_request.dart';
 import 'package:misskey_dog/core/api/request/get_notes_request.dart';
 import 'package:misskey_dog/core/extension/map.dart';
+import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -65,5 +68,13 @@ final class CachedNote extends _$CachedNote {
     state = note;
   }
 
-  Future<void> reaction() async {}
+  Future<void> reaction(Emoji emoji) async {
+    final note = state;
+    if (note == null) return;
+
+    final client = await ref.watch(misskeyClientProvider().future);
+    await client.createNoteReaction(request: CreateNoteReactionRequest(noteId: note.id, emojiId: emoji.id).toJson());
+
+    state = await client.getNote(request: GetNoteRequest(noteId: note.id).toJson());
+  }
 }

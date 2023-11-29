@@ -46,6 +46,34 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
+  Future<Note> getNote({required Map<String, dynamic> request}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request);
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Note>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/notes/show',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Note.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<List<Note>> getNotes({required Map<String, dynamic> request}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -102,6 +130,32 @@ class _MisskeyClient implements MisskeyClient {
             ))));
     final value = CreateNoteResponse.fromJson(_result.data!);
     return value;
+  }
+
+  @override
+  Future<void> createNoteReaction(
+      {required Map<String, dynamic> request}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request);
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/notes/reactions/create',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
   }
 
   @override

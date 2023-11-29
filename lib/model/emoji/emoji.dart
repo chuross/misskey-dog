@@ -17,7 +17,7 @@ abstract class LocalEmoji with _$LocalEmoji implements Emoji {
   }) = _LocalEmoji;
 
   @override
-  String get id => name;
+  String get id => ':$name:';
 
   factory LocalEmoji.fromJson(Map<String, dynamic> json) => _$LocalEmojiFromJson(json);
 }
