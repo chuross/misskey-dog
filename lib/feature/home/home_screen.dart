@@ -6,6 +6,7 @@ import 'package:i18n_extension/i18n_widget.dart';
 import 'package:misskey_dog/core/extension/async_value.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/dynamic.dart';
+import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/feature/home/home_note_creation_screen.dart';
 import 'package:misskey_dog/feature/note/share/note_item.dart';
