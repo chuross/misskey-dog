@@ -13,17 +13,19 @@ final class MisskeyEmoji extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (emoji) {
-      LocalEmoji() => _LocalEmojiView(
-          emoji: emoji as LocalEmoji,
-          height: height,
-        ),
+      CustomEmoji() => (emoji as CustomEmoji).isLocal
+          ? _LocalEmojiView(
+              emoji: emoji as CustomEmoji,
+              height: height,
+            )
+          : const SizedBox.shrink(),
       PlainEmoji() => Text((emoji as PlainEmoji).text, style: TextStyle(fontSize: height)),
     };
   }
 }
 
 final class _LocalEmojiView extends ConsumerWidget {
-  final LocalEmoji emoji;
+  final CustomEmoji emoji;
   final double height;
 
   const _LocalEmojiView({required this.emoji, required this.height});

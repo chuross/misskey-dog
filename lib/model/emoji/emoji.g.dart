@@ -6,15 +6,17 @@ part of 'emoji.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LocalEmojiImpl _$$LocalEmojiImplFromJson(Map<String, dynamic> json) =>
-    _$LocalEmojiImpl(
+_$CustomEmojiImpl _$$CustomEmojiImplFromJson(Map<String, dynamic> json) =>
+    _$CustomEmojiImpl(
       name: json['name'] as String,
+      host: json['host'] as String?,
       url: json['url'] as String?,
     );
 
-Map<String, dynamic> _$$LocalEmojiImplToJson(_$LocalEmojiImpl instance) =>
+Map<String, dynamic> _$$CustomEmojiImplToJson(_$CustomEmojiImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
+      'host': instance.host,
       'url': instance.url,
     };
 

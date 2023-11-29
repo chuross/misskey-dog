@@ -34,7 +34,7 @@ List<InlineSpan> _separateInlineSpans(
 
     // 絵文字にマッチしたらそれまでの文字列をTextSpanに変換して、絵文字Spanを追加する
     if (match?.start == index) {
-      final emoji = LocalEmoji(name: match?.group(1) ?? '');
+      final emoji = CustomEmoji(name: match?.group(1) ?? '', host: '.');
       if (previousValue.isNotEmpty) spans.add(TextSpan(text: previousValue));
       spans.add(WidgetSpan(
         child: MisskeyEmoji(emoji: emoji, height: height + 4),

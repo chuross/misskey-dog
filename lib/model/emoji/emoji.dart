@@ -7,12 +7,13 @@ sealed class Emoji {
   String get id;
 
   // localEmoji => :ohayougozaimasu@.:
+  // externalEmoji => :ohayougozaimasu@misskey.io:
   // PlainEmoji => 😀:@.:
   factory Emoji.resolve({required String rawEmojiWithHost}) {
     final [rawEmoji, host] = rawEmojiWithHost.split('@');
 
     if (rawEmoji.startsWith(':')) {
-      return LocalEmoji(name: rawEmoji.substring(1));
+      return CustomEmoji(name: rawEmoji.substring(1), host: host);
     } else {
       return PlainEmoji(text: rawEmoji, host: host);
     }
@@ -20,18 +21,21 @@ sealed class Emoji {
 }
 
 @freezed
-abstract class LocalEmoji with _$LocalEmoji implements Emoji {
-  const LocalEmoji._();
+abstract class CustomEmoji with _$CustomEmoji implements Emoji {
+  const CustomEmoji._();
 
-  const factory LocalEmoji({
+  const factory CustomEmoji({
     required String name, // ex) ohayougozaimasu
+    String? host, // ex) misskey.io
     String? url,
-  }) = _LocalEmoji;
+  }) = _CustomEmoji;
 
   @override
-  String get id => ':$name@.:';
+  String get id => ':$name@$host:';
 
-  factory LocalEmoji.fromJson(Map<String, dynamic> json) => _$LocalEmojiFromJson(json);
+  bool get isLocal => host == '.';
+
+  factory CustomEmoji.fromJson(Map<String, dynamic> json) => _$CustomEmojiFromJson(json);
 }
 
 @freezed
