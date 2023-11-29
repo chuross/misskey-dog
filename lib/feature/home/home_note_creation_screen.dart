@@ -55,6 +55,6 @@ final class HomeNoteCreationScreen extends HookConsumerWidget {
           child: Text('投稿'.i18n),
         ).padding(const EdgeInsets.symmetric(horizontal: 64)).fillWidth(),
       ],
-    ).padding(const EdgeInsets.symmetric(horizontal: 16, vertical: 48));
+    ).padding(const EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 48));
   }
 }
