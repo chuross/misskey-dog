@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 extension BuildContextExt on BuildContext {
+  ThemeData get theme => Theme.of(this);
   TextTheme get textTheme => Theme.of(this).textTheme;
   Color get dividerColor => Theme.of(this).dividerColor;
   Color get dividerColorWithOpacity50 => dividerColor.withOpacity(0.5);

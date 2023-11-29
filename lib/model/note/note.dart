@@ -27,5 +27,7 @@ abstract class Note with _$Note {
 
   List<NoteReaction> get reactions => rawReactions.keys.map((key) => NoteReaction.resolved(key, rawReactions)).toList();
 
+  Emoji? get myReactionEmoji => myRawReactionEmoji != null ? Emoji.resolve(rawEmojiWithHost: myRawReactionEmoji!) : null;
+
   factory Note.fromJson(Map<String, dynamic> json) => _$NoteFromJson(json);
 }

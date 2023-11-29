@@ -30,7 +30,7 @@ final class NoteItem extends StatelessWidget {
         _renotedInfo(),
         _mainContent(context),
         const SizedBox(height: 12),
-        _reactions(onReactionTap),
+        _reactions(note.myReactionEmoji, onReactionTap),
         _ActionButtons(),
       ],
     ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
@@ -95,7 +95,7 @@ final class NoteItem extends StatelessWidget {
     );
   }
 
-  Widget _reactions(Function(Emoji emoji) onReactionTap) {
+  Widget _reactions(Emoji? myReactionEmoji, Function(Emoji emoji) onReactionTap) {
     return note.reactions.isNotEmpty.mapOrElse(
       func: (_) {
         return Row(
@@ -108,6 +108,7 @@ final class NoteItem extends StatelessWidget {
                 return _Reaction(
                   key: "${note.id}_${reaction.emoji.id}".toKey(),
                   reaction: reaction,
+                  isReacted: reaction.emoji.id == myReactionEmoji?.id,
                   onReactionTap: onReactionTap,
                 );
               }).toList(),
@@ -148,22 +149,25 @@ final class _RenotedInfo extends StatelessWidget {
 
 final class _Reaction extends StatelessWidget {
   final NoteReaction reaction;
+  final bool isReacted;
   final Function(Emoji emoji) onReactionTap;
 
   const _Reaction({
     super.key,
     required this.reaction,
+    required this.isReacted,
     required this.onReactionTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onReactionTap(reaction.emoji),
+      onTap: () => !isReacted ? onReactionTap(reaction.emoji) : null,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         decoration: BoxDecoration(
-          border: Border.all(color: context.dividerColorWithOpacity20),
+          color: isReacted ? context.theme.primaryColor.withOpacity(0.15) : null,
+          border: Border.all(color: isReacted ? context.theme.primaryColor.withOpacity(0.3) : context.dividerColorWithOpacity20),
           borderRadius: BorderRadius.circular(4),
         ),
         child: Row(

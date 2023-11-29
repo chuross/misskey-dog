@@ -9,12 +9,12 @@ sealed class Emoji {
   // localEmoji => :ohayougozaimasu@.:
   // PlainEmoji => 😀:@.:
   factory Emoji.resolve({required String rawEmojiWithHost}) {
-    final rawEmoji = rawEmojiWithHost.split('@').first;
+    final [rawEmoji, host] = rawEmojiWithHost.split('@');
 
     if (rawEmoji.startsWith(':')) {
       return LocalEmoji(name: rawEmoji.substring(1));
     } else {
-      return PlainEmoji(text: rawEmoji);
+      return PlainEmoji(text: rawEmoji, host: host);
     }
   }
 }
@@ -29,7 +29,7 @@ abstract class LocalEmoji with _$LocalEmoji implements Emoji {
   }) = _LocalEmoji;
 
   @override
-  String get id => name;
+  String get id => ':$name@.:';
 
   factory LocalEmoji.fromJson(Map<String, dynamic> json) => _$LocalEmojiFromJson(json);
 }
@@ -40,9 +40,11 @@ abstract class PlainEmoji with _$PlainEmoji implements Emoji {
 
   const factory PlainEmoji({
     required String text,
+    required String host,
   }) = _PlainEmoji;
 
-  String get id => text;
+  @override
+  String get id => "$text@$host";
 
   factory PlainEmoji.fromJson(Map<String, dynamic> json) => _$PlainEmojiFromJson(json);
 }
