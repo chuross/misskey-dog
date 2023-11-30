@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:misskey_dog/core/extension/string.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 
 @RoutePage()
@@ -22,7 +23,12 @@ final class ImageDetailScreen extends StatelessWidget {
             color: Colors.blueGrey[700],
             child: Hero(
               tag: imageUrl,
-              child: Image.network(imageUrl),
+              child: Dismissible(
+                key: imageUrl.toKey(),
+                direction: DismissDirection.vertical,
+                onDismissed: (_) => context.router.pop(),
+                child: Image.network(imageUrl),
+              ),
             ).align(Alignment.center),
           ),
         ),
