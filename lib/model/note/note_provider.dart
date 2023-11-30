@@ -14,13 +14,14 @@ part 'note_provider.g.dart';
 final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
   @override
   Future<List<String>> build({
-    bool isLocal = false,
+    bool? hasFiles,
     int limit = 100,
   }) async {
     final client = await ref.watch(misskeyClientProvider().future);
 
     final notes = await client.getLocalNotes(
       request: GetLocalNotesRequest(
+        hasFiles: hasFiles,
         limit: limit,
       ).toJson().removeAllNullValueKeys(),
     );
@@ -40,10 +41,9 @@ final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
 
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final newNotes = await client.getNotes(
-      request: GetNotesRequest(
-        sinceId: lastNoteId,
-        isLocal: isLocal,
+    final newNotes = await client.getLocalNotes(
+      request: GetLocalNotesRequest(
+        hasFiles: hasFiles,
         limit: limit,
       ).toJson().removeAllNullValueKeys(),
     );

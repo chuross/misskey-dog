@@ -7,7 +7,7 @@ part of 'note_provider.dart';
 // **************************************************************************
 
 String _$localNoteIdsWithCacheHash() =>
-    r'29343350a6d0770df1e46bf1a1492be8029e4fd7';
+    r'94c7743da27de00ec6c2a8874efc6ba838361c2f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -32,11 +32,11 @@ class _SystemHash {
 
 abstract class _$LocalNoteIdsWithCache
     extends BuildlessAutoDisposeAsyncNotifier<List<String>> {
-  late final bool isLocal;
+  late final bool? hasFiles;
   late final int limit;
 
   FutureOr<List<String>> build({
-    bool isLocal = false,
+    bool? hasFiles,
     int limit = 100,
   });
 }
@@ -52,11 +52,11 @@ class LocalNoteIdsWithCacheFamily extends Family<AsyncValue<List<String>>> {
 
   /// See also [LocalNoteIdsWithCache].
   LocalNoteIdsWithCacheProvider call({
-    bool isLocal = false,
+    bool? hasFiles,
     int limit = 100,
   }) {
     return LocalNoteIdsWithCacheProvider(
-      isLocal: isLocal,
+      hasFiles: hasFiles,
       limit: limit,
     );
   }
@@ -66,7 +66,7 @@ class LocalNoteIdsWithCacheFamily extends Family<AsyncValue<List<String>>> {
     covariant LocalNoteIdsWithCacheProvider provider,
   ) {
     return call(
-      isLocal: provider.isLocal,
+      hasFiles: provider.hasFiles,
       limit: provider.limit,
     );
   }
@@ -92,11 +92,11 @@ class LocalNoteIdsWithCacheProvider
         List<String>> {
   /// See also [LocalNoteIdsWithCache].
   LocalNoteIdsWithCacheProvider({
-    bool isLocal = false,
+    bool? hasFiles,
     int limit = 100,
   }) : this._internal(
           () => LocalNoteIdsWithCache()
-            ..isLocal = isLocal
+            ..hasFiles = hasFiles
             ..limit = limit,
           from: localNoteIdsWithCacheProvider,
           name: r'localNoteIdsWithCacheProvider',
@@ -107,7 +107,7 @@ class LocalNoteIdsWithCacheProvider
           dependencies: LocalNoteIdsWithCacheFamily._dependencies,
           allTransitiveDependencies:
               LocalNoteIdsWithCacheFamily._allTransitiveDependencies,
-          isLocal: isLocal,
+          hasFiles: hasFiles,
           limit: limit,
         );
 
@@ -118,11 +118,11 @@ class LocalNoteIdsWithCacheProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.isLocal,
+    required this.hasFiles,
     required this.limit,
   }) : super.internal();
 
-  final bool isLocal;
+  final bool? hasFiles;
   final int limit;
 
   @override
@@ -130,7 +130,7 @@ class LocalNoteIdsWithCacheProvider
     covariant LocalNoteIdsWithCache notifier,
   ) {
     return notifier.build(
-      isLocal: isLocal,
+      hasFiles: hasFiles,
       limit: limit,
     );
   }
@@ -141,14 +141,14 @@ class LocalNoteIdsWithCacheProvider
       origin: this,
       override: LocalNoteIdsWithCacheProvider._internal(
         () => create()
-          ..isLocal = isLocal
+          ..hasFiles = hasFiles
           ..limit = limit,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        isLocal: isLocal,
+        hasFiles: hasFiles,
         limit: limit,
       ),
     );
@@ -163,14 +163,14 @@ class LocalNoteIdsWithCacheProvider
   @override
   bool operator ==(Object other) {
     return other is LocalNoteIdsWithCacheProvider &&
-        other.isLocal == isLocal &&
+        other.hasFiles == hasFiles &&
         other.limit == limit;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, isLocal.hashCode);
+    hash = _SystemHash.combine(hash, hasFiles.hashCode);
     hash = _SystemHash.combine(hash, limit.hashCode);
 
     return _SystemHash.finish(hash);
@@ -179,8 +179,8 @@ class LocalNoteIdsWithCacheProvider
 
 mixin LocalNoteIdsWithCacheRef
     on AutoDisposeAsyncNotifierProviderRef<List<String>> {
-  /// The parameter `isLocal` of this provider.
-  bool get isLocal;
+  /// The parameter `hasFiles` of this provider.
+  bool? get hasFiles;
 
   /// The parameter `limit` of this provider.
   int get limit;
@@ -192,7 +192,7 @@ class _LocalNoteIdsWithCacheProviderElement
   _LocalNoteIdsWithCacheProviderElement(super.provider);
 
   @override
-  bool get isLocal => (origin as LocalNoteIdsWithCacheProvider).isLocal;
+  bool? get hasFiles => (origin as LocalNoteIdsWithCacheProvider).hasFiles;
   @override
   int get limit => (origin as LocalNoteIdsWithCacheProvider).limit;
 }
