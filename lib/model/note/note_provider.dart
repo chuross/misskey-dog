@@ -2,7 +2,6 @@ import 'package:misskey_dog/core/api/api_provider.dart';
 import 'package:misskey_dog/core/api/request/create_note_reaction_request.dart';
 import 'package:misskey_dog/core/api/request/get_local_notes_request.dart';
 import 'package:misskey_dog/core/api/request/get_note_request.dart';
-import 'package:misskey_dog/core/api/request/get_notes_request.dart';
 import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
