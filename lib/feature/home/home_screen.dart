@@ -1,20 +1,25 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:i18n_extension/i18n_widget.dart';
 import 'package:misskey_dog/core/extension/async_value.dart';
-import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/dynamic.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
+import 'package:misskey_dog/feature/home/home_local_timeline.dart';
 import 'package:misskey_dog/feature/home/home_note_creation_screen.dart';
-import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
-import 'package:misskey_dog/model/note/note_provider.dart';
+
+part 'home_screen.freezed.dart';
 
 @RoutePage()
 final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
+  static final _tabs = [
+    _HomeTab(title: 'ローカル'.i18n, child: const HomeLocalTimeline()),
+  ];
+
   const HomeScreen({super.key});
 
   @override
@@ -26,7 +31,7 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
         onRetry: () => ref.invalidate(accountStateProvider),
         data: (account) {
           return DefaultTabController(
-              length: 1,
+              length: _tabs.length,
               child: Scaffold(
                 appBar: AppBar(
                   title: const Text('Misskey Dog'),
@@ -41,15 +46,9 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
                       onPressed: () => context.router.push(const AccountRoute()),
                     ),
                   ],
-                  bottom: TabBar(tabs: [
-                    Tab(text: 'ローカル'.i18n),
-                  ]),
+                  bottom: TabBar(tabs: _tabs.map((tab) => Tab(text: tab.title)).toList()),
                 ),
-                body: const TabBarView(
-                  children: [
-                    _NoteList(isLocal: true),
-                  ],
-                ),
+                body: TabBarView(children: _tabs.map((tab) => tab.child).toList()),
                 floatingActionButton: Builder(builder: (context) {
                   return FloatingActionButton(
                     child: const Icon(Icons.edit),
@@ -77,47 +76,10 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
   }
 }
 
-final class _NoteList extends ConsumerWidget {
-  final bool isLocal;
-
-  const _NoteList({required this.isLocal});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final provider = localNoteIdsWithCacheProvider();
-    final noteIds = ref.watch(provider);
-
-    return noteIds.whenScreenLoading(
-      ref: ref,
-      onRetry: () => ref.invalidate(provider),
-      data: (notesIds) {
-        return RefreshIndicator(
-          onRefresh: () async => ref.invalidate(provider),
-          child: ListView.builder(
-            padding: const EdgeInsets.only(bottom: 80),
-            itemCount: notesIds.length,
-            itemBuilder: (context, index) {
-              final note = ref.watch(cachedNoteProvider(id: notesIds[index]));
-              if (note == null) return const SizedBox.shrink();
-
-              return Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: Divider.createBorderSide(context, color: context.dividerColorWithOpacity30),
-                  ),
-                ),
-                child: NoteItem(
-                  key: ValueKey(note.id),
-                  note: note,
-                  onReactionTap: (emoji) {
-                    ref.read(cachedNoteProvider(id: note.id).notifier).reaction(emoji);
-                  },
-                ),
-              );
-            },
-          ),
-        );
-      },
-    );
-  }
+@freezed
+class HomeTab with _$HomeTab {
+  const factory HomeTab({
+    required String title,
+    required Widget child,
+  }) = _HomeTab;
 }
