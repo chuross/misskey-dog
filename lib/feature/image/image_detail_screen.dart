@@ -52,6 +52,7 @@ final class ImageDetailScreen extends HookWidget {
                   absorbing: currentScale.value != 1.0,
                   child: Dismissible(
                     key: imageUrl.toKey(),
+                    resizeDuration: null,
                     direction: DismissDirection.vertical,
                     onDismissed: (_) => context.router.pop(),
                     child: Image.network(imageUrl),
