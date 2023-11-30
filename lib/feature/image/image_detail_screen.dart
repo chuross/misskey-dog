@@ -36,6 +36,16 @@ final class ImageDetailScreen extends HookWidget {
             color: Colors.blueGrey[700],
             child: Hero(
               tag: imageUrl,
+              flightShuttleBuilder: (flightContext, animation, flightDirection, fromHeroContext, toHeroContext) {
+                if (flightDirection == HeroFlightDirection.pop) {
+                  return const SizedBox();
+                }
+
+                return DefaultTextStyle(
+                  style: DefaultTextStyle.of(toHeroContext).style,
+                  child: toHeroContext.widget,
+                );
+              },
               child: GestureDetector(
                 onDoubleTap: () => controller.value = Matrix4.identity(),
                 child: AbsorbPointer(
