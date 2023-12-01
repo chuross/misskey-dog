@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/date_time.dart';
-import 'package:misskey_dog/core/extension/dynamic.dart';
+import 'package:misskey_dog/core/extension/object.dart';
 import 'package:misskey_dog/core/extension/string.dart';
 
 import 'package:misskey_dog/core/extension/widget.dart';
@@ -40,7 +40,7 @@ final class NoteItem extends StatelessWidget {
 
   Widget _renotedInfo() {
     return note.renote.mapOrElse(
-      func: (_) => Column(
+      (_) => Column(
         children: [
           _RenotedInfo(note: note),
           const SizedBox(height: 12),
@@ -85,7 +85,7 @@ final class NoteItem extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             note.files.where((element) => element.isImage).firstOrNull.mapOrElse(
-                  func: (file) => ClipRRect(
+                  (file) => ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: InkWell(
                       onTap: () => context.pushRoute(ImageDetailRoute(imageUrl: file.url)),
@@ -105,25 +105,23 @@ final class NoteItem extends StatelessWidget {
 
   Widget _reactions(Emoji? myReactionEmoji, Function(Emoji emoji) onReactionTap) {
     return note.reactions.isNotEmpty.mapOrElse(
-      func: (_) {
-        return Row(
-          children: [
-            const SizedBox(width: 68),
-            Wrap(
-              spacing: 8,
-              runSpacing: 4,
-              children: note.reactions.map((reaction) {
-                return _Reaction(
-                  key: "${note.id}_${reaction.emoji.id}".toKey(),
-                  reaction: reaction,
-                  isReacted: reaction.emoji.id == myReactionEmoji?.id,
-                  onReactionTap: onReactionTap,
-                );
-              }).toList(),
-            ).expanded(),
-          ],
-        );
-      },
+      (_) => Row(
+        children: [
+          const SizedBox(width: 68),
+          Wrap(
+            spacing: 8,
+            runSpacing: 4,
+            children: note.reactions.map((reaction) {
+              return _Reaction(
+                key: "${note.id}_${reaction.emoji.id}".toKey(),
+                reaction: reaction,
+                isReacted: reaction.emoji.id == myReactionEmoji?.id,
+                onReactionTap: onReactionTap,
+              );
+            }).toList(),
+          ).expanded(),
+        ],
+      ),
       elseValue: const SizedBox.shrink(),
     );
   }

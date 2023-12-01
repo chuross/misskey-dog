@@ -6,7 +6,7 @@ import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/api/api_provider.dart';
 import 'package:misskey_dog/core/api/request/create_note_request.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
-import 'package:misskey_dog/core/extension/dynamic.dart';
+import 'package:misskey_dog/core/extension/object.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 
 (AsyncValue<bool>, Function(String)) useNoteCreation(WidgetRef ref) {
@@ -48,10 +48,7 @@ final class HomeNoteCreationScreen extends HookConsumerWidget {
         ),
         const SizedBox(height: 32),
         FilledButton(
-          onPressed: (text.value.isNotEmpty).mapOrElse(
-            func: (_) => () => createNote(text.value),
-            elseValue: null,
-          ),
+          onPressed: text.value.isNotEmpty.takeIfTrue()?.map((_) => () => createNote(text.value)),
           child: Text('投稿'.i18n),
         ).padding(const EdgeInsets.symmetric(horizontal: 64)),
       ],
