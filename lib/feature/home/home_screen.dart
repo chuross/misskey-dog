@@ -7,6 +7,7 @@ import 'package:i18n_extension/i18n_widget.dart';
 import 'package:misskey_dog/core/extension/async_value.dart';
 import 'package:misskey_dog/core/extension/object.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
+import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/feature/home/home_local_timeline.dart';
 import 'package:misskey_dog/feature/home/home_media_timeline.dart';
@@ -29,7 +30,7 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
     final account = ref.watch(accountStateProvider);
 
     return account.whenScreenLoading(
-        ref: ref,
+        log: ref.watch(logProvider),
         onRetry: () => ref.invalidate(accountStateProvider),
         data: (account) {
           return DefaultTabController(

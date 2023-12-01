@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:misskey_dog/core/extension/async_value.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
+import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
 
@@ -14,7 +15,7 @@ final class HomeMediaTimeline extends ConsumerWidget {
     final noteIds = ref.watch(provider);
 
     return noteIds.whenScreenLoading(
-      ref: ref,
+      log: ref.watch(logProvider),
       onRetry: () => ref.invalidate(provider),
       data: (notesIds) {
         return RefreshIndicator(
