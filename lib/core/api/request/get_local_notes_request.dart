@@ -9,7 +9,7 @@ part 'get_local_notes_request.g.dart';
 class GetLocalNotesRequest with _$GetLocalNotesRequest {
   const factory GetLocalNotesRequest({
     @JsonKey(name: 'withFiles') bool? hasFiles,
-    String? sinceId,
+    String? untilId,
     int? limit,
   }) = _GetLocalNotesRequest;
 

@@ -43,6 +43,7 @@ final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
     final newNotes = await client.getLocalNotes(
       request: GetLocalNotesRequest(
         hasFiles: hasFiles,
+        untilId: lastNoteId,
         limit: limit,
       ).toJson().removeAllNullValueKeys(),
     );

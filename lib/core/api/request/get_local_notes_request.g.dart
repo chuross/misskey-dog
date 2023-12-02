@@ -10,7 +10,7 @@ _$GetLocalNotesRequestImpl _$$GetLocalNotesRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$GetLocalNotesRequestImpl(
       hasFiles: json['withFiles'] as bool?,
-      sinceId: json['sinceId'] as String?,
+      untilId: json['untilId'] as String?,
       limit: json['limit'] as int?,
     );
 
@@ -18,6 +18,6 @@ Map<String, dynamic> _$$GetLocalNotesRequestImplToJson(
         _$GetLocalNotesRequestImpl instance) =>
     <String, dynamic>{
       'withFiles': instance.hasFiles,
-      'sinceId': instance.sinceId,
+      'untilId': instance.untilId,
       'limit': instance.limit,
     };

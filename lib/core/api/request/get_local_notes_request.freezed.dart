@@ -22,7 +22,7 @@ GetLocalNotesRequest _$GetLocalNotesRequestFromJson(Map<String, dynamic> json) {
 mixin _$GetLocalNotesRequest {
   @JsonKey(name: 'withFiles')
   bool? get hasFiles => throw _privateConstructorUsedError;
-  String? get sinceId => throw _privateConstructorUsedError;
+  String? get untilId => throw _privateConstructorUsedError;
   int? get limit => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ abstract class $GetLocalNotesRequestCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'withFiles') bool? hasFiles,
-      String? sinceId,
+      String? untilId,
       int? limit});
 }
 
@@ -58,7 +58,7 @@ class _$GetLocalNotesRequestCopyWithImpl<$Res,
   @override
   $Res call({
     Object? hasFiles = freezed,
-    Object? sinceId = freezed,
+    Object? untilId = freezed,
     Object? limit = freezed,
   }) {
     return _then(_value.copyWith(
@@ -66,9 +66,9 @@ class _$GetLocalNotesRequestCopyWithImpl<$Res,
           ? _value.hasFiles
           : hasFiles // ignore: cast_nullable_to_non_nullable
               as bool?,
-      sinceId: freezed == sinceId
-          ? _value.sinceId
-          : sinceId // ignore: cast_nullable_to_non_nullable
+      untilId: freezed == untilId
+          ? _value.untilId
+          : untilId // ignore: cast_nullable_to_non_nullable
               as String?,
       limit: freezed == limit
           ? _value.limit
@@ -88,7 +88,7 @@ abstract class _$$GetLocalNotesRequestImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'withFiles') bool? hasFiles,
-      String? sinceId,
+      String? untilId,
       int? limit});
 }
 
@@ -104,7 +104,7 @@ class __$$GetLocalNotesRequestImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? hasFiles = freezed,
-    Object? sinceId = freezed,
+    Object? untilId = freezed,
     Object? limit = freezed,
   }) {
     return _then(_$GetLocalNotesRequestImpl(
@@ -112,9 +112,9 @@ class __$$GetLocalNotesRequestImplCopyWithImpl<$Res>
           ? _value.hasFiles
           : hasFiles // ignore: cast_nullable_to_non_nullable
               as bool?,
-      sinceId: freezed == sinceId
-          ? _value.sinceId
-          : sinceId // ignore: cast_nullable_to_non_nullable
+      untilId: freezed == untilId
+          ? _value.untilId
+          : untilId // ignore: cast_nullable_to_non_nullable
               as String?,
       limit: freezed == limit
           ? _value.limit
@@ -128,7 +128,7 @@ class __$$GetLocalNotesRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$GetLocalNotesRequestImpl implements _GetLocalNotesRequest {
   const _$GetLocalNotesRequestImpl(
-      {@JsonKey(name: 'withFiles') this.hasFiles, this.sinceId, this.limit});
+      {@JsonKey(name: 'withFiles') this.hasFiles, this.untilId, this.limit});
 
   factory _$GetLocalNotesRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$GetLocalNotesRequestImplFromJson(json);
@@ -137,13 +137,13 @@ class _$GetLocalNotesRequestImpl implements _GetLocalNotesRequest {
   @JsonKey(name: 'withFiles')
   final bool? hasFiles;
   @override
-  final String? sinceId;
+  final String? untilId;
   @override
   final int? limit;
 
   @override
   String toString() {
-    return 'GetLocalNotesRequest(hasFiles: $hasFiles, sinceId: $sinceId, limit: $limit)';
+    return 'GetLocalNotesRequest(hasFiles: $hasFiles, untilId: $untilId, limit: $limit)';
   }
 
   @override
@@ -153,13 +153,13 @@ class _$GetLocalNotesRequestImpl implements _GetLocalNotesRequest {
             other is _$GetLocalNotesRequestImpl &&
             (identical(other.hasFiles, hasFiles) ||
                 other.hasFiles == hasFiles) &&
-            (identical(other.sinceId, sinceId) || other.sinceId == sinceId) &&
+            (identical(other.untilId, untilId) || other.untilId == untilId) &&
             (identical(other.limit, limit) || other.limit == limit));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, hasFiles, sinceId, limit);
+  int get hashCode => Object.hash(runtimeType, hasFiles, untilId, limit);
 
   @JsonKey(ignore: true)
   @override
@@ -180,7 +180,7 @@ class _$GetLocalNotesRequestImpl implements _GetLocalNotesRequest {
 abstract class _GetLocalNotesRequest implements GetLocalNotesRequest {
   const factory _GetLocalNotesRequest(
       {@JsonKey(name: 'withFiles') final bool? hasFiles,
-      final String? sinceId,
+      final String? untilId,
       final int? limit}) = _$GetLocalNotesRequestImpl;
 
   factory _GetLocalNotesRequest.fromJson(Map<String, dynamic> json) =
@@ -190,7 +190,7 @@ abstract class _GetLocalNotesRequest implements GetLocalNotesRequest {
   @JsonKey(name: 'withFiles')
   bool? get hasFiles;
   @override
-  String? get sinceId;
+  String? get untilId;
   @override
   int? get limit;
   @override
