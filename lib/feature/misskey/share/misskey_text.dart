@@ -9,6 +9,7 @@ final RegExp _emojiReget = RegExp(r':([A-Za-z0-9_]+):');
 List<InlineSpan> _separateInlineSpans({
   required String text,
   required double height,
+  required Map<String, String> externalTextEmojiUrlMap,
 }) {
   // RegExpはマルチバイト文字のインデックスが計算できないので、マルチバイト文字をシングルバイトの文字に変換する
   final emojiMatches = _emojiReget.allMatches((String.fromCharCodes(text.runes.map((rune) {
@@ -29,13 +30,19 @@ List<InlineSpan> _separateInlineSpans({
 
     // 絵文字にマッチしたらそれまでの文字列をTextSpanに変換して、絵文字Spanを追加する
     if (match?.start == index) {
-      final emoji = CustomEmoji(name: match?.group(1) ?? '', host: '.');
+      final emojiName = match?.group(1);
+      final url = externalTextEmojiUrlMap[emojiName];
+      final host = url?.isNotEmpty == true ? 'unknown' : '.';
+      final emoji = CustomEmoji(name: emojiName ?? '', host: host, url: url);
+
       if (previousValue.isNotEmpty) spans.add(TextSpan(text: previousValue));
+
       spans.add(WidgetSpan(
         child: MisskeyEmoji(emoji: emoji, height: height + 4),
         alignment: PlaceholderAlignment.middle,
         baseline: TextBaseline.alphabetic,
       ));
+
       return '';
     }
 
@@ -69,6 +76,7 @@ final class MisskeyText extends HookWidget {
       return _separateInlineSpans(
         text: text,
         height: baseTextStyle.fontSize ?? 14,
+        externalTextEmojiUrlMap: externalTextEmojiUrlMap,
       );
     }, const []);
 
