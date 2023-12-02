@@ -17,13 +17,14 @@ abstract class Note with _$Note {
     required DateTime createdAt,
     required User user,
     Note? renote,
-    required int repliesCount,
-    required int renoteCount,
+    String? text,
+    required List<NoteFile> files,
+    @JsonKey(name: 'emojis') required Map<String, String> externalTextEmojiUrlMap,
     @JsonKey(name: 'reactions') required Map<String, int> reactionCountMap,
     @JsonKey(name: 'reactionEmojis') required Map<String, String> externalReactionUrlMap,
     @JsonKey(name: 'myReaction') String? myRawReactionEmoji,
-    String? text,
-    required List<NoteFile> files,
+    required int repliesCount,
+    required int renoteCount,
   }) = _Note;
 
   List<NoteReaction> get reactions => reactionCountMap.keys.map((key) {

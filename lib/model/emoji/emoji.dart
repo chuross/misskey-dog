@@ -9,10 +9,10 @@ sealed class Emoji {
   // localEmoji => :ohayougozaimasu@.:
   // externalEmoji => :ohayougozaimasu@misskey.io:
   // PlainEmoji => 😀
-  factory Emoji.resolve({required String rawEmoji}) {
+  factory Emoji.resolve({required String rawEmoji, String? url}) {
     if (rawEmoji.startsWith(':')) {
       final [emojiName, host] = rawEmoji.split('@');
-      return CustomEmoji(name: emojiName.substring(1), host: host.substring(0, host.length - 1));
+      return CustomEmoji(name: emojiName.substring(1), host: host.substring(0, host.length - 1), url: url);
     } else {
       return PlainEmoji(text: rawEmoji);
     }

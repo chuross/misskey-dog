@@ -10,9 +10,13 @@ abstract class NoteReaction with _$NoteReaction {
     required int reactionCount,
   }) = _NoteReactionLocalEmoji;
 
-  factory NoteReaction.resolved(String key, {Map<String, int> reactionCountMap = const {}}) {
+  factory NoteReaction.resolved(
+    String key, {
+    Map<String, int> reactionCountMap = const {},
+    Map<String, String> externalReactionUrlMap = const {},
+  }) {
     return NoteReaction(
-      emoji: Emoji.resolve(rawEmoji: key),
+      emoji: Emoji.resolve(rawEmoji: key, url: externalReactionUrlMap[key]),
       reactionCount: reactionCountMap[key] ?? 0,
     );
   }
