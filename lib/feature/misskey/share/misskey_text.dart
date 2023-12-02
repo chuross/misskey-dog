@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:misskey_dog/feature/emoji/share/misskey_emoji.dart';
+import 'package:misskey_dog/feature/misskey/share/misskey_emoji.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
