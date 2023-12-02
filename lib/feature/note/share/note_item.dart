@@ -12,6 +12,7 @@ import 'package:misskey_dog/feature/emoji/share/misskey_emoji.dart';
 import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
+import 'package:misskey_dog/model/note/note_file.dart';
 import 'package:misskey_dog/model/note/note_reaction.dart';
 
 final class NoteItem extends StatelessWidget {
@@ -85,16 +86,7 @@ final class NoteItem extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             note.files.where((element) => element.isImage).firstOrNull.mapOrElse(
-                  (file) => ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: InkWell(
-                      onTap: () => context.pushRoute(ImageDetailRoute(imageUrl: file.url)),
-                      child: Hero(
-                        tag: file.url,
-                        child: Image.network(file.url, width: double.infinity, height: 250, fit: BoxFit.cover),
-                      ),
-                    ),
-                  ),
+                  (file) => _Image(file: file),
                   elseValue: const SizedBox.shrink(),
                 ),
           ],
@@ -149,6 +141,26 @@ final class _RenotedInfo extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ).flexible(),
       ],
+    );
+  }
+}
+
+final class _Image extends StatelessWidget {
+  final NoteFile file;
+
+  const _Image({required this.file});
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: InkWell(
+        onTap: () => context.pushRoute(ImageDetailRoute(imageUrl: file.url)),
+        child: Hero(
+          tag: file.url,
+          child: Image.network(file.url, width: double.infinity, height: 250, fit: BoxFit.cover),
+        ),
+      ),
     );
   }
 }
