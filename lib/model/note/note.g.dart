@@ -17,10 +17,16 @@ _$NoteImpl _$$NoteImplFromJson(Map<String, dynamic> json) => _$NoteImpl(
       files: (json['files'] as List<dynamic>)
           .map((e) => NoteFile.fromJson(e as Map<String, dynamic>))
           .toList(),
-      externalTextEmojiUrlMap: Map<String, String>.from(json['emojis'] as Map),
+      externalTextEmojiUrlMap: (json['emojis'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, e as String),
+          ) ??
+          {},
       reactionCountMap: Map<String, int>.from(json['reactions'] as Map),
       externalReactionUrlMap:
-          Map<String, String>.from(json['reactionEmojis'] as Map),
+          (json['reactionEmojis'] as Map<String, dynamic>?)?.map(
+                (k, e) => MapEntry(k, e as String),
+              ) ??
+              {},
       myRawReactionEmoji: json['myReaction'] as String?,
       repliesCount: json['repliesCount'] as int,
       renoteCount: json['renoteCount'] as int,

@@ -26,12 +26,12 @@ mixin _$Note {
   Note? get renote => throw _privateConstructorUsedError;
   String? get text => throw _privateConstructorUsedError;
   List<NoteFile> get files => throw _privateConstructorUsedError;
-  @JsonKey(name: 'emojis')
+  @JsonKey(name: 'emojis', defaultValue: {})
   Map<String, String> get externalTextEmojiUrlMap =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'reactions')
   Map<String, int> get reactionCountMap => throw _privateConstructorUsedError;
-  @JsonKey(name: 'reactionEmojis')
+  @JsonKey(name: 'reactionEmojis', defaultValue: {})
   Map<String, String> get externalReactionUrlMap =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'myReaction')
@@ -56,9 +56,10 @@ abstract class $NoteCopyWith<$Res> {
       Note? renote,
       String? text,
       List<NoteFile> files,
-      @JsonKey(name: 'emojis') Map<String, String> externalTextEmojiUrlMap,
+      @JsonKey(name: 'emojis', defaultValue: {})
+      Map<String, String> externalTextEmojiUrlMap,
       @JsonKey(name: 'reactions') Map<String, int> reactionCountMap,
-      @JsonKey(name: 'reactionEmojis')
+      @JsonKey(name: 'reactionEmojis', defaultValue: {})
       Map<String, String> externalReactionUrlMap,
       @JsonKey(name: 'myReaction') String? myRawReactionEmoji,
       int repliesCount,
@@ -181,9 +182,10 @@ abstract class _$$NoteImplCopyWith<$Res> implements $NoteCopyWith<$Res> {
       Note? renote,
       String? text,
       List<NoteFile> files,
-      @JsonKey(name: 'emojis') Map<String, String> externalTextEmojiUrlMap,
+      @JsonKey(name: 'emojis', defaultValue: {})
+      Map<String, String> externalTextEmojiUrlMap,
       @JsonKey(name: 'reactions') Map<String, int> reactionCountMap,
-      @JsonKey(name: 'reactionEmojis')
+      @JsonKey(name: 'reactionEmojis', defaultValue: {})
       Map<String, String> externalReactionUrlMap,
       @JsonKey(name: 'myReaction') String? myRawReactionEmoji,
       int repliesCount,
@@ -281,11 +283,11 @@ class _$NoteImpl extends _Note {
       this.renote,
       this.text,
       required final List<NoteFile> files,
-      @JsonKey(name: 'emojis')
+      @JsonKey(name: 'emojis', defaultValue: {})
       required final Map<String, String> externalTextEmojiUrlMap,
       @JsonKey(name: 'reactions')
       required final Map<String, int> reactionCountMap,
-      @JsonKey(name: 'reactionEmojis')
+      @JsonKey(name: 'reactionEmojis', defaultValue: {})
       required final Map<String, String> externalReactionUrlMap,
       @JsonKey(name: 'myReaction') this.myRawReactionEmoji,
       required this.repliesCount,
@@ -319,7 +321,7 @@ class _$NoteImpl extends _Note {
 
   final Map<String, String> _externalTextEmojiUrlMap;
   @override
-  @JsonKey(name: 'emojis')
+  @JsonKey(name: 'emojis', defaultValue: {})
   Map<String, String> get externalTextEmojiUrlMap {
     if (_externalTextEmojiUrlMap is EqualUnmodifiableMapView)
       return _externalTextEmojiUrlMap;
@@ -338,7 +340,7 @@ class _$NoteImpl extends _Note {
 
   final Map<String, String> _externalReactionUrlMap;
   @override
-  @JsonKey(name: 'reactionEmojis')
+  @JsonKey(name: 'reactionEmojis', defaultValue: {})
   Map<String, String> get externalReactionUrlMap {
     if (_externalReactionUrlMap is EqualUnmodifiableMapView)
       return _externalReactionUrlMap;
@@ -424,11 +426,11 @@ abstract class _Note extends Note {
       final Note? renote,
       final String? text,
       required final List<NoteFile> files,
-      @JsonKey(name: 'emojis')
+      @JsonKey(name: 'emojis', defaultValue: {})
       required final Map<String, String> externalTextEmojiUrlMap,
       @JsonKey(name: 'reactions')
       required final Map<String, int> reactionCountMap,
-      @JsonKey(name: 'reactionEmojis')
+      @JsonKey(name: 'reactionEmojis', defaultValue: {})
       required final Map<String, String> externalReactionUrlMap,
       @JsonKey(name: 'myReaction') final String? myRawReactionEmoji,
       required final int repliesCount,
@@ -450,13 +452,13 @@ abstract class _Note extends Note {
   @override
   List<NoteFile> get files;
   @override
-  @JsonKey(name: 'emojis')
+  @JsonKey(name: 'emojis', defaultValue: {})
   Map<String, String> get externalTextEmojiUrlMap;
   @override
   @JsonKey(name: 'reactions')
   Map<String, int> get reactionCountMap;
   @override
-  @JsonKey(name: 'reactionEmojis')
+  @JsonKey(name: 'reactionEmojis', defaultValue: {})
   Map<String, String> get externalReactionUrlMap;
   @override
   @JsonKey(name: 'myReaction')
