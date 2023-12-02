@@ -15,7 +15,9 @@ _$NoteImpl _$$NoteImplFromJson(Map<String, dynamic> json) => _$NoteImpl(
           : Note.fromJson(json['renote'] as Map<String, dynamic>),
       repliesCount: json['repliesCount'] as int,
       renoteCount: json['renoteCount'] as int,
-      rawReactions: Map<String, int>.from(json['reactions'] as Map),
+      reactionCountMap: Map<String, int>.from(json['reactions'] as Map),
+      externalReactionUrlMap:
+          Map<String, String>.from(json['reactionEmojis'] as Map),
       myRawReactionEmoji: json['myReaction'] as String?,
       text: json['text'] as String?,
       files: (json['files'] as List<dynamic>)
@@ -31,7 +33,8 @@ Map<String, dynamic> _$$NoteImplToJson(_$NoteImpl instance) =>
       'renote': instance.renote,
       'repliesCount': instance.repliesCount,
       'renoteCount': instance.renoteCount,
-      'reactions': instance.rawReactions,
+      'reactions': instance.reactionCountMap,
+      'reactionEmojis': instance.externalReactionUrlMap,
       'myReaction': instance.myRawReactionEmoji,
       'text': instance.text,
       'files': instance.files,

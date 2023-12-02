@@ -27,7 +27,10 @@ mixin _$Note {
   int get repliesCount => throw _privateConstructorUsedError;
   int get renoteCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'reactions')
-  Map<String, int> get rawReactions => throw _privateConstructorUsedError;
+  Map<String, int> get reactionCountMap => throw _privateConstructorUsedError;
+  @JsonKey(name: 'reactionEmojis')
+  Map<String, String> get externalReactionUrlMap =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'myReaction')
   String? get myRawReactionEmoji => throw _privateConstructorUsedError;
   String? get text => throw _privateConstructorUsedError;
@@ -50,7 +53,9 @@ abstract class $NoteCopyWith<$Res> {
       Note? renote,
       int repliesCount,
       int renoteCount,
-      @JsonKey(name: 'reactions') Map<String, int> rawReactions,
+      @JsonKey(name: 'reactions') Map<String, int> reactionCountMap,
+      @JsonKey(name: 'reactionEmojis')
+      Map<String, String> externalReactionUrlMap,
       @JsonKey(name: 'myReaction') String? myRawReactionEmoji,
       String? text,
       List<NoteFile> files});
@@ -78,7 +83,8 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
     Object? renote = freezed,
     Object? repliesCount = null,
     Object? renoteCount = null,
-    Object? rawReactions = null,
+    Object? reactionCountMap = null,
+    Object? externalReactionUrlMap = null,
     Object? myRawReactionEmoji = freezed,
     Object? text = freezed,
     Object? files = null,
@@ -108,10 +114,14 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
           ? _value.renoteCount
           : renoteCount // ignore: cast_nullable_to_non_nullable
               as int,
-      rawReactions: null == rawReactions
-          ? _value.rawReactions
-          : rawReactions // ignore: cast_nullable_to_non_nullable
+      reactionCountMap: null == reactionCountMap
+          ? _value.reactionCountMap
+          : reactionCountMap // ignore: cast_nullable_to_non_nullable
               as Map<String, int>,
+      externalReactionUrlMap: null == externalReactionUrlMap
+          ? _value.externalReactionUrlMap
+          : externalReactionUrlMap // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
       myRawReactionEmoji: freezed == myRawReactionEmoji
           ? _value.myRawReactionEmoji
           : myRawReactionEmoji // ignore: cast_nullable_to_non_nullable
@@ -162,7 +172,9 @@ abstract class _$$NoteImplCopyWith<$Res> implements $NoteCopyWith<$Res> {
       Note? renote,
       int repliesCount,
       int renoteCount,
-      @JsonKey(name: 'reactions') Map<String, int> rawReactions,
+      @JsonKey(name: 'reactions') Map<String, int> reactionCountMap,
+      @JsonKey(name: 'reactionEmojis')
+      Map<String, String> externalReactionUrlMap,
       @JsonKey(name: 'myReaction') String? myRawReactionEmoji,
       String? text,
       List<NoteFile> files});
@@ -189,7 +201,8 @@ class __$$NoteImplCopyWithImpl<$Res>
     Object? renote = freezed,
     Object? repliesCount = null,
     Object? renoteCount = null,
-    Object? rawReactions = null,
+    Object? reactionCountMap = null,
+    Object? externalReactionUrlMap = null,
     Object? myRawReactionEmoji = freezed,
     Object? text = freezed,
     Object? files = null,
@@ -219,10 +232,14 @@ class __$$NoteImplCopyWithImpl<$Res>
           ? _value.renoteCount
           : renoteCount // ignore: cast_nullable_to_non_nullable
               as int,
-      rawReactions: null == rawReactions
-          ? _value._rawReactions
-          : rawReactions // ignore: cast_nullable_to_non_nullable
+      reactionCountMap: null == reactionCountMap
+          ? _value._reactionCountMap
+          : reactionCountMap // ignore: cast_nullable_to_non_nullable
               as Map<String, int>,
+      externalReactionUrlMap: null == externalReactionUrlMap
+          ? _value._externalReactionUrlMap
+          : externalReactionUrlMap // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
       myRawReactionEmoji: freezed == myRawReactionEmoji
           ? _value.myRawReactionEmoji
           : myRawReactionEmoji // ignore: cast_nullable_to_non_nullable
@@ -249,11 +266,15 @@ class _$NoteImpl extends _Note {
       this.renote,
       required this.repliesCount,
       required this.renoteCount,
-      @JsonKey(name: 'reactions') required final Map<String, int> rawReactions,
+      @JsonKey(name: 'reactions')
+      required final Map<String, int> reactionCountMap,
+      @JsonKey(name: 'reactionEmojis')
+      required final Map<String, String> externalReactionUrlMap,
       @JsonKey(name: 'myReaction') this.myRawReactionEmoji,
       this.text,
       required final List<NoteFile> files})
-      : _rawReactions = rawReactions,
+      : _reactionCountMap = reactionCountMap,
+        _externalReactionUrlMap = externalReactionUrlMap,
         _files = files,
         super._();
 
@@ -272,13 +293,23 @@ class _$NoteImpl extends _Note {
   final int repliesCount;
   @override
   final int renoteCount;
-  final Map<String, int> _rawReactions;
+  final Map<String, int> _reactionCountMap;
   @override
   @JsonKey(name: 'reactions')
-  Map<String, int> get rawReactions {
-    if (_rawReactions is EqualUnmodifiableMapView) return _rawReactions;
+  Map<String, int> get reactionCountMap {
+    if (_reactionCountMap is EqualUnmodifiableMapView) return _reactionCountMap;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_rawReactions);
+    return EqualUnmodifiableMapView(_reactionCountMap);
+  }
+
+  final Map<String, String> _externalReactionUrlMap;
+  @override
+  @JsonKey(name: 'reactionEmojis')
+  Map<String, String> get externalReactionUrlMap {
+    if (_externalReactionUrlMap is EqualUnmodifiableMapView)
+      return _externalReactionUrlMap;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_externalReactionUrlMap);
   }
 
   @override
@@ -296,7 +327,7 @@ class _$NoteImpl extends _Note {
 
   @override
   String toString() {
-    return 'Note(id: $id, createdAt: $createdAt, user: $user, renote: $renote, repliesCount: $repliesCount, renoteCount: $renoteCount, rawReactions: $rawReactions, myRawReactionEmoji: $myRawReactionEmoji, text: $text, files: $files)';
+    return 'Note(id: $id, createdAt: $createdAt, user: $user, renote: $renote, repliesCount: $repliesCount, renoteCount: $renoteCount, reactionCountMap: $reactionCountMap, externalReactionUrlMap: $externalReactionUrlMap, myRawReactionEmoji: $myRawReactionEmoji, text: $text, files: $files)';
   }
 
   @override
@@ -314,7 +345,9 @@ class _$NoteImpl extends _Note {
             (identical(other.renoteCount, renoteCount) ||
                 other.renoteCount == renoteCount) &&
             const DeepCollectionEquality()
-                .equals(other._rawReactions, _rawReactions) &&
+                .equals(other._reactionCountMap, _reactionCountMap) &&
+            const DeepCollectionEquality().equals(
+                other._externalReactionUrlMap, _externalReactionUrlMap) &&
             (identical(other.myRawReactionEmoji, myRawReactionEmoji) ||
                 other.myRawReactionEmoji == myRawReactionEmoji) &&
             (identical(other.text, text) || other.text == text) &&
@@ -331,7 +364,8 @@ class _$NoteImpl extends _Note {
       renote,
       repliesCount,
       renoteCount,
-      const DeepCollectionEquality().hash(_rawReactions),
+      const DeepCollectionEquality().hash(_reactionCountMap),
+      const DeepCollectionEquality().hash(_externalReactionUrlMap),
       myRawReactionEmoji,
       text,
       const DeepCollectionEquality().hash(_files));
@@ -358,7 +392,10 @@ abstract class _Note extends Note {
       final Note? renote,
       required final int repliesCount,
       required final int renoteCount,
-      @JsonKey(name: 'reactions') required final Map<String, int> rawReactions,
+      @JsonKey(name: 'reactions')
+      required final Map<String, int> reactionCountMap,
+      @JsonKey(name: 'reactionEmojis')
+      required final Map<String, String> externalReactionUrlMap,
       @JsonKey(name: 'myReaction') final String? myRawReactionEmoji,
       final String? text,
       required final List<NoteFile> files}) = _$NoteImpl;
@@ -380,7 +417,10 @@ abstract class _Note extends Note {
   int get renoteCount;
   @override
   @JsonKey(name: 'reactions')
-  Map<String, int> get rawReactions;
+  Map<String, int> get reactionCountMap;
+  @override
+  @JsonKey(name: 'reactionEmojis')
+  Map<String, String> get externalReactionUrlMap;
   @override
   @JsonKey(name: 'myReaction')
   String? get myRawReactionEmoji;

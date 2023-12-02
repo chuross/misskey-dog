@@ -19,13 +19,16 @@ abstract class Note with _$Note {
     Note? renote,
     required int repliesCount,
     required int renoteCount,
-    @JsonKey(name: 'reactions') required Map<String, int> rawReactions,
+    @JsonKey(name: 'reactions') required Map<String, int> reactionCountMap,
+    @JsonKey(name: 'reactionEmojis') required Map<String, String> externalReactionUrlMap,
     @JsonKey(name: 'myReaction') String? myRawReactionEmoji,
     String? text,
     required List<NoteFile> files,
   }) = _Note;
 
-  List<NoteReaction> get reactions => rawReactions.keys.map((key) => NoteReaction.resolved(key, rawReactions)).toList();
+  List<NoteReaction> get reactions => reactionCountMap.keys.map((key) {
+        return NoteReaction.resolved(key, reactionCountMap: reactionCountMap);
+      }).toList();
 
   Emoji? get myReactionEmoji => myRawReactionEmoji != null ? Emoji.resolve(rawEmoji: myRawReactionEmoji!) : null;
 

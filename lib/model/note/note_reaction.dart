@@ -10,13 +10,10 @@ abstract class NoteReaction with _$NoteReaction {
     required int reactionCount,
   }) = _NoteReactionLocalEmoji;
 
-  // key:
-  // localEmoji => :ohayougozaimasu@.:
-  // PlainEmoji => 😀:@.:
-  factory NoteReaction.resolved(String key, Map<String, int> rawReactions) {
+  factory NoteReaction.resolved(String key, {Map<String, int> reactionCountMap = const {}}) {
     return NoteReaction(
       emoji: Emoji.resolve(rawEmoji: key),
-      reactionCount: rawReactions[key] ?? 0,
+      reactionCount: reactionCountMap[key] ?? 0,
     );
   }
 }
