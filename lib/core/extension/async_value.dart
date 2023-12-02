@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
-import 'package:misskey_dog/core/ui/error_view.dart';
-import 'package:misskey_dog/core/ui/loading_view.dart';
+import 'package:misskey_dog/core/view/error_view.dart';
+import 'package:misskey_dog/core/view/loading_view.dart';
 
 extension AsyncValueExt<T> on AsyncValue<T> {
   Widget whenScreenLoading({
