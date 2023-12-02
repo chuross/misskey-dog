@@ -154,7 +154,7 @@ final class _Image extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
-      child: InkWell(
+      child: GestureDetector(
         onTap: () => context.pushRoute(ImageDetailRoute(imageUrl: file.url)),
         child: Hero(
           tag: file.url,
