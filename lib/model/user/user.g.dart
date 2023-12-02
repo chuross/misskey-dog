@@ -10,6 +10,9 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       id: json['id'] as String,
       username: json['username'] as String,
       avatarUrl: json['avatarUrl'] as String?,
+      instance: json['instance'] == null
+          ? null
+          : Instance.fromJson(json['instance'] as Map<String, dynamic>),
       isBot: json['isBot'] as bool,
       bannerUrl: json['bannerUrl'] as String?,
       description: json['description'] as String?,
@@ -23,6 +26,7 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'id': instance.id,
       'username': instance.username,
       'avatarUrl': instance.avatarUrl,
+      'instance': instance.instance,
       'isBot': instance.isBot,
       'bannerUrl': instance.bannerUrl,
       'description': instance.description,

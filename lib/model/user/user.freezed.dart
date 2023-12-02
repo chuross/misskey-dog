@@ -23,6 +23,7 @@ mixin _$User {
   String get id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String? get avatarUrl => throw _privateConstructorUsedError;
+  Instance? get instance => throw _privateConstructorUsedError;
   bool get isBot => throw _privateConstructorUsedError;
   String? get bannerUrl => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -44,12 +45,15 @@ abstract class $UserCopyWith<$Res> {
       {String id,
       String username,
       String? avatarUrl,
+      Instance? instance,
       bool isBot,
       String? bannerUrl,
       String? description,
       int? followersCount,
       int? followingCount,
       int? notesCount});
+
+  $InstanceCopyWith<$Res>? get instance;
 }
 
 /// @nodoc
@@ -68,6 +72,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? id = null,
     Object? username = null,
     Object? avatarUrl = freezed,
+    Object? instance = freezed,
     Object? isBot = null,
     Object? bannerUrl = freezed,
     Object? description = freezed,
@@ -88,6 +93,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      instance: freezed == instance
+          ? _value.instance
+          : instance // ignore: cast_nullable_to_non_nullable
+              as Instance?,
       isBot: null == isBot
           ? _value.isBot
           : isBot // ignore: cast_nullable_to_non_nullable
@@ -114,6 +123,18 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
               as int?,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $InstanceCopyWith<$Res>? get instance {
+    if (_value.instance == null) {
+      return null;
+    }
+
+    return $InstanceCopyWith<$Res>(_value.instance!, (value) {
+      return _then(_value.copyWith(instance: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -127,12 +148,16 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       {String id,
       String username,
       String? avatarUrl,
+      Instance? instance,
       bool isBot,
       String? bannerUrl,
       String? description,
       int? followersCount,
       int? followingCount,
       int? notesCount});
+
+  @override
+  $InstanceCopyWith<$Res>? get instance;
 }
 
 /// @nodoc
@@ -148,6 +173,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? id = null,
     Object? username = null,
     Object? avatarUrl = freezed,
+    Object? instance = freezed,
     Object? isBot = null,
     Object? bannerUrl = freezed,
     Object? description = freezed,
@@ -168,6 +194,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      instance: freezed == instance
+          ? _value.instance
+          : instance // ignore: cast_nullable_to_non_nullable
+              as Instance?,
       isBot: null == isBot
           ? _value.isBot
           : isBot // ignore: cast_nullable_to_non_nullable
@@ -203,6 +233,7 @@ class _$UserImpl implements _User {
       {required this.id,
       required this.username,
       this.avatarUrl,
+      this.instance,
       required this.isBot,
       this.bannerUrl,
       this.description,
@@ -220,6 +251,8 @@ class _$UserImpl implements _User {
   @override
   final String? avatarUrl;
   @override
+  final Instance? instance;
+  @override
   final bool isBot;
   @override
   final String? bannerUrl;
@@ -234,7 +267,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, avatarUrl: $avatarUrl, isBot: $isBot, bannerUrl: $bannerUrl, description: $description, followersCount: $followersCount, followingCount: $followingCount, notesCount: $notesCount)';
+    return 'User(id: $id, username: $username, avatarUrl: $avatarUrl, instance: $instance, isBot: $isBot, bannerUrl: $bannerUrl, description: $description, followersCount: $followersCount, followingCount: $followingCount, notesCount: $notesCount)';
   }
 
   @override
@@ -247,6 +280,8 @@ class _$UserImpl implements _User {
                 other.username == username) &&
             (identical(other.avatarUrl, avatarUrl) ||
                 other.avatarUrl == avatarUrl) &&
+            (identical(other.instance, instance) ||
+                other.instance == instance) &&
             (identical(other.isBot, isBot) || other.isBot == isBot) &&
             (identical(other.bannerUrl, bannerUrl) ||
                 other.bannerUrl == bannerUrl) &&
@@ -262,8 +297,18 @@ class _$UserImpl implements _User {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, username, avatarUrl, isBot,
-      bannerUrl, description, followersCount, followingCount, notesCount);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      username,
+      avatarUrl,
+      instance,
+      isBot,
+      bannerUrl,
+      description,
+      followersCount,
+      followingCount,
+      notesCount);
 
   @JsonKey(ignore: true)
   @override
@@ -284,6 +329,7 @@ abstract class _User implements User {
       {required final String id,
       required final String username,
       final String? avatarUrl,
+      final Instance? instance,
       required final bool isBot,
       final String? bannerUrl,
       final String? description,
@@ -299,6 +345,8 @@ abstract class _User implements User {
   String get username;
   @override
   String? get avatarUrl;
+  @override
+  Instance? get instance;
   @override
   bool get isBot;
   @override

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:misskey_dog/model/instance/instance.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
@@ -9,6 +10,7 @@ abstract class User with _$User {
     required String id,
     required String username,
     String? avatarUrl,
+    Instance? instance,
     required bool isBot,
     String? bannerUrl,
     String? description,
