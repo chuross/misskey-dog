@@ -1,17 +1,12 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:misskey_dog/feature/misskey/share/misskey_emoji.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'misskey_text.g.dart';
 
 final RegExp _emojiReget = RegExp(r':([A-Za-z0-9_]+):');
 
-@riverpod
-List<InlineSpan> _separateInlineSpans(
-  _SeparateInlineSpansRef ref, {
+List<InlineSpan> _separateInlineSpans({
   required String text,
   required double height,
 }) {
@@ -56,15 +51,26 @@ List<InlineSpan> _separateInlineSpans(
   return spans;
 }
 
-final class MisskeyText extends ConsumerWidget {
+final class MisskeyText extends HookWidget {
   final String text;
   final TextStyle baseTextStyle;
+  final Map<String, String> externalTextEmojiUrlMap;
 
-  const MisskeyText({super.key, required this.text, required this.baseTextStyle});
+  const MisskeyText({
+    super.key,
+    required this.text,
+    required this.baseTextStyle,
+    required this.externalTextEmojiUrlMap,
+  });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final inlineSpans = ref.watch(_separateInlineSpansProvider(text: text, height: baseTextStyle.fontSize ?? 14));
+  Widget build(BuildContext context) {
+    final inlineSpans = useMemoized(() {
+      return _separateInlineSpans(
+        text: text,
+        height: baseTextStyle.fontSize ?? 14,
+      );
+    }, const []);
 
     return RichText(
       softWrap: true,
