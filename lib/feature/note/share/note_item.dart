@@ -81,7 +81,23 @@ final class NoteItem extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 4),
+            (note.renote?.user.instance ?? note.user.instance).mapOrElse((instance) {
+              return Row(
+                children: [
+                  SizedBox.square(
+                    dimension: 12,
+                    child: Image.network(instance.iconUrl, fit: BoxFit.cover),
+                  ),
+                  const SizedBox(width: 2),
+                  Text(
+                    instance.name,
+                    style: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade700),
+                    overflow: TextOverflow.ellipsis,
+                  ).flexible(),
+                ],
+              );
+            }, elseValue: const SizedBox.shrink()),
+            const SizedBox(height: 12),
             MisskeyText(
               key: "${note.id}_text".toKey(),
               text: note.renote?.text ?? note.text ?? '',
