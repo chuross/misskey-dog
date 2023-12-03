@@ -10,7 +10,7 @@ _$InstanceImpl _$$InstanceImplFromJson(Map<String, dynamic> json) =>
     _$InstanceImpl(
       name: json['name'] as String,
       iconUrl: json['iconUrl'] as String,
-      themeColor: json['themeColor'] as String,
+      themeColor: json['themeColor'] as String?,
     );
 
 Map<String, dynamic> _$$InstanceImplToJson(_$InstanceImpl instance) =>

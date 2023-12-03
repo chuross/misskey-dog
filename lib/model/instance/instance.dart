@@ -8,7 +8,7 @@ abstract class Instance with _$Instance {
   const factory Instance({
     required String name,
     required String iconUrl,
-    required String themeColor,
+    required String? themeColor,
   }) = _Instance;
 
   factory Instance.fromJson(Map<String, dynamic> json) => _$InstanceFromJson(json);

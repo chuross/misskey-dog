@@ -22,7 +22,7 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
 mixin _$Instance {
   String get name => throw _privateConstructorUsedError;
   String get iconUrl => throw _privateConstructorUsedError;
-  String get themeColor => throw _privateConstructorUsedError;
+  String? get themeColor => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $InstanceCopyWith<$Res> {
   factory $InstanceCopyWith(Instance value, $Res Function(Instance) then) =
       _$InstanceCopyWithImpl<$Res, Instance>;
   @useResult
-  $Res call({String name, String iconUrl, String themeColor});
+  $Res call({String name, String iconUrl, String? themeColor});
 }
 
 /// @nodoc
@@ -53,7 +53,7 @@ class _$InstanceCopyWithImpl<$Res, $Val extends Instance>
   $Res call({
     Object? name = null,
     Object? iconUrl = null,
-    Object? themeColor = null,
+    Object? themeColor = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -64,10 +64,10 @@ class _$InstanceCopyWithImpl<$Res, $Val extends Instance>
           ? _value.iconUrl
           : iconUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      themeColor: null == themeColor
+      themeColor: freezed == themeColor
           ? _value.themeColor
           : themeColor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -80,7 +80,7 @@ abstract class _$$InstanceImplCopyWith<$Res>
       __$$InstanceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String iconUrl, String themeColor});
+  $Res call({String name, String iconUrl, String? themeColor});
 }
 
 /// @nodoc
@@ -96,7 +96,7 @@ class __$$InstanceImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? iconUrl = null,
-    Object? themeColor = null,
+    Object? themeColor = freezed,
   }) {
     return _then(_$InstanceImpl(
       name: null == name
@@ -107,10 +107,10 @@ class __$$InstanceImplCopyWithImpl<$Res>
           ? _value.iconUrl
           : iconUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      themeColor: null == themeColor
+      themeColor: freezed == themeColor
           ? _value.themeColor
           : themeColor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -129,7 +129,7 @@ class _$InstanceImpl implements _Instance {
   @override
   final String iconUrl;
   @override
-  final String themeColor;
+  final String? themeColor;
 
   @override
   String toString() {
@@ -169,7 +169,7 @@ abstract class _Instance implements Instance {
   const factory _Instance(
       {required final String name,
       required final String iconUrl,
-      required final String themeColor}) = _$InstanceImpl;
+      required final String? themeColor}) = _$InstanceImpl;
 
   factory _Instance.fromJson(Map<String, dynamic> json) =
       _$InstanceImpl.fromJson;
@@ -179,7 +179,7 @@ abstract class _Instance implements Instance {
   @override
   String get iconUrl;
   @override
-  String get themeColor;
+  String? get themeColor;
   @override
   @JsonKey(ignore: true)
   _$$InstanceImplCopyWith<_$InstanceImpl> get copyWith =>
