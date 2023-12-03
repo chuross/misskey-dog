@@ -10,7 +10,7 @@ part 'api_provider.g.dart';
 Future<Dio> dio(DioRef ref) async {
   final dio = Dio(BaseOptions(
     connectTimeout: const Duration(seconds: 3),
-    receiveTimeout: const Duration(seconds: 3),
+    receiveTimeout: const Duration(seconds: 6),
     sendTimeout: const Duration(seconds: 10),
   ));
 
