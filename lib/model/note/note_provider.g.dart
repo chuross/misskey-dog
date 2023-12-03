@@ -197,6 +197,176 @@ class _LocalNoteIdsWithCacheProviderElement
   int get limit => (origin as LocalNoteIdsWithCacheProvider).limit;
 }
 
+String _$globalNoteIdsWithCacheHash() =>
+    r'2c572968f38f30caefe9c06a72260e7909d94712';
+
+abstract class _$GlobalNoteIdsWithCache
+    extends BuildlessAutoDisposeAsyncNotifier<List<String>> {
+  late final bool? hasFiles;
+  late final int limit;
+
+  FutureOr<List<String>> build({
+    bool? hasFiles,
+    int limit = 100,
+  });
+}
+
+/// See also [GlobalNoteIdsWithCache].
+@ProviderFor(GlobalNoteIdsWithCache)
+const globalNoteIdsWithCacheProvider = GlobalNoteIdsWithCacheFamily();
+
+/// See also [GlobalNoteIdsWithCache].
+class GlobalNoteIdsWithCacheFamily extends Family<AsyncValue<List<String>>> {
+  /// See also [GlobalNoteIdsWithCache].
+  const GlobalNoteIdsWithCacheFamily();
+
+  /// See also [GlobalNoteIdsWithCache].
+  GlobalNoteIdsWithCacheProvider call({
+    bool? hasFiles,
+    int limit = 100,
+  }) {
+    return GlobalNoteIdsWithCacheProvider(
+      hasFiles: hasFiles,
+      limit: limit,
+    );
+  }
+
+  @override
+  GlobalNoteIdsWithCacheProvider getProviderOverride(
+    covariant GlobalNoteIdsWithCacheProvider provider,
+  ) {
+    return call(
+      hasFiles: provider.hasFiles,
+      limit: provider.limit,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'globalNoteIdsWithCacheProvider';
+}
+
+/// See also [GlobalNoteIdsWithCache].
+class GlobalNoteIdsWithCacheProvider
+    extends AutoDisposeAsyncNotifierProviderImpl<GlobalNoteIdsWithCache,
+        List<String>> {
+  /// See also [GlobalNoteIdsWithCache].
+  GlobalNoteIdsWithCacheProvider({
+    bool? hasFiles,
+    int limit = 100,
+  }) : this._internal(
+          () => GlobalNoteIdsWithCache()
+            ..hasFiles = hasFiles
+            ..limit = limit,
+          from: globalNoteIdsWithCacheProvider,
+          name: r'globalNoteIdsWithCacheProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$globalNoteIdsWithCacheHash,
+          dependencies: GlobalNoteIdsWithCacheFamily._dependencies,
+          allTransitiveDependencies:
+              GlobalNoteIdsWithCacheFamily._allTransitiveDependencies,
+          hasFiles: hasFiles,
+          limit: limit,
+        );
+
+  GlobalNoteIdsWithCacheProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.hasFiles,
+    required this.limit,
+  }) : super.internal();
+
+  final bool? hasFiles;
+  final int limit;
+
+  @override
+  FutureOr<List<String>> runNotifierBuild(
+    covariant GlobalNoteIdsWithCache notifier,
+  ) {
+    return notifier.build(
+      hasFiles: hasFiles,
+      limit: limit,
+    );
+  }
+
+  @override
+  Override overrideWith(GlobalNoteIdsWithCache Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: GlobalNoteIdsWithCacheProvider._internal(
+        () => create()
+          ..hasFiles = hasFiles
+          ..limit = limit,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        hasFiles: hasFiles,
+        limit: limit,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeAsyncNotifierProviderElement<GlobalNoteIdsWithCache, List<String>>
+      createElement() {
+    return _GlobalNoteIdsWithCacheProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is GlobalNoteIdsWithCacheProvider &&
+        other.hasFiles == hasFiles &&
+        other.limit == limit;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, hasFiles.hashCode);
+    hash = _SystemHash.combine(hash, limit.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin GlobalNoteIdsWithCacheRef
+    on AutoDisposeAsyncNotifierProviderRef<List<String>> {
+  /// The parameter `hasFiles` of this provider.
+  bool? get hasFiles;
+
+  /// The parameter `limit` of this provider.
+  int get limit;
+}
+
+class _GlobalNoteIdsWithCacheProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<GlobalNoteIdsWithCache,
+        List<String>> with GlobalNoteIdsWithCacheRef {
+  _GlobalNoteIdsWithCacheProviderElement(super.provider);
+
+  @override
+  bool? get hasFiles => (origin as GlobalNoteIdsWithCacheProvider).hasFiles;
+  @override
+  int get limit => (origin as GlobalNoteIdsWithCacheProvider).limit;
+}
+
 String _$cachedNoteHash() => r'37bb9f450daab926abd431cc81638043e9cfb502';
 
 abstract class _$CachedNote extends BuildlessAutoDisposeNotifier<Note?> {

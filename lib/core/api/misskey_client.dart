@@ -41,6 +41,9 @@ abstract class MisskeyClient {
   @POST('/api/notes/local-timeline')
   Future<List<Note>> getLocalNotes({@Body() required Map<String, dynamic> request});
 
+  @POST('/api/notes/global-timeline')
+  Future<List<Note>> getGlobalNotes({@Body() required Map<String, dynamic> request});
+
   @POST('/api/notes/create')
   Future<CreateNoteResponse> createNote({@Body() required Map<String, dynamic> request});
 

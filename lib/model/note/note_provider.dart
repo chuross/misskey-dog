@@ -1,5 +1,6 @@
 import 'package:misskey_dog/core/api/api_provider.dart';
 import 'package:misskey_dog/core/api/request/create_note_reaction_request.dart';
+import 'package:misskey_dog/core/api/request/get_global_notes_request.dart';
 import 'package:misskey_dog/core/api/request/get_local_notes_request.dart';
 import 'package:misskey_dog/core/api/request/get_note_request.dart';
 import 'package:misskey_dog/core/extension/map.dart';
@@ -20,6 +21,53 @@ final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
 
     final notes = await client.getLocalNotes(
       request: GetLocalNotesRequest(
+        hasFiles: hasFiles,
+        limit: limit,
+      ).toJson().removeAllNullValueKeys(),
+    );
+
+    for (var note in notes) {
+      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+    }
+
+    return notes.map((note) => note.id).toList();
+  }
+
+  Future<void> fetchNext() async {
+    if (state.isLoading) return;
+
+    final lastNoteId = state.value?.lastOrNull;
+    if (lastNoteId == null) return;
+
+    final client = await ref.watch(misskeyClientProvider().future);
+
+    final newNotes = await client.getLocalNotes(
+      request: GetLocalNotesRequest(
+        hasFiles: hasFiles,
+        untilId: lastNoteId,
+        limit: limit,
+      ).toJson().removeAllNullValueKeys(),
+    );
+
+    for (var note in newNotes) {
+      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+    }
+
+    state = AsyncData([...state.value!, ...newNotes.map((note) => note.id)]);
+  }
+}
+
+@riverpod
+final class GlobalNoteIdsWithCache extends _$GlobalNoteIdsWithCache {
+  @override
+  Future<List<String>> build({
+    bool? hasFiles,
+    int limit = 100,
+  }) async {
+    final client = await ref.watch(misskeyClientProvider().future);
+
+    final notes = await client.getGlobalNotes(
+      request: GetGlobalNotesRequest(
         hasFiles: hasFiles,
         limit: limit,
       ).toJson().removeAllNullValueKeys(),
