@@ -28,7 +28,11 @@ abstract class Note with _$Note {
   }) = _Note;
 
   List<NoteReaction> get reactions => reactionCountMap.keys.map((key) {
-        return NoteReaction.resolved(key, reactionCountMap: reactionCountMap);
+        return NoteReaction.resolved(
+          key,
+          reactionCountMap: reactionCountMap,
+          externalReactionUrlMap: externalReactionUrlMap,
+        );
       }).toList();
 
   Emoji? get myReactionEmoji => myRawReactionEmoji != null ? Emoji.resolve(rawEmoji: myRawReactionEmoji!) : null;
