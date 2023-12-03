@@ -97,7 +97,7 @@ final class NoteItem extends StatelessWidget {
                 ],
               );
             }, elseValue: const SizedBox.shrink()),
-            const SizedBox(height: 12),
+            const SizedBox(height: 4),
             MisskeyText(
               key: "${note.id}_text".toKey(),
               text: note.renote?.text ?? note.text ?? '',
@@ -105,7 +105,7 @@ final class NoteItem extends StatelessWidget {
               externalTextEmojiUrlMap: note.externalTextEmojiUrlMap,
             ),
             const SizedBox(height: 16),
-            note.files.where((element) => element.isImage).firstOrNull.mapOrElse(
+            (note.renote?.files ?? note.files).where((element) => element.isImage).firstOrNull.mapOrElse(
                   (file) => _Image(file: file),
                   elseValue: const SizedBox.shrink(),
                 ),
