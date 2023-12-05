@@ -18,7 +18,7 @@ abstract class NoteReaction with _$NoteReaction {
     Map<String, int> reactionCountMap = const {},
     Map<String, String> externalReactionUrlMap = const {},
   }) {
-    final emojiName = key.takeIf((p) => p.length > 1)?.substring(1, key.length) ?? '';
+    final emojiName = key.takeIf((p) => p.length > 1)?.substring(1, key.length - 1) ?? '';
 
     return NoteReaction(
       emoji: Emoji.resolve(rawEmoji: key, url: externalReactionUrlMap[emojiName]),
