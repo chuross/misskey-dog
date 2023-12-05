@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:misskey_dog/core/extension/object.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 
 part 'note_reaction.freezed.dart';
@@ -17,7 +18,7 @@ abstract class NoteReaction with _$NoteReaction {
     Map<String, int> reactionCountMap = const {},
     Map<String, String> externalReactionUrlMap = const {},
   }) {
-    final emojiName = key.substring(1, key.length - 1);
+    final emojiName = key.takeIf((p) => p.length > 1)?.substring(1, key.length) ?? '';
 
     return NoteReaction(
       emoji: Emoji.resolve(rawEmoji: key, url: externalReactionUrlMap[emojiName]),
