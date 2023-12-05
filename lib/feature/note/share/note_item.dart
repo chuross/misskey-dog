@@ -104,7 +104,7 @@ final class NoteItem extends StatelessWidget {
               baseTextStyle: context.textTheme.bodyMedium!,
               externalTextEmojiUrlMap: note.externalTextEmojiUrlMap,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             (note.renote?.files ?? note.files).where((element) => element.isImage).firstOrNull.mapOrElse(
                   (file) => _Image(file: file),
                   elseValue: const SizedBox.shrink(),
