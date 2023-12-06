@@ -28,14 +28,16 @@ const _$StreamingPayloadRequestKindEnumMap = {
 _$StreamingPayloadRequestBodyImpl _$$StreamingPayloadRequestBodyImplFromJson(
         Map<String, dynamic> json) =>
     _$StreamingPayloadRequestBodyImpl(
+      id: json['id'] as String,
       channel:
           $enumDecode(_$StreamingPayloadRequestChannelEnumMap, json['channel']),
-      params: json['params'] as Map<String, dynamic>,
+      params: json['params'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$$StreamingPayloadRequestBodyImplToJson(
         _$StreamingPayloadRequestBodyImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'channel': _$StreamingPayloadRequestChannelEnumMap[instance.channel]!,
       'params': instance.params,
     };

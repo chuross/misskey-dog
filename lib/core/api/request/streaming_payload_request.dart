@@ -23,8 +23,9 @@ enum StreamingPayloadRequestKind {
 @freezed
 class StreamingPayloadRequestBody with _$StreamingPayloadRequestBody {
   const factory StreamingPayloadRequestBody({
+    required String id,
     required StreamingPayloadRequestChannel channel,
-    required Map<String, dynamic> params,
+    Map<String, dynamic>? params,
   }) = _StreamingPayloadRequestBody;
 
   factory StreamingPayloadRequestBody.fromJson(Map<String, dynamic> json) => _$StreamingPayloadRequestBodyFromJson(json);
