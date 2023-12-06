@@ -29,6 +29,10 @@ abstract class MisskeyClient {
     });
   }
 
+  static Uri sreamingUri({required String host, required String token}) {
+    return Uri.parse('wss://$host/streaming?i=$token');
+  }
+
   @POST('/api/miauth/{session}/check')
   Future<Account> authorize(@Path('session') String session);
 

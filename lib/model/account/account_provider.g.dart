@@ -7,7 +7,7 @@ part of 'account_provider.dart';
 // **************************************************************************
 
 String _$accountAuthorizationHash() =>
-    r'3a7b3bc5edca87d6d4ab955417cb69374fa1d39b';
+    r'b049247ef601e31a2027e8a306e94c11f7f899ce';
 
 /// Copied from Dart SDK
 class _SystemHash {

@@ -8,11 +8,15 @@ part 'account.g.dart';
 
 @freezed
 abstract class Account with _$Account {
+  const Account._();
+
   const factory Account({
     required String token,
     required User user,
-    String? apiBaseUrl,
+    String? host,
   }) = _Account;
+
+  String get apiBaseUrl => 'https://$host';
 
   factory Account.fromJson(Map<String, dynamic> json) => _$AccountFromJson(json);
 }
