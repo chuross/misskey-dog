@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:misskey_dog/core/api/misskey_client.dart';
+import 'package:misskey_dog/core/extension/stream.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
@@ -83,6 +84,6 @@ Raw<Stream<dynamic>> misskeyChannelStreaming(MisskeyChannelStreamingRef ref) {
       }));
     });
 
-    return webSocketChannel;
-  });
+    return webSocketChannel.stream;
+  }).flatten();
 }
