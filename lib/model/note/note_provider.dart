@@ -26,7 +26,7 @@ final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
       ).toJson().removeAllNullValueKeys(),
     );
 
-    for (var note in notes) {
+    for (final note in notes) {
       ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
     }
 
@@ -49,7 +49,7 @@ final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
       ).toJson().removeAllNullValueKeys(),
     );
 
-    for (var note in newNotes) {
+    for (final note in newNotes) {
       ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
     }
 
@@ -73,7 +73,7 @@ final class GlobalNoteIdsWithCache extends _$GlobalNoteIdsWithCache {
       ).toJson().removeAllNullValueKeys(),
     );
 
-    for (var note in notes) {
+    for (final note in notes) {
       ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
     }
 
@@ -96,7 +96,7 @@ final class GlobalNoteIdsWithCache extends _$GlobalNoteIdsWithCache {
       ).toJson().removeAllNullValueKeys(),
     );
 
-    for (var note in newNotes) {
+    for (final note in newNotes) {
       ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
     }
 

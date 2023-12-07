@@ -170,14 +170,14 @@ class _MisskeyClientProviderElement
   String? get baseUrl => (origin as MisskeyClientProvider).baseUrl;
 }
 
-String _$misskeyStreamingHash() => r'14a217366b624787ada95de5055ff44299fa6c02';
+String _$misskeyStreamingHash() => r'cb1aacdf9897d4d41e7a857f8dda9d8c67918af3';
 
 /// See also [misskeyStreaming].
 @ProviderFor(misskeyStreaming)
 const misskeyStreamingProvider = MisskeyStreamingFamily();
 
 /// See also [misskeyStreaming].
-class MisskeyStreamingFamily extends Family<Raw<Stream<WebSocketChannel>>> {
+class MisskeyStreamingFamily extends Family<Raw<Stream<Notification>>> {
   /// See also [misskeyStreaming].
   const MisskeyStreamingFamily();
 
@@ -216,7 +216,7 @@ class MisskeyStreamingFamily extends Family<Raw<Stream<WebSocketChannel>>> {
 
 /// See also [misskeyStreaming].
 class MisskeyStreamingProvider
-    extends AutoDisposeProvider<Raw<Stream<WebSocketChannel>>> {
+    extends AutoDisposeProvider<Raw<Stream<Notification>>> {
   /// See also [misskeyStreaming].
   MisskeyStreamingProvider({
     required StreamingPayloadRequestChannel channel,
@@ -251,7 +251,7 @@ class MisskeyStreamingProvider
 
   @override
   Override overrideWith(
-    Raw<Stream<WebSocketChannel>> Function(MisskeyStreamingRef provider) create,
+    Raw<Stream<Notification>> Function(MisskeyStreamingRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -268,7 +268,7 @@ class MisskeyStreamingProvider
   }
 
   @override
-  AutoDisposeProviderElement<Raw<Stream<WebSocketChannel>>> createElement() {
+  AutoDisposeProviderElement<Raw<Stream<Notification>>> createElement() {
     return _MisskeyStreamingProviderElement(this);
   }
 
@@ -286,14 +286,13 @@ class MisskeyStreamingProvider
   }
 }
 
-mixin MisskeyStreamingRef
-    on AutoDisposeProviderRef<Raw<Stream<WebSocketChannel>>> {
+mixin MisskeyStreamingRef on AutoDisposeProviderRef<Raw<Stream<Notification>>> {
   /// The parameter `channel` of this provider.
   StreamingPayloadRequestChannel get channel;
 }
 
 class _MisskeyStreamingProviderElement
-    extends AutoDisposeProviderElement<Raw<Stream<WebSocketChannel>>>
+    extends AutoDisposeProviderElement<Raw<Stream<Notification>>>
     with MisskeyStreamingRef {
   _MisskeyStreamingProviderElement(super.provider);
 

@@ -1,10 +1,13 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:misskey_dog/core/api/misskey_client.dart';
 import 'package:misskey_dog/core/api/request/streaming_payload_request.dart';
+import 'package:misskey_dog/core/extension/stream.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
+import 'package:misskey_dog/model/notification/notification.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 import 'package:uuid/v4.dart';
@@ -53,19 +56,27 @@ Future<MisskeyClient> misskeyClient(MisskeyClientRef ref, {String? baseUrl}) asy
 }
 
 @riverpod
-Raw<Stream<WebSocketChannel>> misskeyStreaming(MisskeyStreamingRef ref, {required StreamingPayloadRequestChannel channel}) {
-  return ref.watch(accountStateProvider.future).asStream().where((event) => event != null).map((event) => event!).map((event) {
-    final websocket = WebSocketChannel.connect(MisskeyClient.sreamingUri(host: event.host ?? '', token: event.token));
-    ref.onDispose(() => websocket.sink.close());
+Raw<Stream<Notification>> misskeyStreaming(MisskeyStreamingRef ref, {required StreamingPayloadRequestChannel channel}) {
+  return ref
+      .watch(accountStateProvider.future)
+      .asStream()
+      .where((event) => event != null)
+      .map((event) => event!)
+      .map((event) {
+        final webSocket = WebSocketChannel.connect(MisskeyClient.sreamingUri(host: event.host ?? '', token: event.token));
+        ref.onDispose(() => webSocket.sink.close());
 
-    websocket.sink.add(jsonEncode(StreamingPayloadRequest(
-      kind: StreamingPayloadRequestKind.connect,
-      body: StreamingPayloadRequestBody(
-        id: const Uuid().v4(),
-        channel: channel,
-      ),
-    ).toJson()));
+        webSocket.sink.add(jsonEncode(StreamingPayloadRequest(
+          kind: StreamingPayloadRequestKind.connect,
+          body: StreamingPayloadRequestBody(
+            id: const Uuid().v4(),
+            channel: channel,
+          ),
+        ).toJson()));
 
-    return websocket;
-  });
+        return webSocket.stream;
+      })
+      .flatten()
+      .map((event) => jsonDecode(event))
+      .map((event) => Notification.fromJson(event));
 }
