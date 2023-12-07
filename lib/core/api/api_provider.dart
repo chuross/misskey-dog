@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:misskey_dog/core/api/misskey_client.dart';
 import 'package:misskey_dog/core/extension/stream.dart';
+import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 import 'package:misskey_dog/model/streaming/streaming_channel.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -55,11 +56,21 @@ Future<MisskeyClient> misskeyClient(MisskeyClientRef ref, {String? baseUrl}) asy
 
 @riverpod
 Future<WebSocketChannel> _misskeyStreaming(_MisskeyStreamingRef ref) async {
+  final log = ref.watch(logProvider);
   final account = await ref.watch(accountStateProvider.future);
   if (account == null) throw StateError('account is null');
 
-  final webSocket = WebSocketChannel.connect(MisskeyClient.sreamingUri(host: account.host ?? '', token: account.token));
-  ref.onDispose(() => webSocket.sink.close());
+  final streamingUrl = MisskeyClient.sreamingUri(host: account.host ?? '', token: account.token);
+
+  log.d('@@@streaming:connect:start:url=$streamingUrl');
+  final webSocket = WebSocketChannel.connect(streamingUrl);
+  ref.onDispose(() {
+    log.d('@@@streaming:close');
+    webSocket.sink.close();
+  });
+
+  await webSocket.ready;
+  log.d('@@@streaming:connect:completed');
 
   return webSocket;
 }

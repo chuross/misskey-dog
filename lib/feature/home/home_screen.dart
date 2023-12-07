@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:i18n_extension/i18n_widget.dart';
+import 'package:misskey_dog/core/api/api_provider.dart';
 import 'package:misskey_dog/core/extension/async_value.dart';
 import 'package:misskey_dog/core/extension/object.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
@@ -14,11 +17,12 @@ import 'package:misskey_dog/feature/home/home_local_timeline.dart';
 import 'package:misskey_dog/feature/home/home_media_timeline.dart';
 import 'package:misskey_dog/feature/home/home_note_creation_screen.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
+import 'package:misskey_dog/model/streaming/streaming_channel.dart';
 
 part 'home_screen.freezed.dart';
 
 @RoutePage()
-final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
+final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
   static final _tabs = [
     _HomeTab(title: 'ローカル'.i18n, child: const HomeLocalTimeline()),
     _HomeTab(title: 'メディア'.i18n, child: const HomeMediaTimeline()),
@@ -30,6 +34,11 @@ final class HomeScreen extends ConsumerWidget implements AutoRouteWrapper {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final account = ref.watch(accountStateProvider);
+
+    final mainStream = useStream(ref.watch(misskeyChannelStreamingProvider(channel: StreamingChannel.localTimeline)));
+    useEffect(() {
+      print('@@@ mainStream: ${mainStream.data}, error=${mainStream.error}');
+    }, [mainStream.data]);
 
     return account.whenScreenLoading(
         log: ref.watch(logProvider),
