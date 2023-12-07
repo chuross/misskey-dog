@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:misskey_dog/core/api/misskey_client.dart';
 import 'package:misskey_dog/core/extension/stream.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
+import 'package:misskey_dog/model/streaming/streaming_channel.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -64,26 +65,33 @@ Future<WebSocketChannel> _misskeyStreaming(_MisskeyStreamingRef ref) async {
 }
 
 @riverpod
-Raw<Stream<dynamic>> misskeyChannelStreaming(MisskeyChannelStreamingRef ref) {
-  return ref.watch(_misskeyStreamingProvider.future).asStream().map((webSocketChannel) {
-    final streamingId = const Uuid().v4();
+Raw<Stream<dynamic>> misskeyChannelStreaming(MisskeyChannelStreamingRef ref, {required StreamingChannel channel}) {
+  final streamingId = const Uuid().v4();
 
-    webSocketChannel.sink.add(jsonEncode({
-      'type': 'connect',
-      'body': {
-        'id': streamingId,
-      },
-    }));
+  return ref
+      .watch(_misskeyStreamingProvider.future)
+      .asStream()
+      .map((webSocketChannel) {
+        webSocketChannel.sink.add(jsonEncode({
+          'type': 'connect',
+          'body': {
+            'id': streamingId,
+            'channel': channel.rawValue,
+          },
+        }));
 
-    ref.onDispose(() {
-      webSocketChannel.sink.add(jsonEncode({
-        'type': 'disconnect',
-        'body': {
-          'id': streamingId,
-        },
-      }));
-    });
+        ref.onDispose(() {
+          webSocketChannel.sink.add(jsonEncode({
+            'type': 'disconnect',
+            'body': {
+              'id': streamingId,
+            },
+          }));
+        });
 
-    return webSocketChannel.stream;
-  }).flatten();
+        return webSocketChannel.stream;
+      })
+      .flatten()
+      .where((event) => event['body']['id'] == streamingId)
+      .map((event) => event['body']);
 }
