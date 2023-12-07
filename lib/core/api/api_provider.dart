@@ -4,14 +4,9 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:misskey_dog/core/api/misskey_client.dart';
-import 'package:misskey_dog/core/api/request/streaming_payload_request.dart';
-import 'package:misskey_dog/core/extension/map.dart';
-import 'package:misskey_dog/core/extension/stream.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
-import 'package:misskey_dog/model/notification/notification.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
-import 'package:uuid/v4.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 part 'api_provider.g.dart';
@@ -57,7 +52,7 @@ Future<MisskeyClient> misskeyClient(MisskeyClientRef ref, {String? baseUrl}) asy
 }
 
 @riverpod
-Future<WebSocketChannel> _misskeyStreamingChannel(_MisskeyStreamingChannelRef ref) async {
+Future<WebSocketChannel> _misskeyStreaming(_MisskeyStreamingRef ref) async {
   final account = await ref.watch(accountStateProvider.future);
   if (account == null) throw StateError('account is null');
 
@@ -67,28 +62,27 @@ Future<WebSocketChannel> _misskeyStreamingChannel(_MisskeyStreamingChannelRef re
   return webSocket;
 }
 
-// @riverpod
-// Raw<Stream<Notification>> misskeyStreaming(MisskeyStreamingRef ref, {required StreamingPayloadRequestChannel channel}) {
-//   return ref
-//       .watch(accountStateProvider.future)
-//       .asStream()
-//       .where((event) => event != null)
-//       .map((event) => event!)
-//       .map((event) {
-//         final webSocket = WebSocketChannel.connect(MisskeyClient.sreamingUri(host: event.host ?? '', token: event.token));
-//         ref.onDispose(() => webSocket.sink.close());
+@riverpod
+Raw<Stream<dynamic>> misskeyChannelStreaming(MisskeyChannelStreamingRef ref) {
+  return ref.watch(_misskeyStreamingProvider.future).asStream().map((webSocketChannel) {
+    final streamingId = const Uuid().v4();
 
-        // webSocket.sink.add(jsonEncode(StreamingPayloadRequest(
-        //   kind: StreamingPayloadRequestKind.connect,
-        //   body: StreamingPayloadRequestBody(
-        //     id: const Uuid().v4(),
-        //     channel: channel,
-        //   ),
-        // ).toJson().removeAllNullValueKeys()));
+    webSocketChannel.sink.add(jsonEncode({
+      'type': 'connect',
+      'body': {
+        'id': streamingId,
+      },
+    }));
 
-//         return webSocket.stream;
-//       })
-//       .flatten()
-//       .map((event) => jsonDecode(event))
-//       .map((event) => Notification.fromJson(event));
-// }
+    ref.onDispose(() {
+      webSocketChannel.sink.add(jsonEncode({
+        'type': 'disconnect',
+        'body': {
+          'id': streamingId,
+        },
+      }));
+    });
+
+    return webSocketChannel;
+  });
+}
