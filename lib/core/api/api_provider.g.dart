@@ -170,135 +170,23 @@ class _MisskeyClientProviderElement
   String? get baseUrl => (origin as MisskeyClientProvider).baseUrl;
 }
 
-String _$misskeyStreamingHash() => r'e72755168bada6d5959c503d41764bc44781ccbe';
+String _$misskeyStreamingChannelHash() =>
+    r'ee86e0916778eb147ff6f6a60aaa4f7d7ce9604e';
 
-/// See also [misskeyStreaming].
-@ProviderFor(misskeyStreaming)
-const misskeyStreamingProvider = MisskeyStreamingFamily();
+/// See also [_misskeyStreamingChannel].
+@ProviderFor(_misskeyStreamingChannel)
+final _misskeyStreamingChannelProvider =
+    AutoDisposeFutureProvider<WebSocketChannel>.internal(
+  _misskeyStreamingChannel,
+  name: r'_misskeyStreamingChannelProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$misskeyStreamingChannelHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
-/// See also [misskeyStreaming].
-class MisskeyStreamingFamily extends Family<Raw<Stream<Notification>>> {
-  /// See also [misskeyStreaming].
-  const MisskeyStreamingFamily();
-
-  /// See also [misskeyStreaming].
-  MisskeyStreamingProvider call({
-    required StreamingPayloadRequestChannel channel,
-  }) {
-    return MisskeyStreamingProvider(
-      channel: channel,
-    );
-  }
-
-  @override
-  MisskeyStreamingProvider getProviderOverride(
-    covariant MisskeyStreamingProvider provider,
-  ) {
-    return call(
-      channel: provider.channel,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'misskeyStreamingProvider';
-}
-
-/// See also [misskeyStreaming].
-class MisskeyStreamingProvider
-    extends AutoDisposeProvider<Raw<Stream<Notification>>> {
-  /// See also [misskeyStreaming].
-  MisskeyStreamingProvider({
-    required StreamingPayloadRequestChannel channel,
-  }) : this._internal(
-          (ref) => misskeyStreaming(
-            ref as MisskeyStreamingRef,
-            channel: channel,
-          ),
-          from: misskeyStreamingProvider,
-          name: r'misskeyStreamingProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$misskeyStreamingHash,
-          dependencies: MisskeyStreamingFamily._dependencies,
-          allTransitiveDependencies:
-              MisskeyStreamingFamily._allTransitiveDependencies,
-          channel: channel,
-        );
-
-  MisskeyStreamingProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.channel,
-  }) : super.internal();
-
-  final StreamingPayloadRequestChannel channel;
-
-  @override
-  Override overrideWith(
-    Raw<Stream<Notification>> Function(MisskeyStreamingRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: MisskeyStreamingProvider._internal(
-        (ref) => create(ref as MisskeyStreamingRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        channel: channel,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeProviderElement<Raw<Stream<Notification>>> createElement() {
-    return _MisskeyStreamingProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is MisskeyStreamingProvider && other.channel == channel;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, channel.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-mixin MisskeyStreamingRef on AutoDisposeProviderRef<Raw<Stream<Notification>>> {
-  /// The parameter `channel` of this provider.
-  StreamingPayloadRequestChannel get channel;
-}
-
-class _MisskeyStreamingProviderElement
-    extends AutoDisposeProviderElement<Raw<Stream<Notification>>>
-    with MisskeyStreamingRef {
-  _MisskeyStreamingProviderElement(super.provider);
-
-  @override
-  StreamingPayloadRequestChannel get channel =>
-      (origin as MisskeyStreamingProvider).channel;
-}
+typedef _MisskeyStreamingChannelRef
+    = AutoDisposeFutureProviderRef<WebSocketChannel>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

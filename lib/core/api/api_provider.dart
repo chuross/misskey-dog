@@ -57,27 +57,38 @@ Future<MisskeyClient> misskeyClient(MisskeyClientRef ref, {String? baseUrl}) asy
 }
 
 @riverpod
-Raw<Stream<Notification>> misskeyStreaming(MisskeyStreamingRef ref, {required StreamingPayloadRequestChannel channel}) {
-  return ref
-      .watch(accountStateProvider.future)
-      .asStream()
-      .where((event) => event != null)
-      .map((event) => event!)
-      .map((event) {
-        final webSocket = WebSocketChannel.connect(MisskeyClient.sreamingUri(host: event.host ?? '', token: event.token));
-        ref.onDispose(() => webSocket.sink.close());
+Future<WebSocketChannel> _misskeyStreamingChannel(_MisskeyStreamingChannelRef ref) async {
+  final account = await ref.watch(accountStateProvider.future);
+  if (account == null) throw StateError('account is null');
 
-        webSocket.sink.add(jsonEncode(StreamingPayloadRequest(
-          kind: StreamingPayloadRequestKind.connect,
-          body: StreamingPayloadRequestBody(
-            id: const Uuid().v4(),
-            channel: channel,
-          ),
-        ).toJson().removeAllNullValueKeys()));
+  final webSocket = WebSocketChannel.connect(MisskeyClient.sreamingUri(host: account.host ?? '', token: account.token));
+  ref.onDispose(() => webSocket.sink.close());
 
-        return webSocket.stream;
-      })
-      .flatten()
-      .map((event) => jsonDecode(event))
-      .map((event) => Notification.fromJson(event));
+  return webSocket;
 }
+
+// @riverpod
+// Raw<Stream<Notification>> misskeyStreaming(MisskeyStreamingRef ref, {required StreamingPayloadRequestChannel channel}) {
+//   return ref
+//       .watch(accountStateProvider.future)
+//       .asStream()
+//       .where((event) => event != null)
+//       .map((event) => event!)
+//       .map((event) {
+//         final webSocket = WebSocketChannel.connect(MisskeyClient.sreamingUri(host: event.host ?? '', token: event.token));
+//         ref.onDispose(() => webSocket.sink.close());
+
+        // webSocket.sink.add(jsonEncode(StreamingPayloadRequest(
+        //   kind: StreamingPayloadRequestKind.connect,
+        //   body: StreamingPayloadRequestBody(
+        //     id: const Uuid().v4(),
+        //     channel: channel,
+        //   ),
+        // ).toJson().removeAllNullValueKeys()));
+
+//         return webSocket.stream;
+//       })
+//       .flatten()
+//       .map((event) => jsonDecode(event))
+//       .map((event) => Notification.fromJson(event));
+// }
