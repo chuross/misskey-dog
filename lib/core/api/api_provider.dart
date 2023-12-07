@@ -77,12 +77,15 @@ Future<WebSocketChannel> _misskeyStreaming(_MisskeyStreamingRef ref) async {
 
 @riverpod
 Raw<Stream<dynamic>> misskeyChannelStreaming(MisskeyChannelStreamingRef ref, {required StreamingChannel channel}) {
+  final log = ref.watch(logProvider);
   final streamingId = const Uuid().v4();
 
   return ref
       .watch(_misskeyStreamingProvider.future)
       .asStream()
       .map((webSocketChannel) {
+        log.d('@@@streaming:channel:connect');
+
         webSocketChannel.sink.add(jsonEncode({
           'type': 'connect',
           'body': {
@@ -92,6 +95,7 @@ Raw<Stream<dynamic>> misskeyChannelStreaming(MisskeyChannelStreamingRef ref, {re
         }));
 
         ref.onDispose(() {
+          log.d('@@@streaming:channel:disconnect');
           webSocketChannel.sink.add(jsonEncode({
             'type': 'disconnect',
             'body': {
