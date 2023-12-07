@@ -170,7 +170,7 @@ class _MisskeyClientProviderElement
   String? get baseUrl => (origin as MisskeyClientProvider).baseUrl;
 }
 
-String _$misskeyStreamingHash() => r'cb1aacdf9897d4d41e7a857f8dda9d8c67918af3';
+String _$misskeyStreamingHash() => r'e72755168bada6d5959c503d41764bc44781ccbe';
 
 /// See also [misskeyStreaming].
 @ProviderFor(misskeyStreaming)

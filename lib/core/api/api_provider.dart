@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:misskey_dog/core/api/misskey_client.dart';
 import 'package:misskey_dog/core/api/request/streaming_payload_request.dart';
+import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/core/extension/stream.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 import 'package:misskey_dog/model/notification/notification.dart';
@@ -72,7 +73,7 @@ Raw<Stream<Notification>> misskeyStreaming(MisskeyStreamingRef ref, {required St
             id: const Uuid().v4(),
             channel: channel,
           ),
-        ).toJson()));
+        ).toJson().removeAllNullValueKeys()));
 
         return webSocket.stream;
       })
