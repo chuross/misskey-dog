@@ -32,7 +32,6 @@ final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
     }
 
     ref.listen(noteStreamingProvider(channel: StreamingChannel.localTimeline), (_, noteValue) {
-      print('@@@$noteValue');
       final note = noteValue.requireValue;
       ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
 
