@@ -7,6 +7,7 @@ import 'package:misskey_dog/core/api/misskey_client.dart';
 import 'package:misskey_dog/core/extension/stream.dart';
 import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
+import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/streaming/streaming_channel.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
@@ -113,4 +114,12 @@ Raw<Stream<dynamic>> _misskeyChannelStreaming(_MisskeyChannelStreamingRef ref, {
       .where((event) => event['body']['id'] == streamingId)
       .map((event) => event['body'])
       .asBroadcastStream();
+}
+
+@riverpod
+Stream<Note> misskeyNoteStreaming(MisskeyNoteStreamingRef ref, {required StreamingChannel channel}) {
+  if (channel == StreamingChannel.main) {
+    return Stream.error(ArgumentError('main channnel has no note streaming'));
+  }
+  return ref.watch(_misskeyChannelStreamingProvider(channel: channel)).map((event) => Note.fromJson(event)).asBroadcastStream();
 }

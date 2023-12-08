@@ -319,5 +319,136 @@ class _MisskeyChannelStreamingProviderElement
   StreamingChannel get channel =>
       (origin as _MisskeyChannelStreamingProvider).channel;
 }
+
+String _$misskeyNoteStreamingHash() =>
+    r'ab1f5f66c6df96619e27018e0f5cf897bbc2718e';
+
+/// See also [misskeyNoteStreaming].
+@ProviderFor(misskeyNoteStreaming)
+const misskeyNoteStreamingProvider = MisskeyNoteStreamingFamily();
+
+/// See also [misskeyNoteStreaming].
+class MisskeyNoteStreamingFamily extends Family<AsyncValue<Note>> {
+  /// See also [misskeyNoteStreaming].
+  const MisskeyNoteStreamingFamily();
+
+  /// See also [misskeyNoteStreaming].
+  MisskeyNoteStreamingProvider call({
+    required StreamingChannel channel,
+  }) {
+    return MisskeyNoteStreamingProvider(
+      channel: channel,
+    );
+  }
+
+  @override
+  MisskeyNoteStreamingProvider getProviderOverride(
+    covariant MisskeyNoteStreamingProvider provider,
+  ) {
+    return call(
+      channel: provider.channel,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'misskeyNoteStreamingProvider';
+}
+
+/// See also [misskeyNoteStreaming].
+class MisskeyNoteStreamingProvider extends AutoDisposeStreamProvider<Note> {
+  /// See also [misskeyNoteStreaming].
+  MisskeyNoteStreamingProvider({
+    required StreamingChannel channel,
+  }) : this._internal(
+          (ref) => misskeyNoteStreaming(
+            ref as MisskeyNoteStreamingRef,
+            channel: channel,
+          ),
+          from: misskeyNoteStreamingProvider,
+          name: r'misskeyNoteStreamingProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$misskeyNoteStreamingHash,
+          dependencies: MisskeyNoteStreamingFamily._dependencies,
+          allTransitiveDependencies:
+              MisskeyNoteStreamingFamily._allTransitiveDependencies,
+          channel: channel,
+        );
+
+  MisskeyNoteStreamingProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.channel,
+  }) : super.internal();
+
+  final StreamingChannel channel;
+
+  @override
+  Override overrideWith(
+    Stream<Note> Function(MisskeyNoteStreamingRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: MisskeyNoteStreamingProvider._internal(
+        (ref) => create(ref as MisskeyNoteStreamingRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        channel: channel,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeStreamProviderElement<Note> createElement() {
+    return _MisskeyNoteStreamingProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is MisskeyNoteStreamingProvider && other.channel == channel;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, channel.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin MisskeyNoteStreamingRef on AutoDisposeStreamProviderRef<Note> {
+  /// The parameter `channel` of this provider.
+  StreamingChannel get channel;
+}
+
+class _MisskeyNoteStreamingProviderElement
+    extends AutoDisposeStreamProviderElement<Note>
+    with MisskeyNoteStreamingRef {
+  _MisskeyNoteStreamingProviderElement(super.provider);
+
+  @override
+  StreamingChannel get channel =>
+      (origin as MisskeyNoteStreamingProvider).channel;
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
