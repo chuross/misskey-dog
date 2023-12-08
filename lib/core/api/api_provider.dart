@@ -71,7 +71,7 @@ Future<WebSocketChannel> _misskeyStreaming(_MisskeyStreamingRef ref) async {
   });
 
   await webSocket.ready;
-  log.d('@@@streaming:connect:completed');
+  log.d('@@@streaming:connect:ready');
 
   return webSocket;
 }
