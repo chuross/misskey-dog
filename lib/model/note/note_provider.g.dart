@@ -7,7 +7,7 @@ part of 'note_provider.dart';
 // **************************************************************************
 
 String _$localNoteIdsWithCacheHash() =>
-    r'f4139fb2f703c95a8015895c8c6c44bd3175de4a';
+    r'67407561bba65e24aec2b3fcf22cf2fd6b8156a0';
 
 /// Copied from Dart SDK
 class _SystemHash {

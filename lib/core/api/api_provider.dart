@@ -117,9 +117,14 @@ Raw<Stream<dynamic>> _misskeyChannelStreaming(_MisskeyChannelStreamingRef ref, {
 }
 
 @riverpod
-Stream<Note> misskeyNoteStreaming(MisskeyNoteStreamingRef ref, {required StreamingChannel channel}) {
+Stream<Note> noteStreaming(NoteStreamingRef ref, {required StreamingChannel channel}) {
   if (channel == StreamingChannel.main) {
     return Stream.error(ArgumentError('main channnel has no note streaming'));
   }
-  return ref.watch(_misskeyChannelStreamingProvider(channel: channel)).map((event) => Note.fromJson(event)).asBroadcastStream();
+  return ref
+      .watch(_misskeyChannelStreamingProvider(channel: channel))
+      .where((event) => event['type'] == 'note')
+      .map((event) => event['body'])
+      .map((event) => Note.fromJson(event))
+      .asBroadcastStream();
 }

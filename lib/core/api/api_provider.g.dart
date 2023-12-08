@@ -320,30 +320,29 @@ class _MisskeyChannelStreamingProviderElement
       (origin as _MisskeyChannelStreamingProvider).channel;
 }
 
-String _$misskeyNoteStreamingHash() =>
-    r'ab1f5f66c6df96619e27018e0f5cf897bbc2718e';
+String _$noteStreamingHash() => r'0f5aed37e8da7cd43f3bb8d7be469e141035a072';
 
-/// See also [misskeyNoteStreaming].
-@ProviderFor(misskeyNoteStreaming)
-const misskeyNoteStreamingProvider = MisskeyNoteStreamingFamily();
+/// See also [noteStreaming].
+@ProviderFor(noteStreaming)
+const noteStreamingProvider = NoteStreamingFamily();
 
-/// See also [misskeyNoteStreaming].
-class MisskeyNoteStreamingFamily extends Family<AsyncValue<Note>> {
-  /// See also [misskeyNoteStreaming].
-  const MisskeyNoteStreamingFamily();
+/// See also [noteStreaming].
+class NoteStreamingFamily extends Family<AsyncValue<Note>> {
+  /// See also [noteStreaming].
+  const NoteStreamingFamily();
 
-  /// See also [misskeyNoteStreaming].
-  MisskeyNoteStreamingProvider call({
+  /// See also [noteStreaming].
+  NoteStreamingProvider call({
     required StreamingChannel channel,
   }) {
-    return MisskeyNoteStreamingProvider(
+    return NoteStreamingProvider(
       channel: channel,
     );
   }
 
   @override
-  MisskeyNoteStreamingProvider getProviderOverride(
-    covariant MisskeyNoteStreamingProvider provider,
+  NoteStreamingProvider getProviderOverride(
+    covariant NoteStreamingProvider provider,
   ) {
     return call(
       channel: provider.channel,
@@ -362,32 +361,32 @@ class MisskeyNoteStreamingFamily extends Family<AsyncValue<Note>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'misskeyNoteStreamingProvider';
+  String? get name => r'noteStreamingProvider';
 }
 
-/// See also [misskeyNoteStreaming].
-class MisskeyNoteStreamingProvider extends AutoDisposeStreamProvider<Note> {
-  /// See also [misskeyNoteStreaming].
-  MisskeyNoteStreamingProvider({
+/// See also [noteStreaming].
+class NoteStreamingProvider extends AutoDisposeStreamProvider<Note> {
+  /// See also [noteStreaming].
+  NoteStreamingProvider({
     required StreamingChannel channel,
   }) : this._internal(
-          (ref) => misskeyNoteStreaming(
-            ref as MisskeyNoteStreamingRef,
+          (ref) => noteStreaming(
+            ref as NoteStreamingRef,
             channel: channel,
           ),
-          from: misskeyNoteStreamingProvider,
-          name: r'misskeyNoteStreamingProvider',
+          from: noteStreamingProvider,
+          name: r'noteStreamingProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$misskeyNoteStreamingHash,
-          dependencies: MisskeyNoteStreamingFamily._dependencies,
+                  : _$noteStreamingHash,
+          dependencies: NoteStreamingFamily._dependencies,
           allTransitiveDependencies:
-              MisskeyNoteStreamingFamily._allTransitiveDependencies,
+              NoteStreamingFamily._allTransitiveDependencies,
           channel: channel,
         );
 
-  MisskeyNoteStreamingProvider._internal(
+  NoteStreamingProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -401,12 +400,12 @@ class MisskeyNoteStreamingProvider extends AutoDisposeStreamProvider<Note> {
 
   @override
   Override overrideWith(
-    Stream<Note> Function(MisskeyNoteStreamingRef provider) create,
+    Stream<Note> Function(NoteStreamingRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: MisskeyNoteStreamingProvider._internal(
-        (ref) => create(ref as MisskeyNoteStreamingRef),
+      override: NoteStreamingProvider._internal(
+        (ref) => create(ref as NoteStreamingRef),
         from: from,
         name: null,
         dependencies: null,
@@ -419,12 +418,12 @@ class MisskeyNoteStreamingProvider extends AutoDisposeStreamProvider<Note> {
 
   @override
   AutoDisposeStreamProviderElement<Note> createElement() {
-    return _MisskeyNoteStreamingProviderElement(this);
+    return _NoteStreamingProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is MisskeyNoteStreamingProvider && other.channel == channel;
+    return other is NoteStreamingProvider && other.channel == channel;
   }
 
   @override
@@ -436,19 +435,17 @@ class MisskeyNoteStreamingProvider extends AutoDisposeStreamProvider<Note> {
   }
 }
 
-mixin MisskeyNoteStreamingRef on AutoDisposeStreamProviderRef<Note> {
+mixin NoteStreamingRef on AutoDisposeStreamProviderRef<Note> {
   /// The parameter `channel` of this provider.
   StreamingChannel get channel;
 }
 
-class _MisskeyNoteStreamingProviderElement
-    extends AutoDisposeStreamProviderElement<Note>
-    with MisskeyNoteStreamingRef {
-  _MisskeyNoteStreamingProviderElement(super.provider);
+class _NoteStreamingProviderElement
+    extends AutoDisposeStreamProviderElement<Note> with NoteStreamingRef {
+  _NoteStreamingProviderElement(super.provider);
 
   @override
-  StreamingChannel get channel =>
-      (origin as MisskeyNoteStreamingProvider).channel;
+  StreamingChannel get channel => (origin as NoteStreamingProvider).channel;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -6,6 +6,7 @@ import 'package:misskey_dog/core/api/request/get_note_request.dart';
 import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
+import 'package:misskey_dog/model/streaming/streaming_channel.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'note_provider.g.dart';
@@ -29,6 +30,17 @@ final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
     for (final note in notes) {
       ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
     }
+
+    ref.listen(noteStreamingProvider(channel: StreamingChannel.localTimeline), (_, noteValue) {
+      print('@@@$noteValue');
+      final note = noteValue.requireValue;
+      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+
+      state = AsyncData([
+        note.id,
+        ...state.value ?? [],
+      ]);
+    });
 
     return notes.map((note) => note.id).toList();
   }
