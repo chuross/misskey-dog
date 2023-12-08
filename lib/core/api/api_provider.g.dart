@@ -187,29 +187,29 @@ final _misskeyStreamingProvider =
 
 typedef _MisskeyStreamingRef = AutoDisposeFutureProviderRef<WebSocketChannel>;
 String _$misskeyChannelStreamingHash() =>
-    r'14dd5626f734b8ab4148ee1586bce9de6aa03498';
+    r'ca76c73acc3e03513dc3378eaf78558e436cb9b8';
 
-/// See also [misskeyChannelStreaming].
-@ProviderFor(misskeyChannelStreaming)
-const misskeyChannelStreamingProvider = MisskeyChannelStreamingFamily();
+/// See also [_misskeyChannelStreaming].
+@ProviderFor(_misskeyChannelStreaming)
+const _misskeyChannelStreamingProvider = _MisskeyChannelStreamingFamily();
 
-/// See also [misskeyChannelStreaming].
-class MisskeyChannelStreamingFamily extends Family<Raw<Stream<dynamic>>> {
-  /// See also [misskeyChannelStreaming].
-  const MisskeyChannelStreamingFamily();
+/// See also [_misskeyChannelStreaming].
+class _MisskeyChannelStreamingFamily extends Family<Raw<Stream<dynamic>>> {
+  /// See also [_misskeyChannelStreaming].
+  const _MisskeyChannelStreamingFamily();
 
-  /// See also [misskeyChannelStreaming].
-  MisskeyChannelStreamingProvider call({
+  /// See also [_misskeyChannelStreaming].
+  _MisskeyChannelStreamingProvider call({
     required StreamingChannel channel,
   }) {
-    return MisskeyChannelStreamingProvider(
+    return _MisskeyChannelStreamingProvider(
       channel: channel,
     );
   }
 
   @override
-  MisskeyChannelStreamingProvider getProviderOverride(
-    covariant MisskeyChannelStreamingProvider provider,
+  _MisskeyChannelStreamingProvider getProviderOverride(
+    covariant _MisskeyChannelStreamingProvider provider,
   ) {
     return call(
       channel: provider.channel,
@@ -228,33 +228,33 @@ class MisskeyChannelStreamingFamily extends Family<Raw<Stream<dynamic>>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'misskeyChannelStreamingProvider';
+  String? get name => r'_misskeyChannelStreamingProvider';
 }
 
-/// See also [misskeyChannelStreaming].
-class MisskeyChannelStreamingProvider
+/// See also [_misskeyChannelStreaming].
+class _MisskeyChannelStreamingProvider
     extends AutoDisposeProvider<Raw<Stream<dynamic>>> {
-  /// See also [misskeyChannelStreaming].
-  MisskeyChannelStreamingProvider({
+  /// See also [_misskeyChannelStreaming].
+  _MisskeyChannelStreamingProvider({
     required StreamingChannel channel,
   }) : this._internal(
-          (ref) => misskeyChannelStreaming(
-            ref as MisskeyChannelStreamingRef,
+          (ref) => _misskeyChannelStreaming(
+            ref as _MisskeyChannelStreamingRef,
             channel: channel,
           ),
-          from: misskeyChannelStreamingProvider,
-          name: r'misskeyChannelStreamingProvider',
+          from: _misskeyChannelStreamingProvider,
+          name: r'_misskeyChannelStreamingProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
                   : _$misskeyChannelStreamingHash,
-          dependencies: MisskeyChannelStreamingFamily._dependencies,
+          dependencies: _MisskeyChannelStreamingFamily._dependencies,
           allTransitiveDependencies:
-              MisskeyChannelStreamingFamily._allTransitiveDependencies,
+              _MisskeyChannelStreamingFamily._allTransitiveDependencies,
           channel: channel,
         );
 
-  MisskeyChannelStreamingProvider._internal(
+  _MisskeyChannelStreamingProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -268,12 +268,12 @@ class MisskeyChannelStreamingProvider
 
   @override
   Override overrideWith(
-    Raw<Stream<dynamic>> Function(MisskeyChannelStreamingRef provider) create,
+    Raw<Stream<dynamic>> Function(_MisskeyChannelStreamingRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: MisskeyChannelStreamingProvider._internal(
-        (ref) => create(ref as MisskeyChannelStreamingRef),
+      override: _MisskeyChannelStreamingProvider._internal(
+        (ref) => create(ref as _MisskeyChannelStreamingRef),
         from: from,
         name: null,
         dependencies: null,
@@ -291,7 +291,8 @@ class MisskeyChannelStreamingProvider
 
   @override
   bool operator ==(Object other) {
-    return other is MisskeyChannelStreamingProvider && other.channel == channel;
+    return other is _MisskeyChannelStreamingProvider &&
+        other.channel == channel;
   }
 
   @override
@@ -303,7 +304,7 @@ class MisskeyChannelStreamingProvider
   }
 }
 
-mixin MisskeyChannelStreamingRef
+mixin _MisskeyChannelStreamingRef
     on AutoDisposeProviderRef<Raw<Stream<dynamic>>> {
   /// The parameter `channel` of this provider.
   StreamingChannel get channel;
@@ -311,12 +312,12 @@ mixin MisskeyChannelStreamingRef
 
 class _MisskeyChannelStreamingProviderElement
     extends AutoDisposeProviderElement<Raw<Stream<dynamic>>>
-    with MisskeyChannelStreamingRef {
+    with _MisskeyChannelStreamingRef {
   _MisskeyChannelStreamingProviderElement(super.provider);
 
   @override
   StreamingChannel get channel =>
-      (origin as MisskeyChannelStreamingProvider).channel;
+      (origin as _MisskeyChannelStreamingProvider).channel;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
