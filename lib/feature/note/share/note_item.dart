@@ -182,7 +182,7 @@ final class _Image extends HookWidget {
           tag: file.url,
           child: ImageFiltered(
             enabled: !isBlurRemoved.value,
-            imageFilter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+            imageFilter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Image.network(file.url, width: double.infinity, height: 250, fit: BoxFit.cover),
           ),
         ),
