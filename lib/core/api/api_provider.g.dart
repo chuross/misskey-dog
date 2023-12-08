@@ -170,7 +170,7 @@ class _MisskeyClientProviderElement
   String? get baseUrl => (origin as MisskeyClientProvider).baseUrl;
 }
 
-String _$misskeyStreamingHash() => r'a39613130bf11d25281e86fa72aec9687ffde95c';
+String _$misskeyStreamingHash() => r'59f43a0056a6dc34793fc51c2b738092ec67c377';
 
 /// See also [_misskeyStreaming].
 @ProviderFor(_misskeyStreaming)
@@ -187,7 +187,7 @@ final _misskeyStreamingProvider =
 
 typedef _MisskeyStreamingRef = AutoDisposeFutureProviderRef<WebSocketChannel>;
 String _$misskeyChannelStreamingHash() =>
-    r'f280c93b28a0e6a62fbc0bf96960886ab2738ee5';
+    r'5f57a2dbe5c92596a5302204b06597a376993fe6';
 
 /// See also [misskeyChannelStreaming].
 @ProviderFor(misskeyChannelStreaming)

@@ -65,7 +65,7 @@ Future<WebSocketChannel> _misskeyStreaming(_MisskeyStreamingRef ref) async {
   log.d('@@@streaming:connect:start:url=$streamingUrl');
   final webSocket = WebSocketChannel.connect(streamingUrl);
   ref.onDispose(() {
-    log.d('@@@streaming:close');
+    log.d('@@@streaming:connect:close');
     webSocket.sink.close();
   });
 
@@ -84,7 +84,7 @@ Raw<Stream<dynamic>> misskeyChannelStreaming(MisskeyChannelStreamingRef ref, {re
       .watch(_misskeyStreamingProvider.future)
       .asStream()
       .map((webSocketChannel) {
-        log.d('@@@streaming:channel:connect');
+        log.d('@@@streaming:channel:connect:channel=${channel.rawValue}, id=$streamingId');
 
         webSocketChannel.sink.add(jsonEncode({
           'type': 'connect',
@@ -95,7 +95,7 @@ Raw<Stream<dynamic>> misskeyChannelStreaming(MisskeyChannelStreamingRef ref, {re
         }));
 
         ref.onDispose(() {
-          log.d('@@@streaming:channel:disconnect');
+          log.d('@@@streaming:channel:disconnect:id=$streamingId');
           webSocketChannel.sink.add(jsonEncode({
             'type': 'disconnect',
             'body': {
@@ -107,6 +107,6 @@ Raw<Stream<dynamic>> misskeyChannelStreaming(MisskeyChannelStreamingRef ref, {re
         return webSocketChannel.stream;
       })
       .flatten()
-      .where((event) => event['body']['id'] == streamingId)
-      .map((event) => event['body']);
+      .map((event) => event['body'])
+      .asBroadcastStream();
 }
