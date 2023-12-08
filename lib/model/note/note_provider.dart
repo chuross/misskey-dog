@@ -6,7 +6,6 @@ import 'package:misskey_dog/core/api/request/get_note_request.dart';
 import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
-import 'package:misskey_dog/model/streaming/streaming_channel.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'note_provider.g.dart';

@@ -117,7 +117,7 @@ Raw<Stream<dynamic>> _misskeyChannelStreaming(_MisskeyChannelStreamingRef ref, {
 }
 
 @riverpod
-Stream<Note> noteStreaming(NoteStreamingRef ref, {required StreamingChannel channel}) {
+Stream<Note> noteCreationStreaming(NoteCreationStreamingRef ref, {required StreamingChannel channel}) {
   if (channel == StreamingChannel.main) {
     return Stream.error(ArgumentError('main channnel has no note streaming'));
   }
@@ -126,5 +126,43 @@ Stream<Note> noteStreaming(NoteStreamingRef ref, {required StreamingChannel chan
       .where((event) => event['type'] == 'note')
       .map((event) => event['body'])
       .map((event) => Note.fromJson(event))
+      .asBroadcastStream();
+}
+
+@riverpod
+Stream<dynamic> _noteUpdateStreaming(_NoteUpdateStreamingRef ref, {required String noteId}) {
+  final log = ref.watch(logProvider);
+
+  return ref
+      .watch(_misskeyStreamingProvider.future)
+      .asStream()
+      .map((webSocketChannel) {
+        log.d('@@@streaming:subNote:connect:noteId=$noteId');
+
+        webSocketChannel.sink.add(jsonEncode({
+          'type': 'subNote',
+          'body': {
+            'id': noteId,
+          },
+        }));
+
+        ref.onDispose(() {
+          log.d('@@@streaming:subNote:disconnect:noteId=$noteId');
+
+          webSocketChannel.sink.add(jsonEncode({
+            'type': 'unsubNote',
+            'body': {
+              'id': noteId,
+            },
+          }));
+        });
+
+        return webSocketChannel.stream;
+      })
+      .flatten()
+      .map((event) => jsonDecode(event))
+      .where((event) => event['type'] == 'noteUpdated')
+      .where((event) => event['body']['id'] == noteId)
+      .map((event) => event['body'])
       .asBroadcastStream();
 }
