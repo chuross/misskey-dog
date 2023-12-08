@@ -16,7 +16,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 part 'api_provider.g.dart';
 
 @riverpod
-Future<Dio> dio(DioRef ref) async {
+Dio dio(DioRef ref) {
   final dio = Dio(BaseOptions(
     connectTimeout: const Duration(seconds: 3),
     receiveTimeout: const Duration(seconds: 6),
@@ -49,7 +49,7 @@ Future<Dio> dio(DioRef ref) async {
 
 @riverpod
 Future<MisskeyClient> misskeyClient(MisskeyClientRef ref, {String? baseUrl}) async {
-  final dio = await ref.watch(dioProvider.future);
+  final dio = ref.watch(dioProvider);
   final account = await ref.watch(accountStateProvider.future);
 
   return MisskeyClient(dio, baseUrl: baseUrl ?? account?.apiBaseUrl ?? '');
