@@ -107,6 +107,7 @@ Raw<Stream<dynamic>> misskeyChannelStreaming(MisskeyChannelStreamingRef ref, {re
         return webSocketChannel.stream;
       })
       .flatten()
-      .map((event) => event['body'])
+      .map((event) => jsonDecode(event))
+      .where((event) => event['body']['id'] == streamingId)
       .asBroadcastStream();
 }

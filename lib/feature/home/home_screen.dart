@@ -35,11 +35,6 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
   Widget build(BuildContext context, WidgetRef ref) {
     final account = ref.watch(accountStateProvider);
 
-    final mainStream = useStream(ref.watch(misskeyChannelStreamingProvider(channel: StreamingChannel.localTimeline)));
-    useEffect(() {
-      print('@@@ mainStream: ${mainStream.data}, error=${mainStream.error}');
-    }, [mainStream.data]);
-
     return account.whenScreenLoading(
         log: ref.watch(logProvider),
         onRetry: () => ref.invalidate(accountStateProvider),
