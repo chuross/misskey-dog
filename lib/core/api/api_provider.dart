@@ -96,6 +96,7 @@ Raw<Stream<dynamic>> misskeyChannelStreaming(MisskeyChannelStreamingRef ref, {re
 
         ref.onDispose(() {
           log.d('@@@streaming:channel:disconnect:id=$streamingId');
+
           webSocketChannel.sink.add(jsonEncode({
             'type': 'disconnect',
             'body': {
