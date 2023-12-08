@@ -31,16 +31,6 @@ final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
       ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
     }
 
-    ref.listen(noteStreamingProvider(channel: StreamingChannel.localTimeline), (_, noteValue) {
-      final note = noteValue.requireValue;
-      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
-
-      state = AsyncData([
-        note.id,
-        ...state.value ?? [],
-      ]);
-    });
-
     return notes.map((note) => note.id).toList();
   }
 
