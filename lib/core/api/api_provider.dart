@@ -130,7 +130,7 @@ Stream<Note> noteCreationStreaming(NoteCreationStreamingRef ref, {required Strea
 }
 
 @riverpod
-Stream<dynamic> _noteUpdateStreaming(_NoteUpdateStreamingRef ref, {required String noteId}) {
+Stream<dynamic> noteUpdateStreaming(NoteUpdateStreamingRef ref, {required String noteId}) {
   final log = ref.watch(logProvider);
 
   return ref

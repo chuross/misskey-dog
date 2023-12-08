@@ -452,29 +452,29 @@ class _NoteCreationStreamingProviderElement
 }
 
 String _$noteUpdateStreamingHash() =>
-    r'93f33caed698389506192136bb1471e7fd215716';
+    r'0e562c9f2edbe416326d155906f2645dda04e489';
 
-/// See also [_noteUpdateStreaming].
-@ProviderFor(_noteUpdateStreaming)
-const _noteUpdateStreamingProvider = _NoteUpdateStreamingFamily();
+/// See also [noteUpdateStreaming].
+@ProviderFor(noteUpdateStreaming)
+const noteUpdateStreamingProvider = NoteUpdateStreamingFamily();
 
-/// See also [_noteUpdateStreaming].
-class _NoteUpdateStreamingFamily extends Family<AsyncValue<dynamic>> {
-  /// See also [_noteUpdateStreaming].
-  const _NoteUpdateStreamingFamily();
+/// See also [noteUpdateStreaming].
+class NoteUpdateStreamingFamily extends Family<AsyncValue<dynamic>> {
+  /// See also [noteUpdateStreaming].
+  const NoteUpdateStreamingFamily();
 
-  /// See also [_noteUpdateStreaming].
-  _NoteUpdateStreamingProvider call({
+  /// See also [noteUpdateStreaming].
+  NoteUpdateStreamingProvider call({
     required String noteId,
   }) {
-    return _NoteUpdateStreamingProvider(
+    return NoteUpdateStreamingProvider(
       noteId: noteId,
     );
   }
 
   @override
-  _NoteUpdateStreamingProvider getProviderOverride(
-    covariant _NoteUpdateStreamingProvider provider,
+  NoteUpdateStreamingProvider getProviderOverride(
+    covariant NoteUpdateStreamingProvider provider,
   ) {
     return call(
       noteId: provider.noteId,
@@ -493,32 +493,32 @@ class _NoteUpdateStreamingFamily extends Family<AsyncValue<dynamic>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'_noteUpdateStreamingProvider';
+  String? get name => r'noteUpdateStreamingProvider';
 }
 
-/// See also [_noteUpdateStreaming].
-class _NoteUpdateStreamingProvider extends AutoDisposeStreamProvider<dynamic> {
-  /// See also [_noteUpdateStreaming].
-  _NoteUpdateStreamingProvider({
+/// See also [noteUpdateStreaming].
+class NoteUpdateStreamingProvider extends AutoDisposeStreamProvider<dynamic> {
+  /// See also [noteUpdateStreaming].
+  NoteUpdateStreamingProvider({
     required String noteId,
   }) : this._internal(
-          (ref) => _noteUpdateStreaming(
-            ref as _NoteUpdateStreamingRef,
+          (ref) => noteUpdateStreaming(
+            ref as NoteUpdateStreamingRef,
             noteId: noteId,
           ),
-          from: _noteUpdateStreamingProvider,
-          name: r'_noteUpdateStreamingProvider',
+          from: noteUpdateStreamingProvider,
+          name: r'noteUpdateStreamingProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
                   : _$noteUpdateStreamingHash,
-          dependencies: _NoteUpdateStreamingFamily._dependencies,
+          dependencies: NoteUpdateStreamingFamily._dependencies,
           allTransitiveDependencies:
-              _NoteUpdateStreamingFamily._allTransitiveDependencies,
+              NoteUpdateStreamingFamily._allTransitiveDependencies,
           noteId: noteId,
         );
 
-  _NoteUpdateStreamingProvider._internal(
+  NoteUpdateStreamingProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -532,12 +532,12 @@ class _NoteUpdateStreamingProvider extends AutoDisposeStreamProvider<dynamic> {
 
   @override
   Override overrideWith(
-    Stream<dynamic> Function(_NoteUpdateStreamingRef provider) create,
+    Stream<dynamic> Function(NoteUpdateStreamingRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: _NoteUpdateStreamingProvider._internal(
-        (ref) => create(ref as _NoteUpdateStreamingRef),
+      override: NoteUpdateStreamingProvider._internal(
+        (ref) => create(ref as NoteUpdateStreamingRef),
         from: from,
         name: null,
         dependencies: null,
@@ -555,7 +555,7 @@ class _NoteUpdateStreamingProvider extends AutoDisposeStreamProvider<dynamic> {
 
   @override
   bool operator ==(Object other) {
-    return other is _NoteUpdateStreamingProvider && other.noteId == noteId;
+    return other is NoteUpdateStreamingProvider && other.noteId == noteId;
   }
 
   @override
@@ -567,18 +567,18 @@ class _NoteUpdateStreamingProvider extends AutoDisposeStreamProvider<dynamic> {
   }
 }
 
-mixin _NoteUpdateStreamingRef on AutoDisposeStreamProviderRef<dynamic> {
+mixin NoteUpdateStreamingRef on AutoDisposeStreamProviderRef<dynamic> {
   /// The parameter `noteId` of this provider.
   String get noteId;
 }
 
 class _NoteUpdateStreamingProviderElement
     extends AutoDisposeStreamProviderElement<dynamic>
-    with _NoteUpdateStreamingRef {
+    with NoteUpdateStreamingRef {
   _NoteUpdateStreamingProviderElement(super.provider);
 
   @override
-  String get noteId => (origin as _NoteUpdateStreamingProvider).noteId;
+  String get noteId => (origin as NoteUpdateStreamingProvider).noteId;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
