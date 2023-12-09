@@ -6,6 +6,7 @@ import 'package:misskey_dog/core/extension/string.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/core/hook/use_load_more.dart';
 import 'package:misskey_dog/core/logger/logger_provider.dart';
+import 'package:misskey_dog/feature/note/share/cached_note_item.dart';
 import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
 
@@ -31,8 +32,7 @@ final class HomeLocalTimeline extends HookConsumerWidget {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
-                    final note = ref.watch(cachedNoteProvider(id: notesIds[index]));
-                    if (note == null) return const SizedBox.shrink();
+                    final noteId = notesIds[index];
 
                     return Container(
                       decoration: BoxDecoration(
@@ -40,12 +40,9 @@ final class HomeLocalTimeline extends HookConsumerWidget {
                           bottom: Divider.createBorderSide(context, color: context.dividerColorWithOpacity30),
                         ),
                       ),
-                      child: NoteItem(
-                        key: note.id.toKey(),
-                        note: note,
-                        onReactionTap: (emoji) {
-                          ref.read(cachedNoteProvider(id: note.id).notifier).reaction(emoji);
-                        },
+                      child: CachedNoteItem(
+                        key: noteId.toKey(),
+                        noteId: noteId,
                       ),
                     );
                   },

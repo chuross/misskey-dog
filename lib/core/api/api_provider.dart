@@ -7,7 +7,6 @@ import 'package:misskey_dog/core/api/misskey_client.dart';
 import 'package:misskey_dog/core/extension/stream.dart';
 import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
-import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/streaming/streaming_channel.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
@@ -56,7 +55,7 @@ Future<MisskeyClient> misskeyClient(MisskeyClientRef ref, {String? baseUrl}) asy
 }
 
 @riverpod
-Future<WebSocketChannel> _misskeyStreaming(_MisskeyStreamingRef ref) async {
+Future<WebSocketChannel> misskeyStreaming(MisskeyStreamingRef ref) async {
   final log = ref.watch(logProvider);
   final account = await ref.watch(accountStateProvider.future);
   if (account == null) throw StateError('account is null');
@@ -78,12 +77,12 @@ Future<WebSocketChannel> _misskeyStreaming(_MisskeyStreamingRef ref) async {
 }
 
 @riverpod
-Raw<Stream<dynamic>> _misskeyChannelStreaming(_MisskeyChannelStreamingRef ref, {required StreamingChannel channel}) {
+Raw<Stream<dynamic>> misskeyChannelStreaming(MisskeyChannelStreamingRef ref, {required StreamingChannel channel}) {
   final log = ref.watch(logProvider);
   final streamingId = const Uuid().v4();
 
   return ref
-      .watch(_misskeyStreamingProvider.future)
+      .watch(misskeyStreamingProvider.future)
       .asStream()
       .map((webSocketChannel) {
         log.d('@@@streaming:channel:connect:channel=${channel.rawValue}, id=$streamingId');
@@ -112,57 +111,6 @@ Raw<Stream<dynamic>> _misskeyChannelStreaming(_MisskeyChannelStreamingRef ref, {
       .flatten()
       .map((event) => jsonDecode(event))
       .where((event) => event['body']['id'] == streamingId)
-      .map((event) => event['body'])
-      .asBroadcastStream();
-}
-
-@riverpod
-Stream<Note> noteCreationStreaming(NoteCreationStreamingRef ref, {required StreamingChannel channel}) {
-  if (channel == StreamingChannel.main) {
-    return Stream.error(ArgumentError('main channnel has no note streaming'));
-  }
-  return ref
-      .watch(_misskeyChannelStreamingProvider(channel: channel))
-      .where((event) => event['type'] == 'note')
-      .map((event) => event['body'])
-      .map((event) => Note.fromJson(event))
-      .asBroadcastStream();
-}
-
-@riverpod
-Stream<dynamic> noteUpdateStreaming(NoteUpdateStreamingRef ref, {required String noteId}) {
-  final log = ref.watch(logProvider);
-
-  return ref
-      .watch(_misskeyStreamingProvider.future)
-      .asStream()
-      .map((webSocketChannel) {
-        log.d('@@@streaming:subNote:connect:noteId=$noteId');
-
-        webSocketChannel.sink.add(jsonEncode({
-          'type': 'subNote',
-          'body': {
-            'id': noteId,
-          },
-        }));
-
-        ref.onDispose(() {
-          log.d('@@@streaming:subNote:disconnect:noteId=$noteId');
-
-          webSocketChannel.sink.add(jsonEncode({
-            'type': 'unsubNote',
-            'body': {
-              'id': noteId,
-            },
-          }));
-        });
-
-        return webSocketChannel.stream;
-      })
-      .flatten()
-      .map((event) => jsonDecode(event))
-      .where((event) => event['type'] == 'noteUpdated')
-      .where((event) => event['body']['id'] == noteId)
       .map((event) => event['body'])
       .asBroadcastStream();
 }
