@@ -12,7 +12,6 @@ import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/streaming/streaming_channel.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 
 part 'note_provider.g.dart';
 
