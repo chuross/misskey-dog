@@ -55,7 +55,7 @@ Future<MisskeyClient> misskeyClient(MisskeyClientRef ref, {String? baseUrl}) asy
 }
 
 @riverpod
-Future<WebSocketChannel> misskeyStreaming(MisskeyStreamingRef ref) async {
+Future<(WebSocketChannel, Stream<dynamic>)> misskeyStreaming(MisskeyStreamingRef ref) async {
   final log = ref.watch(logProvider);
   final account = await ref.watch(accountStateProvider.future);
   if (account == null) throw StateError('account is null');
@@ -73,7 +73,7 @@ Future<WebSocketChannel> misskeyStreaming(MisskeyStreamingRef ref) async {
   await webSocket.ready;
   log.d('@@@streaming:connect:ready');
 
-  return webSocket;
+  return (webSocket, webSocket.stream.asBroadcastStream());
 }
 
 @riverpod
@@ -84,8 +84,10 @@ Raw<Stream<dynamic>> misskeyChannelStreaming(MisskeyChannelStreamingRef ref, {re
   return ref
       .watch(misskeyStreamingProvider.future)
       .asStream()
-      .map((webSocketChannel) {
+      .map((connection) {
         log.d('@@@streaming:channel:connect:channel=${channel.rawValue}, id=$streamingId');
+
+        final (webSocketChannel, stream) = connection;
 
         webSocketChannel.sink.add(jsonEncode({
           'type': 'connect',
@@ -106,7 +108,7 @@ Raw<Stream<dynamic>> misskeyChannelStreaming(MisskeyChannelStreamingRef ref, {re
           }));
         });
 
-        return webSocketChannel.stream;
+        return stream;
       })
       .flatten()
       .map((event) => jsonDecode(event))

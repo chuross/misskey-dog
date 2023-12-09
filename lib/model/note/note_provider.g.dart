@@ -159,7 +159,7 @@ class _NoteCreationStreamingProviderElement
 }
 
 String _$noteUpdateStreamingHash() =>
-    r'31251d16cd6895839d2d3d7cf934337f2fd10518';
+    r'515a317bb621c5b5bdb40937b667d9109f0a2fe9';
 
 /// See also [noteUpdateStreaming].
 @ProviderFor(noteUpdateStreaming)
