@@ -32,12 +32,10 @@ final class _LocalEmojiView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final localEmoji = ref.watch(localEmojiProvider(emojiName: emoji.name));
     return localEmoji.whenPartialLoading(
-      data: (localEmoji) => CachedNetworkImage(
-        imageUrl: localEmoji.url ?? '',
+      data: (localEmoji) => Image(
+        image: CachedNetworkImageProvider(localEmoji.url ?? ''),
         height: height,
         fit: BoxFit.fitHeight,
-        fadeInDuration: Duration.zero,
-        fadeOutDuration: Duration.zero,
       ),
       progressIndicatorSize: Size.square(height),
     );
