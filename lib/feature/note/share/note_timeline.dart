@@ -19,11 +19,11 @@ abstract class NoteTimeline extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = noteIdsProvider();
-    final value = ref.watch(provider);
+    final noteIds = ref.watch(provider);
 
     final controller = useLoadMore(onNext: () => onFetchNext(ref));
 
-    switch (value) {
+    switch (noteIds) {
       case AsyncData(value: final noteIds):
         return RefreshIndicator(
           onRefresh: () async => () => onRefresh(ref),
@@ -61,7 +61,7 @@ abstract class NoteTimeline extends HookConsumerWidget {
           ),
         );
       default:
-        return ScreenLoadingView(value: value, onRetry: () => onRefresh(ref));
+        return ScreenLoadingView(value: noteIds, onRetry: () => onRefresh(ref));
     }
   }
 }

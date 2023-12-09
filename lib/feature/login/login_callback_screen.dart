@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:i18n_extension/i18n_widget.dart';
 import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
-import 'package:misskey_dog/core/view/error_view.dart';
+import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 
 @RoutePage()
@@ -31,18 +31,16 @@ final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapp
       }
     });
 
-    return Scaffold(
-      body: authentication.when(
-        data: (_) => const SizedBox.shrink(),
-        error: (error, stackTrace) => ErrorView(onRetry: () {
-          log.e('@@@authorize failed', error: error, stackTrace: stackTrace);
-
-          // ignore: unused_result
-          ref.refresh(accountAuthorizationProvider(host: host, session: session));
-        }),
-        loading: () => const CircularProgressIndicator(),
-      ),
-    );
+    switch (authentication) {
+      case AsyncData(value: final _):
+        return const SizedBox.shrink();
+      default:
+        return ScreenLoadingView(
+            value: authentication,
+            onRetry: () {
+              ref.invalidate(accountAuthorizationProvider(host: host, session: session));
+            });
+    }
   }
 
   @override
