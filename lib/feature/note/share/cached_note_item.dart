@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
 
@@ -17,8 +18,11 @@ final class CachedNoteItem extends ConsumerWidget {
       return const SizedBox.shrink();
     }
 
+    final log = ref.watch(logProvider);
+
     ref.watch(noteUpdateStreamingProvider(noteId: noteId)).maybeWhen(
           data: (data) => ref.read(provider.notifier).sync(),
+          error: (error, stacktrace) => log.d('@@@@cached_note:streaming:error=$error'),
           orElse: () {},
         );
 

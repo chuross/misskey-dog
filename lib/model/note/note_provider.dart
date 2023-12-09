@@ -149,8 +149,7 @@ Stream<Note> noteCreationStreaming(NoteCreationStreamingRef ref, {required Strea
       .watch(misskeyChannelStreamingProvider(channel: channel))
       .where((event) => event['type'] == 'note')
       .map((event) => event['body'])
-      .map((event) => Note.fromJson(event))
-      .asBroadcastStream();
+      .map((event) => Note.fromJson(event));
 }
 
 @riverpod
@@ -187,6 +186,5 @@ Stream<dynamic> noteUpdateStreaming(NoteUpdateStreamingRef ref, {required String
       .map((event) => jsonDecode(event))
       .where((event) => event['type'] == 'noteUpdated')
       .where((event) => event['body']['id'] == noteId)
-      .map((event) => event['body'])
-      .asBroadcastStream();
+      .map((event) => event['body']);
 }
