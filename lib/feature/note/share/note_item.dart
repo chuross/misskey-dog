@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:i18n_extension/default.i18n.dart';
@@ -183,7 +184,13 @@ final class _Image extends HookWidget {
           child: ImageFiltered(
             enabled: !isBlurRemoved.value,
             imageFilter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
-            child: Image.network(file.url, width: double.infinity, height: 250, fit: BoxFit.cover),
+            child: CachedNetworkImage(
+              imageUrl: file.url,
+              width: double.infinity,
+              height: 250,
+              fit: BoxFit.cover,
+              fadeInDuration: const Duration(milliseconds: 200),
+            ),
           ),
         ),
       ),
