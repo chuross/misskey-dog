@@ -14,25 +14,14 @@ final class CachedNoteItem extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = cachedNoteProvider(id: noteId);
 
-    final log = ref.watch(logProvider);
     final note = ref.watch(provider);
     if (note == null) {
       return const SizedBox.shrink();
     }
 
-    final lastStreamingValue = useState<dynamic>(null);
-
-    ref.watch(noteUpdateStreamingProvider(noteId: noteId)).maybeWhen(
-          data: (value) {
-            if (lastStreamingValue.value == value) {
-              return;
-            }
-            lastStreamingValue.value = value;
-            ref.read(provider.notifier).sync();
-          },
-          error: (error, _) => log.d('@@@cached_note:streaming:noteId=$noteId, error=$error'),
-          orElse: () {},
-        );
+    ref.listen(noteUpdateStreamingProvider(noteId: noteId), (_, next) {
+      ref.read(provider.notifier).sync();
+    });
 
     return NoteItem(
       note: note,
