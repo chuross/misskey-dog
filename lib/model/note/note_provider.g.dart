@@ -436,16 +436,14 @@ class _LocalNoteIdsWithCacheProviderElement
 }
 
 String _$globalNoteIdsWithCacheHash() =>
-    r'7c45c550200c2c1432b184d24edb4e8e18f83c97';
+    r'ddbc4f41e55d6cb4fe787cf0cf6ffe6dae632c54';
 
 abstract class _$GlobalNoteIdsWithCache
     extends BuildlessAutoDisposeAsyncNotifier<List<String>> {
   late final bool? hasFiles;
-  late final int limit;
 
   FutureOr<List<String>> build({
     bool? hasFiles,
-    int limit = 100,
   });
 }
 
@@ -461,11 +459,9 @@ class GlobalNoteIdsWithCacheFamily extends Family<AsyncValue<List<String>>> {
   /// See also [GlobalNoteIdsWithCache].
   GlobalNoteIdsWithCacheProvider call({
     bool? hasFiles,
-    int limit = 100,
   }) {
     return GlobalNoteIdsWithCacheProvider(
       hasFiles: hasFiles,
-      limit: limit,
     );
   }
 
@@ -475,7 +471,6 @@ class GlobalNoteIdsWithCacheFamily extends Family<AsyncValue<List<String>>> {
   ) {
     return call(
       hasFiles: provider.hasFiles,
-      limit: provider.limit,
     );
   }
 
@@ -501,11 +496,8 @@ class GlobalNoteIdsWithCacheProvider
   /// See also [GlobalNoteIdsWithCache].
   GlobalNoteIdsWithCacheProvider({
     bool? hasFiles,
-    int limit = 100,
   }) : this._internal(
-          () => GlobalNoteIdsWithCache()
-            ..hasFiles = hasFiles
-            ..limit = limit,
+          () => GlobalNoteIdsWithCache()..hasFiles = hasFiles,
           from: globalNoteIdsWithCacheProvider,
           name: r'globalNoteIdsWithCacheProvider',
           debugGetCreateSourceHash:
@@ -516,7 +508,6 @@ class GlobalNoteIdsWithCacheProvider
           allTransitiveDependencies:
               GlobalNoteIdsWithCacheFamily._allTransitiveDependencies,
           hasFiles: hasFiles,
-          limit: limit,
         );
 
   GlobalNoteIdsWithCacheProvider._internal(
@@ -527,11 +518,9 @@ class GlobalNoteIdsWithCacheProvider
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.hasFiles,
-    required this.limit,
   }) : super.internal();
 
   final bool? hasFiles;
-  final int limit;
 
   @override
   FutureOr<List<String>> runNotifierBuild(
@@ -539,7 +528,6 @@ class GlobalNoteIdsWithCacheProvider
   ) {
     return notifier.build(
       hasFiles: hasFiles,
-      limit: limit,
     );
   }
 
@@ -548,16 +536,13 @@ class GlobalNoteIdsWithCacheProvider
     return ProviderOverride(
       origin: this,
       override: GlobalNoteIdsWithCacheProvider._internal(
-        () => create()
-          ..hasFiles = hasFiles
-          ..limit = limit,
+        () => create()..hasFiles = hasFiles,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         hasFiles: hasFiles,
-        limit: limit,
       ),
     );
   }
@@ -571,15 +556,13 @@ class GlobalNoteIdsWithCacheProvider
   @override
   bool operator ==(Object other) {
     return other is GlobalNoteIdsWithCacheProvider &&
-        other.hasFiles == hasFiles &&
-        other.limit == limit;
+        other.hasFiles == hasFiles;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, hasFiles.hashCode);
-    hash = _SystemHash.combine(hash, limit.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -589,9 +572,6 @@ mixin GlobalNoteIdsWithCacheRef
     on AutoDisposeAsyncNotifierProviderRef<List<String>> {
   /// The parameter `hasFiles` of this provider.
   bool? get hasFiles;
-
-  /// The parameter `limit` of this provider.
-  int get limit;
 }
 
 class _GlobalNoteIdsWithCacheProviderElement
@@ -601,8 +581,6 @@ class _GlobalNoteIdsWithCacheProviderElement
 
   @override
   bool? get hasFiles => (origin as GlobalNoteIdsWithCacheProvider).hasFiles;
-  @override
-  int get limit => (origin as GlobalNoteIdsWithCacheProvider).limit;
 }
 
 String _$cachedNoteHash() => r'64db389de13236470fee2e54ba8fdaf9901d6c9f';

@@ -64,14 +64,13 @@ final class GlobalNoteIdsWithCache extends _$GlobalNoteIdsWithCache {
   @override
   Future<List<String>> build({
     bool? hasFiles,
-    int limit = 100,
   }) async {
     final client = await ref.watch(misskeyClientProvider().future);
 
     final notes = await client.getGlobalNotes(
       request: GetGlobalNotesRequest(
         hasFiles: hasFiles,
-        limit: limit,
+        limit: 100,
       ).toJson().removeAllNullValueKeys(),
     );
 
@@ -94,7 +93,7 @@ final class GlobalNoteIdsWithCache extends _$GlobalNoteIdsWithCache {
       request: GetLocalNotesRequest(
         hasFiles: hasFiles,
         untilId: lastNoteId,
-        limit: limit,
+        limit: 100,
       ).toJson().removeAllNullValueKeys(),
     );
 
