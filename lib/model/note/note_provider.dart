@@ -132,8 +132,8 @@ final class CachedNote extends _$CachedNote {
   }
 
   Future<void> sync() async {
-    // final client = await ref.watch(misskeyClientProvider().future);
-    // state = await client.getNote(request: GetNoteRequest(noteId: id).toJson());
+    final client = await ref.watch(misskeyClientProvider().future);
+    state = await client.getNote(request: GetNoteRequest(noteId: id).toJson());
   }
 }
 
