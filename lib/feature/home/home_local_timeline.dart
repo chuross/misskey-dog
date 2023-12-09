@@ -14,13 +14,14 @@ final class HomeLocalTimeline extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = localNoteIdsWithCacheProvider();
+    final streamingProvider = noteCreationStreamingProvider(channel: StreamingChannel.localTimeline);
     final noteIds = ref.watch(provider);
 
     final controller = useLoadMore(onNext: () => ref.read(provider.notifier).fetchNext());
 
     final shouldManualReload = useState(false);
 
-    ref.listen(noteCreationStreamingProvider(channel: StreamingChannel.localTimeline), (_, next) {
+    ref.listen(streamingProvider, (_, next) {
       final isScrolling = controller.offset > 0;
       if (!isScrolling && !shouldManualReload.value) {
         ref.read(provider.notifier).onNoteCreated(next.requireValue);
@@ -29,29 +30,19 @@ final class HomeLocalTimeline extends HookConsumerWidget {
       }
     });
 
-    return Stack(
-      children: [
-        NoteTimeline(
-          noteIds: noteIds,
-          scrollController: controller,
-          onRefresh: () => ref.invalidate(provider),
-          onFetchNext: () => ref.read(provider.notifier).fetchNext(),
-        ),
-        shouldManualReload.value
-            ? ElevatedButton(
-                onPressed: () {
-                  controller.animateTo(
-                    controller.position.minScrollExtent,
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.easeInCubic,
-                  );
-                  ref.invalidate(provider);
-                  shouldManualReload.value = false;
-                },
-                child: Text('最新の投稿を見る'.i18n),
-              ).align(Alignment.topCenter)
-            : const SizedBox.shrink(),
-      ],
+    return NoteTimeline(
+      noteIds: noteIds,
+      scrollController: controller,
+      shouldManualReload: shouldManualReload.value,
+      onRefresh: () {
+        ref.invalidate(provider);
+        ref.invalidate(streamingProvider);
+      },
+      onManualReloadPressed: () {
+        ref.invalidate(provider);
+        shouldManualReload.value = false;
+      },
+      onFetchNext: () => ref.read(provider.notifier).fetchNext(),
     );
   }
 }
