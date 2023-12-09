@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -37,7 +38,7 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
                   IconButton(
                     icon: account.mapOrElse(
                       (account) => CircleAvatar(
-                        foregroundImage: NetworkImage(account.user.avatarUrl ?? ''),
+                        foregroundImage: CachedNetworkImageProvider(account.user.avatarUrl ?? ''),
                       ),
                       elseValue: const Icon(Icons.person),
                     ),

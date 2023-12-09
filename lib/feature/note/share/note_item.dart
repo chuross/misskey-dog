@@ -62,7 +62,7 @@ final class NoteItem extends StatelessWidget {
         SizedBox(
           width: 56,
           height: 56,
-          child: CircleAvatar(foregroundImage: NetworkImage(note.renote?.user.avatarUrl ?? note.user.avatarUrl ?? '')),
+          child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(note.renote?.user.avatarUrl ?? note.user.avatarUrl ?? '')),
         ),
         const SizedBox(width: 12),
         Column(
@@ -85,10 +85,7 @@ final class NoteItem extends StatelessWidget {
             (note.renote?.user.instance ?? note.user.instance).mapOrElse((instance) {
               return Row(
                 children: [
-                  SizedBox.square(
-                    dimension: 12,
-                    child: Image.network(instance.iconUrl, fit: BoxFit.cover),
-                  ),
+                  CachedNetworkImage(imageUrl: instance.iconUrl, fit: BoxFit.cover, width: 12, height: 12),
                   const SizedBox(width: 2),
                   Text(
                     instance.name,
@@ -153,7 +150,7 @@ final class _RenotedInfo extends StatelessWidget {
         const Icon(Icons.repeat_rounded, size: 16),
         SizedBox(
           height: 24,
-          child: CircleAvatar(foregroundImage: NetworkImage(note.user.avatarUrl ?? '')),
+          child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(note.user.avatarUrl ?? '')),
         ),
         Text(
           "%sがリノート".i18n.fill([note.user.username]),
