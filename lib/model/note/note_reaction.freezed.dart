@@ -104,9 +104,10 @@ class __$$NoteReactionLocalEmojiImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NoteReactionLocalEmojiImpl implements _NoteReactionLocalEmoji {
+class _$NoteReactionLocalEmojiImpl extends _NoteReactionLocalEmoji {
   const _$NoteReactionLocalEmojiImpl(
-      {required this.emoji, required this.reactionCount});
+      {required this.emoji, required this.reactionCount})
+      : super._();
 
   @override
   final Emoji emoji;
@@ -139,10 +140,11 @@ class _$NoteReactionLocalEmojiImpl implements _NoteReactionLocalEmoji {
           _$NoteReactionLocalEmojiImpl>(this, _$identity);
 }
 
-abstract class _NoteReactionLocalEmoji implements NoteReaction {
+abstract class _NoteReactionLocalEmoji extends NoteReaction {
   const factory _NoteReactionLocalEmoji(
       {required final Emoji emoji,
       required final int reactionCount}) = _$NoteReactionLocalEmojiImpl;
+  const _NoteReactionLocalEmoji._() : super._();
 
   @override
   Emoji get emoji;

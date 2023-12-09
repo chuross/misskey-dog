@@ -206,12 +206,16 @@ final class _Reaction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => !isReacted ? onReactionTap(reaction.emoji) : null,
+      onTap: () => !isReacted && reaction.isReactionable ? onReactionTap(reaction.emoji) : null,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         decoration: BoxDecoration(
           color: isReacted ? context.theme.primaryColor.withOpacity(0.15) : null,
-          border: Border.all(color: isReacted ? context.theme.primaryColor.withOpacity(0.3) : context.dividerColorWithOpacity20),
+          border: reaction.isReactionable
+              ? Border.all(
+                  color: isReacted ? context.theme.primaryColor.withOpacity(0.3) : context.dividerColorWithOpacity20,
+                )
+              : null,
           borderRadius: BorderRadius.circular(4),
         ),
         child: Row(

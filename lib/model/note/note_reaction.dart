@@ -6,10 +6,14 @@ part 'note_reaction.freezed.dart';
 
 @freezed
 abstract class NoteReaction with _$NoteReaction {
+  const NoteReaction._();
+
   const factory NoteReaction({
     required Emoji emoji,
     required int reactionCount,
   }) = _NoteReactionLocalEmoji;
+
+  bool get isReactionable => emoji.safeCast<CustomEmoji>()?.isLocal == true || emoji is PlainEmoji;
 
   // key: ex) :dame@submarin.online:
   // externalReactionUrlMap: ex) {dame@submarin.online: https://submarin.online/files/webpublic-5940b269-071e-4991-b937-a02302fec7a9}
