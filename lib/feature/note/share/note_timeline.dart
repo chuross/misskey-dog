@@ -10,11 +10,9 @@ import 'package:misskey_dog/feature/note/share/cached_note_item.dart';
 abstract class NoteTimeline extends HookConsumerWidget {
   const NoteTimeline({super.key});
 
-  ProviderListenable<AsyncValue<List<String>>> noteIdsProvider();
+  ProviderBase<AsyncValue<List<String>>> noteIdsProvider();
 
   void onFetchNext(WidgetRef ref);
-
-  void onRefresh(WidgetRef ref);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,7 +24,7 @@ abstract class NoteTimeline extends HookConsumerWidget {
     switch (noteIds) {
       case AsyncData(value: final noteIds):
         return RefreshIndicator(
-          onRefresh: () async => onRefresh(ref),
+          onRefresh: () async => ref.invalidate(provider),
           child: CustomScrollView(
             controller: controller,
             slivers: [
@@ -61,7 +59,7 @@ abstract class NoteTimeline extends HookConsumerWidget {
           ),
         );
       default:
-        return ScreenLoadingView(value: noteIds, onRetry: () => onRefresh(ref));
+        return ScreenLoadingView(value: noteIds, onRetry: () => ref.invalidate(provider));
     }
   }
 }

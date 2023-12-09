@@ -6,17 +6,12 @@ final class HomeMediaTimeline extends NoteTimeline {
   const HomeMediaTimeline({super.key});
 
   @override
-  ProviderListenable<AsyncValue<List<String>>> noteIdsProvider() {
+  ProviderBase<AsyncValue<List<String>>> noteIdsProvider() {
     return localNoteIdsWithCacheProvider(hasFiles: true);
   }
 
   @override
   void onFetchNext(WidgetRef ref) {
     ref.read(localNoteIdsWithCacheProvider(hasFiles: true).notifier).fetchNext();
-  }
-
-  @override
-  void onRefresh(WidgetRef ref) {
-    ref.invalidate(localNoteIdsWithCacheProvider(hasFiles: true));
   }
 }

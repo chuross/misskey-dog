@@ -6,17 +6,12 @@ final class HomeGlobalTimeline extends NoteTimeline {
   const HomeGlobalTimeline({super.key});
 
   @override
-  ProviderListenable<AsyncValue<List<String>>> noteIdsProvider() {
+  ProviderBase<AsyncValue<List<String>>> noteIdsProvider() {
     return globalNoteIdsWithCacheProvider();
   }
 
   @override
   void onFetchNext(WidgetRef ref) {
     ref.read(globalNoteIdsWithCacheProvider().notifier).fetchNext();
-  }
-
-  @override
-  void onRefresh(WidgetRef ref) {
-    ref.invalidate(globalNoteIdsWithCacheProvider());
   }
 }

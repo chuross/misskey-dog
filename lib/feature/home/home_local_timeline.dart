@@ -6,17 +6,12 @@ final class HomeLocalTimeline extends NoteTimeline {
   const HomeLocalTimeline({super.key});
 
   @override
-  ProviderListenable<AsyncValue<List<String>>> noteIdsProvider() {
+  ProviderBase<AsyncValue<List<String>>> noteIdsProvider() {
     return localNoteIdsWithCacheProvider();
   }
 
   @override
   void onFetchNext(WidgetRef ref) {
     ref.read(localNoteIdsWithCacheProvider().notifier).fetchNext();
-  }
-
-  @override
-  void onRefresh(WidgetRef ref) {
-    ref.invalidate(localNoteIdsWithCacheProvider());
   }
 }
