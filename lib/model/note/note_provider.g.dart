@@ -628,7 +628,7 @@ class _GlobalNoteIdsWithCacheProviderElement
   int get limit => (origin as GlobalNoteIdsWithCacheProvider).limit;
 }
 
-String _$cachedNoteHash() => r'd2568b379c5b1e01358c21afb7187361cf9a659f';
+String _$cachedNoteHash() => r'64db389de13236470fee2e54ba8fdaf9901d6c9f';
 
 abstract class _$CachedNote extends BuildlessAutoDisposeNotifier<Note?> {
   late final String id;

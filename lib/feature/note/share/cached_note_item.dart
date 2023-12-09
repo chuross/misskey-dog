@@ -18,7 +18,7 @@ final class CachedNoteItem extends ConsumerWidget {
     }
 
     ref.watch(noteUpdateStreamingProvider(noteId: noteId)).maybeWhen(
-          data: (data) => print('@@@@$data'),
+          data: (data) => ref.read(provider.notifier).sync(),
           orElse: () {},
         );
 

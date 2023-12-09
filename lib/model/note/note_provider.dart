@@ -128,6 +128,14 @@ final class CachedNote extends _$CachedNote {
     final client = await ref.watch(misskeyClientProvider().future);
     await client.createNoteReaction(request: CreateNoteReactionRequest(noteId: note.id, emojiId: emoji.id).toJson());
 
+    // リアクションが反映されるまでラグがあるので少し待つ
+    await Future.delayed(const Duration(seconds: 1));
+
+    sync();
+  }
+
+  Future<void> sync() async {
+    final client = await ref.watch(misskeyClientProvider().future);
     state = await client.getNote(request: GetNoteRequest(noteId: id).toJson());
   }
 }
