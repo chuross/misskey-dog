@@ -289,16 +289,14 @@ class _NoteUpdateStreamingProviderElement
 }
 
 String _$localNoteIdsWithCacheHash() =>
-    r'f4139fb2f703c95a8015895c8c6c44bd3175de4a';
+    r'779a0d18da247c2bb3ae7a9576dafd27f59f4790';
 
 abstract class _$LocalNoteIdsWithCache
     extends BuildlessAutoDisposeAsyncNotifier<List<String>> {
   late final bool? hasFiles;
-  late final int limit;
 
   FutureOr<List<String>> build({
     bool? hasFiles,
-    int limit = 100,
   });
 }
 
@@ -314,11 +312,9 @@ class LocalNoteIdsWithCacheFamily extends Family<AsyncValue<List<String>>> {
   /// See also [LocalNoteIdsWithCache].
   LocalNoteIdsWithCacheProvider call({
     bool? hasFiles,
-    int limit = 100,
   }) {
     return LocalNoteIdsWithCacheProvider(
       hasFiles: hasFiles,
-      limit: limit,
     );
   }
 
@@ -328,7 +324,6 @@ class LocalNoteIdsWithCacheFamily extends Family<AsyncValue<List<String>>> {
   ) {
     return call(
       hasFiles: provider.hasFiles,
-      limit: provider.limit,
     );
   }
 
@@ -354,11 +349,8 @@ class LocalNoteIdsWithCacheProvider
   /// See also [LocalNoteIdsWithCache].
   LocalNoteIdsWithCacheProvider({
     bool? hasFiles,
-    int limit = 100,
   }) : this._internal(
-          () => LocalNoteIdsWithCache()
-            ..hasFiles = hasFiles
-            ..limit = limit,
+          () => LocalNoteIdsWithCache()..hasFiles = hasFiles,
           from: localNoteIdsWithCacheProvider,
           name: r'localNoteIdsWithCacheProvider',
           debugGetCreateSourceHash:
@@ -369,7 +361,6 @@ class LocalNoteIdsWithCacheProvider
           allTransitiveDependencies:
               LocalNoteIdsWithCacheFamily._allTransitiveDependencies,
           hasFiles: hasFiles,
-          limit: limit,
         );
 
   LocalNoteIdsWithCacheProvider._internal(
@@ -380,11 +371,9 @@ class LocalNoteIdsWithCacheProvider
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.hasFiles,
-    required this.limit,
   }) : super.internal();
 
   final bool? hasFiles;
-  final int limit;
 
   @override
   FutureOr<List<String>> runNotifierBuild(
@@ -392,7 +381,6 @@ class LocalNoteIdsWithCacheProvider
   ) {
     return notifier.build(
       hasFiles: hasFiles,
-      limit: limit,
     );
   }
 
@@ -401,16 +389,13 @@ class LocalNoteIdsWithCacheProvider
     return ProviderOverride(
       origin: this,
       override: LocalNoteIdsWithCacheProvider._internal(
-        () => create()
-          ..hasFiles = hasFiles
-          ..limit = limit,
+        () => create()..hasFiles = hasFiles,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         hasFiles: hasFiles,
-        limit: limit,
       ),
     );
   }
@@ -423,16 +408,13 @@ class LocalNoteIdsWithCacheProvider
 
   @override
   bool operator ==(Object other) {
-    return other is LocalNoteIdsWithCacheProvider &&
-        other.hasFiles == hasFiles &&
-        other.limit == limit;
+    return other is LocalNoteIdsWithCacheProvider && other.hasFiles == hasFiles;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, hasFiles.hashCode);
-    hash = _SystemHash.combine(hash, limit.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -442,9 +424,6 @@ mixin LocalNoteIdsWithCacheRef
     on AutoDisposeAsyncNotifierProviderRef<List<String>> {
   /// The parameter `hasFiles` of this provider.
   bool? get hasFiles;
-
-  /// The parameter `limit` of this provider.
-  int get limit;
 }
 
 class _LocalNoteIdsWithCacheProviderElement
@@ -454,8 +433,6 @@ class _LocalNoteIdsWithCacheProviderElement
 
   @override
   bool? get hasFiles => (origin as LocalNoteIdsWithCacheProvider).hasFiles;
-  @override
-  int get limit => (origin as LocalNoteIdsWithCacheProvider).limit;
 }
 
 String _$globalNoteIdsWithCacheHash() =>

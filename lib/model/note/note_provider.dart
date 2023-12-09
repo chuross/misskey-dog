@@ -18,16 +18,13 @@ part 'note_provider.g.dart';
 @riverpod
 final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
   @override
-  Future<List<String>> build({
-    bool? hasFiles,
-    int limit = 100,
-  }) async {
+  Future<List<String>> build({bool? hasFiles}) async {
     final client = await ref.watch(misskeyClientProvider().future);
 
     final notes = await client.getLocalNotes(
       request: GetLocalNotesRequest(
         hasFiles: hasFiles,
-        limit: limit,
+        limit: 100,
       ).toJson().removeAllNullValueKeys(),
     );
 
@@ -50,7 +47,7 @@ final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
       request: GetLocalNotesRequest(
         hasFiles: hasFiles,
         untilId: lastNoteId,
-        limit: limit,
+        limit: 100,
       ).toJson().removeAllNullValueKeys(),
     );
 
