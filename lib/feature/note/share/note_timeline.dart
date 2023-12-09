@@ -26,7 +26,7 @@ abstract class NoteTimeline extends HookConsumerWidget {
     switch (noteIds) {
       case AsyncData(value: final noteIds):
         return RefreshIndicator(
-          onRefresh: () async => () => onRefresh(ref),
+          onRefresh: () async => onRefresh(ref),
           child: CustomScrollView(
             controller: controller,
             slivers: [
