@@ -55,7 +55,15 @@ final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
       ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
     }
 
-    state = AsyncData([...state.value!, ...newNotes.map((note) => note.id)]);
+    state = AsyncData([...state.requireValue, ...newNotes.map((note) => note.id)]);
+  }
+
+  void onNoteCreated(Note note) {
+    final noteIds = state.value;
+    if (noteIds == null) return;
+
+    ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+    state = AsyncData([note.id, ...state.requireValue]);
   }
 }
 

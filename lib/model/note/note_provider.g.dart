@@ -289,7 +289,7 @@ class _NoteUpdateStreamingProviderElement
 }
 
 String _$localNoteIdsWithCacheHash() =>
-    r'779a0d18da247c2bb3ae7a9576dafd27f59f4790';
+    r'02e396f020af93c7e5f06793920a811616f15912';
 
 abstract class _$LocalNoteIdsWithCache
     extends BuildlessAutoDisposeAsyncNotifier<List<String>> {

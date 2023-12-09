@@ -4,27 +4,31 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/string.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
-import 'package:misskey_dog/core/hook/use_load_more.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/feature/note/share/cached_note_item.dart';
 
 final class NoteTimeline extends HookWidget {
   final AsyncValue<List<String>> noteIds;
+  final ScrollController scrollController;
   final Function() onRefresh;
   final Function() onFetchNext;
 
-  const NoteTimeline({super.key, required this.noteIds, required this.onRefresh, required this.onFetchNext});
+  const NoteTimeline({
+    super.key,
+    required this.noteIds,
+    required this.scrollController,
+    required this.onRefresh,
+    required this.onFetchNext,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final controller = useLoadMore(onNext: () => onFetchNext());
-
     switch (noteIds) {
       case AsyncData(value: final noteIds):
         return RefreshIndicator(
           onRefresh: () async => onRefresh(),
           child: CustomScrollView(
-            controller: controller,
+            controller: scrollController,
             slivers: [
               SliverList(
                 delegate: SliverChildBuilderDelegate(
