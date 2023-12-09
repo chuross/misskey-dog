@@ -8,9 +8,7 @@ import 'package:misskey_dog/core/extension/object.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
-import 'package:misskey_dog/feature/home/home_global_timeline.dart';
 import 'package:misskey_dog/feature/home/home_local_timeline.dart';
-import 'package:misskey_dog/feature/home/home_media_timeline.dart';
 import 'package:misskey_dog/feature/home/home_note_creation_screen.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 
@@ -20,8 +18,6 @@ part 'home_screen.freezed.dart';
 final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
   static final _tabs = [
     _HomeTab(title: 'ローカル'.i18n, child: const HomeLocalTimeline()),
-    _HomeTab(title: 'メディア'.i18n, child: const HomeMediaTimeline()),
-    _HomeTab(title: 'グローバル'.i18n, child: const HomeGlobalTimeline()),
   ];
 
   const HomeScreen({super.key});
