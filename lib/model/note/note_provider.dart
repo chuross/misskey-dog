@@ -90,7 +90,7 @@ final class GlobalNoteIdsWithCache extends _$GlobalNoteIdsWithCache {
 
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final newNotes = await client.getLocalNotes(
+    final newNotes = await client.getGlobalNotes(
       request: GetLocalNotesRequest(
         hasFiles: hasFiles,
         untilId: lastNoteId,
