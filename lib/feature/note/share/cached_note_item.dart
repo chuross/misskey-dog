@@ -19,7 +19,7 @@ final class CachedNoteItem extends HookConsumerWidget {
       return const SizedBox.shrink();
     }
 
-    ref.listen(noteUpdateStreamingProvider(noteId: noteId), (_, next) {
+    ref.listen(noteUpdateStreamingProvider(noteId: noteId), (_, __) {
       ref.read(provider.notifier).sync();
     });
 
