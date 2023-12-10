@@ -6,7 +6,7 @@ part of 'emoji_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localEmojiHash() => r'eb22f731a78dc4fbb78a769125b0529f1311d0e0';
+String _$localEmojiHash() => r'5fb57851adfdef595f6e40e3ce51a0457248f438';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -34,7 +34,7 @@ class _SystemHash {
 const localEmojiProvider = LocalEmojiFamily();
 
 /// See also [localEmoji].
-class LocalEmojiFamily extends Family<AsyncValue<CustomEmoji>> {
+class LocalEmojiFamily extends Family<AsyncValue<LocalEmoji>> {
   /// See also [localEmoji].
   const LocalEmojiFamily();
 
@@ -72,7 +72,7 @@ class LocalEmojiFamily extends Family<AsyncValue<CustomEmoji>> {
 }
 
 /// See also [localEmoji].
-class LocalEmojiProvider extends AutoDisposeFutureProvider<CustomEmoji> {
+class LocalEmojiProvider extends AutoDisposeFutureProvider<LocalEmoji> {
   /// See also [localEmoji].
   LocalEmojiProvider({
     required String emojiName,
@@ -107,7 +107,7 @@ class LocalEmojiProvider extends AutoDisposeFutureProvider<CustomEmoji> {
 
   @override
   Override overrideWith(
-    FutureOr<CustomEmoji> Function(LocalEmojiRef provider) create,
+    FutureOr<LocalEmoji> Function(LocalEmojiRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -124,7 +124,7 @@ class LocalEmojiProvider extends AutoDisposeFutureProvider<CustomEmoji> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<CustomEmoji> createElement() {
+  AutoDisposeFutureProviderElement<LocalEmoji> createElement() {
     return _LocalEmojiProviderElement(this);
   }
 
@@ -142,13 +142,13 @@ class LocalEmojiProvider extends AutoDisposeFutureProvider<CustomEmoji> {
   }
 }
 
-mixin LocalEmojiRef on AutoDisposeFutureProviderRef<CustomEmoji> {
+mixin LocalEmojiRef on AutoDisposeFutureProviderRef<LocalEmoji> {
   /// The parameter `emojiName` of this provider.
   String get emojiName;
 }
 
 class _LocalEmojiProviderElement
-    extends AutoDisposeFutureProviderElement<CustomEmoji> with LocalEmojiRef {
+    extends AutoDisposeFutureProviderElement<LocalEmoji> with LocalEmojiRef {
   _LocalEmojiProviderElement(super.provider);
 
   @override

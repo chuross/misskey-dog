@@ -55,5 +55,5 @@ abstract class MisskeyClient {
   Future<void> createNoteReaction({@Body() required Map<String, dynamic> request});
 
   @POST('/api/emoji')
-  Future<CustomEmoji> getLocalEmoji({@Body() required Map<String, dynamic> request});
+  Future<LocalEmoji> getLocalEmoji({@Body() required Map<String, dynamic> request});
 }

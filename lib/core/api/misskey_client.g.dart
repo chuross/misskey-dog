@@ -221,7 +221,7 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<CustomEmoji> getLocalEmoji(
+  Future<LocalEmoji> getLocalEmoji(
       {required Map<String, dynamic> request}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -229,7 +229,7 @@ class _MisskeyClient implements MisskeyClient {
     final _data = <String, dynamic>{};
     _data.addAll(request);
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<CustomEmoji>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<LocalEmoji>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -245,7 +245,7 @@ class _MisskeyClient implements MisskeyClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = CustomEmoji.fromJson(_result.data!);
+    final value = LocalEmoji.fromJson(_result.data!);
     return value;
   }
 

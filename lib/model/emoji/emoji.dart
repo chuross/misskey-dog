@@ -10,31 +10,50 @@ sealed class Emoji {
   // externalEmoji => :ohayougozaimasu@misskey.io:
   // PlainEmoji => 😀
   factory Emoji.resolve({required String rawEmoji, String? url}) {
-    if (rawEmoji.startsWith(':')) {
-      final [emojiName, host] = rawEmoji.split('@');
-      return CustomEmoji(name: emojiName.substring(1), host: host.substring(0, host.length - 1), url: url);
-    } else {
-      return PlainEmoji(text: rawEmoji);
+    switch (rawEmoji) {
+      case (String rawEmoji) when rawEmoji.startsWith(':'):
+        var [emojiName, host] = rawEmoji.split('@');
+        emojiName = emojiName.substring(1);
+        host = host.substring(0, host.length - 1);
+
+        return switch (rawEmoji) {
+          (String _) when host == '.' => LocalEmoji(name: emojiName),
+          _ => ExternalEmoji(name: emojiName, host: host, url: url!),
+        };
+      default:
+        return PlainEmoji(text: rawEmoji);
     }
   }
 }
 
 @freezed
-abstract class CustomEmoji with _$CustomEmoji implements Emoji {
-  const CustomEmoji._();
+abstract class LocalEmoji with _$LocalEmoji implements Emoji {
+  const LocalEmoji._();
 
-  const factory CustomEmoji({
+  const factory LocalEmoji({
     required String name, // ex) ohayougozaimasu
-    String? host, // ex) misskey.io
     String? url,
-  }) = _CustomEmoji;
+  }) = _LocalEmoji;
+
+  String get id => ':$name@.:';
+
+  factory LocalEmoji.fromJson(Map<String, dynamic> json) => _$LocalEmojiFromJson(json);
+}
+
+@freezed
+abstract class ExternalEmoji with _$ExternalEmoji implements Emoji {
+  const ExternalEmoji._();
+
+  const factory ExternalEmoji({
+    required String name, // ex) ohayougozaimasu
+    required String host, // ex) misskey.io
+    required String url,
+  }) = _ExternalEmoji;
 
   @override
   String get id => ':$name@$host:';
 
-  bool get isLocal => host == '.';
-
-  factory CustomEmoji.fromJson(Map<String, dynamic> json) => _$CustomEmojiFromJson(json);
+  factory ExternalEmoji.fromJson(Map<String, dynamic> json) => _$ExternalEmojiFromJson(json);
 }
 
 @freezed

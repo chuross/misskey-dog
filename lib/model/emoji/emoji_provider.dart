@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'emoji_provider.g.dart';
 
 @riverpod
-Future<CustomEmoji> localEmoji(LocalEmojiRef ref, {required String emojiName}) async {
+Future<LocalEmoji> localEmoji(LocalEmojiRef ref, {required String emojiName}) async {
   ref.keepAlive();
 
   final client = await ref.watch(misskeyClientProvider().future);

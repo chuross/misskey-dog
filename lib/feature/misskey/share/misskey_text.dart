@@ -33,7 +33,10 @@ List<InlineSpan> _separateInlineSpans({
       final emojiName = match?.group(1);
       final url = externalTextEmojiUrlMap[emojiName];
       final host = url?.isNotEmpty == true ? 'unknown' : '.';
-      final emoji = CustomEmoji(name: emojiName ?? '', host: host, url: url);
+      final emoji = switch (host) {
+        (String host) when host == '.' => LocalEmoji(name: emojiName ?? ''),
+        _ => ExternalEmoji(name: emojiName ?? '', host: host, url: url!),
+      };
 
       if (previousValue.isNotEmpty) spans.add(TextSpan(text: previousValue));
 

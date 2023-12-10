@@ -14,16 +14,15 @@ final class MisskeyEmoji extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (emoji) {
-      CustomEmoji() => (emoji as CustomEmoji).isLocal
-          ? _LocalEmojiView(emoji: emoji as CustomEmoji, height: height)
-          : _ExternalEmojiView(emoji: emoji as CustomEmoji, height: height),
-      PlainEmoji() => Text((emoji as PlainEmoji).text, style: TextStyle(fontSize: height)),
+      (LocalEmoji emoji) => _LocalEmojiView(emoji: emoji, height: height),
+      (ExternalEmoji emoji) => _ExternalEmojiView(emoji: emoji, height: height),
+      (PlainEmoji emoji) => Text(emoji.text, style: TextStyle(fontSize: height)),
     };
   }
 }
 
 final class _LocalEmojiView extends ConsumerWidget {
-  final CustomEmoji emoji;
+  final LocalEmoji emoji;
   final double height;
 
   const _LocalEmojiView({required this.emoji, required this.height});
@@ -43,13 +42,13 @@ final class _LocalEmojiView extends ConsumerWidget {
 }
 
 final class _ExternalEmojiView extends StatelessWidget {
-  final CustomEmoji emoji;
+  final ExternalEmoji emoji;
   final double height;
 
   const _ExternalEmojiView({required this.emoji, required this.height});
 
   @override
   Widget build(BuildContext context) {
-    return Image.network(emoji.url ?? '', height: height, fit: BoxFit.fitHeight);
+    return Image.network(emoji.url, height: height, fit: BoxFit.fitHeight);
   }
 }
