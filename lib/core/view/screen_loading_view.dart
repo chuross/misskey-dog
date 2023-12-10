@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
-import 'package:misskey_dog/core/view/loading_view.dart';
 
 final class ScreenLoadingView extends StatelessWidget {
   final AsyncValue<dynamic> value;
@@ -15,7 +14,9 @@ final class ScreenLoadingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return switch (value) {
       AsyncError() => _ErrorView(onRetry: onRetry),
-      _ => const LoadingView(),
+      _ => const CircularProgressIndicator(
+          strokeWidth: 4.0,
+        ).align(Alignment.center),
     };
   }
 }

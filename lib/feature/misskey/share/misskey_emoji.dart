@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:misskey_dog/core/extension/async_value.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/emoji/emoji_provider.dart';
 
@@ -30,14 +29,17 @@ final class _LocalEmojiView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localEmoji = ref.watch(localEmojiProvider(emojiName: emoji.name));
-    return localEmoji.whenPartialLoading(
-      data: (localEmoji) => Image(
-        image: CachedNetworkImageProvider(localEmoji.url ?? ''),
-        height: height,
-        fit: BoxFit.fitHeight,
-      ),
-      progressIndicatorSize: Size.square(height),
-    );
+
+    switch (localEmoji) {
+      case AsyncData(value: final localEmoji):
+        return Image(
+          image: CachedNetworkImageProvider(localEmoji.url ?? ''),
+          height: height,
+          fit: BoxFit.fitHeight,
+        );
+      default:
+        return SizedBox.square(dimension: height, child: const CircularProgressIndicator(strokeWidth: 1));
+    }
   }
 }
 
