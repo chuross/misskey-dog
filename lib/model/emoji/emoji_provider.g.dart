@@ -21,7 +21,7 @@ final localEmojisProvider =
 );
 
 typedef LocalEmojisRef = AutoDisposeFutureProviderRef<List<LocalEmoji>>;
-String _$localEmojiMapHash() => r'80d4aac1f81c170c6e8b70e7515975b5fc12ea48';
+String _$localEmojiMapHash() => r'b864eb188b128accfbe35f89eb05417cf776220e';
 
 /// See also [_localEmojiMap].
 @ProviderFor(_localEmojiMap)
@@ -38,7 +38,7 @@ final _localEmojiMapProvider =
 
 typedef _LocalEmojiMapRef
     = AutoDisposeFutureProviderRef<Map<String, LocalEmoji>>;
-String _$localEmojiHash() => r'fa509c06f40f0e6b46c9767aa5e5fb3a4fc08b2d';
+String _$localEmojiHash() => r'0df51af9a15f0861fb32be111ce0e88d3e600ebc';
 
 /// Copied from Dart SDK
 class _SystemHash {

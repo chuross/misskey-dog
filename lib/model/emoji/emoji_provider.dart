@@ -15,12 +15,13 @@ Future<List<LocalEmoji>> localEmojis(LocalEmojisRef ref) async {
 @riverpod
 Future<Map<String, LocalEmoji>> _localEmojiMap(_LocalEmojiMapRef ref) async {
   final emojis = await ref.watch(localEmojisProvider.future);
-  return Map.fromEntries(emojis.map((e) => MapEntry(e.name, e)));
+  final emojiMap = Map.fromEntries(emojis.map((e) => MapEntry(e.name, e)));
+  ref.keepAlive();
+  return emojiMap;
 }
 
 @riverpod
 Future<LocalEmoji> localEmoji(LocalEmojiRef ref, {required String emojiName}) async {
   final emojiMap = await ref.watch(_localEmojiMapProvider.future);
-  print('@@@@emoji:found?: name=$emojiName result=${emojiMap[emojiName]}');
   return emojiMap[emojiName]!;
 }
