@@ -19,7 +19,7 @@ final class EmojiReactionCreationModal extends HookConsumerWidget {
     final query = useState('');
 
     final filterdEmoji = useMemoized(() {
-      return emojis.value?.where((element) => element.name.contains(query.value)).toList() ?? [];
+      return emojis.value?.where((element) => element.name.contains(query.value)).toList() ?? emojis;
     }, [query.value]);
 
     switch (emojis) {
@@ -27,7 +27,7 @@ final class EmojiReactionCreationModal extends HookConsumerWidget {
         return DraggableScrollableSheet(
           initialChildSize: 0.5,
           maxChildSize: 0.9,
-          minChildSize: 0.25,
+          minChildSize: 0.49,
           expand: false,
           snap: true,
           builder: (_, controller) {
@@ -38,6 +38,7 @@ final class EmojiReactionCreationModal extends HookConsumerWidget {
                   child: Column(
                     children: [
                       TextField(
+                        keyboardType: TextInputType.url,
                         decoration: InputDecoration(
                           border: const UnderlineInputBorder(),
                           hintText: 'キーワード'.i18n,
