@@ -54,7 +54,7 @@ final class EmojiReactionCreationModal extends HookConsumerWidget {
                     onEmojiSelected(emoji);
                     context.popRoute();
                   },
-                  child: CachedNetworkImage(imageUrl: emoji.url ?? ''),
+                  child: CachedNetworkImage(imageUrl: emoji.url ?? '', fit: BoxFit.contain),
                 );
               },
             )
