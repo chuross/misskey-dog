@@ -19,7 +19,7 @@ final class EmojiReactionCreationModal extends HookConsumerWidget {
     final query = useState('');
 
     final filterdEmoji = useMemoized(() {
-      return emojis.value?.where((element) => element.name.contains(query.value)).toList() ?? emojis;
+      return emojis.value?.where((element) => element.name.contains(query.value)).toList() ?? emojis.value ?? [];
     }, [query.value]);
 
     switch (emojis) {
