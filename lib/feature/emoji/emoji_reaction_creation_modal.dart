@@ -66,7 +66,7 @@ final class EmojiReactionCreationModal extends HookConsumerWidget {
                 )
               ],
             )
-                .padding(const EdgeInsets.only(left: 16, right: 16, bottom: 24))
+                .padding(const EdgeInsets.symmetric(horizontal: 16))
                 .padding(EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom));
           },
         );
