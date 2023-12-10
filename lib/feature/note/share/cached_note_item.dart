@@ -30,7 +30,11 @@ final class CachedNoteItem extends HookConsumerWidget {
       onReactionPressed: (emoji) => ref.read(provider.notifier).reaction(emoji),
       onReactionAddPressed: () => showModalBottomSheet(
         context: context,
-        builder: (_) => const EmojiReactionCreationModal(),
+        isScrollControlled: false,
+        showDragHandle: true,
+        builder: (_) => EmojiReactionCreationModal(onEmojiSelected: (emoji) {
+          ref.read(provider.notifier).reaction(emoji);
+        }),
       ),
     );
   }
