@@ -35,6 +35,19 @@ final class NoteItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (note.renote != null && note.renote?.myReactionEmoji != null) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _renotedInfo(),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+            child: Text('リアクションしたリノートなので省略'.i18n),
+          )
+        ],
+      ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
