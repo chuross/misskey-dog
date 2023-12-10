@@ -57,6 +57,7 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
                     showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
+                      showDragHandle: true,
                       builder: (_) {
                         return const HomeNoteCreationScreen();
                       },

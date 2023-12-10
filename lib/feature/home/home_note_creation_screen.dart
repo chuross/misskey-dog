@@ -37,7 +37,7 @@ final class HomeNoteCreationScreen extends HookConsumerWidget {
         FilledButton(
           onPressed: text.value.isNotEmpty.takeIfTrue()?.map((_) => () => createNote(text.value)),
           child: Text('投稿'.i18n),
-        ).padding(const EdgeInsets.symmetric(horizontal: 64)),
+        ).padding(const EdgeInsets.symmetric(horizontal: 64)).padding(EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom)),
       ],
     );
   }
