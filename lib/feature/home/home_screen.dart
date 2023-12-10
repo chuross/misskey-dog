@@ -35,16 +35,17 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
             child: Scaffold(
               appBar: AppBar(
                 title: const Text('Misskey Dog'),
-                actions: [
-                  IconButton(
-                    icon: account.mapOrElse(
-                      (account) => CircleAvatar(
-                        foregroundImage: CachedNetworkImageProvider(account.user.avatarUrl ?? ''),
-                      ),
-                      elseValue: const Icon(Icons.person),
+                leading: IconButton(
+                  icon: account.mapOrElse(
+                    (account) => CircleAvatar(
+                      foregroundImage: CachedNetworkImageProvider(account.user.avatarUrl ?? ''),
                     ),
-                    onPressed: () => context.router.push(const AccountRoute()),
+                    elseValue: const Icon(Icons.person),
                   ),
+                  onPressed: () => context.router.push(const AccountRoute()),
+                ),
+                actions: [
+                  IconButton(icon: const Icon(Icons.notifications), onPressed: () {}),
                 ],
                 bottom: TabBar(tabs: _tabs.map((tab) => Tab(text: tab.title)).toList()),
               ),
