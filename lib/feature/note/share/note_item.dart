@@ -23,6 +23,7 @@ final class NoteItem extends StatelessWidget {
   final Note note;
   final Function(Emoji emoji) onReactionPressed;
   final Function onReactionAddPressed;
+  final Function(String url) onUrlPressed;
 
   Note get mainNote => note.renote ?? note;
   bool get maybeIndifferenceNote => mainNote.text?.contains('\$[') == true;
@@ -32,6 +33,7 @@ final class NoteItem extends StatelessWidget {
     required this.note,
     required this.onReactionPressed,
     required this.onReactionAddPressed,
+    required this.onUrlPressed,
   });
 
   @override
@@ -122,6 +124,7 @@ final class NoteItem extends StatelessWidget {
               text: mainNote.text ?? '',
               baseTextStyle: context.textTheme.bodyMedium!,
               externalTextEmojiUrlMap: note.externalTextEmojiUrlMap,
+              onUrlPressed: onUrlPressed,
             ),
             const SizedBox(height: 8),
             mainNote.files.where((element) => element.isImage).firstOrNull.mapOrElse(

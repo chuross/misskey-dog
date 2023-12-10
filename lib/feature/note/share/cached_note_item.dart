@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
 import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final class CachedNoteItem extends HookConsumerWidget {
   final String noteId;
@@ -36,6 +37,7 @@ final class CachedNoteItem extends HookConsumerWidget {
           ref.read(provider.notifier).reaction(emoji);
         }),
       ),
+      onUrlPressed: (url) => launchUrl(Uri.parse(url)),
     );
   }
 }
