@@ -37,6 +37,7 @@ final class CachedNoteItem extends HookConsumerWidget {
           ref.read(provider.notifier).reaction(emoji);
         }),
       ),
+      onHashTagPressed: (_) {},
       onUrlPressed: (url) => launchUrl(Uri.parse(url)),
     );
   }
