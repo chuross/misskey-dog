@@ -6,7 +6,39 @@ part of 'emoji_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localEmojiHash() => r'5fb57851adfdef595f6e40e3ce51a0457248f438';
+String _$localEmojisHash() => r'3dc6cd4173515a0953f79c023e4d5bad3a4e07fe';
+
+/// See also [localEmojis].
+@ProviderFor(localEmojis)
+final localEmojisProvider =
+    AutoDisposeFutureProvider<List<LocalEmoji>>.internal(
+  localEmojis,
+  name: r'localEmojisProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$localEmojisHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef LocalEmojisRef = AutoDisposeFutureProviderRef<List<LocalEmoji>>;
+String _$localEmojiMapHash() => r'80d4aac1f81c170c6e8b70e7515975b5fc12ea48';
+
+/// See also [_localEmojiMap].
+@ProviderFor(_localEmojiMap)
+final _localEmojiMapProvider =
+    AutoDisposeFutureProvider<Map<String, LocalEmoji>>.internal(
+  _localEmojiMap,
+  name: r'_localEmojiMapProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$localEmojiMapHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _LocalEmojiMapRef
+    = AutoDisposeFutureProviderRef<Map<String, LocalEmoji>>;
+String _$localEmojiHash() => r'fa509c06f40f0e6b46c9767aa5e5fb3a4fc08b2d';
 
 /// Copied from Dart SDK
 class _SystemHash {

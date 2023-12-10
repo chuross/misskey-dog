@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:misskey_dog/core/api/combined_response/create_note_response.dart';
+import 'package:misskey_dog/core/api/combined_response/get_emojis_response.dart';
 import 'package:misskey_dog/model/account/account.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
@@ -53,6 +54,9 @@ abstract class MisskeyClient {
 
   @POST('/api/notes/reactions/create')
   Future<void> createNoteReaction({@Body() required Map<String, dynamic> request});
+
+  @POST('/api/emojis')
+  Future<GetEmojisResponse> getLocalEmojis({@Body() Map<String, dynamic> request = const {}});
 
   @POST('/api/emoji')
   Future<LocalEmoji> getLocalEmoji({@Body() required Map<String, dynamic> request});

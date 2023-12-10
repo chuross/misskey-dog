@@ -221,6 +221,35 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
+  Future<GetEmojisResponse> getLocalEmojis(
+      {Map<String, dynamic> request = const {}}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<GetEmojisResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/emojis',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = GetEmojisResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<LocalEmoji> getLocalEmoji(
       {required Map<String, dynamic> request}) async {
     const _extra = <String, dynamic>{};

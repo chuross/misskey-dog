@@ -27,6 +27,10 @@ final class HomeMediaTimeline extends HookConsumerWidget {
         return;
       }
 
+      if (controller.positions.isEmpty) {
+        return;
+      }
+
       final targetFiles = next.value?.renote?.files ?? next.value?.files ?? [];
       if (targetFiles.any((element) => element.isImage) == false) {
         return;

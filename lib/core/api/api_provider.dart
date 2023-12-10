@@ -39,7 +39,7 @@ Dio dio(DioRef ref) {
       requestHeader: false,
       requestBody: true,
       responseHeader: false,
-      responseBody: true,
+      responseBody: false,
     ));
   }
 
