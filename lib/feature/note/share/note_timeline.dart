@@ -29,7 +29,7 @@ final class NoteTimeline extends HookWidget {
   @override
   Widget build(BuildContext context) {
     switch (noteIds) {
-      case AsyncData(:final value) when !this.noteIds.isRefreshing:
+      case AsyncData(:final value) when !noteIds.isRefreshing:
         return Stack(
           children: [
             RefreshIndicator(
