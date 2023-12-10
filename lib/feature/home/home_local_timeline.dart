@@ -20,6 +20,11 @@ final class HomeLocalTimeline extends HookConsumerWidget {
     final shouldManualReload = useState(false);
 
     ref.listen(streamingProvider, (_, next) {
+      if (next.hasError) {
+        shouldManualReload.value = true;
+        return;
+      }
+
       final isScrolling = controller.offset > 200;
       if (!isScrolling && !shouldManualReload.value) {
         ref.read(provider.notifier).onNoteCreated(next.requireValue);

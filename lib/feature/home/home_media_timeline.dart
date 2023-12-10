@@ -22,6 +22,11 @@ final class HomeMediaTimeline extends HookConsumerWidget {
     final shouldManualReload = useState(false);
 
     ref.listen(streamingProvider, (_, next) {
+      if (next.hasError) {
+        shouldManualReload.value = true;
+        return;
+      }
+
       final targetFiles = next.value?.renote?.files ?? next.value?.files ?? [];
       if (targetFiles.any((element) => element.isImage) == false) {
         return;

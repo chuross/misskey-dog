@@ -17,9 +17,9 @@ part 'api_provider.g.dart';
 @riverpod
 Dio dio(DioRef ref) {
   final dio = Dio(BaseOptions(
-    connectTimeout: const Duration(seconds: 3),
-    receiveTimeout: const Duration(seconds: 6),
-    sendTimeout: const Duration(seconds: 10),
+    connectTimeout: const Duration(seconds: 10),
+    receiveTimeout: const Duration(seconds: 10),
+    sendTimeout: const Duration(seconds: 180),
   ));
 
   dio.interceptors.add(InterceptorsWrapper(
