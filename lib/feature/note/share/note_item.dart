@@ -42,8 +42,11 @@ final class NoteItem extends StatelessWidget {
         children: [
           _renotedInfo(),
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-            child: Text('リアクションしたか興味無いノートなので省略'.i18n),
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Text(
+              'リアクションしたか興味無いノートなので省略'.i18n,
+              style: context.textTheme.bodyMedium,
+            ).align(Alignment.center),
           )
         ],
       ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
