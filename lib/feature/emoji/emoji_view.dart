@@ -4,11 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/emoji/emoji_provider.dart';
 
-final class MisskeyEmoji extends StatelessWidget {
+final class EmojiView extends StatelessWidget {
   final Emoji emoji;
   final double height;
 
-  const MisskeyEmoji({super.key, required this.emoji, required this.height});
+  const EmojiView({super.key, required this.emoji, required this.height});
 
   @override
   Widget build(BuildContext context) {
