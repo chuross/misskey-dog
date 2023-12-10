@@ -29,7 +29,7 @@ final class HomeLocalTimeline extends HookConsumerWidget {
         return;
       }
 
-      final isScrolling = controller.offset > 200;
+      final isScrolling = controller.offset > 0;
       if (!isScrolling && !shouldManualReload.value) {
         ref.read(provider.notifier).onNoteCreated(next.requireValue);
       } else {
