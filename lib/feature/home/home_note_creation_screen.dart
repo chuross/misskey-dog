@@ -9,26 +9,13 @@ import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/object.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 
-(AsyncValue<bool>, Function(String)) useNoteCreation(WidgetRef ref) {
-  final result = useState<AsyncValue<bool>>(const AsyncLoading<bool>());
-
-  func(String text) async {
-    final client = await ref.read(misskeyClientProvider().future);
-    await client.createNote(request: CreateNoteRequest(text: text).toJson());
-
-    result.value = const AsyncData(true);
-  }
-
-  return (result.value, func);
-}
-
 final class HomeNoteCreationScreen extends HookConsumerWidget {
   const HomeNoteCreationScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final text = useState('');
-    final (creationResult, createNote) = useNoteCreation(ref);
+    final (creationResult, createNote) = _useNoteCreation(ref);
 
     if (creationResult.value == true) {
       context.popRoute();
@@ -53,5 +40,18 @@ final class HomeNoteCreationScreen extends HookConsumerWidget {
         ).padding(const EdgeInsets.symmetric(horizontal: 64)),
       ],
     ).padding(const EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 48));
+  }
+
+  (AsyncValue<bool>, Function(String)) _useNoteCreation(WidgetRef ref) {
+    final result = useState<AsyncValue<bool>>(const AsyncLoading<bool>());
+
+    func(String text) async {
+      final client = await ref.read(misskeyClientProvider().future);
+      await client.createNote(request: CreateNoteRequest(text: text).toJson());
+
+      result.value = const AsyncData(true);
+    }
+
+    return (result.value, func);
   }
 }

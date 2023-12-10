@@ -15,7 +15,7 @@ class LoginScreen extends HookWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    final hostTextState = useState('');
+    final hostText = useState('');
 
     return Scaffold(
       body: Column(
@@ -39,14 +39,14 @@ class LoginScreen extends HookWidget implements AutoRouteWrapper {
               labelText: 'Misskey host'.i18n,
               hintText: 'sushi.ski, misskey.ioなど'.i18n,
             ),
-            onChanged: (text) => hostTextState.value = text,
+            onChanged: (text) => hostText.value = text,
           ),
           const SizedBox(height: 24),
           FilledButton(
-            onPressed: hostTextState.value.isNotEmpty
+            onPressed: hostText.value.isNotEmpty
                 ? () {
                     _launchOAuthUrl(
-                      host: hostTextState.value,
+                      host: hostText.value,
                       oauthCallbackUrl: Config.oauthCallbackUrl,
                     );
                   }

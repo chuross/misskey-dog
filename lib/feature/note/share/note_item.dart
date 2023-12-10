@@ -22,11 +22,13 @@ import 'package:misskey_dog/model/note/note_reaction.dart';
 final class NoteItem extends StatelessWidget {
   final Note note;
   final Function(Emoji emoji) onReactionTap;
+  final Function onReactionAddPressed;
 
   const NoteItem({
     super.key,
     required this.note,
     required this.onReactionTap,
+    required this.onReactionAddPressed,
   });
 
   @override
@@ -38,7 +40,9 @@ final class NoteItem extends StatelessWidget {
         _mainContent(context),
         const SizedBox(height: 12),
         _reactions(note.myReactionEmoji, onReactionTap),
-        _ActionButtons(),
+        _ActionButtons(
+          onReactionAddPressed: onReactionAddPressed,
+        ),
       ],
     ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
   }
@@ -239,6 +243,10 @@ final class _Reaction extends StatelessWidget {
 }
 
 final class _ActionButtons extends StatelessWidget {
+  final Function onReactionAddPressed;
+
+  const _ActionButtons({required this.onReactionAddPressed});
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -256,7 +264,7 @@ final class _ActionButtons extends StatelessWidget {
           icon: const Icon(Icons.repeat_rounded),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () => onReactionAddPressed(),
           iconSize: 20,
           icon: const Icon(Icons.add),
         ),
