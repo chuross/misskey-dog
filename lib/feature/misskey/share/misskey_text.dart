@@ -25,61 +25,15 @@ List<InlineSpan> _separateInlineSpans({
   var spans = <InlineSpan>[];
 
   final remnants = text.characters.foldIndexed('', (index, previousValue, char) {
-    final emojiMatch = emojiMatches.firstWhereOrNull((element) {
-      return element.start <= index && index < element.end;
-    });
-
-    // 絵文字にマッチしている間は無視
-    if (emojiMatch != null && emojiMatch.start != index) {
+    if ([
+      _applyEmojiSpan(spans, previousValue, index, height, emojiMatches, externalTextEmojiUrlMap),
+      _applyUrlSpan(spans, previousValue, index, urlMatches, context, onUrlPressed),
+    ].any((element) => element)) {
       return '';
+    } else {
+      // マッチしたものがなければ文字を積んで次のループへ
+      return previousValue + char;
     }
-
-    // 絵文字にマッチしたらそれまでの文字列をTextSpanに変換して、絵文字Spanを追加する
-    if (emojiMatch?.start == index) {
-      final emojiName = emojiMatch?.group(1);
-      final url = externalTextEmojiUrlMap[emojiName];
-      final host = url?.isNotEmpty == true ? 'unknown' : '.';
-      final emoji = switch (host) {
-        (String host) when host == '.' => LocalEmoji(name: emojiName ?? ''),
-        _ => ExternalEmoji(name: emojiName ?? '', host: host, url: url!),
-      };
-
-      if (previousValue.isNotEmpty) spans.add(TextSpan(text: previousValue));
-
-      spans.add(WidgetSpan(
-        child: EmojiView(emoji: emoji, height: height + 4),
-        alignment: PlaceholderAlignment.middle,
-        baseline: TextBaseline.alphabetic,
-      ));
-
-      return '';
-    }
-
-    final urlMatch = urlMatches.firstWhereOrNull((element) {
-      return element.start <= index && index < element.end;
-    });
-
-    // URLにマッチしている間は無視
-    if (urlMatch != null && urlMatch.start != index) {
-      return '';
-    }
-
-    // URLにマッチしたらそれまでの文字列をTextSpanに変換して、絵文字Spanを追加する
-    if (urlMatch?.start == index) {
-      if (previousValue.isNotEmpty) spans.add(TextSpan(text: previousValue));
-
-      final url = urlMatch?.group(0);
-
-      spans.add(TextSpan(
-          text: url,
-          style: TextStyle(color: context.theme.primaryColor),
-          recognizer: TapGestureRecognizer()..onTap = () => onUrlPressed(url ?? '')));
-
-      return '';
-    }
-
-    // マッチしたものがなければ文字を積んで次のループへ
-    return previousValue + char;
   });
 
   // 余った文字列があればTextSpanに変換して追加する
@@ -88,6 +42,75 @@ List<InlineSpan> _separateInlineSpans({
   }
 
   return spans;
+}
+
+bool _applyEmojiSpan(List<InlineSpan> spans, String previousValue, int index, double height, Iterable<RegExpMatch> emojiMatches,
+    Map<String, String> externalTextEmojiUrlMap) {
+  final emojiMatch = emojiMatches.firstWhereOrNull((element) {
+    return element.start <= index && index < element.end;
+  });
+
+  // 絵文字にマッチしている間は無視
+  if (emojiMatch != null && emojiMatch.start != index) {
+    return true;
+  }
+
+  // 絵文字にマッチしたらそれまでの文字列をTextSpanに変換して、絵文字Spanを追加する
+  if (emojiMatch?.start == index) {
+    final emojiName = emojiMatch?.group(1);
+    final url = externalTextEmojiUrlMap[emojiName];
+    final host = url?.isNotEmpty == true ? 'unknown' : '.';
+    final emoji = switch (host) {
+      (String host) when host == '.' => LocalEmoji(name: emojiName ?? ''),
+      _ => ExternalEmoji(name: emojiName ?? '', host: host, url: url!),
+    };
+
+    if (previousValue.isNotEmpty) spans.add(TextSpan(text: previousValue));
+
+    spans.add(WidgetSpan(
+      child: EmojiView(emoji: emoji, height: height + 4),
+      alignment: PlaceholderAlignment.middle,
+      baseline: TextBaseline.alphabetic,
+    ));
+
+    return true;
+  }
+
+  return false;
+}
+
+bool _applyUrlSpan(
+  List<InlineSpan> spans,
+  String previousValue,
+  int index,
+  Iterable<RegExpMatch> urlMatches,
+  BuildContext context,
+  Function(String) onUrlPressed,
+) {
+  final urlMatch = urlMatches.firstWhereOrNull((element) {
+    return element.start <= index && index < element.end;
+  });
+
+  // URLにマッチしている間は無視
+  if (urlMatch != null && urlMatch.start != index) {
+    return true;
+  }
+
+  // URLにマッチしたらそれまでの文字列をTextSpanに変換して、絵文字Spanを追加する
+  if (urlMatch?.start == index) {
+    if (previousValue.isNotEmpty) spans.add(TextSpan(text: previousValue));
+
+    final url = urlMatch?.group(0);
+
+    spans.add(TextSpan(
+        text: url,
+        style: TextStyle(color: context.theme.primaryColor),
+        recognizer: TapGestureRecognizer()..onTap = () => onUrlPressed(url ?? '')));
+
+    return true;
+  }
+
+  return false;
 }
 
 final class MisskeyText extends HookWidget {
