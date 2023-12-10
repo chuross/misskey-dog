@@ -81,7 +81,7 @@ final class MisskeyText extends HookWidget {
         height: baseTextStyle.fontSize ?? 14,
         externalTextEmojiUrlMap: externalTextEmojiUrlMap,
       );
-    }, const []);
+    }, [text]);
 
     return RichText(
       softWrap: true,
