@@ -69,14 +69,7 @@ final class NoteTimeline extends HookWidget {
             ),
             shouldManualReload
                 ? ElevatedButton(
-                    onPressed: () {
-                      scrollController.animateTo(
-                        scrollController.position.minScrollExtent,
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.easeInCubic,
-                      );
-                      onManualReloadPressed();
-                    },
+                    onPressed: () => onManualReloadPressed(),
                     child: Text('最新の投稿を見る'.i18n),
                   ).align(Alignment.topCenter)
                 : const SizedBox.shrink(),
