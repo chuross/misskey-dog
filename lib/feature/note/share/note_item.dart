@@ -36,7 +36,7 @@ final class NoteItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (maybeIndifferenceNote || (note.renote != null && note.renote?.myReactionEmoji != null)) {
+    if (maybeIndifferenceNote) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -44,7 +44,7 @@ final class NoteItem extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(bottom: 16),
             child: Text(
-              'リアクションしたか興味無いノートなので省略'.i18n,
+              '興味無いノートなので省略'.i18n,
               style: context.textTheme.bodyMedium,
             ).align(Alignment.center),
           )
