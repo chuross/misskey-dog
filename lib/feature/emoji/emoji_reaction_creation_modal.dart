@@ -24,42 +24,52 @@ final class EmojiReactionCreationModal extends HookConsumerWidget {
 
     switch (emojis) {
       case AsyncData():
-        return CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  TextField(
-                    decoration: InputDecoration(
-                      border: const UnderlineInputBorder(),
-                      hintText: 'キーワード'.i18n,
-                    ),
-                    onChanged: (text) => query.value = text,
+        return DraggableScrollableSheet(
+          initialChildSize: 0.8,
+          minChildSize: 0.5,
+          expand: false,
+          builder: (_, controller) {
+            return CustomScrollView(
+              controller: controller,
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                          border: const UnderlineInputBorder(),
+                          hintText: 'キーワード'.i18n,
+                        ),
+                        onChanged: (text) => query.value = text,
+                      ),
+                      const SizedBox(height: 32),
+                    ],
                   ),
-                  const SizedBox(height: 32),
-                ],
-              ),
-            ),
-            SliverGrid.builder(
-              itemCount: filterdEmoji.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 8,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-              ),
-              itemBuilder: (_, index) {
-                final emoji = filterdEmoji[index];
-                return InkWell(
-                  onTap: () {
-                    onEmojiSelected(emoji);
-                    context.popRoute();
+                ),
+                SliverGrid.builder(
+                  itemCount: filterdEmoji.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 8,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                  ),
+                  itemBuilder: (_, index) {
+                    final emoji = filterdEmoji[index];
+                    return InkWell(
+                      onTap: () {
+                        onEmojiSelected(emoji);
+                        context.popRoute();
+                      },
+                      child: CachedNetworkImage(imageUrl: emoji.url ?? '', fit: BoxFit.contain),
+                    );
                   },
-                  child: CachedNetworkImage(imageUrl: emoji.url ?? '', fit: BoxFit.contain),
-                );
-              },
+                )
+              ],
             )
-          ],
-        ).padding(const EdgeInsets.only(left: 16, right: 16, bottom: 24));
+                .padding(const EdgeInsets.only(left: 16, right: 16, bottom: 24))
+                .padding(EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom));
+          },
+        );
       default:
         return const SizedBox.shrink();
     }
