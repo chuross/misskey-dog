@@ -29,7 +29,7 @@ final class NoteTimeline extends HookWidget {
   @override
   Widget build(BuildContext context) {
     switch (noteIds) {
-      case AsyncData(value: final noteIds):
+      case AsyncData(:final value) when !this.noteIds.isRefreshing:
         return Stack(
           children: [
             RefreshIndicator(
@@ -40,7 +40,7 @@ final class NoteTimeline extends HookWidget {
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        final noteId = noteIds[index];
+                        final noteId = value[index];
 
                         return Container(
                           decoration: BoxDecoration(
@@ -54,7 +54,7 @@ final class NoteTimeline extends HookWidget {
                           ),
                         );
                       },
-                      childCount: noteIds.length,
+                      childCount: value.length,
                     ),
                   ),
                   SliverToBoxAdapter(
