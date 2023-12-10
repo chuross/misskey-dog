@@ -6,7 +6,6 @@ import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/string.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
-import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
 import 'package:misskey_dog/feature/note/share/cached_note_item.dart';
 
 final class NoteTimeline extends HookWidget {

@@ -21,13 +21,15 @@ import 'package:misskey_dog/model/note/note_reaction.dart';
 
 final class NoteItem extends StatelessWidget {
   final Note note;
-  final Function(Emoji emoji) onReactionTap;
+  final Function(Emoji emoji) onReactionPressed;
   final Function onReactionAddPressed;
+
+  Note get mainNote => note.renote ?? note;
 
   const NoteItem({
     super.key,
     required this.note,
-    required this.onReactionTap,
+    required this.onReactionPressed,
     required this.onReactionAddPressed,
   });
 
@@ -39,10 +41,8 @@ final class NoteItem extends StatelessWidget {
         _renotedInfo(),
         _mainContent(context),
         const SizedBox(height: 12),
-        _reactions(note.myReactionEmoji, onReactionTap),
-        _ActionButtons(
-          onReactionAddPressed: onReactionAddPressed,
-        ),
+        _reactions(onReactionPressed),
+        _ActionButtons(onReactionAddPressed: onReactionAddPressed),
       ],
     ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
   }
@@ -66,7 +66,7 @@ final class NoteItem extends StatelessWidget {
         SizedBox(
           width: 56,
           height: 56,
-          child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(note.renote?.user.avatarUrl ?? note.user.avatarUrl ?? '')),
+          child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(mainNote.user.avatarUrl ?? '')),
         ),
         const SizedBox(width: 12),
         Column(
@@ -76,17 +76,17 @@ final class NoteItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  note.renote?.user.username ?? note.user.username,
+                  mainNote.user.username,
                   style: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
                 ).flexible(),
                 const SizedBox(width: 8),
                 Text(
-                  note.renote?.createdAt.elapsedTimeLabel ?? note.createdAt.elapsedTimeLabel,
+                  mainNote.createdAt.elapsedTimeLabel,
                   style: context.textTheme.bodySmall,
                 ),
               ],
             ),
-            (note.renote?.user.instance ?? note.user.instance).mapOrElse((instance) {
+            (mainNote.user.instance).mapOrElse((instance) {
               return Row(
                 children: [
                   CachedNetworkImage(imageUrl: instance.iconUrl, fit: BoxFit.cover, width: 12, height: 12),
@@ -102,12 +102,12 @@ final class NoteItem extends StatelessWidget {
             const SizedBox(height: 4),
             MisskeyText(
               key: "${note.id}_text".toKey(),
-              text: note.renote?.text ?? note.text ?? '',
+              text: mainNote.text ?? '',
               baseTextStyle: context.textTheme.bodyMedium!,
               externalTextEmojiUrlMap: note.externalTextEmojiUrlMap,
             ),
             const SizedBox(height: 8),
-            (note.renote?.files ?? note.files).where((element) => element.isImage).firstOrNull.mapOrElse(
+            mainNote.files.where((element) => element.isImage).firstOrNull.mapOrElse(
                   (file) => _Image(file: file),
                   elseValue: const SizedBox.shrink(),
                 ),
@@ -117,20 +117,20 @@ final class NoteItem extends StatelessWidget {
     );
   }
 
-  Widget _reactions(Emoji? myReactionEmoji, Function(Emoji emoji) onReactionTap) {
-    return note.reactions.isNotEmpty.mapOrElse(
+  Widget _reactions(Function(Emoji emoji) onReactionPressed) {
+    return mainNote.reactions.isNotEmpty.mapOrElse(
       (_) => Row(
         children: [
           const SizedBox(width: 68),
           Wrap(
             spacing: 8,
             runSpacing: 4,
-            children: note.reactions.map((reaction) {
+            children: mainNote.reactions.map((reaction) {
               return _Reaction(
                 key: "${note.id}_${reaction.emoji.id}".toKey(),
                 reaction: reaction,
-                isReacted: reaction.emoji.id == myReactionEmoji?.id,
-                onReactionTap: onReactionTap,
+                isReacted: reaction.emoji.id == mainNote.myReactionEmoji?.id,
+                onReactionPressed: onReactionPressed,
               );
             }).toList(),
           ).expanded(),
@@ -202,19 +202,19 @@ final class _Image extends HookWidget {
 final class _Reaction extends StatelessWidget {
   final NoteReaction reaction;
   final bool isReacted;
-  final Function(Emoji emoji) onReactionTap;
+  final Function(Emoji emoji) onReactionPressed;
 
   const _Reaction({
     super.key,
     required this.reaction,
     required this.isReacted,
-    required this.onReactionTap,
+    required this.onReactionPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => !isReacted && reaction.isReactionable ? onReactionTap(reaction.emoji) : null,
+      onTap: () => !isReacted && reaction.isReactionable ? onReactionPressed(reaction.emoji) : null,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         decoration: BoxDecoration(
