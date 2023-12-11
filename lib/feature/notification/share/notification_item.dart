@@ -5,6 +5,7 @@ import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/date_time.dart';
 import 'package:misskey_dog/core/extension/object.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
+import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
 import 'package:misskey_dog/model/notification/notification.dart' as model;
 import 'package:misskey_dog/model/notification/notification_type.dart';
 
@@ -19,22 +20,25 @@ final class NotificationItem extends StatelessWidget {
       NotificationKind.reaction => _item(
           context: context,
           imageUrl: notification.user?.avatarUrl ?? '',
-          text: '%sがリアクション'.fill([notification.user?.username ?? '']).i18n,
+          text: '%sがリアクション'.fill([notification.user?.displayName ?? '']).i18n,
           subText: notification.note?.text ?? notification.note?.cw,
           createdAt: notification.createdAt,
+          externalEmojiUrlMap: notification.user?.externalEmojiUrlMap ?? const {},
         ),
       NotificationKind.renote => _item(
           context: context,
           imageUrl: notification.user?.avatarUrl ?? '',
-          text: '%sがリノート'.fill([notification.user?.username ?? '']).i18n,
+          text: '%sがリノート'.fill([notification.user?.displayName ?? '']).i18n,
           subText: notification.note?.renote?.text ?? notification.note?.renote?.cw,
           createdAt: notification.createdAt,
+          externalEmojiUrlMap: notification.user?.externalEmojiUrlMap ?? const {},
         ),
       NotificationKind.follow => _item(
           context: context,
           imageUrl: notification.user?.avatarUrl ?? '',
-          text: '%sがフォロー'.fill([notification.user?.username ?? '']).i18n,
+          text: '%sがフォロー'.fill([notification.user?.displayName ?? '']).i18n,
           createdAt: notification.createdAt,
+          externalEmojiUrlMap: notification.user?.externalEmojiUrlMap ?? const {},
         ),
       _ => const SizedBox.shrink(),
     };
@@ -47,6 +51,8 @@ final class NotificationItem extends StatelessWidget {
     required String text,
     String? subText,
     required DateTime createdAt,
+    Map<String, String> externalEmojiUrlMap = const {},
+    Map<String, String> subEmojiUrlMap = const {},
   }) {
     return Row(
       children: [
@@ -65,14 +71,18 @@ final class NotificationItem extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(text, style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
+            MisskeyText(
+              text: text,
+              baseTextStyle: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+              externalTextEmojiUrlMap: externalEmojiUrlMap,
+            ),
             SizedBox(height: subText?.map((_) => 8) ?? 0),
             subText.mapOrElse((p) {
               return Text(p, style: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade700));
             }, elseValue: const SizedBox.shrink())
           ],
         ).expanded(),
-        const SizedBox(width: 8),
+        const SizedBox(width: 24),
         Text(createdAt.elapsedTimeLabel, style: context.textTheme.bodySmall),
       ],
     ).padding(const EdgeInsets.all(16));
