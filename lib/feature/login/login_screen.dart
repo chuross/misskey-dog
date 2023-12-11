@@ -34,6 +34,7 @@ class LoginScreen extends HookWidget implements AutoRouteWrapper {
           ),
           const SizedBox(height: 64),
           TextField(
+            keyboardType: TextInputType.url,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               labelText: 'Misskey host'.i18n,
