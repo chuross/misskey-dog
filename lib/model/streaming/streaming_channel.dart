@@ -1,6 +1,7 @@
 enum StreamingChannel {
   main('main'),
-  localTimeline('localTimeline');
+  localTimeline('localTimeline'),
+  globalTimeline('globalTimeline');
 
   final String rawValue;
 

@@ -111,6 +111,14 @@ final class GlobalNoteIdsWithCache extends _$GlobalNoteIdsWithCache {
 
     state = AsyncData([...state.value!, ...newNotes.map((note) => note.id)]);
   }
+
+  void onNoteCreated(Note note) {
+    final noteIds = state.value;
+    if (noteIds == null) return;
+
+    ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+    state = AsyncData([note.id, ...state.requireValue]);
+  }
 }
 
 @riverpod

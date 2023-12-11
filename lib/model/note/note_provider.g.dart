@@ -436,7 +436,7 @@ class _LocalNoteIdsWithCacheProviderElement
 }
 
 String _$globalNoteIdsWithCacheHash() =>
-    r'ddbc4f41e55d6cb4fe787cf0cf6ffe6dae632c54';
+    r'767573e1d10d9b5d76ffa98f8aff2ec1fa17118d';
 
 abstract class _$GlobalNoteIdsWithCache
     extends BuildlessAutoDisposeAsyncNotifier<List<String>> {
