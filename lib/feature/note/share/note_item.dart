@@ -84,9 +84,8 @@ final class NoteItem extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          width: 56,
-          height: 56,
+        SizedBox.square(
+          dimension: 56,
           child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(mainNote.user.avatarUrl ?? '')),
         ),
         const SizedBox(width: 12),

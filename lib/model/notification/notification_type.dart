@@ -6,6 +6,4 @@ enum NotificationKind {
   reaction,
   @JsonValue('follow')
   follow,
-  @JsonValue('achievementEarned')
-  achievementEarned,
 }

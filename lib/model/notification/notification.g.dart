@@ -35,5 +35,4 @@ const _$NotificationKindEnumMap = {
   NotificationKind.unknown: 'unknown',
   NotificationKind.reaction: 'reaction',
   NotificationKind.follow: 'follow',
-  NotificationKind.achievementEarned: 'achievementEarned',
 };
