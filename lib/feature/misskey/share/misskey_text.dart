@@ -6,7 +6,7 @@ import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/feature/emoji/share/emoji_view.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 
-final RegExp _a = RegExp(r"\u{D800}-\u{DFFF}");
+final RegExp _surrogateRegex = RegExp(r"\u{D800}-\u{DFFF}");
 final RegExp _emojiRegex = RegExp(r':([A-Za-z0-9_]+):');
 final RegExp _hashTagRegex = RegExp(r'(?<=\s)#\S+');
 final RegExp _urlRegex = RegExp(r'https?://([\w-]+\.)+[\w-]+(/[\w-./?%&=#]*)?');
@@ -20,7 +20,7 @@ List<InlineSpan> _separateInlineSpans({
   required Function(String) onUrlPressed,
 }) {
   // RegExpはマルチバイト文字のインデックスが計算できないので、サロゲートペアをシングルバイトの文字に変換する
-  final replacedText = text.replaceAllMapped(RegExp(r"\u{D800}-\u{DFFF}"), (match) {
+  final replacedText = text.replaceAllMapped(_surrogateRegex, (match) {
     return '_';
   });
 

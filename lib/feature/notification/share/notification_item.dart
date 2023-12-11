@@ -52,7 +52,7 @@ final class NotificationItem extends StatelessWidget {
     String? subText,
     required DateTime createdAt,
     Map<String, String> externalEmojiUrlMap = const {},
-    Map<String, String> subEmojiUrlMap = const {},
+    Map<String, String> subExternalEmojiUrlMap = const {},
   }) {
     return Row(
       children: [
@@ -77,8 +77,11 @@ final class NotificationItem extends StatelessWidget {
               externalTextEmojiUrlMap: externalEmojiUrlMap,
             ),
             SizedBox(height: subText?.map((_) => 8) ?? 0),
-            subText.mapOrElse((p) {
-              return Text(p, style: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade700));
+            subText.mapOrElse((text) {
+              return MisskeyText(
+                  text: text,
+                  baseTextStyle: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade700),
+                  externalTextEmojiUrlMap: subExternalEmojiUrlMap);
             }, elseValue: const SizedBox.shrink())
           ],
         ).expanded(),

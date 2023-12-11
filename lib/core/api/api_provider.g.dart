@@ -170,12 +170,30 @@ class _MisskeyClientProviderElement
   String? get baseUrl => (origin as MisskeyClientProvider).baseUrl;
 }
 
-String _$misskeyStreamingHash() => r'b8859f0297b69e433271551e06a6aae5c3063b6c';
+String _$misskeyStreamingConnectionHash() =>
+    r'4c1f46aa131f8523e2ec81a0d320821025e2f0ff';
+
+/// See also [_misskeyStreamingConnection].
+@ProviderFor(_misskeyStreamingConnection)
+final _misskeyStreamingConnectionProvider =
+    AutoDisposeFutureProvider<(WebSocketChannel, Stream<dynamic>)>.internal(
+  _misskeyStreamingConnection,
+  name: r'_misskeyStreamingConnectionProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$misskeyStreamingConnectionHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _MisskeyStreamingConnectionRef
+    = AutoDisposeFutureProviderRef<(WebSocketChannel, Stream<dynamic>)>;
+String _$misskeyStreamingHash() => r'aa9341ba81dc4050f3f9ebb1abe97c33c55de135';
 
 /// See also [misskeyStreaming].
 @ProviderFor(misskeyStreaming)
 final misskeyStreamingProvider =
-    AutoDisposeFutureProvider<(WebSocketChannel, Stream<dynamic>)>.internal(
+    AutoDisposeStreamProvider<(WebSocketChannel, Stream<dynamic>)>.internal(
   misskeyStreaming,
   name: r'misskeyStreamingProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -186,7 +204,7 @@ final misskeyStreamingProvider =
 );
 
 typedef MisskeyStreamingRef
-    = AutoDisposeFutureProviderRef<(WebSocketChannel, Stream<dynamic>)>;
+    = AutoDisposeStreamProviderRef<(WebSocketChannel, Stream<dynamic>)>;
 String _$misskeyChannelStreamingHash() =>
     r'2d43959f7d214c02ffacb9b575a09253fd720cbb';
 
