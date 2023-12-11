@@ -23,6 +23,13 @@ final class NotificationItem extends StatelessWidget {
           subText: notification.note?.text ?? notification.note?.cw,
           createdAt: notification.createdAt,
         ),
+      NotificationKind.renote => _item(
+          context: context,
+          imageUrl: notification.user?.avatarUrl ?? '',
+          text: '%sがリノート'.fill([notification.user?.username ?? '']).i18n,
+          subText: notification.note?.text ?? notification.note?.cw,
+          createdAt: notification.createdAt,
+        ),
       NotificationKind.follow => _item(
           context: context,
           imageUrl: notification.user?.avatarUrl ?? '',

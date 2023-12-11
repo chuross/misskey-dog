@@ -34,5 +34,6 @@ Map<String, dynamic> _$$NotificationImplToJson(_$NotificationImpl instance) =>
 const _$NotificationKindEnumMap = {
   NotificationKind.unknown: 'unknown',
   NotificationKind.reaction: 'reaction',
+  NotificationKind.renote: 'renote',
   NotificationKind.follow: 'follow',
 };
