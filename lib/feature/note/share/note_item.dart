@@ -95,9 +95,10 @@ final class NoteItem extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  mainNote.user.username,
-                  style: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+                MisskeyText(
+                  text: mainNote.user.displayName,
+                  baseTextStyle: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+                  externalTextEmojiUrlMap: mainNote.user.externalEmojiUrlMap,
                 ).flexible(),
                 const SizedBox(width: 8),
                 Text(
@@ -123,7 +124,7 @@ final class NoteItem extends StatelessWidget {
             MisskeyText(
               key: "${note.id}_text".toKey(),
               text: mainNote.text ?? '',
-              baseTextStyle: context.textTheme.bodyMedium!,
+              baseTextStyle: context.textTheme.bodyMedium,
               externalTextEmojiUrlMap: note.externalTextEmojiUrlMap,
               onHashTagPressed: onHashTagPressed,
               onUrlPressed: onUrlPressed,
@@ -178,11 +179,12 @@ final class _RenotedInfo extends StatelessWidget {
           height: 24,
           child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(note.user.avatarUrl ?? '')),
         ),
-        Text(
-          "%sがリノート".i18n.fill([note.user.username]),
-          style: context.textTheme.bodySmall,
+        MisskeyText(
+          text: "%sがリノート".i18n.fill([note.user.displayName]),
+          baseTextStyle: context.textTheme.bodySmall,
           textAlign: TextAlign.start,
           overflow: TextOverflow.ellipsis,
+          externalTextEmojiUrlMap: note.user.externalEmojiUrlMap,
         ).flexible(),
       ],
     );

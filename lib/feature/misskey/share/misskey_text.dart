@@ -148,18 +148,22 @@ bool _applyCliclableTextSpan({
 
 final class MisskeyText extends HookWidget {
   final String text;
-  final TextStyle baseTextStyle;
+  final TextStyle? baseTextStyle;
   final Map<String, String> externalTextEmojiUrlMap;
+  final TextOverflow overflow;
+  final TextAlign textAlign;
   final Function(String)? onHashTagPressed;
   final Function(String)? onUrlPressed;
 
   const MisskeyText({
     super.key,
     required this.text,
-    required this.baseTextStyle,
+    this.baseTextStyle,
     required this.externalTextEmojiUrlMap,
-    required this.onHashTagPressed,
-    required this.onUrlPressed,
+    this.overflow = TextOverflow.clip,
+    this.textAlign = TextAlign.start,
+    this.onHashTagPressed,
+    this.onUrlPressed,
   });
 
   @override
@@ -171,7 +175,7 @@ final class MisskeyText extends HookWidget {
       return _separateInlineSpans(
         context: context,
         text: text,
-        height: baseTextStyle.fontSize ?? 14,
+        height: baseTextStyle?.fontSize ?? 14,
         externalTextEmojiUrlMap: externalTextEmojiUrlMap,
         onHashTagPressed: onHashTagPressedCallback,
         onUrlPressed: onUrlPressedCallback,
@@ -180,6 +184,8 @@ final class MisskeyText extends HookWidget {
 
     return RichText(
       softWrap: true,
+      overflow: overflow,
+      textAlign: textAlign,
       text: TextSpan(
         style: baseTextStyle,
         children: inlineSpans,

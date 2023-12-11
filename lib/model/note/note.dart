@@ -22,7 +22,7 @@ abstract class Note with _$Note {
     required List<NoteFile> files,
     @JsonKey(name: 'emojis', defaultValue: {}) required Map<String, String> externalTextEmojiUrlMap,
     @JsonKey(name: 'reactions') required Map<String, int> reactionCountMap,
-    @JsonKey(name: 'reactionEmojis', defaultValue: {}) required Map<String, String> externalReactionUrlMap,
+    @JsonKey(name: 'reactionEmojis', defaultValue: {}) required Map<String, String> externalReactionEmojiUrlMap,
     @JsonKey(name: 'myReaction') String? myRawReactionEmoji,
     required int repliesCount,
     required int renoteCount,
@@ -32,7 +32,7 @@ abstract class Note with _$Note {
         return NoteReaction.resolved(
           key,
           reactionCountMap: reactionCountMap,
-          externalReactionUrlMap: externalReactionUrlMap,
+          externalReactionEmojiUrlMap: externalReactionEmojiUrlMap,
         );
       }).toList();
 

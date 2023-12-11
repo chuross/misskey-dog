@@ -8,6 +8,7 @@ part of 'user.dart';
 
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       id: json['id'] as String,
+      name: json['name'] as String?,
       username: json['username'] as String,
       avatarUrl: json['avatarUrl'] as String?,
       instance: json['instance'] == null
@@ -19,11 +20,16 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       followersCount: json['followersCount'] as int?,
       followingCount: json['followingCount'] as int?,
       notesCount: json['notesCount'] as int?,
+      externalEmojiUrlMap: (json['emojis'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, e as String),
+          ) ??
+          {},
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'name': instance.name,
       'username': instance.username,
       'avatarUrl': instance.avatarUrl,
       'instance': instance.instance,
@@ -33,4 +39,5 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'followersCount': instance.followersCount,
       'followingCount': instance.followingCount,
       'notesCount': instance.notesCount,
+      'emojis': instance.externalEmojiUrlMap,
     };

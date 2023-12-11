@@ -21,6 +21,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$User {
   String get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String? get avatarUrl => throw _privateConstructorUsedError;
   Instance? get instance => throw _privateConstructorUsedError;
@@ -30,6 +31,9 @@ mixin _$User {
   int? get followersCount => throw _privateConstructorUsedError;
   int? get followingCount => throw _privateConstructorUsedError;
   int? get notesCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'emojis', defaultValue: {})
+  Map<String, String> get externalEmojiUrlMap =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,6 +47,7 @@ abstract class $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String? name,
       String username,
       String? avatarUrl,
       Instance? instance,
@@ -51,7 +56,9 @@ abstract class $UserCopyWith<$Res> {
       String? description,
       int? followersCount,
       int? followingCount,
-      int? notesCount});
+      int? notesCount,
+      @JsonKey(name: 'emojis', defaultValue: {})
+      Map<String, String> externalEmojiUrlMap});
 
   $InstanceCopyWith<$Res>? get instance;
 }
@@ -70,6 +77,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? id = null,
+    Object? name = freezed,
     Object? username = null,
     Object? avatarUrl = freezed,
     Object? instance = freezed,
@@ -79,12 +87,17 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? followersCount = freezed,
     Object? followingCount = freezed,
     Object? notesCount = freezed,
+    Object? externalEmojiUrlMap = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -121,6 +134,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.notesCount
           : notesCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      externalEmojiUrlMap: null == externalEmojiUrlMap
+          ? _value.externalEmojiUrlMap
+          : externalEmojiUrlMap // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
     ) as $Val);
   }
 
@@ -146,6 +163,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String? name,
       String username,
       String? avatarUrl,
       Instance? instance,
@@ -154,7 +172,9 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? description,
       int? followersCount,
       int? followingCount,
-      int? notesCount});
+      int? notesCount,
+      @JsonKey(name: 'emojis', defaultValue: {})
+      Map<String, String> externalEmojiUrlMap});
 
   @override
   $InstanceCopyWith<$Res>? get instance;
@@ -171,6 +191,7 @@ class __$$UserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? name = freezed,
     Object? username = null,
     Object? avatarUrl = freezed,
     Object? instance = freezed,
@@ -180,12 +201,17 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? followersCount = freezed,
     Object? followingCount = freezed,
     Object? notesCount = freezed,
+    Object? externalEmojiUrlMap = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -222,15 +248,20 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.notesCount
           : notesCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      externalEmojiUrlMap: null == externalEmojiUrlMap
+          ? _value._externalEmojiUrlMap
+          : externalEmojiUrlMap // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$UserImpl implements _User {
+class _$UserImpl extends _User {
   const _$UserImpl(
       {required this.id,
+      this.name,
       required this.username,
       this.avatarUrl,
       this.instance,
@@ -239,13 +270,19 @@ class _$UserImpl implements _User {
       this.description,
       this.followersCount,
       this.followingCount,
-      this.notesCount});
+      this.notesCount,
+      @JsonKey(name: 'emojis', defaultValue: {})
+      required final Map<String, String> externalEmojiUrlMap})
+      : _externalEmojiUrlMap = externalEmojiUrlMap,
+        super._();
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
   @override
   final String id;
+  @override
+  final String? name;
   @override
   final String username;
   @override
@@ -264,10 +301,19 @@ class _$UserImpl implements _User {
   final int? followingCount;
   @override
   final int? notesCount;
+  final Map<String, String> _externalEmojiUrlMap;
+  @override
+  @JsonKey(name: 'emojis', defaultValue: {})
+  Map<String, String> get externalEmojiUrlMap {
+    if (_externalEmojiUrlMap is EqualUnmodifiableMapView)
+      return _externalEmojiUrlMap;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_externalEmojiUrlMap);
+  }
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, avatarUrl: $avatarUrl, instance: $instance, isBot: $isBot, bannerUrl: $bannerUrl, description: $description, followersCount: $followersCount, followingCount: $followingCount, notesCount: $notesCount)';
+    return 'User(id: $id, name: $name, username: $username, avatarUrl: $avatarUrl, instance: $instance, isBot: $isBot, bannerUrl: $bannerUrl, description: $description, followersCount: $followersCount, followingCount: $followingCount, notesCount: $notesCount, externalEmojiUrlMap: $externalEmojiUrlMap)';
   }
 
   @override
@@ -276,6 +322,7 @@ class _$UserImpl implements _User {
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.avatarUrl, avatarUrl) ||
@@ -292,7 +339,9 @@ class _$UserImpl implements _User {
             (identical(other.followingCount, followingCount) ||
                 other.followingCount == followingCount) &&
             (identical(other.notesCount, notesCount) ||
-                other.notesCount == notesCount));
+                other.notesCount == notesCount) &&
+            const DeepCollectionEquality()
+                .equals(other._externalEmojiUrlMap, _externalEmojiUrlMap));
   }
 
   @JsonKey(ignore: true)
@@ -300,6 +349,7 @@ class _$UserImpl implements _User {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      name,
       username,
       avatarUrl,
       instance,
@@ -308,7 +358,8 @@ class _$UserImpl implements _User {
       description,
       followersCount,
       followingCount,
-      notesCount);
+      notesCount,
+      const DeepCollectionEquality().hash(_externalEmojiUrlMap));
 
   @JsonKey(ignore: true)
   @override
@@ -324,9 +375,10 @@ class _$UserImpl implements _User {
   }
 }
 
-abstract class _User implements User {
+abstract class _User extends User {
   const factory _User(
       {required final String id,
+      final String? name,
       required final String username,
       final String? avatarUrl,
       final Instance? instance,
@@ -335,12 +387,17 @@ abstract class _User implements User {
       final String? description,
       final int? followersCount,
       final int? followingCount,
-      final int? notesCount}) = _$UserImpl;
+      final int? notesCount,
+      @JsonKey(name: 'emojis', defaultValue: {})
+      required final Map<String, String> externalEmojiUrlMap}) = _$UserImpl;
+  const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
   String get id;
+  @override
+  String? get name;
   @override
   String get username;
   @override
@@ -359,6 +416,9 @@ abstract class _User implements User {
   int? get followingCount;
   @override
   int? get notesCount;
+  @override
+  @JsonKey(name: 'emojis', defaultValue: {})
+  Map<String, String> get externalEmojiUrlMap;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
