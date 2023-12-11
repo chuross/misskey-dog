@@ -41,7 +41,7 @@ abstract class MisskeyClient {
   Future<Account> authorize(@Path('session') String session);
 
   @POST('/api/notes/show')
-  Future<Note> getNote({required Map<String, dynamic> request});
+  Future<Note> getNote({@Body() required Map<String, dynamic> request});
 
   @POST('/api/notes')
   Future<List<Note>> getNotes({@Body() required Map<String, dynamic> request});
