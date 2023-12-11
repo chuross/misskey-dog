@@ -150,8 +150,8 @@ final class MisskeyText extends HookWidget {
   final String text;
   final TextStyle baseTextStyle;
   final Map<String, String> externalTextEmojiUrlMap;
-  final Function(String) onHashTagPressed;
-  final Function(String) onUrlPressed;
+  final Function(String)? onHashTagPressed;
+  final Function(String)? onUrlPressed;
 
   const MisskeyText({
     super.key,
@@ -164,7 +164,8 @@ final class MisskeyText extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final onUrlPressedCallback = useCallback(onUrlPressed);
+    final onHashTagPressedCallback = useCallback(onHashTagPressed ?? (_) {});
+    final onUrlPressedCallback = useCallback(onUrlPressed ?? (_) {});
 
     final inlineSpans = useMemoized(() {
       return _separateInlineSpans(
@@ -172,7 +173,7 @@ final class MisskeyText extends HookWidget {
         text: text,
         height: baseTextStyle.fontSize ?? 14,
         externalTextEmojiUrlMap: externalTextEmojiUrlMap,
-        onHashTagPressed: onHashTagPressed,
+        onHashTagPressed: onHashTagPressedCallback,
         onUrlPressed: onUrlPressedCallback,
       );
     }, [text, onUrlPressedCallback]);
