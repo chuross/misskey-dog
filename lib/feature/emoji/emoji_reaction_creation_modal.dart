@@ -25,11 +25,10 @@ final class EmojiReactionCreationModal extends HookConsumerWidget {
     switch (emojis) {
       case AsyncData():
         return DraggableScrollableSheet(
-          initialChildSize: 0.5,
+          initialChildSize: 0.7,
           maxChildSize: 0.9,
-          minChildSize: 0.49,
+          minChildSize: 0.5,
           expand: false,
-          snap: true,
           builder: (_, controller) {
             return CustomScrollView(
               controller: controller,
