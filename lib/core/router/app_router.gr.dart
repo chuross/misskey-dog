@@ -8,34 +8,36 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i6;
-import 'package:flutter/material.dart' as _i7;
+import 'package:auto_route/auto_route.dart' as _i7;
+import 'package:flutter/material.dart' as _i8;
 import 'package:misskey_dog/feature/account/account_screen.dart' as _i1;
 import 'package:misskey_dog/feature/home/home_screen.dart' as _i2;
 import 'package:misskey_dog/feature/image/image_detail_screen.dart' as _i3;
 import 'package:misskey_dog/feature/login/login_callback_screen.dart' as _i4;
 import 'package:misskey_dog/feature/login/login_screen.dart' as _i5;
+import 'package:misskey_dog/feature/notification/notifications_screen.dart'
+    as _i6;
 
-abstract class $AppRouter extends _i6.RootStackRouter {
+abstract class $AppRouter extends _i7.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i6.PageFactory> pagesMap = {
+  final Map<String, _i7.PageFactory> pagesMap = {
     AccountRoute.name: (routeData) {
-      return _i6.AutoRoutePage<dynamic>(
+      return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i1.AccountScreen(),
       );
     },
     HomeRoute.name: (routeData) {
-      return _i6.AutoRoutePage<dynamic>(
+      return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i6.WrappedRoute(child: const _i2.HomeScreen()),
+        child: _i7.WrappedRoute(child: const _i2.HomeScreen()),
       );
     },
     ImageDetailRoute.name: (routeData) {
       final args = routeData.argsAs<ImageDetailRouteArgs>();
-      return _i6.AutoRoutePage<dynamic>(
+      return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i3.ImageDetailScreen(
           key: args.key,
@@ -56,9 +58,9 @@ abstract class $AppRouter extends _i6.RootStackRouter {
                   '',
                 ),
               ));
-      return _i6.AutoRoutePage<dynamic>(
+      return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i6.WrappedRoute(
+        child: _i7.WrappedRoute(
             child: _i4.LoginCallbackScreen(
           key: args.key,
           host: args.host,
@@ -67,9 +69,15 @@ abstract class $AppRouter extends _i6.RootStackRouter {
       );
     },
     LoginRoute.name: (routeData) {
-      return _i6.AutoRoutePage<dynamic>(
+      return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i6.WrappedRoute(child: const _i5.LoginScreen()),
+        child: _i7.WrappedRoute(child: const _i5.LoginScreen()),
+      );
+    },
+    NotificationsRoute.name: (routeData) {
+      return _i7.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i6.NotificationsScreen(),
       );
     },
   };
@@ -77,8 +85,8 @@ abstract class $AppRouter extends _i6.RootStackRouter {
 
 /// generated route for
 /// [_i1.AccountScreen]
-class AccountRoute extends _i6.PageRouteInfo<void> {
-  const AccountRoute({List<_i6.PageRouteInfo>? children})
+class AccountRoute extends _i7.PageRouteInfo<void> {
+  const AccountRoute({List<_i7.PageRouteInfo>? children})
       : super(
           AccountRoute.name,
           initialChildren: children,
@@ -86,13 +94,13 @@ class AccountRoute extends _i6.PageRouteInfo<void> {
 
   static const String name = 'AccountRoute';
 
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i2.HomeScreen]
-class HomeRoute extends _i6.PageRouteInfo<void> {
-  const HomeRoute({List<_i6.PageRouteInfo>? children})
+class HomeRoute extends _i7.PageRouteInfo<void> {
+  const HomeRoute({List<_i7.PageRouteInfo>? children})
       : super(
           HomeRoute.name,
           initialChildren: children,
@@ -100,16 +108,16 @@ class HomeRoute extends _i6.PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i3.ImageDetailScreen]
-class ImageDetailRoute extends _i6.PageRouteInfo<ImageDetailRouteArgs> {
+class ImageDetailRoute extends _i7.PageRouteInfo<ImageDetailRouteArgs> {
   ImageDetailRoute({
-    _i7.Key? key,
+    _i8.Key? key,
     required String imageUrl,
-    List<_i6.PageRouteInfo>? children,
+    List<_i7.PageRouteInfo>? children,
   }) : super(
           ImageDetailRoute.name,
           args: ImageDetailRouteArgs(
@@ -121,8 +129,8 @@ class ImageDetailRoute extends _i6.PageRouteInfo<ImageDetailRouteArgs> {
 
   static const String name = 'ImageDetailRoute';
 
-  static const _i6.PageInfo<ImageDetailRouteArgs> page =
-      _i6.PageInfo<ImageDetailRouteArgs>(name);
+  static const _i7.PageInfo<ImageDetailRouteArgs> page =
+      _i7.PageInfo<ImageDetailRouteArgs>(name);
 }
 
 class ImageDetailRouteArgs {
@@ -131,7 +139,7 @@ class ImageDetailRouteArgs {
     required this.imageUrl,
   });
 
-  final _i7.Key? key;
+  final _i8.Key? key;
 
   final String imageUrl;
 
@@ -143,12 +151,12 @@ class ImageDetailRouteArgs {
 
 /// generated route for
 /// [_i4.LoginCallbackScreen]
-class LoginCallbackRoute extends _i6.PageRouteInfo<LoginCallbackRouteArgs> {
+class LoginCallbackRoute extends _i7.PageRouteInfo<LoginCallbackRouteArgs> {
   LoginCallbackRoute({
-    _i7.Key? key,
+    _i8.Key? key,
     String host = '',
     String session = '',
-    List<_i6.PageRouteInfo>? children,
+    List<_i7.PageRouteInfo>? children,
   }) : super(
           LoginCallbackRoute.name,
           args: LoginCallbackRouteArgs(
@@ -165,8 +173,8 @@ class LoginCallbackRoute extends _i6.PageRouteInfo<LoginCallbackRouteArgs> {
 
   static const String name = 'LoginCallbackRoute';
 
-  static const _i6.PageInfo<LoginCallbackRouteArgs> page =
-      _i6.PageInfo<LoginCallbackRouteArgs>(name);
+  static const _i7.PageInfo<LoginCallbackRouteArgs> page =
+      _i7.PageInfo<LoginCallbackRouteArgs>(name);
 }
 
 class LoginCallbackRouteArgs {
@@ -176,7 +184,7 @@ class LoginCallbackRouteArgs {
     this.session = '',
   });
 
-  final _i7.Key? key;
+  final _i8.Key? key;
 
   final String host;
 
@@ -190,8 +198,8 @@ class LoginCallbackRouteArgs {
 
 /// generated route for
 /// [_i5.LoginScreen]
-class LoginRoute extends _i6.PageRouteInfo<void> {
-  const LoginRoute({List<_i6.PageRouteInfo>? children})
+class LoginRoute extends _i7.PageRouteInfo<void> {
+  const LoginRoute({List<_i7.PageRouteInfo>? children})
       : super(
           LoginRoute.name,
           initialChildren: children,
@@ -199,5 +207,19 @@ class LoginRoute extends _i6.PageRouteInfo<void> {
 
   static const String name = 'LoginRoute';
 
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i6.NotificationsScreen]
+class NotificationsRoute extends _i7.PageRouteInfo<void> {
+  const NotificationsRoute({List<_i7.PageRouteInfo>? children})
+      : super(
+          NotificationsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'NotificationsRoute';
+
+  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
 }

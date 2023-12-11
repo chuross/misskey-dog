@@ -4,6 +4,7 @@ import 'package:misskey_dog/core/api/combined_response/get_emojis_response.dart'
 import 'package:misskey_dog/model/account/account.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
+import 'package:misskey_dog/model/notification/notification.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:uuid/uuid.dart';
 
@@ -26,6 +27,8 @@ abstract class MisskeyClient {
         'read:account',
         'write:notes',
         'write:reactions',
+        'read:notifications',
+        'write:notifications',
       ].join(','),
     });
   }
@@ -38,7 +41,7 @@ abstract class MisskeyClient {
   Future<Account> authorize(@Path('session') String session);
 
   @POST('/api/notes/show')
-  Future<Note> getNote({@Body() required Map<String, dynamic> request});
+  Future<Note> getNote({required Map<String, dynamic> request});
 
   @POST('/api/notes')
   Future<List<Note>> getNotes({@Body() required Map<String, dynamic> request});
@@ -60,4 +63,7 @@ abstract class MisskeyClient {
 
   @POST('/api/emoji')
   Future<LocalEmoji> getLocalEmoji({@Body() required Map<String, dynamic> request});
+
+  @POST('/api/i/notifications')
+  Future<List<Notification>> getNotifications(@Body() Map<String, dynamic> request);
 }

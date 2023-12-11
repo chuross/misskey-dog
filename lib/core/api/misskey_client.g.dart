@@ -50,8 +50,7 @@ class _MisskeyClient implements MisskeyClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<Note>(Options(
       method: 'POST',
@@ -275,6 +274,37 @@ class _MisskeyClient implements MisskeyClient {
               baseUrl,
             ))));
     final value = LocalEmoji.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<Notification>> getNotifications(
+      Map<String, dynamic> request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request);
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<Notification>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/i/notifications',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) => Notification.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
