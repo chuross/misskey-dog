@@ -583,7 +583,7 @@ class _GlobalNoteIdsWithCacheProviderElement
   bool? get hasFiles => (origin as GlobalNoteIdsWithCacheProvider).hasFiles;
 }
 
-String _$cachedNoteHash() => r'c780a2cf0925092c766ee3a3a78e70a9ef4c0bca';
+String _$cachedNoteHash() => r'eeba02c050a34221f19409456f8179dea06f5f23';
 
 abstract class _$CachedNote extends BuildlessAutoDisposeNotifier<Note?> {
   late final String id;

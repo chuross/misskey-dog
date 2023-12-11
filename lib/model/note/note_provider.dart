@@ -135,7 +135,7 @@ final class CachedNote extends _$CachedNote {
     await client.createNoteReaction(request: CreateNoteReactionRequest(noteId: targetNote.id, emojiId: emoji.id).toJson());
 
     // リアクションが反映されるまでラグがあるので少し待つ
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 1000));
 
     sync();
   }
