@@ -11,7 +11,6 @@ import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/feature/home/home_global_timeline.dart';
 import 'package:misskey_dog/feature/home/home_local_timeline.dart';
 import 'package:misskey_dog/feature/home/home_media_timeline.dart';
-import 'package:misskey_dog/feature/note/share/note_creation_screen.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 
 part 'home_screen.freezed.dart';
@@ -48,7 +47,7 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
                 ),
                 actions: [
                   IconButton(
-                      icon: const Icon(Icons.notifications),
+                      icon: const Icon(Icons.notifications_none_outlined),
                       onPressed: () {
                         context.router.push(const NotificationsRoute());
                       }),
