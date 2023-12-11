@@ -39,7 +39,6 @@ final class EmojiReactionCreationModal extends HookConsumerWidget {
                       TextField(
                         keyboardType: TextInputType.url,
                         decoration: InputDecoration(
-                          border: const UnderlineInputBorder(),
                           hintText: 'キーワード'.i18n,
                         ),
                         onChanged: (text) => query.value = text,

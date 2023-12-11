@@ -11,7 +11,7 @@ import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/feature/home/home_global_timeline.dart';
 import 'package:misskey_dog/feature/home/home_local_timeline.dart';
 import 'package:misskey_dog/feature/home/home_media_timeline.dart';
-import 'package:misskey_dog/feature/home/home_note_creation_screen.dart';
+import 'package:misskey_dog/feature/note/share/note_creation_screen.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 
 part 'home_screen.freezed.dart';
@@ -59,16 +59,7 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
               floatingActionButton: Builder(builder: (context) {
                 return FloatingActionButton(
                   child: const Icon(Icons.edit),
-                  onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      showDragHandle: true,
-                      builder: (_) {
-                        return const HomeNoteCreationScreen();
-                      },
-                    );
-                  },
+                  onPressed: () => context.pushRoute(const NoteCreationRoute()),
                 );
               }),
             ));
