@@ -23,6 +23,12 @@ final class NotificationItem extends StatelessWidget {
           subText: notification.note?.text ?? notification.note?.cw,
           createdAt: notification.createdAt,
         ),
+      NotificationKind.follow => _item(
+          context: context,
+          imageUrl: notification.user?.avatarUrl ?? '',
+          text: '%sがフォロー'.fill([notification.user?.username ?? '']).i18n,
+          createdAt: notification.createdAt,
+        ),
       _ => const SizedBox.shrink(),
     };
   }
