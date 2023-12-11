@@ -25,13 +25,15 @@ final class NotificationsScreen extends ConsumerWidget {
             onRefresh: () async => ref.invalidate(notificationsProvider),
             child: CustomScrollView(
               slivers: [
-                SliverList.builder(
-                  itemCount: value.length,
-                  itemBuilder: (_, index) {
-                    final notification = value[index];
-                    return NotificationItem(key: notification.id.toKey(), notification: notification);
-                  },
-                )
+                SliverSafeArea(
+                  sliver: SliverList.builder(
+                    itemCount: value.length,
+                    itemBuilder: (_, index) {
+                      final notification = value[index];
+                      return NotificationItem(key: notification.id.toKey(), notification: notification);
+                    },
+                  ),
+                ),
               ],
             ),
           ),
