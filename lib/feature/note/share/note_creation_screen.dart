@@ -19,12 +19,13 @@ final class NoteCreationScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textController = useTextEditingController();
     final createNote = _useNoteCreation(context, ref);
+    final value = useValueListenable(textController);
 
     return Scaffold(
       appBar: AppBar(
         actions: [
           FilledButton.icon(
-            onPressed: textController.text.takeIf((p) => p.isNotEmpty)?.map((text) {
+            onPressed: value.text.takeIf((p) => p.isNotEmpty)?.map((text) {
               return () => createNote(text);
             }),
             icon: const Icon(Icons.send),
@@ -43,6 +44,7 @@ final class NoteCreationScreen extends HookConsumerWidget {
                 border: InputBorder.none,
                 hintText: 'いまどうしてる?'.i18n,
               ),
+              keyboardType: TextInputType.multiline,
               autofocus: true,
               maxLines: null,
             ).expanded(),
