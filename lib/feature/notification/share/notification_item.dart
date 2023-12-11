@@ -27,7 +27,7 @@ final class NotificationItem extends StatelessWidget {
           context: context,
           imageUrl: notification.user?.avatarUrl ?? '',
           text: '%sがリノート'.fill([notification.user?.username ?? '']).i18n,
-          subText: notification.note?.text ?? notification.note?.cw,
+          subText: notification.note?.renote?.text ?? notification.note?.renote?.cw,
           createdAt: notification.createdAt,
         ),
       NotificationKind.follow => _item(
