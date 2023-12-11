@@ -6,6 +6,7 @@ import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/feature/emoji/share/emoji_view.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 
+final RegExp _a = RegExp(r"\u{D800}-\u{DFFF}");
 final RegExp _emojiRegex = RegExp(r':([A-Za-z0-9_]+):');
 final RegExp _hashTagRegex = RegExp(r'(?<=\s)#\S+');
 final RegExp _urlRegex = RegExp(r'https?://([\w-]+\.)+[\w-]+(/[\w-./?%&=#]*)?');
@@ -18,12 +19,14 @@ List<InlineSpan> _separateInlineSpans({
   required Function(String) onHashTagPressed,
   required Function(String) onUrlPressed,
 }) {
-  // RegExpはマルチバイト文字のインデックスが計算できないので、マルチバイト文字をシングルバイトの文字に変換する
-  final emojiMatches = _emojiRegex.allMatches((String.fromCharCodes(text.runes.map((rune) {
-    return rune > 0x7F ? 'A'.codeUnitAt(0) : rune;
-  }))));
-  final hashTagMatches = _hashTagRegex.allMatches(text);
-  final urlMatches = _urlRegex.allMatches(text);
+  // RegExpはマルチバイト文字のインデックスが計算できないので、サロゲートペアをシングルバイトの文字に変換する
+  final replacedText = text.replaceAllMapped(RegExp(r"\u{D800}-\u{DFFF}"), (match) {
+    return '_';
+  });
+
+  final emojiMatches = _emojiRegex.allMatches(replacedText);
+  final hashTagMatches = _hashTagRegex.allMatches(replacedText);
+  final urlMatches = _urlRegex.allMatches(replacedText);
 
   var spans = <InlineSpan>[];
 
