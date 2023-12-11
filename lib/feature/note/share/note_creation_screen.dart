@@ -47,7 +47,8 @@ final class NoteCreationScreen extends HookConsumerWidget {
               keyboardType: TextInputType.multiline,
               autofocus: true,
               maxLines: null,
-            ).expanded(),
+            ).padding(const EdgeInsets.all(16)),
+            const Spacer(),
             Divider(height: 1, color: context.dividerColorWithOpacity30),
             Row(
               children: [
@@ -71,9 +72,9 @@ final class NoteCreationScreen extends HookConsumerWidget {
                   icon: const Icon(Icons.emoji_emotions_outlined),
                 ),
               ],
-            ),
+            ).padding(const EdgeInsets.only(left: 8, right: 8, bottom: 16)),
           ],
-        ).padding(const EdgeInsets.all(16)).padding(EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom)),
+        ),
       ),
     );
   }
