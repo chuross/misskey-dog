@@ -68,7 +68,7 @@ final class NotificationItem extends StatelessWidget {
             Text(text, style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
             SizedBox(height: subText?.map((_) => 8) ?? 0),
             subText.mapOrElse((p) {
-              return Text(p, style: context.textTheme.bodyMedium?.copyWith(color: Colors.grey.shade700));
+              return Text(p, style: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade700));
             }, elseValue: const SizedBox.shrink())
           ],
         ).expanded(),
