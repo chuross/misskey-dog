@@ -18,6 +18,7 @@ abstract class Note with _$Note {
     required User user,
     Note? renote,
     String? text,
+    String? cw,
     required List<NoteFile> files,
     @JsonKey(name: 'emojis', defaultValue: {}) required Map<String, String> externalTextEmojiUrlMap,
     @JsonKey(name: 'reactions') required Map<String, int> reactionCountMap,

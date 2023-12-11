@@ -20,7 +20,7 @@ final class NotificationItem extends StatelessWidget {
           context: context,
           imageUrl: notification.user?.avatarUrl ?? '',
           text: '%sがリアクション'.fill([notification.user?.username ?? '']).i18n,
-          subText: notification.note?.text,
+          subText: notification.note?.text ?? notification.note?.cw,
           createdAt: notification.createdAt,
         ),
       _ => const SizedBox.shrink(),
