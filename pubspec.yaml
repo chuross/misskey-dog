@@ -25,6 +25,7 @@ dependencies:
   intl: ^0.18.1
   json_annotation: ^4.8.1
   logger: ^2.0.2+1
+  responsive_grid_list: ^1.4.0
   retrofit: ^4.0.3
   riverpod_annotation: ^2.3.2
   url_launcher: ^6.2.1

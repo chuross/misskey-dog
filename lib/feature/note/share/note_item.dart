@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +16,7 @@ import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/note/note_file.dart';
 import 'package:misskey_dog/model/note/note_reaction.dart';
+import 'package:responsive_grid_list/responsive_grid_list.dart';
 
 final class NoteItem extends StatelessWidget {
   final Note note;
@@ -133,10 +132,7 @@ final class NoteItem extends StatelessWidget {
               onUrlPressed: onUrlPressed,
             ),
             const SizedBox(height: 8),
-            mainNote.files.where((element) => element.isImage).firstOrNull.mapOrElse(
-                  (file) => _Image(file: file),
-                  elseValue: const SizedBox.shrink(),
-                ),
+            _files(mainNote.files),
           ],
         ).expanded()
       ],
@@ -194,6 +190,23 @@ final class _RenotedInfo extends StatelessWidget {
   }
 }
 
+Widget _files(List<NoteFile> files) {
+  if (files.isEmpty) {
+    return const SizedBox.shrink();
+  }
+
+  if (files.length == 1) {
+    return _Image(file: files.first);
+  }
+
+  return ResponsiveGridList(
+    listViewBuilderOptions: ListViewBuilderOptions(shrinkWrap: true, primary: false),
+    minItemWidth: double.infinity,
+    minItemsPerRow: 2,
+    children: files.map((e) => _Image(file: e)).toList(),
+  );
+}
+
 final class _Image extends HookWidget {
   final NoteFile file;
 
@@ -212,8 +225,7 @@ final class _Image extends HookWidget {
                   tag: file.url,
                   child: CachedNetworkImage(
                     imageUrl: file.url,
-                    width: double.infinity,
-                    height: 250,
+                    height: 300,
                     fit: BoxFit.cover,
                     fadeInDuration: const Duration(milliseconds: 200),
                   ),
@@ -221,7 +233,7 @@ final class _Image extends HookWidget {
             elseValue: Container(
               alignment: Alignment.center,
               color: Colors.blueGrey,
-              height: 250,
+              height: 300,
               child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white)),
             )),
       ),
