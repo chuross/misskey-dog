@@ -198,26 +198,29 @@ final class _Image extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isBlurRemoved = useState(!file.isSensitive);
+    final isSensitiveRemoved = useState(!file.isSensitive);
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: GestureDetector(
-        onTap: () => isBlurRemoved.value ? context.pushRoute(ImageDetailRoute(imageUrl: file.url)) : isBlurRemoved.value = true,
-        child: Hero(
-          tag: file.url,
-          child: ImageFiltered(
-            enabled: !isBlurRemoved.value,
-            imageFilter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
-            child: CachedNetworkImage(
-              imageUrl: file.url,
-              width: double.infinity,
+        onTap: () => isSensitiveRemoved.value ? context.pushRoute(ImageDetailRoute(imageUrl: file.url)) : isSensitiveRemoved.value = true,
+        child: isSensitiveRemoved.value.takeIfTrue().mapOrElse(
+            (_) => Hero(
+                  tag: file.url,
+                  child: CachedNetworkImage(
+                    imageUrl: file.url,
+                    width: double.infinity,
+                    height: 250,
+                    fit: BoxFit.cover,
+                    fadeInDuration: const Duration(milliseconds: 200),
+                  ),
+                ),
+            elseValue: Container(
+              alignment: Alignment.center,
+              color: Colors.blueGrey,
               height: 250,
-              fit: BoxFit.cover,
-              fadeInDuration: const Duration(milliseconds: 200),
-            ),
-          ),
-        ),
+              child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white)),
+            )),
       ),
     );
   }
