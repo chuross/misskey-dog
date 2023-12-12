@@ -7,7 +7,6 @@ import 'package:misskey_dog/core/api/request/get_local_notes_request.dart';
 import 'package:misskey_dog/core/api/request/get_note_request.dart';
 import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/core/extension/stream.dart';
-import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/streaming/streaming_channel.dart';
@@ -168,14 +167,10 @@ Stream<Note> noteCreationStreaming(NoteCreationStreamingRef ref, {required Strea
 
 @riverpod
 Stream<dynamic> noteUpdateStreaming(NoteUpdateStreamingRef ref, {required String noteId}) {
-  final log = ref.watch(logProvider);
-
   return ref
       .watch(misskeyStreamingProvider.future)
       .asStream()
       .map((connection) {
-        log.d('@@@streaming:subNote:connect:noteId=$noteId');
-
         final (webSocketChannel, stream) = connection;
 
         webSocketChannel.sink.add(jsonEncode({
@@ -186,8 +181,6 @@ Stream<dynamic> noteUpdateStreaming(NoteUpdateStreamingRef ref, {required String
         }));
 
         ref.onDispose(() {
-          log.d('@@@streaming:subNote:disconnect:noteId=$noteId');
-
           webSocketChannel.sink.add(jsonEncode({
             'type': 'unsubNote',
             'body': {
