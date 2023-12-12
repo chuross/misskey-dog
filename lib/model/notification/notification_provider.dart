@@ -13,7 +13,23 @@ final class Notifications extends _$Notifications {
     final client = await ref.watch(misskeyClientProvider().future);
 
     return await client.getNotifications(GetNotificationsRequest(
-      limit: 100,
+      limit: 30,
     ).toJson().removeAllNullValueKeys());
+  }
+
+  Future<void> fetchNext() async {
+    if (state.isLoading) return;
+
+    final lastId = state.value?.lastOrNull?.id;
+    if (lastId == null) return;
+
+    final client = await ref.watch(misskeyClientProvider().future);
+
+    final newNotifications = await client.getNotifications(GetNotificationsRequest(
+      limit: 30,
+      untilId: lastId,
+    ).toJson().removeAllNullValueKeys());
+
+    state = AsyncData([...state.value!, ...newNotifications]);
   }
 }
