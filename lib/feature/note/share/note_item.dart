@@ -223,23 +223,30 @@ final class _Image extends HookWidget {
       borderRadius: BorderRadius.circular(16),
       child: GestureDetector(
         onTap: () => isSensitiveRemoved.value ? context.pushRoute(ImageDetailRoute(imageUrl: file.url)) : isSensitiveRemoved.value = true,
-        child: isSensitiveRemoved.value.takeIfTrue().mapOrElse(
-            (_) => Hero(
-                  tag: file.url,
-                  child: CachedNetworkImage(
-                    imageUrl: file.url,
-                    width: double.infinity,
-                    height: height,
-                    fit: BoxFit.cover,
-                    fadeInDuration: const Duration(milliseconds: 200),
+        child: Stack(
+          children: [
+            Hero(
+              tag: file.url,
+              child: CachedNetworkImage(
+                imageUrl: file.url,
+                width: double.infinity,
+                height: height,
+                fit: BoxFit.cover,
+                fadeInDuration: const Duration(milliseconds: 200),
+              ),
+            ),
+            isSensitiveRemoved.value.takeIfTrue().mapOrElse(
+                  (_) => const SizedBox.shrink(),
+                  elseValue: Positioned.fill(
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: Colors.blueGrey,
+                      child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white)),
+                    ),
                   ),
                 ),
-            elseValue: Container(
-              alignment: Alignment.center,
-              color: Colors.blueGrey,
-              height: height ?? 300,
-              child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white)),
-            )),
+          ],
+        ),
       ),
     );
   }
