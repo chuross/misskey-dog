@@ -193,7 +193,7 @@ final class MisskeyText extends HookWidget {
       textAlign: textAlign,
       text: TextSpan(
         style: baseTextStyle,
-        children: inlineSpans.data ?? [],
+        children: inlineSpans.requireData,
       ),
     );
   }
