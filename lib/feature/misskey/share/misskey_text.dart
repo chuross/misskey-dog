@@ -11,14 +11,14 @@ final RegExp _emojiRegex = RegExp(r':([A-Za-z0-9_]+):');
 final RegExp _hashTagRegex = RegExp(r'(?<=\s)#\S+');
 final RegExp _urlRegex = RegExp(r'https?://([\w-]+\.)+[\w-]+(/[\w-./?%&=#]*)?');
 
-Future<List<InlineSpan>> _separateInlineSpans({
+List<InlineSpan> _separateInlineSpans({
   required BuildContext context,
   required String text,
   required double height,
   required Map<String, String> externalTextEmojiUrlMap,
   required Function(String) onHashTagPressed,
   required Function(String) onUrlPressed,
-}) async {
+}) {
   // RegExpはマルチバイト文字のインデックスが計算できないので、サロゲートペアをシングルバイトの文字に変換する
   final replacedText = text.replaceAllMapped(_surrogateRegex, (match) {
     return '_';
@@ -174,18 +174,14 @@ final class MisskeyText extends HookWidget {
     final onHashTagPressedCallback = useCallback(onHashTagPressed ?? (_) {});
     final onUrlPressedCallback = useCallback(onUrlPressed ?? (_) {});
 
-    final inlineSpans = useFuture(_separateInlineSpans(
+    final inlineSpans = _separateInlineSpans(
       context: context,
       text: text,
       height: baseTextStyle?.fontSize ?? 14,
       externalTextEmojiUrlMap: externalTextEmojiUrlMap,
       onHashTagPressed: onHashTagPressedCallback,
       onUrlPressed: onUrlPressedCallback,
-    ));
-
-    if (!inlineSpans.hasData) {
-      return const SizedBox(width: double.infinity, height: 100);
-    }
+    );
 
     return RichText(
       softWrap: true,
@@ -193,7 +189,7 @@ final class MisskeyText extends HookWidget {
       textAlign: textAlign,
       text: TextSpan(
         style: baseTextStyle,
-        children: inlineSpans.requireData,
+        children: inlineSpans,
       ),
     );
   }
