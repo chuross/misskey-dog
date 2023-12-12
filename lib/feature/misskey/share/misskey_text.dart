@@ -174,13 +174,16 @@ final class MisskeyText extends HookWidget {
     final onHashTagPressedCallback = useCallback(onHashTagPressed ?? (_) {});
     final onUrlPressedCallback = useCallback(onUrlPressed ?? (_) {});
 
-    final inlineSpans = _separateInlineSpans(
-      context: context,
-      text: text,
-      height: baseTextStyle?.fontSize ?? 14,
-      externalTextEmojiUrlMap: externalTextEmojiUrlMap,
-      onHashTagPressed: onHashTagPressedCallback,
-      onUrlPressed: onUrlPressedCallback,
+    final inlineSpans = useMemoized(
+      () => _separateInlineSpans(
+        context: context,
+        text: text,
+        height: baseTextStyle?.fontSize ?? 14,
+        externalTextEmojiUrlMap: externalTextEmojiUrlMap,
+        onHashTagPressed: onHashTagPressedCallback,
+        onUrlPressed: onUrlPressedCallback,
+      ),
+      [text],
     );
 
     return RichText(
