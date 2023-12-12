@@ -196,7 +196,7 @@ Widget _files(List<NoteFile> files) {
   }
 
   if (files.length == 1) {
-    return _Image(file: files.first, height: 300);
+    return _Image(file: files.first, height: null);
   }
 
   return ResponsiveGridList(
@@ -211,7 +211,7 @@ Widget _files(List<NoteFile> files) {
 
 final class _Image extends HookWidget {
   final NoteFile file;
-  final double height;
+  final double? height;
 
   const _Image({required this.file, required this.height});
 
@@ -237,7 +237,7 @@ final class _Image extends HookWidget {
             elseValue: Container(
               alignment: Alignment.center,
               color: Colors.blueGrey,
-              height: height,
+              height: height ?? 300,
               child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white)),
             )),
       ),
