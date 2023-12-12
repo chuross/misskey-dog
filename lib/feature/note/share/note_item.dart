@@ -228,6 +228,7 @@ final class _Image extends HookWidget {
                   tag: file.url,
                   child: CachedNetworkImage(
                     imageUrl: file.url,
+                    width: double.infinity,
                     height: height,
                     fit: BoxFit.cover,
                     fadeInDuration: const Duration(milliseconds: 200),
