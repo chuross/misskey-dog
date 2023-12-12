@@ -86,7 +86,7 @@ final class NotificationItem extends StatelessWidget {
           ],
         ).expanded(),
         const SizedBox(width: 24),
-        Text(createdAt.elapsedTimeLabel, style: context.textTheme.bodySmall),
+        Text(createdAt.elapsedTimeLabel, style: context.textTheme.labelSmall),
       ],
     ).padding(const EdgeInsets.all(16));
   }

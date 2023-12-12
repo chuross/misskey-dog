@@ -103,7 +103,7 @@ final class NoteItem extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(
                   mainNote.createdAt.elapsedTimeLabel,
-                  style: context.textTheme.bodySmall,
+                  style: context.textTheme.labelSmall,
                 ),
               ],
             ),
@@ -121,8 +121,9 @@ final class NoteItem extends StatelessWidget {
               );
             }, elseValue: const SizedBox.shrink()),
             const SizedBox(height: 4),
+            mainNote.cw?.map((cw) => Text(cw, style: context.textTheme.labelSmall?.copyWith(color: Colors.grey.shade500))) ??
+                const SizedBox.shrink(),
             MisskeyText(
-              key: "${note.id}_text".toKey(),
               text: mainNote.text ?? '',
               baseTextStyle: context.textTheme.bodyMedium,
               externalTextEmojiUrlMap: note.externalTextEmojiUrlMap,
