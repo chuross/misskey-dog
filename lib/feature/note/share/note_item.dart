@@ -40,7 +40,7 @@ final class NoteItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (maybeIndifferenceNote) {
+    if (maybeIndifferenceNote || mainNote.myRawReactionEmoji != null) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
