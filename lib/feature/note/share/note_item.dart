@@ -196,7 +196,7 @@ Widget _files(List<NoteFile> files) {
   }
 
   if (files.length == 1) {
-    return _Image(file: files.first, height: null);
+    return _Image(file: files.first, height: 300);
   }
 
   return ResponsiveGridList(
