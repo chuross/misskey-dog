@@ -203,6 +203,8 @@ Widget _files(List<NoteFile> files) {
     listViewBuilderOptions: ListViewBuilderOptions(shrinkWrap: true, primary: false),
     minItemWidth: double.infinity,
     minItemsPerRow: 2,
+    horizontalGridSpacing: 8,
+    verticalGridSpacing: 8,
     children: files.map((e) => _Image(file: e, height: 200)).toList(),
   );
 }
