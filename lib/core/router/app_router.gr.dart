@@ -15,8 +15,7 @@ import 'package:misskey_dog/feature/home/home_screen.dart' as _i2;
 import 'package:misskey_dog/feature/image/image_detail_screen.dart' as _i3;
 import 'package:misskey_dog/feature/login/login_callback_screen.dart' as _i4;
 import 'package:misskey_dog/feature/login/login_screen.dart' as _i5;
-import 'package:misskey_dog/feature/note/share/note_creation_screen.dart'
-    as _i6;
+import 'package:misskey_dog/feature/note/note_creation_screen.dart' as _i6;
 import 'package:misskey_dog/feature/notification/notifications_screen.dart'
     as _i7;
 
