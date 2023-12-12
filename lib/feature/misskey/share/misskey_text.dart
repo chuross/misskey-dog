@@ -6,7 +6,7 @@ import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/feature/emoji/share/emoji_view.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 
-final RegExp _surrogateRegex = RegExp(r"\u{D800}-\u{DFFF}");
+final RegExp _surrogateRegex = RegExp(r'[\uD800-\uDBFF][\uDC00-\uDFFF]');
 final RegExp _emojiRegex = RegExp(r':([A-Za-z0-9_]+):');
 final RegExp _hashTagRegex = RegExp(r'(?<=\s)#\S+');
 final RegExp _urlRegex = RegExp(r'https?://([\w-]+\.)+[\w-]+(/[\w-./?%&=#]*)?');
