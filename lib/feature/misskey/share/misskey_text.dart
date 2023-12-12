@@ -171,17 +171,14 @@ final class MisskeyText extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final onHashTagPressedCallback = useCallback(onHashTagPressed ?? (_) {});
-    final onUrlPressedCallback = useCallback(onUrlPressed ?? (_) {});
-
     final inlineSpans = useMemoized(
       () => _separateInlineSpans(
         context: context,
         text: text,
         height: baseTextStyle?.fontSize ?? 14,
         externalTextEmojiUrlMap: externalTextEmojiUrlMap,
-        onHashTagPressed: onHashTagPressedCallback,
-        onUrlPressed: onUrlPressedCallback,
+        onHashTagPressed: onHashTagPressed ?? (_) {},
+        onUrlPressed: onUrlPressed ?? (_) {},
       ),
       [text],
     );
