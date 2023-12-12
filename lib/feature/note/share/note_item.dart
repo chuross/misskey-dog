@@ -196,21 +196,22 @@ Widget _files(List<NoteFile> files) {
   }
 
   if (files.length == 1) {
-    return _Image(file: files.first);
+    return _Image(file: files.first, height: 300);
   }
 
   return ResponsiveGridList(
     listViewBuilderOptions: ListViewBuilderOptions(shrinkWrap: true, primary: false),
     minItemWidth: double.infinity,
     minItemsPerRow: 2,
-    children: files.map((e) => _Image(file: e)).toList(),
+    children: files.map((e) => _Image(file: e, height: 200)).toList(),
   );
 }
 
 final class _Image extends HookWidget {
   final NoteFile file;
+  final double height;
 
-  const _Image({required this.file});
+  const _Image({required this.file, required this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -225,7 +226,7 @@ final class _Image extends HookWidget {
                   tag: file.url,
                   child: CachedNetworkImage(
                     imageUrl: file.url,
-                    height: 300,
+                    height: height,
                     fit: BoxFit.cover,
                     fadeInDuration: const Duration(milliseconds: 200),
                   ),
@@ -233,7 +234,7 @@ final class _Image extends HookWidget {
             elseValue: Container(
               alignment: Alignment.center,
               color: Colors.blueGrey,
-              height: 300,
+              height: height,
               child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white)),
             )),
       ),
