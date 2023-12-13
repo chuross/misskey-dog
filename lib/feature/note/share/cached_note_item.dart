@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
 import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
@@ -37,7 +39,7 @@ final class CachedNoteItem extends HookConsumerWidget {
           ref.read(provider.notifier).reaction(emoji);
         }),
       ),
-      onHashTagPressed: (_) {},
+      onHashTagPressed: (hashTag) => context.pushRoute(HashTagNotesRoute(hashTag: hashTag)),
       onUrlPressed: (url) => launchUrl(Uri.parse(url)),
     );
   }

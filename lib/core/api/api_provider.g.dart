@@ -171,7 +171,7 @@ class _MisskeyClientProviderElement
 }
 
 String _$misskeyStreamingConnectionHash() =>
-    r'4c1f46aa131f8523e2ec81a0d320821025e2f0ff';
+    r'c3f0a21e8496c43e6046b0f673d4e888867633ca';
 
 /// See also [_misskeyStreamingConnection].
 @ProviderFor(_misskeyStreamingConnection)

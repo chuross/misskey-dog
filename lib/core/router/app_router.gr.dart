@@ -8,39 +8,50 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i8;
-import 'package:flutter/material.dart' as _i9;
+import 'package:auto_route/auto_route.dart' as _i9;
+import 'package:flutter/material.dart' as _i10;
 import 'package:misskey_dog/feature/account/account_screen.dart' as _i1;
-import 'package:misskey_dog/feature/home/home_screen.dart' as _i2;
-import 'package:misskey_dog/feature/image/image_detail_screen.dart' as _i3;
-import 'package:misskey_dog/feature/login/login_callback_screen.dart' as _i4;
-import 'package:misskey_dog/feature/login/login_screen.dart' as _i5;
-import 'package:misskey_dog/feature/note/note_creation_screen.dart' as _i6;
+import 'package:misskey_dog/feature/home/home_screen.dart' as _i3;
+import 'package:misskey_dog/feature/image/image_detail_screen.dart' as _i4;
+import 'package:misskey_dog/feature/login/login_callback_screen.dart' as _i5;
+import 'package:misskey_dog/feature/login/login_screen.dart' as _i6;
+import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart' as _i2;
+import 'package:misskey_dog/feature/note/note_creation_screen.dart' as _i7;
 import 'package:misskey_dog/feature/notification/notifications_screen.dart'
-    as _i7;
+    as _i8;
 
-abstract class $AppRouter extends _i8.RootStackRouter {
+abstract class $AppRouter extends _i9.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i8.PageFactory> pagesMap = {
+  final Map<String, _i9.PageFactory> pagesMap = {
     AccountRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
+      return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i1.AccountScreen(),
       );
     },
-    HomeRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
+    HashTagNotesRoute.name: (routeData) {
+      final args = routeData.argsAs<HashTagNotesRouteArgs>();
+      return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i8.WrappedRoute(child: const _i2.HomeScreen()),
+        child: _i2.HashTagNotesScreen(
+          key: args.key,
+          hashTag: args.hashTag,
+        ),
+      );
+    },
+    HomeRoute.name: (routeData) {
+      return _i9.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i9.WrappedRoute(child: const _i3.HomeScreen()),
       );
     },
     ImageDetailRoute.name: (routeData) {
       final args = routeData.argsAs<ImageDetailRouteArgs>();
-      return _i8.AutoRoutePage<dynamic>(
+      return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i3.ImageDetailScreen(
+        child: _i4.ImageDetailScreen(
           key: args.key,
           imageUrl: args.imageUrl,
         ),
@@ -59,10 +70,10 @@ abstract class $AppRouter extends _i8.RootStackRouter {
                   '',
                 ),
               ));
-      return _i8.AutoRoutePage<dynamic>(
+      return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i8.WrappedRoute(
-            child: _i4.LoginCallbackScreen(
+        child: _i9.WrappedRoute(
+            child: _i5.LoginCallbackScreen(
           key: args.key,
           host: args.host,
           session: args.session,
@@ -70,21 +81,21 @@ abstract class $AppRouter extends _i8.RootStackRouter {
       );
     },
     LoginRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
+      return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i8.WrappedRoute(child: const _i5.LoginScreen()),
+        child: _i9.WrappedRoute(child: const _i6.LoginScreen()),
       );
     },
     NoteCreationRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
+      return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.NoteCreationScreen(),
+        child: const _i7.NoteCreationScreen(),
       );
     },
     NotificationsRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
+      return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i7.NotificationsScreen(),
+        child: const _i8.NotificationsScreen(),
       );
     },
   };
@@ -92,8 +103,8 @@ abstract class $AppRouter extends _i8.RootStackRouter {
 
 /// generated route for
 /// [_i1.AccountScreen]
-class AccountRoute extends _i8.PageRouteInfo<void> {
-  const AccountRoute({List<_i8.PageRouteInfo>? children})
+class AccountRoute extends _i9.PageRouteInfo<void> {
+  const AccountRoute({List<_i9.PageRouteInfo>? children})
       : super(
           AccountRoute.name,
           initialChildren: children,
@@ -101,13 +112,51 @@ class AccountRoute extends _i8.PageRouteInfo<void> {
 
   static const String name = 'AccountRoute';
 
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
+  static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i2.HomeScreen]
-class HomeRoute extends _i8.PageRouteInfo<void> {
-  const HomeRoute({List<_i8.PageRouteInfo>? children})
+/// [_i2.HashTagNotesScreen]
+class HashTagNotesRoute extends _i9.PageRouteInfo<HashTagNotesRouteArgs> {
+  HashTagNotesRoute({
+    _i10.Key? key,
+    required String hashTag,
+    List<_i9.PageRouteInfo>? children,
+  }) : super(
+          HashTagNotesRoute.name,
+          args: HashTagNotesRouteArgs(
+            key: key,
+            hashTag: hashTag,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'HashTagNotesRoute';
+
+  static const _i9.PageInfo<HashTagNotesRouteArgs> page =
+      _i9.PageInfo<HashTagNotesRouteArgs>(name);
+}
+
+class HashTagNotesRouteArgs {
+  const HashTagNotesRouteArgs({
+    this.key,
+    required this.hashTag,
+  });
+
+  final _i10.Key? key;
+
+  final String hashTag;
+
+  @override
+  String toString() {
+    return 'HashTagNotesRouteArgs{key: $key, hashTag: $hashTag}';
+  }
+}
+
+/// generated route for
+/// [_i3.HomeScreen]
+class HomeRoute extends _i9.PageRouteInfo<void> {
+  const HomeRoute({List<_i9.PageRouteInfo>? children})
       : super(
           HomeRoute.name,
           initialChildren: children,
@@ -115,16 +164,16 @@ class HomeRoute extends _i8.PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
+  static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i3.ImageDetailScreen]
-class ImageDetailRoute extends _i8.PageRouteInfo<ImageDetailRouteArgs> {
+/// [_i4.ImageDetailScreen]
+class ImageDetailRoute extends _i9.PageRouteInfo<ImageDetailRouteArgs> {
   ImageDetailRoute({
-    _i9.Key? key,
+    _i10.Key? key,
     required String imageUrl,
-    List<_i8.PageRouteInfo>? children,
+    List<_i9.PageRouteInfo>? children,
   }) : super(
           ImageDetailRoute.name,
           args: ImageDetailRouteArgs(
@@ -136,8 +185,8 @@ class ImageDetailRoute extends _i8.PageRouteInfo<ImageDetailRouteArgs> {
 
   static const String name = 'ImageDetailRoute';
 
-  static const _i8.PageInfo<ImageDetailRouteArgs> page =
-      _i8.PageInfo<ImageDetailRouteArgs>(name);
+  static const _i9.PageInfo<ImageDetailRouteArgs> page =
+      _i9.PageInfo<ImageDetailRouteArgs>(name);
 }
 
 class ImageDetailRouteArgs {
@@ -146,7 +195,7 @@ class ImageDetailRouteArgs {
     required this.imageUrl,
   });
 
-  final _i9.Key? key;
+  final _i10.Key? key;
 
   final String imageUrl;
 
@@ -157,13 +206,13 @@ class ImageDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i4.LoginCallbackScreen]
-class LoginCallbackRoute extends _i8.PageRouteInfo<LoginCallbackRouteArgs> {
+/// [_i5.LoginCallbackScreen]
+class LoginCallbackRoute extends _i9.PageRouteInfo<LoginCallbackRouteArgs> {
   LoginCallbackRoute({
-    _i9.Key? key,
+    _i10.Key? key,
     String host = '',
     String session = '',
-    List<_i8.PageRouteInfo>? children,
+    List<_i9.PageRouteInfo>? children,
   }) : super(
           LoginCallbackRoute.name,
           args: LoginCallbackRouteArgs(
@@ -180,8 +229,8 @@ class LoginCallbackRoute extends _i8.PageRouteInfo<LoginCallbackRouteArgs> {
 
   static const String name = 'LoginCallbackRoute';
 
-  static const _i8.PageInfo<LoginCallbackRouteArgs> page =
-      _i8.PageInfo<LoginCallbackRouteArgs>(name);
+  static const _i9.PageInfo<LoginCallbackRouteArgs> page =
+      _i9.PageInfo<LoginCallbackRouteArgs>(name);
 }
 
 class LoginCallbackRouteArgs {
@@ -191,7 +240,7 @@ class LoginCallbackRouteArgs {
     this.session = '',
   });
 
-  final _i9.Key? key;
+  final _i10.Key? key;
 
   final String host;
 
@@ -204,9 +253,9 @@ class LoginCallbackRouteArgs {
 }
 
 /// generated route for
-/// [_i5.LoginScreen]
-class LoginRoute extends _i8.PageRouteInfo<void> {
-  const LoginRoute({List<_i8.PageRouteInfo>? children})
+/// [_i6.LoginScreen]
+class LoginRoute extends _i9.PageRouteInfo<void> {
+  const LoginRoute({List<_i9.PageRouteInfo>? children})
       : super(
           LoginRoute.name,
           initialChildren: children,
@@ -214,13 +263,13 @@ class LoginRoute extends _i8.PageRouteInfo<void> {
 
   static const String name = 'LoginRoute';
 
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
+  static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i6.NoteCreationScreen]
-class NoteCreationRoute extends _i8.PageRouteInfo<void> {
-  const NoteCreationRoute({List<_i8.PageRouteInfo>? children})
+/// [_i7.NoteCreationScreen]
+class NoteCreationRoute extends _i9.PageRouteInfo<void> {
+  const NoteCreationRoute({List<_i9.PageRouteInfo>? children})
       : super(
           NoteCreationRoute.name,
           initialChildren: children,
@@ -228,13 +277,13 @@ class NoteCreationRoute extends _i8.PageRouteInfo<void> {
 
   static const String name = 'NoteCreationRoute';
 
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
+  static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i7.NotificationsScreen]
-class NotificationsRoute extends _i8.PageRouteInfo<void> {
-  const NotificationsRoute({List<_i8.PageRouteInfo>? children})
+/// [_i8.NotificationsScreen]
+class NotificationsRoute extends _i9.PageRouteInfo<void> {
+  const NotificationsRoute({List<_i9.PageRouteInfo>? children})
       : super(
           NotificationsRoute.name,
           initialChildren: children,
@@ -242,5 +291,5 @@ class NotificationsRoute extends _i8.PageRouteInfo<void> {
 
   static const String name = 'NotificationsRoute';
 
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
+  static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
 }
