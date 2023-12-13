@@ -34,11 +34,12 @@ class LoginScreen extends HookWidget implements AutoRouteWrapper {
           ),
           const SizedBox(height: 64),
           TextField(
+            autofocus: true,
             keyboardType: TextInputType.url,
             decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              labelText: 'Misskey host'.i18n,
+              border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(32))),
               hintText: 'sushi.ski, misskey.ioなど'.i18n,
+              prefix: const Text('https://'),
             ),
             onChanged: (text) => hostText.value = text,
           ),
@@ -55,7 +56,7 @@ class LoginScreen extends HookWidget implements AutoRouteWrapper {
             child: Text('ログイン'.i18n),
           ),
         ],
-      ).align(Alignment.center).padding(const EdgeInsets.all(64)),
+      ).align(Alignment.center).padding(const EdgeInsets.all(32)),
     );
   }
 

@@ -47,10 +47,17 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
                 ),
                 actions: [
                   IconButton(
-                      icon: const Icon(Icons.notifications_none_outlined),
-                      onPressed: () {
-                        context.router.push(const NotificationsRoute());
-                      }),
+                    icon: const Icon(Icons.search),
+                    onPressed: () {
+                      context.router.push(const SearchRoute());
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.notifications_none_outlined),
+                    onPressed: () {
+                      context.router.push(const NotificationsRoute());
+                    },
+                  ),
                 ],
                 bottom: TabBar(tabs: _tabs.map((tab) => Tab(text: tab.title)).toList()),
               ),

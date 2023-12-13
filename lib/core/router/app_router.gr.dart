@@ -8,8 +8,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i9;
-import 'package:flutter/material.dart' as _i10;
+import 'package:auto_route/auto_route.dart' as _i10;
+import 'package:flutter/material.dart' as _i11;
 import 'package:misskey_dog/feature/account/account_screen.dart' as _i1;
 import 'package:misskey_dog/feature/home/home_screen.dart' as _i3;
 import 'package:misskey_dog/feature/image/image_detail_screen.dart' as _i4;
@@ -19,21 +19,22 @@ import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart' as _i2;
 import 'package:misskey_dog/feature/note/note_creation_screen.dart' as _i7;
 import 'package:misskey_dog/feature/notification/notifications_screen.dart'
     as _i8;
+import 'package:misskey_dog/feature/search/search_screen.dart' as _i9;
 
-abstract class $AppRouter extends _i9.RootStackRouter {
+abstract class $AppRouter extends _i10.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i9.PageFactory> pagesMap = {
+  final Map<String, _i10.PageFactory> pagesMap = {
     AccountRoute.name: (routeData) {
-      return _i9.AutoRoutePage<dynamic>(
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i1.AccountScreen(),
       );
     },
     HashTagNotesRoute.name: (routeData) {
       final args = routeData.argsAs<HashTagNotesRouteArgs>();
-      return _i9.AutoRoutePage<dynamic>(
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i2.HashTagNotesScreen(
           key: args.key,
@@ -42,14 +43,14 @@ abstract class $AppRouter extends _i9.RootStackRouter {
       );
     },
     HomeRoute.name: (routeData) {
-      return _i9.AutoRoutePage<dynamic>(
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i9.WrappedRoute(child: const _i3.HomeScreen()),
+        child: _i10.WrappedRoute(child: const _i3.HomeScreen()),
       );
     },
     ImageDetailRoute.name: (routeData) {
       final args = routeData.argsAs<ImageDetailRouteArgs>();
-      return _i9.AutoRoutePage<dynamic>(
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i4.ImageDetailScreen(
           key: args.key,
@@ -70,9 +71,9 @@ abstract class $AppRouter extends _i9.RootStackRouter {
                   '',
                 ),
               ));
-      return _i9.AutoRoutePage<dynamic>(
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i9.WrappedRoute(
+        child: _i10.WrappedRoute(
             child: _i5.LoginCallbackScreen(
           key: args.key,
           host: args.host,
@@ -81,21 +82,27 @@ abstract class $AppRouter extends _i9.RootStackRouter {
       );
     },
     LoginRoute.name: (routeData) {
-      return _i9.AutoRoutePage<dynamic>(
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i9.WrappedRoute(child: const _i6.LoginScreen()),
+        child: _i10.WrappedRoute(child: const _i6.LoginScreen()),
       );
     },
     NoteCreationRoute.name: (routeData) {
-      return _i9.AutoRoutePage<dynamic>(
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i7.NoteCreationScreen(),
       );
     },
     NotificationsRoute.name: (routeData) {
-      return _i9.AutoRoutePage<dynamic>(
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i8.NotificationsScreen(),
+      );
+    },
+    SearchRoute.name: (routeData) {
+      return _i10.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i9.SearchScreen(),
       );
     },
   };
@@ -103,8 +110,8 @@ abstract class $AppRouter extends _i9.RootStackRouter {
 
 /// generated route for
 /// [_i1.AccountScreen]
-class AccountRoute extends _i9.PageRouteInfo<void> {
-  const AccountRoute({List<_i9.PageRouteInfo>? children})
+class AccountRoute extends _i10.PageRouteInfo<void> {
+  const AccountRoute({List<_i10.PageRouteInfo>? children})
       : super(
           AccountRoute.name,
           initialChildren: children,
@@ -112,16 +119,16 @@ class AccountRoute extends _i9.PageRouteInfo<void> {
 
   static const String name = 'AccountRoute';
 
-  static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i2.HashTagNotesScreen]
-class HashTagNotesRoute extends _i9.PageRouteInfo<HashTagNotesRouteArgs> {
+class HashTagNotesRoute extends _i10.PageRouteInfo<HashTagNotesRouteArgs> {
   HashTagNotesRoute({
-    _i10.Key? key,
+    _i11.Key? key,
     required String hashTag,
-    List<_i9.PageRouteInfo>? children,
+    List<_i10.PageRouteInfo>? children,
   }) : super(
           HashTagNotesRoute.name,
           args: HashTagNotesRouteArgs(
@@ -133,8 +140,8 @@ class HashTagNotesRoute extends _i9.PageRouteInfo<HashTagNotesRouteArgs> {
 
   static const String name = 'HashTagNotesRoute';
 
-  static const _i9.PageInfo<HashTagNotesRouteArgs> page =
-      _i9.PageInfo<HashTagNotesRouteArgs>(name);
+  static const _i10.PageInfo<HashTagNotesRouteArgs> page =
+      _i10.PageInfo<HashTagNotesRouteArgs>(name);
 }
 
 class HashTagNotesRouteArgs {
@@ -143,7 +150,7 @@ class HashTagNotesRouteArgs {
     required this.hashTag,
   });
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   final String hashTag;
 
@@ -155,8 +162,8 @@ class HashTagNotesRouteArgs {
 
 /// generated route for
 /// [_i3.HomeScreen]
-class HomeRoute extends _i9.PageRouteInfo<void> {
-  const HomeRoute({List<_i9.PageRouteInfo>? children})
+class HomeRoute extends _i10.PageRouteInfo<void> {
+  const HomeRoute({List<_i10.PageRouteInfo>? children})
       : super(
           HomeRoute.name,
           initialChildren: children,
@@ -164,16 +171,16 @@ class HomeRoute extends _i9.PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i4.ImageDetailScreen]
-class ImageDetailRoute extends _i9.PageRouteInfo<ImageDetailRouteArgs> {
+class ImageDetailRoute extends _i10.PageRouteInfo<ImageDetailRouteArgs> {
   ImageDetailRoute({
-    _i10.Key? key,
+    _i11.Key? key,
     required String imageUrl,
-    List<_i9.PageRouteInfo>? children,
+    List<_i10.PageRouteInfo>? children,
   }) : super(
           ImageDetailRoute.name,
           args: ImageDetailRouteArgs(
@@ -185,8 +192,8 @@ class ImageDetailRoute extends _i9.PageRouteInfo<ImageDetailRouteArgs> {
 
   static const String name = 'ImageDetailRoute';
 
-  static const _i9.PageInfo<ImageDetailRouteArgs> page =
-      _i9.PageInfo<ImageDetailRouteArgs>(name);
+  static const _i10.PageInfo<ImageDetailRouteArgs> page =
+      _i10.PageInfo<ImageDetailRouteArgs>(name);
 }
 
 class ImageDetailRouteArgs {
@@ -195,7 +202,7 @@ class ImageDetailRouteArgs {
     required this.imageUrl,
   });
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   final String imageUrl;
 
@@ -207,12 +214,12 @@ class ImageDetailRouteArgs {
 
 /// generated route for
 /// [_i5.LoginCallbackScreen]
-class LoginCallbackRoute extends _i9.PageRouteInfo<LoginCallbackRouteArgs> {
+class LoginCallbackRoute extends _i10.PageRouteInfo<LoginCallbackRouteArgs> {
   LoginCallbackRoute({
-    _i10.Key? key,
+    _i11.Key? key,
     String host = '',
     String session = '',
-    List<_i9.PageRouteInfo>? children,
+    List<_i10.PageRouteInfo>? children,
   }) : super(
           LoginCallbackRoute.name,
           args: LoginCallbackRouteArgs(
@@ -229,8 +236,8 @@ class LoginCallbackRoute extends _i9.PageRouteInfo<LoginCallbackRouteArgs> {
 
   static const String name = 'LoginCallbackRoute';
 
-  static const _i9.PageInfo<LoginCallbackRouteArgs> page =
-      _i9.PageInfo<LoginCallbackRouteArgs>(name);
+  static const _i10.PageInfo<LoginCallbackRouteArgs> page =
+      _i10.PageInfo<LoginCallbackRouteArgs>(name);
 }
 
 class LoginCallbackRouteArgs {
@@ -240,7 +247,7 @@ class LoginCallbackRouteArgs {
     this.session = '',
   });
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   final String host;
 
@@ -254,8 +261,8 @@ class LoginCallbackRouteArgs {
 
 /// generated route for
 /// [_i6.LoginScreen]
-class LoginRoute extends _i9.PageRouteInfo<void> {
-  const LoginRoute({List<_i9.PageRouteInfo>? children})
+class LoginRoute extends _i10.PageRouteInfo<void> {
+  const LoginRoute({List<_i10.PageRouteInfo>? children})
       : super(
           LoginRoute.name,
           initialChildren: children,
@@ -263,13 +270,13 @@ class LoginRoute extends _i9.PageRouteInfo<void> {
 
   static const String name = 'LoginRoute';
 
-  static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i7.NoteCreationScreen]
-class NoteCreationRoute extends _i9.PageRouteInfo<void> {
-  const NoteCreationRoute({List<_i9.PageRouteInfo>? children})
+class NoteCreationRoute extends _i10.PageRouteInfo<void> {
+  const NoteCreationRoute({List<_i10.PageRouteInfo>? children})
       : super(
           NoteCreationRoute.name,
           initialChildren: children,
@@ -277,13 +284,13 @@ class NoteCreationRoute extends _i9.PageRouteInfo<void> {
 
   static const String name = 'NoteCreationRoute';
 
-  static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i8.NotificationsScreen]
-class NotificationsRoute extends _i9.PageRouteInfo<void> {
-  const NotificationsRoute({List<_i9.PageRouteInfo>? children})
+class NotificationsRoute extends _i10.PageRouteInfo<void> {
+  const NotificationsRoute({List<_i10.PageRouteInfo>? children})
       : super(
           NotificationsRoute.name,
           initialChildren: children,
@@ -291,5 +298,19 @@ class NotificationsRoute extends _i9.PageRouteInfo<void> {
 
   static const String name = 'NotificationsRoute';
 
-  static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i9.SearchScreen]
+class SearchRoute extends _i10.PageRouteInfo<void> {
+  const SearchRoute({List<_i10.PageRouteInfo>? children})
+      : super(
+          SearchRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchRoute';
+
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
 }
