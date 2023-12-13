@@ -18,10 +18,13 @@ final class HashTagNotesScreen extends HookConsumerWidget {
 
     final controller = useLoadMore(onNext: () => ref.read(provider.notifier).fetchNext());
 
-    return NoteTimeline(
-      noteIds: noteIds,
-      scrollController: controller,
-      onRefresh: () => ref.invalidate(provider),
+    return Scaffold(
+      appBar: AppBar(title: Text(hashTag)),
+      body: NoteTimeline(
+        noteIds: noteIds,
+        scrollController: controller,
+        onRefresh: () => ref.invalidate(provider),
+      ),
     );
   }
 }

@@ -117,6 +117,8 @@ final class GlobalNoteIdsWithCache extends _$GlobalNoteIdsWithCache {
 
 @riverpod
 final class HashTagNoteIdsWithCache extends _$HashTagNoteIdsWithCache {
+  String get replacedHashTag => hashTag.replaceAll('#', '');
+
   @override
   Future<List<String>> build({
     required String hashTag,
@@ -126,7 +128,7 @@ final class HashTagNoteIdsWithCache extends _$HashTagNoteIdsWithCache {
 
     final notes = await client.getHashTagNotes(
       request: GetHashTagNotesRequest(
-        hashTag: hashTag,
+        hashTag: replacedHashTag,
         limit: 100,
       ).toJson().removeAllNullValueKeys(),
     );
@@ -148,7 +150,7 @@ final class HashTagNoteIdsWithCache extends _$HashTagNoteIdsWithCache {
 
     final newNotes = await client.getHashTagNotes(
       request: GetHashTagNotesRequest(
-        hashTag: hashTag,
+        hashTag: replacedHashTag,
         untilId: lastNoteId,
         limit: 100,
       ).toJson().removeAllNullValueKeys(),
