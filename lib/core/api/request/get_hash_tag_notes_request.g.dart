@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'get_notes_by_hash_tag_request.dart';
+part of 'get_hash_tag_notes_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GetNotesByHashTagRequestImpl _$$GetNotesByHashTagRequestImplFromJson(
+_$GetHashTagNotesRequestImpl _$$GetHashTagNotesRequestImplFromJson(
         Map<String, dynamic> json) =>
-    _$GetNotesByHashTagRequestImpl(
+    _$GetHashTagNotesRequestImpl(
       hashTag: json['tag'] as String,
       limit: json['limit'] as int?,
       untilId: json['untilId'] as String?,
     );
 
-Map<String, dynamic> _$$GetNotesByHashTagRequestImplToJson(
-        _$GetNotesByHashTagRequestImpl instance) =>
+Map<String, dynamic> _$$GetHashTagNotesRequestImplToJson(
+        _$GetHashTagNotesRequestImpl instance) =>
     <String, dynamic>{
       'tag': instance.hashTag,
       'limit': instance.limit,

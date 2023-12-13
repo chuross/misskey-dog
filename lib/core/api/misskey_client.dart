@@ -47,7 +47,7 @@ abstract class MisskeyClient {
   Future<List<Note>> getNotes({@Body() required Map<String, dynamic> request});
 
   @POST('/api/notes/search-by-tag')
-  Future<List<Note>> getNotesByHashTag({@Body() required Map<String, dynamic> request});
+  Future<List<Note>> getHashTagNotes({@Body() required Map<String, dynamic> request});
 
   @POST('/api/notes/local-timeline')
   Future<List<Note>> getLocalNotes({@Body() required Map<String, dynamic> request});

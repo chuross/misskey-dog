@@ -321,5 +321,175 @@ class _GlobalNoteIdsWithCacheProviderElement
   @override
   bool? get hasFiles => (origin as GlobalNoteIdsWithCacheProvider).hasFiles;
 }
+
+String _$hashTagNoteIdsWithCacheHash() =>
+    r'9686e1187b5e023687c9ba0cec4733eecbacf297';
+
+abstract class _$HashTagNoteIdsWithCache
+    extends BuildlessAutoDisposeAsyncNotifier<List<String>> {
+  late final String hashTag;
+  late final bool? hasFiles;
+
+  FutureOr<List<String>> build({
+    required String hashTag,
+    bool? hasFiles,
+  });
+}
+
+/// See also [HashTagNoteIdsWithCache].
+@ProviderFor(HashTagNoteIdsWithCache)
+const hashTagNoteIdsWithCacheProvider = HashTagNoteIdsWithCacheFamily();
+
+/// See also [HashTagNoteIdsWithCache].
+class HashTagNoteIdsWithCacheFamily extends Family<AsyncValue<List<String>>> {
+  /// See also [HashTagNoteIdsWithCache].
+  const HashTagNoteIdsWithCacheFamily();
+
+  /// See also [HashTagNoteIdsWithCache].
+  HashTagNoteIdsWithCacheProvider call({
+    required String hashTag,
+    bool? hasFiles,
+  }) {
+    return HashTagNoteIdsWithCacheProvider(
+      hashTag: hashTag,
+      hasFiles: hasFiles,
+    );
+  }
+
+  @override
+  HashTagNoteIdsWithCacheProvider getProviderOverride(
+    covariant HashTagNoteIdsWithCacheProvider provider,
+  ) {
+    return call(
+      hashTag: provider.hashTag,
+      hasFiles: provider.hasFiles,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'hashTagNoteIdsWithCacheProvider';
+}
+
+/// See also [HashTagNoteIdsWithCache].
+class HashTagNoteIdsWithCacheProvider
+    extends AutoDisposeAsyncNotifierProviderImpl<HashTagNoteIdsWithCache,
+        List<String>> {
+  /// See also [HashTagNoteIdsWithCache].
+  HashTagNoteIdsWithCacheProvider({
+    required String hashTag,
+    bool? hasFiles,
+  }) : this._internal(
+          () => HashTagNoteIdsWithCache()
+            ..hashTag = hashTag
+            ..hasFiles = hasFiles,
+          from: hashTagNoteIdsWithCacheProvider,
+          name: r'hashTagNoteIdsWithCacheProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$hashTagNoteIdsWithCacheHash,
+          dependencies: HashTagNoteIdsWithCacheFamily._dependencies,
+          allTransitiveDependencies:
+              HashTagNoteIdsWithCacheFamily._allTransitiveDependencies,
+          hashTag: hashTag,
+          hasFiles: hasFiles,
+        );
+
+  HashTagNoteIdsWithCacheProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.hashTag,
+    required this.hasFiles,
+  }) : super.internal();
+
+  final String hashTag;
+  final bool? hasFiles;
+
+  @override
+  FutureOr<List<String>> runNotifierBuild(
+    covariant HashTagNoteIdsWithCache notifier,
+  ) {
+    return notifier.build(
+      hashTag: hashTag,
+      hasFiles: hasFiles,
+    );
+  }
+
+  @override
+  Override overrideWith(HashTagNoteIdsWithCache Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: HashTagNoteIdsWithCacheProvider._internal(
+        () => create()
+          ..hashTag = hashTag
+          ..hasFiles = hasFiles,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        hashTag: hashTag,
+        hasFiles: hasFiles,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeAsyncNotifierProviderElement<HashTagNoteIdsWithCache, List<String>>
+      createElement() {
+    return _HashTagNoteIdsWithCacheProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is HashTagNoteIdsWithCacheProvider &&
+        other.hashTag == hashTag &&
+        other.hasFiles == hasFiles;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, hashTag.hashCode);
+    hash = _SystemHash.combine(hash, hasFiles.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin HashTagNoteIdsWithCacheRef
+    on AutoDisposeAsyncNotifierProviderRef<List<String>> {
+  /// The parameter `hashTag` of this provider.
+  String get hashTag;
+
+  /// The parameter `hasFiles` of this provider.
+  bool? get hasFiles;
+}
+
+class _HashTagNoteIdsWithCacheProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<HashTagNoteIdsWithCache,
+        List<String>> with HashTagNoteIdsWithCacheRef {
+  _HashTagNoteIdsWithCacheProviderElement(super.provider);
+
+  @override
+  String get hashTag => (origin as HashTagNoteIdsWithCacheProvider).hashTag;
+  @override
+  bool? get hasFiles => (origin as HashTagNoteIdsWithCacheProvider).hasFiles;
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -1,5 +1,6 @@
 import 'package:misskey_dog/core/api/api_provider.dart';
 import 'package:misskey_dog/core/api/request/get_global_notes_request.dart';
+import 'package:misskey_dog/core/api/request/get_hash_tag_notes_request.dart';
 import 'package:misskey_dog/core/api/request/get_local_notes_request.dart';
 import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/model/note/note.dart';
@@ -111,5 +112,52 @@ final class GlobalNoteIdsWithCache extends _$GlobalNoteIdsWithCache {
 
     ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
     state = AsyncData([note.id, ...state.requireValue]);
+  }
+}
+
+@riverpod
+final class HashTagNoteIdsWithCache extends _$HashTagNoteIdsWithCache {
+  @override
+  Future<List<String>> build({
+    required String hashTag,
+    bool? hasFiles,
+  }) async {
+    final client = await ref.watch(misskeyClientProvider().future);
+
+    final notes = await client.getHashTagNotes(
+      request: GetHashTagNotesRequest(
+        hashTag: hashTag,
+        limit: 100,
+      ).toJson().removeAllNullValueKeys(),
+    );
+
+    for (final note in notes) {
+      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+    }
+
+    return notes.map((note) => note.id).toList();
+  }
+
+  Future<void> fetchNext() async {
+    if (state.isLoading) return;
+
+    final lastNoteId = state.value?.lastOrNull;
+    if (lastNoteId == null) return;
+
+    final client = await ref.watch(misskeyClientProvider().future);
+
+    final newNotes = await client.getHashTagNotes(
+      request: GetHashTagNotesRequest(
+        hashTag: hashTag,
+        untilId: lastNoteId,
+        limit: 100,
+      ).toJson().removeAllNullValueKeys(),
+    );
+
+    for (final note in newNotes) {
+      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+    }
+
+    state = AsyncData([...state.value!, ...newNotes.map((note) => note.id)]);
   }
 }

@@ -104,7 +104,7 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<List<Note>> getNotesByHashTag(
+  Future<List<Note>> getHashTagNotes(
       {required Map<String, dynamic> request}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

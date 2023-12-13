@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'get_notes_by_hash_tag_request.dart';
+part of 'get_hash_tag_notes_request.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-GetNotesByHashTagRequest _$GetNotesByHashTagRequestFromJson(
+GetHashTagNotesRequest _$GetHashTagNotesRequestFromJson(
     Map<String, dynamic> json) {
-  return _GetNotesByHashTagRequest.fromJson(json);
+  return _GetHashTagNotesRequest.fromJson(json);
 }
 
 /// @nodoc
-mixin _$GetNotesByHashTagRequest {
+mixin _$GetHashTagNotesRequest {
   @JsonKey(name: 'tag')
   String get hashTag => throw _privateConstructorUsedError;
   int? get limit => throw _privateConstructorUsedError;
@@ -28,25 +28,25 @@ mixin _$GetNotesByHashTagRequest {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GetNotesByHashTagRequestCopyWith<GetNotesByHashTagRequest> get copyWith =>
+  $GetHashTagNotesRequestCopyWith<GetHashTagNotesRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GetNotesByHashTagRequestCopyWith<$Res> {
-  factory $GetNotesByHashTagRequestCopyWith(GetNotesByHashTagRequest value,
-          $Res Function(GetNotesByHashTagRequest) then) =
-      _$GetNotesByHashTagRequestCopyWithImpl<$Res, GetNotesByHashTagRequest>;
+abstract class $GetHashTagNotesRequestCopyWith<$Res> {
+  factory $GetHashTagNotesRequestCopyWith(GetHashTagNotesRequest value,
+          $Res Function(GetHashTagNotesRequest) then) =
+      _$GetHashTagNotesRequestCopyWithImpl<$Res, GetHashTagNotesRequest>;
   @useResult
   $Res call(
       {@JsonKey(name: 'tag') String hashTag, int? limit, String? untilId});
 }
 
 /// @nodoc
-class _$GetNotesByHashTagRequestCopyWithImpl<$Res,
-        $Val extends GetNotesByHashTagRequest>
-    implements $GetNotesByHashTagRequestCopyWith<$Res> {
-  _$GetNotesByHashTagRequestCopyWithImpl(this._value, this._then);
+class _$GetHashTagNotesRequestCopyWithImpl<$Res,
+        $Val extends GetHashTagNotesRequest>
+    implements $GetHashTagNotesRequestCopyWith<$Res> {
+  _$GetHashTagNotesRequestCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -78,12 +78,12 @@ class _$GetNotesByHashTagRequestCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$GetNotesByHashTagRequestImplCopyWith<$Res>
-    implements $GetNotesByHashTagRequestCopyWith<$Res> {
-  factory _$$GetNotesByHashTagRequestImplCopyWith(
-          _$GetNotesByHashTagRequestImpl value,
-          $Res Function(_$GetNotesByHashTagRequestImpl) then) =
-      __$$GetNotesByHashTagRequestImplCopyWithImpl<$Res>;
+abstract class _$$GetHashTagNotesRequestImplCopyWith<$Res>
+    implements $GetHashTagNotesRequestCopyWith<$Res> {
+  factory _$$GetHashTagNotesRequestImplCopyWith(
+          _$GetHashTagNotesRequestImpl value,
+          $Res Function(_$GetHashTagNotesRequestImpl) then) =
+      __$$GetHashTagNotesRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -91,13 +91,13 @@ abstract class _$$GetNotesByHashTagRequestImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$GetNotesByHashTagRequestImplCopyWithImpl<$Res>
-    extends _$GetNotesByHashTagRequestCopyWithImpl<$Res,
-        _$GetNotesByHashTagRequestImpl>
-    implements _$$GetNotesByHashTagRequestImplCopyWith<$Res> {
-  __$$GetNotesByHashTagRequestImplCopyWithImpl(
-      _$GetNotesByHashTagRequestImpl _value,
-      $Res Function(_$GetNotesByHashTagRequestImpl) _then)
+class __$$GetHashTagNotesRequestImplCopyWithImpl<$Res>
+    extends _$GetHashTagNotesRequestCopyWithImpl<$Res,
+        _$GetHashTagNotesRequestImpl>
+    implements _$$GetHashTagNotesRequestImplCopyWith<$Res> {
+  __$$GetHashTagNotesRequestImplCopyWithImpl(
+      _$GetHashTagNotesRequestImpl _value,
+      $Res Function(_$GetHashTagNotesRequestImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -107,7 +107,7 @@ class __$$GetNotesByHashTagRequestImplCopyWithImpl<$Res>
     Object? limit = freezed,
     Object? untilId = freezed,
   }) {
-    return _then(_$GetNotesByHashTagRequestImpl(
+    return _then(_$GetHashTagNotesRequestImpl(
       hashTag: null == hashTag
           ? _value.hashTag
           : hashTag // ignore: cast_nullable_to_non_nullable
@@ -126,12 +126,12 @@ class __$$GetNotesByHashTagRequestImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GetNotesByHashTagRequestImpl implements _GetNotesByHashTagRequest {
-  const _$GetNotesByHashTagRequestImpl(
+class _$GetHashTagNotesRequestImpl implements _GetHashTagNotesRequest {
+  const _$GetHashTagNotesRequestImpl(
       {@JsonKey(name: 'tag') required this.hashTag, this.limit, this.untilId});
 
-  factory _$GetNotesByHashTagRequestImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GetNotesByHashTagRequestImplFromJson(json);
+  factory _$GetHashTagNotesRequestImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GetHashTagNotesRequestImplFromJson(json);
 
   @override
   @JsonKey(name: 'tag')
@@ -143,14 +143,14 @@ class _$GetNotesByHashTagRequestImpl implements _GetNotesByHashTagRequest {
 
   @override
   String toString() {
-    return 'GetNotesByHashTagRequest(hashTag: $hashTag, limit: $limit, untilId: $untilId)';
+    return 'GetHashTagNotesRequest(hashTag: $hashTag, limit: $limit, untilId: $untilId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetNotesByHashTagRequestImpl &&
+            other is _$GetHashTagNotesRequestImpl &&
             (identical(other.hashTag, hashTag) || other.hashTag == hashTag) &&
             (identical(other.limit, limit) || other.limit == limit) &&
             (identical(other.untilId, untilId) || other.untilId == untilId));
@@ -163,26 +163,26 @@ class _$GetNotesByHashTagRequestImpl implements _GetNotesByHashTagRequest {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$GetNotesByHashTagRequestImplCopyWith<_$GetNotesByHashTagRequestImpl>
-      get copyWith => __$$GetNotesByHashTagRequestImplCopyWithImpl<
-          _$GetNotesByHashTagRequestImpl>(this, _$identity);
+  _$$GetHashTagNotesRequestImplCopyWith<_$GetHashTagNotesRequestImpl>
+      get copyWith => __$$GetHashTagNotesRequestImplCopyWithImpl<
+          _$GetHashTagNotesRequestImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$GetNotesByHashTagRequestImplToJson(
+    return _$$GetHashTagNotesRequestImplToJson(
       this,
     );
   }
 }
 
-abstract class _GetNotesByHashTagRequest implements GetNotesByHashTagRequest {
-  const factory _GetNotesByHashTagRequest(
+abstract class _GetHashTagNotesRequest implements GetHashTagNotesRequest {
+  const factory _GetHashTagNotesRequest(
       {@JsonKey(name: 'tag') required final String hashTag,
       final int? limit,
-      final String? untilId}) = _$GetNotesByHashTagRequestImpl;
+      final String? untilId}) = _$GetHashTagNotesRequestImpl;
 
-  factory _GetNotesByHashTagRequest.fromJson(Map<String, dynamic> json) =
-      _$GetNotesByHashTagRequestImpl.fromJson;
+  factory _GetHashTagNotesRequest.fromJson(Map<String, dynamic> json) =
+      _$GetHashTagNotesRequestImpl.fromJson;
 
   @override
   @JsonKey(name: 'tag')
@@ -193,6 +193,6 @@ abstract class _GetNotesByHashTagRequest implements GetNotesByHashTagRequest {
   String? get untilId;
   @override
   @JsonKey(ignore: true)
-  _$$GetNotesByHashTagRequestImplCopyWith<_$GetNotesByHashTagRequestImpl>
+  _$$GetHashTagNotesRequestImplCopyWith<_$GetHashTagNotesRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
