@@ -50,7 +50,6 @@ final class HomeGlobalTimeline extends HookConsumerWidget {
         ref.invalidate(provider);
         shouldManualReload.value = false;
       },
-      onFetchNext: () => ref.read(provider.notifier).fetchNext(),
     );
   }
 }

@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:misskey_dog/core/hook/use_load_more.dart';
+import 'package:misskey_dog/feature/note/share/note_timeline.dart';
+import 'package:misskey_dog/model/note/notes_provider.dart';
 
 @RoutePage()
 final class HashTagNotesScreen extends HookConsumerWidget {
@@ -12,9 +13,15 @@ final class HashTagNotesScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(title: Text(hashTag)),
-      body: Container(),
+    final provider = hashTagNoteIdsWithCacheProvider(hashTag: hashTag);
+    final noteIds = ref.watch(provider);
+
+    final controller = useLoadMore(onNext: () => ref.read(provider.notifier).fetchNext());
+
+    return NoteTimeline(
+      noteIds: noteIds,
+      scrollController: controller,
+      onRefresh: () => ref.invalidate(provider),
     );
   }
 }

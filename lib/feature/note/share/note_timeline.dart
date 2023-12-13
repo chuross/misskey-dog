@@ -12,18 +12,16 @@ final class NoteTimeline extends HookWidget {
   final AsyncValue<List<String>> noteIds;
   final ScrollController scrollController;
   final bool shouldManualReload;
-  final Function() onRefresh;
-  final Function() onManualReloadPressed;
-  final Function() onFetchNext;
+  final Function onRefresh;
+  final Function? onManualReloadPressed;
 
   const NoteTimeline({
     super.key,
     required this.noteIds,
     required this.scrollController,
-    required this.shouldManualReload,
     required this.onRefresh,
-    required this.onManualReloadPressed,
-    required this.onFetchNext,
+    this.onManualReloadPressed,
+    this.shouldManualReload = false,
   });
 
   @override
@@ -66,7 +64,7 @@ final class NoteTimeline extends HookWidget {
             ),
             shouldManualReload
                 ? ElevatedButton(
-                    onPressed: () => onManualReloadPressed(),
+                    onPressed: () => onManualReloadPressed?.call(),
                     child: Text('最新の投稿を見る'.i18n),
                   ).align(Alignment.topCenter)
                 : const SizedBox.shrink(),
