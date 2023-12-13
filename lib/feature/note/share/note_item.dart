@@ -238,9 +238,9 @@ final class _Image extends HookWidget {
                 ),
             elseValue: Container(
               alignment: Alignment.center,
-              color: Colors.blueGrey,
+              color: Colors.blueGrey.shade100,
               height: height,
-              child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white)),
+              child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
             )),
       ),
     );
