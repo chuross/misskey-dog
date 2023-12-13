@@ -48,15 +48,28 @@ List<InlineSpan> _separateInlineSpans({
 
   final spans = matches.foldIndexed(<InlineSpan>[], (index, spans, curr) {
     final prevMatch = index > 0 ? matches.elementAtOrNull(index - 1) : null;
-    final plainTextSpan = TextSpan(text: textChars.getRange(prevMatch?.$2.end ?? 0, curr.$2.start).join());
+    final plainTextSpan = TextSpan(
+      text: textChars.getRange(prevMatch?.$2.end ?? 0, curr.$2.start).join(),
+      style: TextStyle(fontSize: height),
+    );
     final additionalSpan = switch (curr.$1) {
       _MatchKind.emoji => _resolveEmoji(match: curr.$2, height: height, externalTextEmojiUrlMap: externalTextEmojiUrlMap),
       _MatchKind.hashTag => _resolveCliclableTextSpan(match: curr.$2, height: height, context: context, onPressed: onHashTagPressed),
       _MatchKind.url => _resolveCliclableTextSpan(match: curr.$2, height: height, context: context, onPressed: onUrlPressed),
     };
 
-    return [...spans, plainTextSpan, additionalSpan];
+    spans.addAll([plainTextSpan, additionalSpan]);
+
+    return spans;
   });
+
+  final last = matches.lastOrNull;
+  if (last != null) {
+    final remainedText = textChars.getRange(last.$2.end, textChars.length).join();
+    if (remainedText.isNotEmpty) {
+      spans.add(TextSpan(text: remainedText, style: TextStyle(fontSize: height)));
+    }
+  }
 
   return spans;
 }
