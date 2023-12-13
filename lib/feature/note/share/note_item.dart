@@ -16,7 +16,6 @@ import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/note/note_file.dart';
 import 'package:misskey_dog/model/note/note_reaction.dart';
-import 'package:responsive_grid_list/responsive_grid_list.dart';
 
 final class NoteItem extends StatelessWidget {
   final Note note;
@@ -201,13 +200,13 @@ Widget _files(List<NoteFile> files) {
     return _Image(file: files.first, height: 300);
   }
 
-  return ResponsiveGridList(
-    listViewBuilderOptions: ListViewBuilderOptions(shrinkWrap: true, primary: false),
-    minItemWidth: double.infinity,
-    minItemsPerRow: 2,
-    horizontalGridSpacing: 8,
-    verticalGridSpacing: 8,
-    children: imageFiles.map((e) => _Image(file: e, height: 200)).toList(),
+  return GridView.count(
+    crossAxisCount: 2,
+    shrinkWrap: true,
+    primary: false,
+    mainAxisSpacing: 8,
+    crossAxisSpacing: 8,
+    children: imageFiles.map((e) => _Image(file: e, height: 300)).toList(),
   );
 }
 
