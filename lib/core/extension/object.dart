@@ -7,10 +7,6 @@ extension ObjectExt<T> on T {
     return predicate(this) ? this : null;
   }
 
-  bool? takeIfTrue() {
-    return this is bool && this as bool ? true : null;
-  }
-
   R? safeCast<R>() {
     return (this is R) ? this as R : null;
   }

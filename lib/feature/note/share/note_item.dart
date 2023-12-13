@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:i18n_extension/default.i18n.dart';
+import 'package:misskey_dog/core/extension/bool.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/date_time.dart';
 import 'package:misskey_dog/core/extension/object.dart';
@@ -224,30 +225,23 @@ final class _Image extends HookWidget {
       borderRadius: BorderRadius.circular(16),
       child: GestureDetector(
         onTap: () => isSensitiveRemoved.value ? context.pushRoute(ImageDetailRoute(imageUrl: file.url)) : isSensitiveRemoved.value = true,
-        child: Stack(
-          children: [
-            Hero(
-              tag: file.url,
-              child: CachedNetworkImage(
-                imageUrl: file.url,
-                width: double.infinity,
-                height: height,
-                fit: BoxFit.cover,
-                fadeInDuration: const Duration(milliseconds: 200),
-              ),
-            ),
-            isSensitiveRemoved.value.takeIfTrue().mapOrElse(
-                  (_) => const SizedBox.shrink(),
-                  elseValue: Positioned.fill(
-                    child: Container(
-                      alignment: Alignment.center,
-                      color: Colors.blueGrey,
-                      child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white)),
-                    ),
+        child: isSensitiveRemoved.value.takeIfTrue().mapOrElse(
+            (_) => Hero(
+                  tag: file.url,
+                  child: CachedNetworkImage(
+                    imageUrl: file.url,
+                    width: double.infinity,
+                    height: height,
+                    fit: BoxFit.cover,
+                    fadeInDuration: const Duration(milliseconds: 200),
                   ),
                 ),
-          ],
-        ),
+            elseValue: Container(
+              alignment: Alignment.center,
+              color: Colors.blueGrey,
+              height: height,
+              child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white)),
+            )),
       ),
     );
   }
