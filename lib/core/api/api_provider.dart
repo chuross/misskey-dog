@@ -69,8 +69,13 @@ Future<(WebSocketChannel, Stream<dynamic>)> _misskeyStreamingConnection(_Misskey
     webSocket.sink.close();
   });
 
-  await webSocket.ready;
-  log.d('@@@streaming:connect:ready');
+  try {
+    await webSocket.ready;
+    log.d('@@@streaming:connect:ready');
+  } catch (e) {
+    log.e('@@@streaming:connect:error:error=$e');
+    rethrow;
+  }
 
   return (webSocket, webSocket.stream.asBroadcastStream());
 }
