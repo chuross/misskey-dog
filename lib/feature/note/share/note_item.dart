@@ -195,7 +195,9 @@ Widget _files(List<NoteFile> files) {
     return const SizedBox.shrink();
   }
 
-  if (files.length == 1) {
+  final imageFiles = files.where((e) => e.isImage).toList();
+
+  if (imageFiles.length == 1) {
     return _Image(file: files.first, height: 300);
   }
 
@@ -205,7 +207,7 @@ Widget _files(List<NoteFile> files) {
     minItemsPerRow: 2,
     horizontalGridSpacing: 8,
     verticalGridSpacing: 8,
-    children: files.map((e) => _Image(file: e, height: 200)).toList(),
+    children: imageFiles.map((e) => _Image(file: e, height: 200)).toList(),
   );
 }
 
