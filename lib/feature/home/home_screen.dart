@@ -67,6 +67,12 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
               ],
               body: TabBarView(children: _tabs.map((tab) => tab.child).toList()),
             ),
+            floatingActionButton: FloatingActionButton(
+              child: const Icon(Icons.edit),
+              onPressed: () {
+                context.pushRoute(const NoteCreationRoute());
+              },
+            ),
           ),
         );
       default:
