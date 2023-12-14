@@ -23,6 +23,8 @@ GetHashTagNotesRequest _$GetHashTagNotesRequestFromJson(
 mixin _$GetHashTagNotesRequest {
   @JsonKey(name: 'tag')
   String get hashTag => throw _privateConstructorUsedError;
+  @JsonKey(name: 'withFiles')
+  bool? get hasFiles => throw _privateConstructorUsedError;
   int? get limit => throw _privateConstructorUsedError;
   String? get untilId => throw _privateConstructorUsedError;
 
@@ -39,7 +41,10 @@ abstract class $GetHashTagNotesRequestCopyWith<$Res> {
       _$GetHashTagNotesRequestCopyWithImpl<$Res, GetHashTagNotesRequest>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'tag') String hashTag, int? limit, String? untilId});
+      {@JsonKey(name: 'tag') String hashTag,
+      @JsonKey(name: 'withFiles') bool? hasFiles,
+      int? limit,
+      String? untilId});
 }
 
 /// @nodoc
@@ -57,6 +62,7 @@ class _$GetHashTagNotesRequestCopyWithImpl<$Res,
   @override
   $Res call({
     Object? hashTag = null,
+    Object? hasFiles = freezed,
     Object? limit = freezed,
     Object? untilId = freezed,
   }) {
@@ -65,6 +71,10 @@ class _$GetHashTagNotesRequestCopyWithImpl<$Res,
           ? _value.hashTag
           : hashTag // ignore: cast_nullable_to_non_nullable
               as String,
+      hasFiles: freezed == hasFiles
+          ? _value.hasFiles
+          : hasFiles // ignore: cast_nullable_to_non_nullable
+              as bool?,
       limit: freezed == limit
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
@@ -87,7 +97,10 @@ abstract class _$$GetHashTagNotesRequestImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'tag') String hashTag, int? limit, String? untilId});
+      {@JsonKey(name: 'tag') String hashTag,
+      @JsonKey(name: 'withFiles') bool? hasFiles,
+      int? limit,
+      String? untilId});
 }
 
 /// @nodoc
@@ -104,6 +117,7 @@ class __$$GetHashTagNotesRequestImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? hashTag = null,
+    Object? hasFiles = freezed,
     Object? limit = freezed,
     Object? untilId = freezed,
   }) {
@@ -112,6 +126,10 @@ class __$$GetHashTagNotesRequestImplCopyWithImpl<$Res>
           ? _value.hashTag
           : hashTag // ignore: cast_nullable_to_non_nullable
               as String,
+      hasFiles: freezed == hasFiles
+          ? _value.hasFiles
+          : hasFiles // ignore: cast_nullable_to_non_nullable
+              as bool?,
       limit: freezed == limit
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
@@ -128,7 +146,10 @@ class __$$GetHashTagNotesRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$GetHashTagNotesRequestImpl implements _GetHashTagNotesRequest {
   const _$GetHashTagNotesRequestImpl(
-      {@JsonKey(name: 'tag') required this.hashTag, this.limit, this.untilId});
+      {@JsonKey(name: 'tag') required this.hashTag,
+      @JsonKey(name: 'withFiles') this.hasFiles,
+      this.limit,
+      this.untilId});
 
   factory _$GetHashTagNotesRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$GetHashTagNotesRequestImplFromJson(json);
@@ -137,13 +158,16 @@ class _$GetHashTagNotesRequestImpl implements _GetHashTagNotesRequest {
   @JsonKey(name: 'tag')
   final String hashTag;
   @override
+  @JsonKey(name: 'withFiles')
+  final bool? hasFiles;
+  @override
   final int? limit;
   @override
   final String? untilId;
 
   @override
   String toString() {
-    return 'GetHashTagNotesRequest(hashTag: $hashTag, limit: $limit, untilId: $untilId)';
+    return 'GetHashTagNotesRequest(hashTag: $hashTag, hasFiles: $hasFiles, limit: $limit, untilId: $untilId)';
   }
 
   @override
@@ -152,13 +176,16 @@ class _$GetHashTagNotesRequestImpl implements _GetHashTagNotesRequest {
         (other.runtimeType == runtimeType &&
             other is _$GetHashTagNotesRequestImpl &&
             (identical(other.hashTag, hashTag) || other.hashTag == hashTag) &&
+            (identical(other.hasFiles, hasFiles) ||
+                other.hasFiles == hasFiles) &&
             (identical(other.limit, limit) || other.limit == limit) &&
             (identical(other.untilId, untilId) || other.untilId == untilId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, hashTag, limit, untilId);
+  int get hashCode =>
+      Object.hash(runtimeType, hashTag, hasFiles, limit, untilId);
 
   @JsonKey(ignore: true)
   @override
@@ -178,6 +205,7 @@ class _$GetHashTagNotesRequestImpl implements _GetHashTagNotesRequest {
 abstract class _GetHashTagNotesRequest implements GetHashTagNotesRequest {
   const factory _GetHashTagNotesRequest(
       {@JsonKey(name: 'tag') required final String hashTag,
+      @JsonKey(name: 'withFiles') final bool? hasFiles,
       final int? limit,
       final String? untilId}) = _$GetHashTagNotesRequestImpl;
 
@@ -187,6 +215,9 @@ abstract class _GetHashTagNotesRequest implements GetHashTagNotesRequest {
   @override
   @JsonKey(name: 'tag')
   String get hashTag;
+  @override
+  @JsonKey(name: 'withFiles')
+  bool? get hasFiles;
   @override
   int? get limit;
   @override

@@ -189,6 +189,7 @@ final class HashtagNoteIdsWithCache extends _$HashtagNoteIdsWithCache {
     final notes = await client.getHashTagNotes(
       request: GetHashTagNotesRequest(
         hashTag: _replacedHashTag,
+        hasFiles: hasFiles,
         limit: 100,
       ).toJson().removeAllNullValueKeys(),
     );
@@ -211,6 +212,7 @@ final class HashtagNoteIdsWithCache extends _$HashtagNoteIdsWithCache {
     final newNotes = await client.getHashTagNotes(
       request: GetHashTagNotesRequest(
         hashTag: _replacedHashTag,
+        hasFiles: hasFiles,
         untilId: lastNoteId,
         limit: 100,
       ).toJson().removeAllNullValueKeys(),

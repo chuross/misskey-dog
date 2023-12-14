@@ -9,6 +9,7 @@ part 'get_hash_tag_notes_request.g.dart';
 class GetHashTagNotesRequest with _$GetHashTagNotesRequest {
   const factory GetHashTagNotesRequest({
     @JsonKey(name: 'tag') required String hashTag,
+    @JsonKey(name: 'withFiles') bool? hasFiles,
     int? limit,
     String? untilId,
   }) = _GetHashTagNotesRequest;

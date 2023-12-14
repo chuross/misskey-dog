@@ -493,7 +493,7 @@ class _SearchNotesIdsWithCacheProviderElement
 }
 
 String _$hashtagNoteIdsWithCacheHash() =>
-    r'3a5075eedf2fc10e3dd9d53fa7bad6898a20ba68';
+    r'd134dfbac25f5256ecaad1f98a80a3a3e4481113';
 
 abstract class _$HashtagNoteIdsWithCache
     extends BuildlessAutoDisposeAsyncNotifier<List<String>> {
