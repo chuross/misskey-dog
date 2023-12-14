@@ -35,6 +35,8 @@ final class SearchScreen extends HookWidget {
                 return () {
                   if (searchText.value.startsWith('#')) {
                     context.pushRoute(HashTagNotesRoute(hashTag: searchText.value));
+                  } else {
+                    context.pushRoute(SearchKeyWordRoute(keyword: searchText.value));
                   }
                 };
               }),

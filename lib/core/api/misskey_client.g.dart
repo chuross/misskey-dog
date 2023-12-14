@@ -88,7 +88,7 @@ class _MisskeyClient implements MisskeyClient {
     )
             .compose(
               _dio.options,
-              '/api/notes',
+              '/api/notes/search',
               queryParameters: queryParameters,
               data: _data,
             )

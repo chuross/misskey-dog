@@ -9,15 +9,15 @@ part of 'get_notes_request.dart';
 _$GetNotesRequestImpl _$$GetNotesRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$GetNotesRequestImpl(
-      sinceId: json['sinceId'] as String?,
+      query: json['query'] as String,
+      untilId: json['untilId'] as String?,
       limit: json['limit'] as int?,
-      isLocal: json['local'] as bool?,
     );
 
 Map<String, dynamic> _$$GetNotesRequestImplToJson(
         _$GetNotesRequestImpl instance) =>
     <String, dynamic>{
-      'sinceId': instance.sinceId,
+      'query': instance.query,
+      'untilId': instance.untilId,
       'limit': instance.limit,
-      'local': instance.isLocal,
     };

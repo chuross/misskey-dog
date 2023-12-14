@@ -322,8 +322,178 @@ class _GlobalNoteIdsWithCacheProviderElement
   bool? get hasFiles => (origin as GlobalNoteIdsWithCacheProvider).hasFiles;
 }
 
+String _$searchNotesIdsWithCacheHash() =>
+    r'1f33719c4d33358a4e1e2adb2fe25770f4ba6127';
+
+abstract class _$SearchNotesIdsWithCache
+    extends BuildlessAutoDisposeAsyncNotifier<List<String>> {
+  late final String keyword;
+  late final bool? hasFiles;
+
+  FutureOr<List<String>> build({
+    required String keyword,
+    bool? hasFiles,
+  });
+}
+
+/// See also [SearchNotesIdsWithCache].
+@ProviderFor(SearchNotesIdsWithCache)
+const searchNotesIdsWithCacheProvider = SearchNotesIdsWithCacheFamily();
+
+/// See also [SearchNotesIdsWithCache].
+class SearchNotesIdsWithCacheFamily extends Family<AsyncValue<List<String>>> {
+  /// See also [SearchNotesIdsWithCache].
+  const SearchNotesIdsWithCacheFamily();
+
+  /// See also [SearchNotesIdsWithCache].
+  SearchNotesIdsWithCacheProvider call({
+    required String keyword,
+    bool? hasFiles,
+  }) {
+    return SearchNotesIdsWithCacheProvider(
+      keyword: keyword,
+      hasFiles: hasFiles,
+    );
+  }
+
+  @override
+  SearchNotesIdsWithCacheProvider getProviderOverride(
+    covariant SearchNotesIdsWithCacheProvider provider,
+  ) {
+    return call(
+      keyword: provider.keyword,
+      hasFiles: provider.hasFiles,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'searchNotesIdsWithCacheProvider';
+}
+
+/// See also [SearchNotesIdsWithCache].
+class SearchNotesIdsWithCacheProvider
+    extends AutoDisposeAsyncNotifierProviderImpl<SearchNotesIdsWithCache,
+        List<String>> {
+  /// See also [SearchNotesIdsWithCache].
+  SearchNotesIdsWithCacheProvider({
+    required String keyword,
+    bool? hasFiles,
+  }) : this._internal(
+          () => SearchNotesIdsWithCache()
+            ..keyword = keyword
+            ..hasFiles = hasFiles,
+          from: searchNotesIdsWithCacheProvider,
+          name: r'searchNotesIdsWithCacheProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$searchNotesIdsWithCacheHash,
+          dependencies: SearchNotesIdsWithCacheFamily._dependencies,
+          allTransitiveDependencies:
+              SearchNotesIdsWithCacheFamily._allTransitiveDependencies,
+          keyword: keyword,
+          hasFiles: hasFiles,
+        );
+
+  SearchNotesIdsWithCacheProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.keyword,
+    required this.hasFiles,
+  }) : super.internal();
+
+  final String keyword;
+  final bool? hasFiles;
+
+  @override
+  FutureOr<List<String>> runNotifierBuild(
+    covariant SearchNotesIdsWithCache notifier,
+  ) {
+    return notifier.build(
+      keyword: keyword,
+      hasFiles: hasFiles,
+    );
+  }
+
+  @override
+  Override overrideWith(SearchNotesIdsWithCache Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: SearchNotesIdsWithCacheProvider._internal(
+        () => create()
+          ..keyword = keyword
+          ..hasFiles = hasFiles,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        keyword: keyword,
+        hasFiles: hasFiles,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeAsyncNotifierProviderElement<SearchNotesIdsWithCache, List<String>>
+      createElement() {
+    return _SearchNotesIdsWithCacheProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is SearchNotesIdsWithCacheProvider &&
+        other.keyword == keyword &&
+        other.hasFiles == hasFiles;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, keyword.hashCode);
+    hash = _SystemHash.combine(hash, hasFiles.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin SearchNotesIdsWithCacheRef
+    on AutoDisposeAsyncNotifierProviderRef<List<String>> {
+  /// The parameter `keyword` of this provider.
+  String get keyword;
+
+  /// The parameter `hasFiles` of this provider.
+  bool? get hasFiles;
+}
+
+class _SearchNotesIdsWithCacheProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<SearchNotesIdsWithCache,
+        List<String>> with SearchNotesIdsWithCacheRef {
+  _SearchNotesIdsWithCacheProviderElement(super.provider);
+
+  @override
+  String get keyword => (origin as SearchNotesIdsWithCacheProvider).keyword;
+  @override
+  bool? get hasFiles => (origin as SearchNotesIdsWithCacheProvider).hasFiles;
+}
+
 String _$hashTagNoteIdsWithCacheHash() =>
-    r'b1ebe97d3f47d8bdbaba10e6a23d7dc4b600a621';
+    r'1959dada36f6e8d8819e9142e344020f9f7ef013';
 
 abstract class _$HashTagNoteIdsWithCache
     extends BuildlessAutoDisposeAsyncNotifier<List<String>> {

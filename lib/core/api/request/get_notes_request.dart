@@ -8,9 +8,9 @@ part 'get_notes_request.g.dart';
 @freezed
 class GetNotesRequest with _$GetNotesRequest {
   const factory GetNotesRequest({
-    String? sinceId,
+    required String query,
+    String? untilId,
     int? limit,
-    @JsonKey(name: 'local') bool? isLocal,
   }) = _GetNotesRequest;
 
   factory GetNotesRequest.fromJson(Map<String, dynamic> json) => _$GetNotesRequestFromJson(json);

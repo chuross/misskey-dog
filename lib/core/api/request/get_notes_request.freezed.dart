@@ -20,10 +20,9 @@ GetNotesRequest _$GetNotesRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$GetNotesRequest {
-  String? get sinceId => throw _privateConstructorUsedError;
+  String get query => throw _privateConstructorUsedError;
+  String? get untilId => throw _privateConstructorUsedError;
   int? get limit => throw _privateConstructorUsedError;
-  @JsonKey(name: 'local')
-  bool? get isLocal => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,8 +36,7 @@ abstract class $GetNotesRequestCopyWith<$Res> {
           GetNotesRequest value, $Res Function(GetNotesRequest) then) =
       _$GetNotesRequestCopyWithImpl<$Res, GetNotesRequest>;
   @useResult
-  $Res call(
-      {String? sinceId, int? limit, @JsonKey(name: 'local') bool? isLocal});
+  $Res call({String query, String? untilId, int? limit});
 }
 
 /// @nodoc
@@ -54,23 +52,23 @@ class _$GetNotesRequestCopyWithImpl<$Res, $Val extends GetNotesRequest>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sinceId = freezed,
+    Object? query = null,
+    Object? untilId = freezed,
     Object? limit = freezed,
-    Object? isLocal = freezed,
   }) {
     return _then(_value.copyWith(
-      sinceId: freezed == sinceId
-          ? _value.sinceId
-          : sinceId // ignore: cast_nullable_to_non_nullable
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      untilId: freezed == untilId
+          ? _value.untilId
+          : untilId // ignore: cast_nullable_to_non_nullable
               as String?,
       limit: freezed == limit
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
               as int?,
-      isLocal: freezed == isLocal
-          ? _value.isLocal
-          : isLocal // ignore: cast_nullable_to_non_nullable
-              as bool?,
     ) as $Val);
   }
 }
@@ -83,8 +81,7 @@ abstract class _$$GetNotesRequestImplCopyWith<$Res>
       __$$GetNotesRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? sinceId, int? limit, @JsonKey(name: 'local') bool? isLocal});
+  $Res call({String query, String? untilId, int? limit});
 }
 
 /// @nodoc
@@ -98,23 +95,23 @@ class __$$GetNotesRequestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sinceId = freezed,
+    Object? query = null,
+    Object? untilId = freezed,
     Object? limit = freezed,
-    Object? isLocal = freezed,
   }) {
     return _then(_$GetNotesRequestImpl(
-      sinceId: freezed == sinceId
-          ? _value.sinceId
-          : sinceId // ignore: cast_nullable_to_non_nullable
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      untilId: freezed == untilId
+          ? _value.untilId
+          : untilId // ignore: cast_nullable_to_non_nullable
               as String?,
       limit: freezed == limit
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
               as int?,
-      isLocal: freezed == isLocal
-          ? _value.isLocal
-          : isLocal // ignore: cast_nullable_to_non_nullable
-              as bool?,
     ));
   }
 }
@@ -122,23 +119,21 @@ class __$$GetNotesRequestImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$GetNotesRequestImpl implements _GetNotesRequest {
-  const _$GetNotesRequestImpl(
-      {this.sinceId, this.limit, @JsonKey(name: 'local') this.isLocal});
+  const _$GetNotesRequestImpl({required this.query, this.untilId, this.limit});
 
   factory _$GetNotesRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$GetNotesRequestImplFromJson(json);
 
   @override
-  final String? sinceId;
+  final String query;
+  @override
+  final String? untilId;
   @override
   final int? limit;
-  @override
-  @JsonKey(name: 'local')
-  final bool? isLocal;
 
   @override
   String toString() {
-    return 'GetNotesRequest(sinceId: $sinceId, limit: $limit, isLocal: $isLocal)';
+    return 'GetNotesRequest(query: $query, untilId: $untilId, limit: $limit)';
   }
 
   @override
@@ -146,14 +141,14 @@ class _$GetNotesRequestImpl implements _GetNotesRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetNotesRequestImpl &&
-            (identical(other.sinceId, sinceId) || other.sinceId == sinceId) &&
-            (identical(other.limit, limit) || other.limit == limit) &&
-            (identical(other.isLocal, isLocal) || other.isLocal == isLocal));
+            (identical(other.query, query) || other.query == query) &&
+            (identical(other.untilId, untilId) || other.untilId == untilId) &&
+            (identical(other.limit, limit) || other.limit == limit));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, sinceId, limit, isLocal);
+  int get hashCode => Object.hash(runtimeType, query, untilId, limit);
 
   @JsonKey(ignore: true)
   @override
@@ -172,20 +167,19 @@ class _$GetNotesRequestImpl implements _GetNotesRequest {
 
 abstract class _GetNotesRequest implements GetNotesRequest {
   const factory _GetNotesRequest(
-      {final String? sinceId,
-      final int? limit,
-      @JsonKey(name: 'local') final bool? isLocal}) = _$GetNotesRequestImpl;
+      {required final String query,
+      final String? untilId,
+      final int? limit}) = _$GetNotesRequestImpl;
 
   factory _GetNotesRequest.fromJson(Map<String, dynamic> json) =
       _$GetNotesRequestImpl.fromJson;
 
   @override
-  String? get sinceId;
+  String get query;
+  @override
+  String? get untilId;
   @override
   int? get limit;
-  @override
-  @JsonKey(name: 'local')
-  bool? get isLocal;
   @override
   @JsonKey(ignore: true)
   _$$GetNotesRequestImplCopyWith<_$GetNotesRequestImpl> get copyWith =>

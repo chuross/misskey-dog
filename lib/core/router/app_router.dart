@@ -12,13 +12,16 @@ final class AppRouter extends $AppRouter {
 
   @override
   List<AutoRoute> get routes {
+    final authGuard = AuthGuard(_ref);
+
     return [
-      AutoRoute(page: HomeRoute.page, initial: true, guards: [InitialScreenGuard(), AuthGuard(_ref)]),
-      AutoRoute(page: NoteCreationRoute.page, guards: [AuthGuard(_ref)], fullscreenDialog: true),
-      AutoRoute(page: AccountRoute.page, guards: [AuthGuard(_ref)]),
-      AutoRoute(page: NotificationsRoute.page, guards: [AuthGuard(_ref)]),
-      AutoRoute(page: SearchRoute.page, guards: [AuthGuard(_ref)]),
-      AutoRoute(page: HashTagNotesRoute.page, guards: [AuthGuard(_ref)]),
+      AutoRoute(page: HomeRoute.page, initial: true, guards: [InitialScreenGuard(), authGuard]),
+      AutoRoute(page: NoteCreationRoute.page, guards: [authGuard], fullscreenDialog: true),
+      AutoRoute(page: AccountRoute.page, guards: [authGuard]),
+      AutoRoute(page: NotificationsRoute.page, guards: [authGuard]),
+      AutoRoute(page: SearchRoute.page, guards: [authGuard]),
+      AutoRoute(page: HashTagNotesRoute.page, guards: [authGuard]),
+      AutoRoute(page: SearchKeyWordRoute.page, guards: [authGuard]),
       CustomRoute(
           page: ImageDetailRoute.page, guards: [AuthGuard(_ref)], fullscreenDialog: true, transitionsBuilder: TransitionsBuilders.fadeIn),
       // Login

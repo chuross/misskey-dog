@@ -43,7 +43,7 @@ abstract class MisskeyClient {
   @POST('/api/notes/show')
   Future<Note> getNote({@Body() required Map<String, dynamic> request});
 
-  @POST('/api/notes')
+  @POST('/api/notes/search')
   Future<List<Note>> getNotes({@Body() required Map<String, dynamic> request});
 
   @POST('/api/notes/search-by-tag')
