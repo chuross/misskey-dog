@@ -39,7 +39,7 @@ final class CachedNoteItem extends HookConsumerWidget {
           ref.read(provider.notifier).reaction(emoji);
         }),
       ),
-      onHashTagPressed: (hashTag) => context.pushRoute(HashTagNotesRoute(hashTag: hashTag)),
+      onHashtagPressed: (hashtag) => context.pushRoute(HashtagNotesRoute(hashtag: hashtag)),
       onUrlPressed: (url) => launchUrl(Uri.parse(url)),
     );
   }

@@ -33,13 +33,13 @@ abstract class $AppRouter extends _i11.RootStackRouter {
         child: const _i1.AccountScreen(),
       );
     },
-    HashTagNotesRoute.name: (routeData) {
-      final args = routeData.argsAs<HashTagNotesRouteArgs>();
+    HashtagNotesRoute.name: (routeData) {
+      final args = routeData.argsAs<HashtagNotesRouteArgs>();
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i2.HashTagNotesScreen(
+        child: _i2.HashtagNotesScreen(
           key: args.key,
-          hashTag: args.hashTag,
+          hashtag: args.hashtag,
         ),
       );
     },
@@ -134,40 +134,40 @@ class AccountRoute extends _i11.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.HashTagNotesScreen]
-class HashTagNotesRoute extends _i11.PageRouteInfo<HashTagNotesRouteArgs> {
-  HashTagNotesRoute({
+/// [_i2.HashtagNotesScreen]
+class HashtagNotesRoute extends _i11.PageRouteInfo<HashtagNotesRouteArgs> {
+  HashtagNotesRoute({
     _i12.Key? key,
-    required String hashTag,
+    required String hashtag,
     List<_i11.PageRouteInfo>? children,
   }) : super(
-          HashTagNotesRoute.name,
-          args: HashTagNotesRouteArgs(
+          HashtagNotesRoute.name,
+          args: HashtagNotesRouteArgs(
             key: key,
-            hashTag: hashTag,
+            hashtag: hashtag,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'HashTagNotesRoute';
+  static const String name = 'HashtagNotesRoute';
 
-  static const _i11.PageInfo<HashTagNotesRouteArgs> page =
-      _i11.PageInfo<HashTagNotesRouteArgs>(name);
+  static const _i11.PageInfo<HashtagNotesRouteArgs> page =
+      _i11.PageInfo<HashtagNotesRouteArgs>(name);
 }
 
-class HashTagNotesRouteArgs {
-  const HashTagNotesRouteArgs({
+class HashtagNotesRouteArgs {
+  const HashtagNotesRouteArgs({
     this.key,
-    required this.hashTag,
+    required this.hashtag,
   });
 
   final _i12.Key? key;
 
-  final String hashTag;
+  final String hashtag;
 
   @override
   String toString() {
-    return 'HashTagNotesRouteArgs{key: $key, hashTag: $hashTag}';
+    return 'HashtagNotesRouteArgs{key: $key, hashtag: $hashtag}';
   }
 }
 

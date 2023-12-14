@@ -22,7 +22,7 @@ List<InlineSpan> _separateInlineSpans({
   required String text,
   required double height,
   required Map<String, String> externalTextEmojiUrlMap,
-  required Function(String) onHashTagPressed,
+  required Function(String) onHashtagPressed,
   required Function(String) onUrlPressed,
 }) {
   // RegExpはマルチバイト文字のインデックスが計算できないので、サロゲートペアをシングルバイトの文字に変換する
@@ -54,7 +54,7 @@ List<InlineSpan> _separateInlineSpans({
     );
     final additionalSpan = switch (curr.$1) {
       _MatchKind.emoji => _resolveEmoji(match: curr.$2, height: height, externalTextEmojiUrlMap: externalTextEmojiUrlMap),
-      _MatchKind.hashTag => _resolveCliclableTextSpan(match: curr.$2, height: height, context: context, onPressed: onHashTagPressed),
+      _MatchKind.hashTag => _resolveCliclableTextSpan(match: curr.$2, height: height, context: context, onPressed: onHashtagPressed),
       _MatchKind.url => _resolveCliclableTextSpan(match: curr.$2, height: height, context: context, onPressed: onUrlPressed),
     };
 
@@ -116,7 +116,7 @@ final class MisskeyText extends HookWidget {
   final Map<String, String> externalTextEmojiUrlMap;
   final TextOverflow overflow;
   final TextAlign textAlign;
-  final Function(String)? onHashTagPressed;
+  final Function(String)? onHashtagPressed;
   final Function(String)? onUrlPressed;
 
   const MisskeyText({
@@ -126,7 +126,7 @@ final class MisskeyText extends HookWidget {
     required this.externalTextEmojiUrlMap,
     this.overflow = TextOverflow.clip,
     this.textAlign = TextAlign.start,
-    this.onHashTagPressed,
+    this.onHashtagPressed,
     this.onUrlPressed,
   });
 
@@ -138,7 +138,7 @@ final class MisskeyText extends HookWidget {
         text: text,
         height: baseTextStyle?.fontSize ?? 14,
         externalTextEmojiUrlMap: externalTextEmojiUrlMap,
-        onHashTagPressed: onHashTagPressed ?? (_) {},
+        onHashtagPressed: onHashtagPressed ?? (_) {},
         onUrlPressed: onUrlPressed ?? (_) {},
       ),
       [text],

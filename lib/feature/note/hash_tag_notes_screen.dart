@@ -6,20 +6,20 @@ import 'package:misskey_dog/feature/note/share/note_timeline.dart';
 import 'package:misskey_dog/model/note/notes_provider.dart';
 
 @RoutePage()
-final class HashTagNotesScreen extends HookConsumerWidget {
-  final String hashTag;
+final class HashtagNotesScreen extends HookConsumerWidget {
+  final String hashtag;
 
-  const HashTagNotesScreen({super.key, required this.hashTag});
+  const HashtagNotesScreen({super.key, required this.hashtag});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = hashTagNoteIdsWithCacheProvider(hashTag: hashTag);
+    final provider = hashtagNoteIdsWithCacheProvider(hashtag: hashtag);
     final noteIds = ref.watch(provider);
 
     final controller = useLoadMore(onNext: () => ref.read(provider.notifier).fetchNext());
 
     return Scaffold(
-      appBar: AppBar(title: Text(hashTag)),
+      appBar: AppBar(title: Text(hashtag)),
       body: NoteTimeline(
         noteIds: noteIds,
         scrollController: controller,

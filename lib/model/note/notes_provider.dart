@@ -161,12 +161,12 @@ final class SearchNotesIdsWithCache extends _$SearchNotesIdsWithCache {
 }
 
 @riverpod
-final class HashTagNoteIdsWithCache extends _$HashTagNoteIdsWithCache {
-  String get _replacedHashTag => hashTag.replaceAll('#', '');
+final class HashtagNoteIdsWithCache extends _$HashtagNoteIdsWithCache {
+  String get _replacedHashTag => hashtag.replaceAll('#', '');
 
   @override
   Future<List<String>> build({
-    required String hashTag,
+    required String hashtag,
     bool? hasFiles,
   }) async {
     final client = await ref.watch(misskeyClientProvider().future);
