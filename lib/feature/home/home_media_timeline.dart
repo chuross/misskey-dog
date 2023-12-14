@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:misskey_dog/core/hook/use_load_more.dart';
 import 'package:misskey_dog/feature/note/share/note_timeline.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
 import 'package:misskey_dog/model/note/notes_provider.dart';
@@ -17,9 +16,9 @@ final class HomeMediaTimeline extends HookConsumerWidget {
 
     final noteIds = ref.watch(provider);
 
-    final controller = useLoadMore(onNext: () => ref.read(provider.notifier).fetchNext());
-
     final shouldManualReload = useState(false);
+
+    final controller = PrimaryScrollController.of(context);
 
     ref.listen(streamingProvider, (_, next) {
       if (next.hasError) {
@@ -46,8 +45,8 @@ final class HomeMediaTimeline extends HookConsumerWidget {
 
     return NoteTimeline(
       noteIds: noteIds,
-      scrollController: controller,
       shouldManualReload: shouldManualReload.value,
+      onFetchNext: () => ref.read(provider.notifier).fetchNext(),
       onRefresh: () {
         ref.invalidate(provider);
         ref.invalidate(streamingProvider);
