@@ -62,12 +62,10 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
                 bottom: TabBar(tabs: _tabs.map((tab) => Tab(text: tab.title)).toList()),
               ),
               body: TabBarView(children: _tabs.map((tab) => tab.child).toList()),
-              floatingActionButton: Builder(builder: (context) {
-                return FloatingActionButton(
-                  child: const Icon(Icons.edit),
-                  onPressed: () => context.pushRoute(const NoteCreationRoute()),
-                );
-              }),
+              floatingActionButton: FloatingActionButton(
+                child: const Icon(Icons.edit),
+                onPressed: () => context.pushRoute(const NoteCreationRoute()),
+              ),
             ));
       default:
         return ScreenLoadingView(value: account, onRetry: () => ref.invalidate(accountStateProvider));
