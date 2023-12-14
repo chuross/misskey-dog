@@ -32,41 +32,42 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
     switch (account) {
       case AsyncData(value: final account):
         return DefaultTabController(
-            length: _tabs.length,
-            child: Scaffold(
-              appBar: AppBar(
-                title: const Text('Misskey Dog'),
-                leading: IconButton(
-                  icon: account.mapOrElse(
-                    (account) => CircleAvatar(
-                      foregroundImage: CachedNetworkImageProvider(account.user.avatarUrl ?? ''),
+          length: _tabs.length,
+          child: Scaffold(
+            body: NestedScrollView(
+              headerSliverBuilder: (BuildContext _, bool __) => [
+                SliverAppBar(
+                  title: const Text('Misskey Dog'),
+                  leading: IconButton(
+                    icon: account.mapOrElse(
+                      (account) => CircleAvatar(
+                        foregroundImage: CachedNetworkImageProvider(account.user.avatarUrl ?? ''),
+                      ),
+                      elseValue: const Icon(Icons.person),
                     ),
-                    elseValue: const Icon(Icons.person),
+                    onPressed: () => context.router.push(const AccountRoute()),
                   ),
-                  onPressed: () => context.router.push(const AccountRoute()),
+                  actions: [
+                    IconButton(
+                      icon: const Icon(Icons.search),
+                      onPressed: () {
+                        context.router.push(const SearchRoute());
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.notifications_none_outlined),
+                      onPressed: () {
+                        context.router.push(const NotificationsRoute());
+                      },
+                    ),
+                  ],
+                  bottom: TabBar(tabs: _tabs.map((tab) => Tab(text: tab.title)).toList()),
                 ),
-                actions: [
-                  IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {
-                      context.router.push(const SearchRoute());
-                    },
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.notifications_none_outlined),
-                    onPressed: () {
-                      context.router.push(const NotificationsRoute());
-                    },
-                  ),
-                ],
-                bottom: TabBar(tabs: _tabs.map((tab) => Tab(text: tab.title)).toList()),
-              ),
+              ],
               body: TabBarView(children: _tabs.map((tab) => tab.child).toList()),
-              floatingActionButton: FloatingActionButton(
-                child: const Icon(Icons.edit),
-                onPressed: () => context.pushRoute(const NoteCreationRoute()),
-              ),
-            ));
+            ),
+          ),
+        );
       default:
         return ScreenLoadingView(value: account, onRetry: () => ref.invalidate(accountStateProvider));
     }
