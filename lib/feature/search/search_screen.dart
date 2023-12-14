@@ -23,22 +23,18 @@ final class SearchScreen extends HookWidget {
             const SizedBox(height: 64),
             TextField(
               autofocus: true,
+              textInputAction: TextInputAction.search,
               decoration: InputDecoration(
                 hintText: 'キーワード'.i18n,
                 border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(32))),
               ),
               onChanged: (text) => searchText.value = text,
+              onSubmitted: (_) => _search(context: context, keyword: searchText.value),
             ),
             const SizedBox(height: 24),
             FilledButton(
               onPressed: searchText.value.isNotEmpty.takeIfTrue()?.map((_) {
-                return () {
-                  if (searchText.value.startsWith('#')) {
-                    context.pushRoute(HashTagNotesRoute(hashTag: searchText.value));
-                  } else {
-                    context.pushRoute(SearchKeyWordRoute(keyword: searchText.value));
-                  }
-                };
+                return () => _search(context: context, keyword: searchText.value);
               }),
               child: Text('検索'.i18n),
             )
@@ -46,5 +42,13 @@ final class SearchScreen extends HookWidget {
         ),
       ),
     );
+  }
+
+  void _search({required BuildContext context, required String keyword}) {
+    if (keyword.startsWith('#')) {
+      context.pushRoute(HashTagNotesRoute(hashTag: keyword));
+    } else {
+      context.pushRoute(SearchKeyWordRoute(keyword: keyword));
+    }
   }
 }
