@@ -35,6 +35,7 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
           length: _tabs.length,
           child: Scaffold(
             body: NestedScrollView(
+              floatHeaderSlivers: true,
               headerSliverBuilder: (BuildContext _, bool __) => [
                 SliverAppBar(
                   title: const Text('Misskey Dog'),
