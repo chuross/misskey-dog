@@ -20,10 +20,10 @@ import 'package:misskey_dog/model/note/note_reaction.dart';
 
 final class NoteItem extends StatelessWidget {
   final Note note;
-  final Function(Emoji emoji) onReactionPressed;
-  final Function onReactionAddPressed;
-  final Function(String) onHashtagPressed;
-  final Function(String) onUrlPressed;
+  final void Function(Emoji emoji) onReactionPressed;
+  final void Function() onReactionAddPressed;
+  final void Function(String) onHashtagPressed;
+  final void Function(String) onUrlPressed;
 
   Note get mainNote => note.renote ?? note;
   bool get maybeIndifferenceNote => mainNote.text?.contains('\$[') == true;
@@ -250,7 +250,7 @@ final class _Image extends HookWidget {
 final class _Reaction extends StatelessWidget {
   final NoteReaction reaction;
   final bool isReacted;
-  final Function(Emoji emoji) onReactionPressed;
+  final void Function(Emoji emoji) onReactionPressed;
 
   const _Reaction({
     super.key,
@@ -291,7 +291,7 @@ final class _Reaction extends StatelessWidget {
 }
 
 final class _ActionButtons extends StatelessWidget {
-  final Function onReactionAddPressed;
+  final void Function() onReactionAddPressed;
 
   const _ActionButtons({required this.onReactionAddPressed});
 
@@ -312,7 +312,7 @@ final class _ActionButtons extends StatelessWidget {
           icon: const Icon(Icons.repeat_rounded),
         ),
         IconButton(
-          onPressed: () => onReactionAddPressed(),
+          onPressed: onReactionAddPressed,
           iconSize: 20,
           icon: const Icon(Icons.add),
         ),
