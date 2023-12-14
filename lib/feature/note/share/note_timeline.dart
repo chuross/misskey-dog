@@ -1,14 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/string.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
+import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
+import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
 import 'package:misskey_dog/feature/note/share/cached_note_item.dart';
+import 'package:misskey_dog/model/note/note_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-final class NoteTimeline extends HookWidget {
+final class NoteTimeline extends HookConsumerWidget {
   final AsyncValue<List<String>> noteIds;
   final ScrollController scrollController;
   final bool shouldManualReload;
@@ -25,7 +29,7 @@ final class NoteTimeline extends HookWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     switch (noteIds) {
       case AsyncData(:final value) when !noteIds.isRefreshing:
         return Stack(
@@ -46,7 +50,21 @@ final class NoteTimeline extends HookWidget {
                               bottom: Divider.createBorderSide(context, color: context.dividerColorWithOpacity30),
                             ),
                           ),
-                          child: CachedNoteItem(key: noteId.toKey(), noteId: noteId),
+                          child: CachedNoteItem(
+                            key: noteId.toKey(),
+                            noteId: noteId,
+                            onReactionPressed: (emoji) => ref.read(cachedNoteProvider(id: noteId).notifier).reaction(emoji),
+                            onReactionAddPressed: () => showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              showDragHandle: true,
+                              builder: (_) => EmojiReactionCreationModal(onEmojiSelected: (emoji) {
+                                ref.read(cachedNoteProvider(id: noteId).notifier).reaction(emoji);
+                              }),
+                            ),
+                            onHashtagPressed: (hashtag) => context.pushRoute(HashtagNotesRoute(hashtag: hashtag)),
+                            onUrlPressed: (url) => launchUrl(Uri.parse(url)),
+                          ),
                         );
                       },
                       childCount: value.length,

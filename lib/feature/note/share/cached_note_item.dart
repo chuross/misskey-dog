@@ -1,18 +1,24 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:misskey_dog/core/router/app_router.gr.dart';
-import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
+
 import 'package:misskey_dog/feature/note/share/note_item.dart';
+import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 final class CachedNoteItem extends HookConsumerWidget {
   final String noteId;
+  final void Function(Emoji) onReactionPressed;
+  final void Function() onReactionAddPressed;
+  final void Function(String) onHashtagPressed;
+  final void Function(String) onUrlPressed;
 
   const CachedNoteItem({
     super.key,
     required this.noteId,
+    required this.onReactionPressed,
+    required this.onReactionAddPressed,
+    required this.onHashtagPressed,
+    required this.onUrlPressed,
   });
 
   @override
@@ -30,17 +36,10 @@ final class CachedNoteItem extends HookConsumerWidget {
 
     return NoteItem(
       note: note,
-      onReactionPressed: (emoji) => ref.read(provider.notifier).reaction(emoji),
-      onReactionAddPressed: () => showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        showDragHandle: true,
-        builder: (_) => EmojiReactionCreationModal(onEmojiSelected: (emoji) {
-          ref.read(provider.notifier).reaction(emoji);
-        }),
-      ),
-      onHashtagPressed: (hashtag) => context.pushRoute(HashtagNotesRoute(hashtag: hashtag)),
-      onUrlPressed: (url) => launchUrl(Uri.parse(url)),
+      onReactionPressed: onReactionPressed,
+      onReactionAddPressed: onReactionAddPressed,
+      onHashtagPressed: onHashtagPressed,
+      onUrlPressed: onUrlPressed,
     );
   }
 }
