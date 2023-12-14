@@ -7,10 +7,10 @@ import 'package:misskey_dog/model/note/note_provider.dart';
 
 final class CachedNoteItem extends HookConsumerWidget {
   final String noteId;
-  final void Function(Emoji) onReactionPressed;
-  final void Function() onReactionAddPressed;
-  final void Function(String) onHashtagPressed;
-  final void Function(String) onUrlPressed;
+  final Function(Emoji) onReactionPressed;
+  final Function() onReactionAddPressed;
+  final Function(String) onHashtagPressed;
+  final Function(String) onUrlPressed;
 
   const CachedNoteItem({
     super.key,
