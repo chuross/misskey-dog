@@ -15,7 +15,6 @@ part 'note_provider.g.dart';
 final class CachedNote extends _$CachedNote {
   @override
   Note? build({required String id}) {
-    ref.keepAlive();
     return null;
   }
 

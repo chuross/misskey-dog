@@ -24,7 +24,7 @@ final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
     );
 
     for (final note in notes) {
-      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+      _bindNoteCache(note);
     }
 
     return notes.map((note) => note.id).toList();
@@ -47,7 +47,7 @@ final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
     );
 
     for (final note in newNotes) {
-      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+      _bindNoteCache(note);
     }
 
     state = AsyncData([...state.requireValue, ...newNotes.map((note) => note.id)]);
@@ -57,8 +57,13 @@ final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
     final noteIds = state.value;
     if (noteIds == null) return;
 
-    ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+    _bindNoteCache(note);
     state = AsyncData([note.id, ...state.requireValue]);
+  }
+
+  void _bindNoteCache(Note note) {
+    ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+    ref.listen(cachedNoteProvider(id: note.id), (_, __) {});
   }
 }
 
@@ -78,7 +83,7 @@ final class GlobalNoteIdsWithCache extends _$GlobalNoteIdsWithCache {
     );
 
     for (final note in notes) {
-      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+      _bindNoteCache(note);
     }
 
     return notes.map((note) => note.id).toList();
@@ -101,7 +106,7 @@ final class GlobalNoteIdsWithCache extends _$GlobalNoteIdsWithCache {
     );
 
     for (final note in newNotes) {
-      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+      _bindNoteCache(note);
     }
 
     state = AsyncData([...state.value!, ...newNotes.map((note) => note.id)]);
@@ -111,8 +116,13 @@ final class GlobalNoteIdsWithCache extends _$GlobalNoteIdsWithCache {
     final noteIds = state.value;
     if (noteIds == null) return;
 
-    ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+    _bindNoteCache(note);
     state = AsyncData([note.id, ...state.requireValue]);
+  }
+
+  void _bindNoteCache(Note note) {
+    ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+    ref.listen(cachedNoteProvider(id: note.id), (_, __) {});
   }
 }
 
@@ -130,7 +140,7 @@ final class SearchNotesIdsWithCache extends _$SearchNotesIdsWithCache {
     );
 
     for (final note in notes) {
-      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+      _bindNoteCache(note);
     }
 
     return notes.map((note) => note.id).toList();
@@ -153,10 +163,15 @@ final class SearchNotesIdsWithCache extends _$SearchNotesIdsWithCache {
     );
 
     for (final note in newNotes) {
-      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+      _bindNoteCache(note);
     }
 
     state = AsyncData([...state.requireValue, ...newNotes.map((note) => note.id)]);
+  }
+
+  void _bindNoteCache(Note note) {
+    ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+    ref.listen(cachedNoteProvider(id: note.id), (_, __) {});
   }
 }
 
@@ -179,7 +194,7 @@ final class HashtagNoteIdsWithCache extends _$HashtagNoteIdsWithCache {
     );
 
     for (final note in notes) {
-      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+      _bindNoteCache(note);
     }
 
     return notes.map((note) => note.id).toList();
@@ -202,9 +217,14 @@ final class HashtagNoteIdsWithCache extends _$HashtagNoteIdsWithCache {
     );
 
     for (final note in newNotes) {
-      ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+      _bindNoteCache(note);
     }
 
     state = AsyncData([...state.value!, ...newNotes.map((note) => note.id)]);
+  }
+
+  void _bindNoteCache(Note note) {
+    ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+    ref.listen(cachedNoteProvider(id: note.id), (_, __) {});
   }
 }

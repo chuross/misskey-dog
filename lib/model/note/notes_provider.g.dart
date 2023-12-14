@@ -7,7 +7,7 @@ part of 'notes_provider.dart';
 // **************************************************************************
 
 String _$localNoteIdsWithCacheHash() =>
-    r'02e396f020af93c7e5f06793920a811616f15912';
+    r'd8bb1d62efdb13cadd300fcd7308d835c5dc9912';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -175,7 +175,7 @@ class _LocalNoteIdsWithCacheProviderElement
 }
 
 String _$globalNoteIdsWithCacheHash() =>
-    r'767573e1d10d9b5d76ffa98f8aff2ec1fa17118d';
+    r'dbac20846d77653db74409969ca4365c5f271d0d';
 
 abstract class _$GlobalNoteIdsWithCache
     extends BuildlessAutoDisposeAsyncNotifier<List<String>> {
@@ -323,7 +323,7 @@ class _GlobalNoteIdsWithCacheProviderElement
 }
 
 String _$searchNotesIdsWithCacheHash() =>
-    r'1f33719c4d33358a4e1e2adb2fe25770f4ba6127';
+    r'b9a9efa121f30290bccf14ffb9da742d6f11b308';
 
 abstract class _$SearchNotesIdsWithCache
     extends BuildlessAutoDisposeAsyncNotifier<List<String>> {
@@ -493,7 +493,7 @@ class _SearchNotesIdsWithCacheProviderElement
 }
 
 String _$hashtagNoteIdsWithCacheHash() =>
-    r'e9e4fb6919112643ac1ae9fedfa5bb7945c32826';
+    r'3a5075eedf2fc10e3dd9d53fa7bad6898a20ba68';
 
 abstract class _$HashtagNoteIdsWithCache
     extends BuildlessAutoDisposeAsyncNotifier<List<String>> {

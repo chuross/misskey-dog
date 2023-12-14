@@ -288,7 +288,7 @@ class _NoteUpdateStreamingProviderElement
   String get noteId => (origin as NoteUpdateStreamingProvider).noteId;
 }
 
-String _$cachedNoteHash() => r'c780a2cf0925092c766ee3a3a78e70a9ef4c0bca';
+String _$cachedNoteHash() => r'61ceaecfa748a53ccde7f24a20dacab8b391e37e';
 
 abstract class _$CachedNote extends BuildlessAutoDisposeNotifier<Note?> {
   late final String id;
