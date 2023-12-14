@@ -20,10 +20,10 @@ import 'package:misskey_dog/model/note/note_reaction.dart';
 
 final class NoteItem extends StatelessWidget {
   final Note note;
-  final void Function(Emoji emoji) onReactionPressed;
-  final void Function() onReactionAddPressed;
-  final void Function(String) onHashtagPressed;
-  final void Function(String) onUrlPressed;
+  final Function(Emoji emoji) onReactionPressed;
+  final Function() onReactionAddPressed;
+  final Function(String) onHashtagPressed;
+  final Function(String) onUrlPressed;
 
   Note get mainNote => note.renote ?? note;
   bool get maybeIndifferenceNote => mainNote.text?.contains('\$[') == true;
@@ -106,7 +106,7 @@ final class NoteItem extends StatelessWidget {
                 ),
               ],
             ),
-            (mainNote.user.instance).mapOrElse((instance) {
+            mainNote.user.instance.mapOrElse((instance) {
               return Row(
                 children: [
                   CachedNetworkImage(imageUrl: instance.iconUrl, fit: BoxFit.cover, width: 12, height: 12),
