@@ -18,7 +18,6 @@ final class ImageDetailScreen extends HookWidget {
   Widget build(BuildContext context) {
     final controller = useMemoized(() => TransformationController());
     final currentScale = useState(1.0);
-    final doubleTapDetails = useState<TapDownDetails?>(null);
 
     useEffect(() {
       controller.addListener(() {
@@ -49,17 +48,14 @@ final class ImageDetailScreen extends HookWidget {
                 );
               },
               child: GestureDetector(
-                onDoubleTapDown: (d) => doubleTapDetails.value = d,
-                onDoubleTap: () {
-                  if (controller.value != Matrix4.identity() || doubleTapDetails.value == null) {
+                onDoubleTapDown: (doubleTapDetails) {
+                  if (controller.value != Matrix4.identity()) {
                     controller.value = Matrix4.identity();
-                    doubleTapDetails.value = null;
                   } else {
-                    final position = doubleTapDetails.value!.localPosition;
+                    final position = doubleTapDetails.localPosition;
                     controller.value = Matrix4.identity()
-                      ..translate(-position.dx, -position.dy * 2)
+                      ..translate(-position.dx, -position.dy)
                       ..scale(2.0);
-                    doubleTapDetails.value = null;
                   }
                 },
                 child: AbsorbPointer(
