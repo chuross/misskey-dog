@@ -52,7 +52,7 @@ final class ImageDetailScreen extends HookWidget {
                   if (controller.value != Matrix4.identity()) {
                     controller.value = Matrix4.identity();
                   } else {
-                    final position = doubleTapDetails.localPosition;
+                    final position = doubleTapDetails.globalPosition;
                     controller.value = Matrix4.identity()
                       ..translate(-position.dx, -position.dy)
                       ..scale(2.0);
@@ -75,7 +75,7 @@ final class ImageDetailScreen extends HookWidget {
         Positioned(
           top: 0,
           left: 0,
-          right: 0.0,
+          right: 0,
           child: AppBar(
             iconTheme: const IconThemeData(color: Colors.white),
             backgroundColor: Colors.transparent,
