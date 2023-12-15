@@ -112,7 +112,7 @@ final class NoteItem extends StatelessWidget {
                   CachedNetworkImage(imageUrl: instance.iconUrl, fit: BoxFit.cover, width: 12, height: 12),
                   const SizedBox(width: 2),
                   Text(
-                    instance.name,
+                    instance.name ?? '',
                     style: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade700),
                     overflow: TextOverflow.ellipsis,
                   ).flexible(),

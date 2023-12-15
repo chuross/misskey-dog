@@ -6,7 +6,7 @@ part 'instance.g.dart';
 @freezed
 abstract class Instance with _$Instance {
   const factory Instance({
-    required String name,
+    required String? name,
     required String iconUrl,
     required String? themeColor,
   }) = _Instance;

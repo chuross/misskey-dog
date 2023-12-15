@@ -8,7 +8,7 @@ part of 'instance.dart';
 
 _$InstanceImpl _$$InstanceImplFromJson(Map<String, dynamic> json) =>
     _$InstanceImpl(
-      name: json['name'] as String,
+      name: json['name'] as String?,
       iconUrl: json['iconUrl'] as String,
       themeColor: json['themeColor'] as String?,
     );
