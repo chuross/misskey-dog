@@ -7,7 +7,7 @@ part of 'note_provider.dart';
 // **************************************************************************
 
 String _$noteCreationStreamingHash() =>
-    r'050f8c9702f07c764b0ef724b5f008b1bd7654d2';
+    r'0d71e23f2e62a0d41f4543fc2dd71000f3bc16ca';
 
 /// Copied from Dart SDK
 class _SystemHash {

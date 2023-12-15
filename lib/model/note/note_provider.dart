@@ -49,7 +49,8 @@ Stream<Note> noteCreationStreaming(NoteCreationStreamingRef ref, {required Strea
     return Stream.error(ArgumentError('main channnel has no note streaming'));
   }
   return ref
-      .watch(misskeyChannelStreamingProvider(channel: channel))
+      .watch(misskeyChannelStreamingProvider(channel: channel).future)
+      .asStream()
       .where((event) => event['type'] == 'note')
       .map((event) => event['body'])
       .map((event) => Note.fromJson(event));

@@ -206,14 +206,14 @@ final misskeyStreamingProvider =
 typedef MisskeyStreamingRef
     = AutoDisposeStreamProviderRef<(WebSocketChannel, Stream<dynamic>)>;
 String _$misskeyChannelStreamingHash() =>
-    r'2d43959f7d214c02ffacb9b575a09253fd720cbb';
+    r'6ed723cb52305dee87a5962a97644e8e4dcda7cf';
 
 /// See also [misskeyChannelStreaming].
 @ProviderFor(misskeyChannelStreaming)
 const misskeyChannelStreamingProvider = MisskeyChannelStreamingFamily();
 
 /// See also [misskeyChannelStreaming].
-class MisskeyChannelStreamingFamily extends Family<Raw<Stream<dynamic>>> {
+class MisskeyChannelStreamingFamily extends Family<AsyncValue<dynamic>> {
   /// See also [misskeyChannelStreaming].
   const MisskeyChannelStreamingFamily();
 
@@ -252,7 +252,7 @@ class MisskeyChannelStreamingFamily extends Family<Raw<Stream<dynamic>>> {
 
 /// See also [misskeyChannelStreaming].
 class MisskeyChannelStreamingProvider
-    extends AutoDisposeProvider<Raw<Stream<dynamic>>> {
+    extends AutoDisposeStreamProvider<dynamic> {
   /// See also [misskeyChannelStreaming].
   MisskeyChannelStreamingProvider({
     required StreamingChannel channel,
@@ -287,7 +287,7 @@ class MisskeyChannelStreamingProvider
 
   @override
   Override overrideWith(
-    Raw<Stream<dynamic>> Function(MisskeyChannelStreamingRef provider) create,
+    Stream<dynamic> Function(MisskeyChannelStreamingRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -304,7 +304,7 @@ class MisskeyChannelStreamingProvider
   }
 
   @override
-  AutoDisposeProviderElement<Raw<Stream<dynamic>>> createElement() {
+  AutoDisposeStreamProviderElement<dynamic> createElement() {
     return _MisskeyChannelStreamingProviderElement(this);
   }
 
@@ -322,14 +322,13 @@ class MisskeyChannelStreamingProvider
   }
 }
 
-mixin MisskeyChannelStreamingRef
-    on AutoDisposeProviderRef<Raw<Stream<dynamic>>> {
+mixin MisskeyChannelStreamingRef on AutoDisposeStreamProviderRef<dynamic> {
   /// The parameter `channel` of this provider.
   StreamingChannel get channel;
 }
 
 class _MisskeyChannelStreamingProviderElement
-    extends AutoDisposeProviderElement<Raw<Stream<dynamic>>>
+    extends AutoDisposeStreamProviderElement<dynamic>
     with MisskeyChannelStreamingRef {
   _MisskeyChannelStreamingProviderElement(super.provider);
 

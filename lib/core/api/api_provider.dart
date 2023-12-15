@@ -101,7 +101,7 @@ Stream<(WebSocketChannel, Stream<dynamic>)> misskeyStreaming(MisskeyStreamingRef
 }
 
 @riverpod
-Raw<Stream<dynamic>> misskeyChannelStreaming(MisskeyChannelStreamingRef ref, {required StreamingChannel channel}) {
+Stream<dynamic> misskeyChannelStreaming(MisskeyChannelStreamingRef ref, {required StreamingChannel channel}) {
   final log = ref.watch(logProvider);
   final streamingId = const Uuid().v4();
 
