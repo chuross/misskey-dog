@@ -40,19 +40,13 @@ final class NoteItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (maybeIndifferenceNote || note.renote?.myRawReactionEmoji != null) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _renotedInfo(),
-          Container(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: Text(
-              '省略'.i18n,
-              style: context.textTheme.bodyMedium,
-            ).align(Alignment.center),
-          )
-        ],
-      ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
+      return Container(
+        padding: const EdgeInsets.all(16),
+        child: Text(
+          '省略'.i18n,
+          style: context.textTheme.bodyMedium,
+        ).align(Alignment.center),
+      );
     }
 
     return Column(
