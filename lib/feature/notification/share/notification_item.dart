@@ -89,15 +89,16 @@ Widget _item({
           ),
           subImageUrl.mapOrElse(
             (subImageUrl) => Positioned(
-              bottom: -8,
-              right: -8,
+              bottom: -16,
+              right: 0,
+              left: 0,
               child: Container(
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
+                  borderRadius: BorderRadius.circular(16),
                   color: Colors.white.withOpacity(0.8),
                 ),
-                child: CachedNetworkImage(imageUrl: subImageUrl, width: 24, height: 24),
+                child: CachedNetworkImage(imageUrl: subImageUrl, height: 20, fit: BoxFit.contain),
               ),
             ),
             elseValue: const SizedBox.shrink(),
