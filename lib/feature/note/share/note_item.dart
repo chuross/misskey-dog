@@ -125,7 +125,7 @@ final class NoteItem extends StatelessWidget {
               onHashtagPressed: onHashtagPressed,
               onUrlPressed: onUrlPressed,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: mainNote.text?.isNotEmpty == true ? 8 : 0),
             _files(mainNote.files),
           ],
         ).expanded()
