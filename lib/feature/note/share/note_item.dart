@@ -115,7 +115,7 @@ final class NoteItem extends StatelessWidget {
             }, elseValue: const SizedBox.shrink()),
             const SizedBox(height: 4),
             mainNote.cw.mapOrElse(
-              (cw) => Text(cw, style: context.textTheme.labelSmall?.copyWith(color: Colors.grey.shade500)),
+              (cw) => Text(cw, style: context.textTheme.labelSmall?.copyWith(color: context.theme.colorScheme.secondary)),
               elseValue: const SizedBox.shrink(),
             ),
             MisskeyText(
