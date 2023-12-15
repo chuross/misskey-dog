@@ -7,7 +7,7 @@ part of 'note_provider.dart';
 // **************************************************************************
 
 String _$noteCreationStreamingHash() =>
-    r'0d71e23f2e62a0d41f4543fc2dd71000f3bc16ca';
+    r'5a789a5c6ffff7c117f19ecc6799ae796b253ab2';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -159,7 +159,7 @@ class _NoteCreationStreamingProviderElement
 }
 
 String _$noteUpdateStreamingHash() =>
-    r'f1a7886e1a49cc1200a5c82c5bdcdb95d1fe26bf';
+    r'd370cfdd01a26ab0caa1986871084712f782e568';
 
 /// See also [noteUpdateStreaming].
 @ProviderFor(noteUpdateStreaming)

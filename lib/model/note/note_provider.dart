@@ -7,6 +7,7 @@ import 'package:misskey_dog/core/extension/stream.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/streaming/streaming_channel.dart';
+import 'package:misskey_dog/model/streaming/streaming_event_kind.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'note_provider.g.dart';
@@ -51,7 +52,7 @@ Stream<Note> noteCreationStreaming(NoteCreationStreamingRef ref, {required Strea
   return ref
       .watch(misskeyChannelStreamingProvider(channel: channel).future)
       .asStream()
-      .where((event) => event['type'] == 'note')
+      .where((event) => event['type'] == StreamingEventKind.note.rawValue)
       .map((event) => event['body'])
       .map((event) => Note.fromJson(event));
 }
@@ -84,7 +85,7 @@ Stream<dynamic> noteUpdateStreaming(NoteUpdateStreamingRef ref, {required String
       })
       .flatten()
       .map((event) => jsonDecode(event))
-      .where((event) => event['type'] == 'noteUpdated')
+      .where((event) => event['type'] == StreamingEventKind.noteUpdated.rawValue)
       .where((event) => event['body']['id'] == noteId)
       .map((event) => event['body']);
 }
