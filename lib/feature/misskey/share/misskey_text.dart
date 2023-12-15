@@ -148,7 +148,7 @@ final class MisskeyText extends HookConsumerWidget {
             onUrlPressed: onUrlPressed ?? (_) {},
           );
         } catch (e) {
-          log.e('@@@misskey_text: separateInlineSpans error: $e');
+          log.e('@@@misskey_text: separateInlineSpans text: $text error: $e');
           return [TextSpan(text: text)];
         }
       },
