@@ -30,7 +30,7 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
     final account = ref.watch(accountStateProvider);
 
     switch (account) {
-      case AsyncData(value: final account):
+      case AsyncData(value: final account) when account != null:
         return DefaultTabController(
           length: _tabs.length,
           child: Scaffold(
