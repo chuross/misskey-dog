@@ -67,7 +67,7 @@ List<InlineSpan> _separateInlineSpans({
 
   final last = matches.lastOrNull;
   if (last != null) {
-    final remainedText = textChars.getRange(last.$2.end, textChars.length).join();
+    final remainedText = textChars.getRange(last.$2.end).join();
     if (remainedText.isNotEmpty) {
       spans.add(TextSpan(text: remainedText, style: TextStyle(fontSize: height)));
     }
