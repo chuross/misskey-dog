@@ -22,7 +22,7 @@ jobs:
           flutter-version: '3.16.0'
           channel: stable
       - run: flutter pub get
-      - run: flutter build web --release --web-renderer canvaskit --base-href /${{ steps.repository_name.outputs.name }}/
+      - run: flutter build web --release --web-renderer html --base-href /${{ steps.repository_name.outputs.name }}/
       - uses: actions/upload-pages-artifact@v2
         with:
           path: build/web
