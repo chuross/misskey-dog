@@ -2,7 +2,9 @@ import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
+import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/feature/emoji/share/emoji_view.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 
@@ -110,7 +112,7 @@ TextSpan _resolveCliclableTextSpan({
   );
 }
 
-final class MisskeyText extends HookWidget {
+final class MisskeyText extends HookConsumerWidget {
   final String text;
   final TextStyle? baseTextStyle;
   final Map<String, String> externalTextEmojiUrlMap;
@@ -131,16 +133,24 @@ final class MisskeyText extends HookWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final log = ref.watch(logProvider);
+
     final inlineSpans = useMemoized(
-      () => _separateInlineSpans(
-        context: context,
-        text: text,
-        height: baseTextStyle?.fontSize ?? 14,
-        externalTextEmojiUrlMap: externalTextEmojiUrlMap,
-        onHashtagPressed: onHashtagPressed ?? (_) {},
-        onUrlPressed: onUrlPressed ?? (_) {},
-      ),
+      () {
+        try {
+          return _separateInlineSpans(
+            context: context,
+            text: text,
+            height: baseTextStyle?.fontSize ?? 14,
+            externalTextEmojiUrlMap: externalTextEmojiUrlMap,
+            onHashtagPressed: onHashtagPressed ?? (_) {},
+            onUrlPressed: onUrlPressed ?? (_) {},
+          );
+        } catch (e) {
+          log.e('@@@misskey_text: separateInlineSpans error: $e');
+        }
+      },
       [text],
     );
 
