@@ -5,10 +5,10 @@ import 'package:misskey_dog/feature/note/share/note_timeline.dart';
 import 'package:misskey_dog/model/note/notes_provider.dart';
 
 @RoutePage()
-final class SearchKeyWordScreen extends HookConsumerWidget {
+final class KeywordNotesScreen extends HookConsumerWidget {
   final String keyword;
 
-  const SearchKeyWordScreen({super.key, required this.keyword});
+  const KeywordNotesScreen({super.key, required this.keyword});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

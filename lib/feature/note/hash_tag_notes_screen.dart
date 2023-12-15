@@ -23,7 +23,7 @@ final class HashtagNotesScreen extends HookWidget {
     );
 
     return DefaultTabController(
-      length: 1,
+      length: tabs.length,
       child: Scaffold(
         body: NestedScrollView(
           floatHeaderSlivers: true,

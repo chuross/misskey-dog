@@ -21,7 +21,7 @@ final class AppRouter extends $AppRouter {
       AutoRoute(page: NotificationsRoute.page, guards: [authGuard]),
       AutoRoute(page: SearchRoute.page, guards: [authGuard]),
       AutoRoute(page: HashtagNotesRoute.page, guards: [authGuard]),
-      AutoRoute(page: SearchKeyWordRoute.page, guards: [authGuard]),
+      AutoRoute(page: KeywordNotesRoute.page, guards: [authGuard]),
       CustomRoute(
           page: ImageDetailRoute.page, guards: [AuthGuard(_ref)], fullscreenDialog: true, transitionsBuilder: TransitionsBuilders.fadeIn),
       // Login

@@ -13,13 +13,13 @@ import 'package:flutter/material.dart' as _i12;
 import 'package:misskey_dog/feature/account/account_screen.dart' as _i1;
 import 'package:misskey_dog/feature/home/home_screen.dart' as _i3;
 import 'package:misskey_dog/feature/image/image_detail_screen.dart' as _i4;
-import 'package:misskey_dog/feature/login/login_callback_screen.dart' as _i5;
-import 'package:misskey_dog/feature/login/login_screen.dart' as _i6;
+import 'package:misskey_dog/feature/login/login_callback_screen.dart' as _i6;
+import 'package:misskey_dog/feature/login/login_screen.dart' as _i7;
 import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart' as _i2;
-import 'package:misskey_dog/feature/note/note_creation_screen.dart' as _i7;
+import 'package:misskey_dog/feature/note/note_creation_screen.dart' as _i8;
+import 'package:misskey_dog/feature/note/search_keyword_screen.dart' as _i5;
 import 'package:misskey_dog/feature/notification/notifications_screen.dart'
-    as _i8;
-import 'package:misskey_dog/feature/search/search_keyword_screen.dart' as _i9;
+    as _i9;
 import 'package:misskey_dog/feature/search/search_screen.dart' as _i10;
 
 abstract class $AppRouter extends _i11.RootStackRouter {
@@ -59,6 +59,16 @@ abstract class $AppRouter extends _i11.RootStackRouter {
         ),
       );
     },
+    KeywordNotesRoute.name: (routeData) {
+      final args = routeData.argsAs<KeywordNotesRouteArgs>();
+      return _i11.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i5.KeywordNotesScreen(
+          key: args.key,
+          keyword: args.keyword,
+        ),
+      );
+    },
     LoginCallbackRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<LoginCallbackRouteArgs>(
@@ -75,7 +85,7 @@ abstract class $AppRouter extends _i11.RootStackRouter {
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i11.WrappedRoute(
-            child: _i5.LoginCallbackScreen(
+            child: _i6.LoginCallbackScreen(
           key: args.key,
           host: args.host,
           session: args.session,
@@ -85,29 +95,19 @@ abstract class $AppRouter extends _i11.RootStackRouter {
     LoginRoute.name: (routeData) {
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i11.WrappedRoute(child: const _i6.LoginScreen()),
+        child: _i11.WrappedRoute(child: const _i7.LoginScreen()),
       );
     },
     NoteCreationRoute.name: (routeData) {
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i7.NoteCreationScreen(),
+        child: const _i8.NoteCreationScreen(),
       );
     },
     NotificationsRoute.name: (routeData) {
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i8.NotificationsScreen(),
-      );
-    },
-    SearchKeyWordRoute.name: (routeData) {
-      final args = routeData.argsAs<SearchKeyWordRouteArgs>();
-      return _i11.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i9.SearchKeyWordScreen(
-          key: args.key,
-          keyword: args.keyword,
-        ),
+        child: const _i9.NotificationsScreen(),
       );
     },
     SearchRoute.name: (routeData) {
@@ -224,7 +224,45 @@ class ImageDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i5.LoginCallbackScreen]
+/// [_i5.KeywordNotesScreen]
+class KeywordNotesRoute extends _i11.PageRouteInfo<KeywordNotesRouteArgs> {
+  KeywordNotesRoute({
+    _i12.Key? key,
+    required String keyword,
+    List<_i11.PageRouteInfo>? children,
+  }) : super(
+          KeywordNotesRoute.name,
+          args: KeywordNotesRouteArgs(
+            key: key,
+            keyword: keyword,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'KeywordNotesRoute';
+
+  static const _i11.PageInfo<KeywordNotesRouteArgs> page =
+      _i11.PageInfo<KeywordNotesRouteArgs>(name);
+}
+
+class KeywordNotesRouteArgs {
+  const KeywordNotesRouteArgs({
+    this.key,
+    required this.keyword,
+  });
+
+  final _i12.Key? key;
+
+  final String keyword;
+
+  @override
+  String toString() {
+    return 'KeywordNotesRouteArgs{key: $key, keyword: $keyword}';
+  }
+}
+
+/// generated route for
+/// [_i6.LoginCallbackScreen]
 class LoginCallbackRoute extends _i11.PageRouteInfo<LoginCallbackRouteArgs> {
   LoginCallbackRoute({
     _i12.Key? key,
@@ -271,7 +309,7 @@ class LoginCallbackRouteArgs {
 }
 
 /// generated route for
-/// [_i6.LoginScreen]
+/// [_i7.LoginScreen]
 class LoginRoute extends _i11.PageRouteInfo<void> {
   const LoginRoute({List<_i11.PageRouteInfo>? children})
       : super(
@@ -285,7 +323,7 @@ class LoginRoute extends _i11.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.NoteCreationScreen]
+/// [_i8.NoteCreationScreen]
 class NoteCreationRoute extends _i11.PageRouteInfo<void> {
   const NoteCreationRoute({List<_i11.PageRouteInfo>? children})
       : super(
@@ -299,7 +337,7 @@ class NoteCreationRoute extends _i11.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i8.NotificationsScreen]
+/// [_i9.NotificationsScreen]
 class NotificationsRoute extends _i11.PageRouteInfo<void> {
   const NotificationsRoute({List<_i11.PageRouteInfo>? children})
       : super(
@@ -310,44 +348,6 @@ class NotificationsRoute extends _i11.PageRouteInfo<void> {
   static const String name = 'NotificationsRoute';
 
   static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i9.SearchKeyWordScreen]
-class SearchKeyWordRoute extends _i11.PageRouteInfo<SearchKeyWordRouteArgs> {
-  SearchKeyWordRoute({
-    _i12.Key? key,
-    required String keyword,
-    List<_i11.PageRouteInfo>? children,
-  }) : super(
-          SearchKeyWordRoute.name,
-          args: SearchKeyWordRouteArgs(
-            key: key,
-            keyword: keyword,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'SearchKeyWordRoute';
-
-  static const _i11.PageInfo<SearchKeyWordRouteArgs> page =
-      _i11.PageInfo<SearchKeyWordRouteArgs>(name);
-}
-
-class SearchKeyWordRouteArgs {
-  const SearchKeyWordRouteArgs({
-    this.key,
-    required this.keyword,
-  });
-
-  final _i12.Key? key;
-
-  final String keyword;
-
-  @override
-  String toString() {
-    return 'SearchKeyWordRouteArgs{key: $key, keyword: $keyword}';
-  }
 }
 
 /// generated route for
