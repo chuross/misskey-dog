@@ -19,10 +19,7 @@ abstract class MisskeyClient {
 
     return Uri.parse("https://$host/miauth/$session").replace(queryParameters: {
       'name': 'Misskey Dog',
-      'callback': Uri.parse(baseCallbackUrl).replace(queryParameters: {
-        'host': host,
-        'session': session,
-      }).toString(),
+      'callback': Uri.encodeFull('$baseCallbackUrl?host=$host&session=$session'),
       'permission': [
         'read:account',
         'write:notes',

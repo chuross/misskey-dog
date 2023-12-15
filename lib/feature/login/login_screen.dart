@@ -69,7 +69,7 @@ class LoginScreen extends HookWidget implements AutoRouteWrapper {
       baseCallbackUrl: oauthCallbackUrl,
     );
 
-    await launchUrl(oauthUri, mode: LaunchMode.externalApplication);
+    await launchUrl(oauthUri, mode: LaunchMode.externalApplication, webOnlyWindowName: '_self');
   }
 
   @override
