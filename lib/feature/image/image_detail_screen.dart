@@ -67,7 +67,6 @@ final class ImageDetailScreen extends HookWidget {
                     onDismissed: (_) => context.router.pop(),
                     child: CachedNetworkImage(
                       imageUrl: imageUrl,
-                      fit: BoxFit.contain,
                       filterQuality: FilterQuality.high,
                       placeholder: (_, __) => const CircularProgressIndicator(),
                     ),
