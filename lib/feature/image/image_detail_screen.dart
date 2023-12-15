@@ -68,6 +68,7 @@ final class ImageDetailScreen extends HookWidget {
                     child: CachedNetworkImage(
                       imageUrl: imageUrl,
                       fit: BoxFit.contain,
+                      filterQuality: FilterQuality.high,
                       placeholder: (_, __) => const CircularProgressIndicator(),
                     ),
                   ),
