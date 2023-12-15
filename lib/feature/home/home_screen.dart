@@ -72,6 +72,7 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
                         child: const Icon(Icons.notifications_none_outlined),
                       ),
                       onPressed: () {
+                        hasUnreadNotifications.value = false;
                         context.router.push(const NotificationsRoute());
                       },
                     ),
