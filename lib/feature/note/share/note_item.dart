@@ -47,7 +47,7 @@ final class NoteItem extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(bottom: 16),
             child: Text(
-              '興味無いノートなので省略'.i18n,
+              '省略'.i18n,
               style: context.textTheme.bodyMedium,
             ).align(Alignment.center),
           )
