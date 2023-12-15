@@ -149,6 +149,7 @@ final class MisskeyText extends HookConsumerWidget {
           );
         } catch (e) {
           log.e('@@@misskey_text: separateInlineSpans error: $e');
+          return [TextSpan(text: text)];
         }
       },
       [text],
