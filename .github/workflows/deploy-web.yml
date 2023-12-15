@@ -1,0 +1,26 @@
+on:
+  push:
+    branches-ignore:
+      - '**'
+    tags:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - id: repository_name
+        run: echo "name=$(echo ${{ github.repository }} | sed -e "s#.*/##")" >> $GITHUB_OUTPUT
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.0'
+          channel: stable
+      - run: flutter pub get
+      - run: flutter build web --release --web-renderer canvaskit --base-href /${{ steps.repository_name.outputs.name }}/
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
