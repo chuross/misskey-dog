@@ -96,7 +96,7 @@ Widget _item({
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: Colors.white.withOpacity(0.8),
+                  color: Colors.grey.shade200.withOpacity(0.6),
                 ),
                 child: CachedNetworkImage(imageUrl: subImageUrl, height: 20, fit: BoxFit.contain),
               ),
