@@ -12,7 +12,8 @@ final class SearchScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchText = useState('');
+    final searchTextController = useTextEditingController();
+    final searchTextValue = useListenable(searchTextController);
 
     return Scaffold(
       appBar: AppBar(title: Text('検索'.i18n)),
@@ -22,19 +23,25 @@ final class SearchScreen extends HookWidget {
           children: [
             const SizedBox(height: 64),
             TextField(
+              controller: searchTextController,
               autofocus: true,
               textInputAction: TextInputAction.search,
               decoration: InputDecoration(
                 hintText: 'キーワード'.i18n,
                 border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(32))),
+                suffixIcon: searchTextValue.text.isNotEmpty.takeIfTrue()?.map((_) {
+                  return IconButton(
+                    icon: const Icon(Icons.cancel),
+                    onPressed: () => searchTextController.text = '',
+                  );
+                }),
               ),
-              onChanged: (text) => searchText.value = text,
-              onSubmitted: (_) => _search(context: context, keyword: searchText.value),
+              onSubmitted: (_) => _search(context: context, keyword: searchTextValue.text),
             ),
             const SizedBox(height: 24),
             FilledButton(
-              onPressed: searchText.value.isNotEmpty.takeIfTrue()?.map((_) {
-                return () => _search(context: context, keyword: searchText.value);
+              onPressed: searchTextController.text.isNotEmpty.takeIfTrue()?.map((_) {
+                return () => _search(context: context, keyword: searchTextValue.text);
               }),
               child: Text('検索'.i18n),
             )
