@@ -229,7 +229,7 @@ final class _Image extends HookWidget {
             (_) => Hero(
                   tag: file.url,
                   child: CachedNetworkImage(
-                    imageUrl: file.url,
+                    imageUrl: file.thumbnailUrl ?? file.url,
                     width: double.infinity,
                     height: height,
                     fit: BoxFit.cover,
