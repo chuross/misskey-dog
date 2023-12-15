@@ -1,11 +1,11 @@
 {
-    "name": "misskey_dog",
-    "short_name": "misskey_dog",
+    "name": "misskey dog",
+    "short_name": "misskey dog",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "unofficial misskey client",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
