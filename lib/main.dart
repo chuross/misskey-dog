@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:i18n_extension/i18n_extension.dart';
 import 'package:misskey_dog/core/router/app_router.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 
 void main() {
+  // 多言語化する際に消す
+  Translations.missingKeyCallback = (_, __) {};
+
   runApp(const ProviderScope(
     child: MainApp(),
   ));
