@@ -99,9 +99,15 @@ abstract class $AppRouter extends _i11.RootStackRouter {
       );
     },
     NoteCreationRoute.name: (routeData) {
+      final args = routeData.argsAs<NoteCreationRouteArgs>(
+          orElse: () => const NoteCreationRouteArgs());
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i8.NoteCreationScreen(),
+        child: _i8.NoteCreationScreen(
+          key: args.key,
+          relatedNoteId: args.relatedNoteId,
+          isRenoted: args.isRenoted,
+        ),
       );
     },
     NotificationsRoute.name: (routeData) {
@@ -324,16 +330,45 @@ class LoginRoute extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.NoteCreationScreen]
-class NoteCreationRoute extends _i11.PageRouteInfo<void> {
-  const NoteCreationRoute({List<_i11.PageRouteInfo>? children})
-      : super(
+class NoteCreationRoute extends _i11.PageRouteInfo<NoteCreationRouteArgs> {
+  NoteCreationRoute({
+    _i12.Key? key,
+    String? relatedNoteId,
+    bool isRenoted = false,
+    List<_i11.PageRouteInfo>? children,
+  }) : super(
           NoteCreationRoute.name,
+          args: NoteCreationRouteArgs(
+            key: key,
+            relatedNoteId: relatedNoteId,
+            isRenoted: isRenoted,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'NoteCreationRoute';
 
-  static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
+  static const _i11.PageInfo<NoteCreationRouteArgs> page =
+      _i11.PageInfo<NoteCreationRouteArgs>(name);
+}
+
+class NoteCreationRouteArgs {
+  const NoteCreationRouteArgs({
+    this.key,
+    this.relatedNoteId,
+    this.isRenoted = false,
+  });
+
+  final _i12.Key? key;
+
+  final String? relatedNoteId;
+
+  final bool isRenoted;
+
+  @override
+  String toString() {
+    return 'NoteCreationRouteArgs{key: $key, relatedNoteId: $relatedNoteId, isRenoted: $isRenoted}';
+  }
 }
 
 /// generated route for

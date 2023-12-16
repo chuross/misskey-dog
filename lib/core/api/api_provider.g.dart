@@ -206,7 +206,7 @@ final misskeyStreamingProvider =
 typedef MisskeyStreamingRef
     = AutoDisposeStreamProviderRef<(WebSocketChannel, Stream<dynamic>)>;
 String _$misskeyChannelStreamingHash() =>
-    r'6ed723cb52305dee87a5962a97644e8e4dcda7cf';
+    r'3577cb9694da7f53edd68c356ec0f2f34589fde5';
 
 /// See also [misskeyChannelStreaming].
 @ProviderFor(misskeyChannelStreaming)

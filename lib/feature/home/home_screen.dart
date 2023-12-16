@@ -85,7 +85,7 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
             floatingActionButton: FloatingActionButton(
               child: const Icon(Icons.edit),
               onPressed: () {
-                context.pushRoute(const NoteCreationRoute());
+                context.pushRoute(NoteCreationRoute());
               },
             ),
           ),

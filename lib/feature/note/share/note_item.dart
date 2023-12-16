@@ -20,10 +20,12 @@ import 'package:misskey_dog/model/note/note_reaction.dart';
 
 final class NoteItem extends StatelessWidget {
   final Note note;
-  final Function(Emoji emoji) onReactionPressed;
-  final Function() onReactionAddPressed;
   final Function(String) onHashtagPressed;
   final Function(String) onUrlPressed;
+  final Function(Emoji emoji) onReactionPressed;
+  final Function() onReplyPressed;
+  final Function() onRenotePressed;
+  final Function() onReactionAddPressed;
 
   Note get mainNote => note.renote ?? note;
   bool get maybeIndifferenceNote => mainNote.text?.contains('\$[') == true;
@@ -31,10 +33,12 @@ final class NoteItem extends StatelessWidget {
   const NoteItem({
     super.key,
     required this.note,
-    required this.onReactionPressed,
-    required this.onReactionAddPressed,
     required this.onHashtagPressed,
     required this.onUrlPressed,
+    required this.onReactionPressed,
+    required this.onReplyPressed,
+    required this.onRenotePressed,
+    required this.onReactionAddPressed,
   });
 
   @override
@@ -56,7 +60,11 @@ final class NoteItem extends StatelessWidget {
         _mainContent(context),
         const SizedBox(height: 12),
         _reactions(onReactionPressed),
-        _ActionButtons(onReactionAddPressed: onReactionAddPressed),
+        _ActionButtons(
+          onReplyPressed: onReplyPressed,
+          onRenotePressed: onRenotePressed,
+          onReactionAddPressed: onReactionAddPressed,
+        ),
       ],
     ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
   }
@@ -285,9 +293,15 @@ final class _Reaction extends StatelessWidget {
 }
 
 final class _ActionButtons extends StatelessWidget {
-  final void Function() onReactionAddPressed;
+  final Function() onReplyPressed;
+  final Function() onRenotePressed;
+  final Function() onReactionAddPressed;
 
-  const _ActionButtons({required this.onReactionAddPressed});
+  const _ActionButtons({
+    required this.onReplyPressed,
+    required this.onRenotePressed,
+    required this.onReactionAddPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -296,12 +310,12 @@ final class _ActionButtons extends StatelessWidget {
       children: [
         const SizedBox(width: 56),
         IconButton(
-          onPressed: () {},
+          onPressed: onReplyPressed,
           iconSize: 20,
           icon: const Icon(Icons.reply_rounded),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: onRenotePressed,
           iconSize: 20,
           icon: const Icon(Icons.repeat_rounded),
         ),

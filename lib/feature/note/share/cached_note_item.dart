@@ -8,17 +8,21 @@ import 'package:misskey_dog/model/note/note_provider.dart';
 final class CachedNoteItem extends HookConsumerWidget {
   final String noteId;
   final Function(Emoji) onReactionPressed;
-  final Function() onReactionAddPressed;
   final Function(String) onHashtagPressed;
   final Function(String) onUrlPressed;
+  final Function() onReplyPressed;
+  final Function() onRenotePressed;
+  final Function() onReactionAddPressed;
 
   const CachedNoteItem({
     super.key,
     required this.noteId,
     required this.onReactionPressed,
-    required this.onReactionAddPressed,
     required this.onHashtagPressed,
     required this.onUrlPressed,
+    required this.onReplyPressed,
+    required this.onRenotePressed,
+    required this.onReactionAddPressed,
   });
 
   @override
@@ -37,9 +41,11 @@ final class CachedNoteItem extends HookConsumerWidget {
     return NoteItem(
       note: note,
       onReactionPressed: onReactionPressed,
-      onReactionAddPressed: onReactionAddPressed,
       onHashtagPressed: onHashtagPressed,
       onUrlPressed: onUrlPressed,
+      onReplyPressed: onReplyPressed,
+      onRenotePressed: onRenotePressed,
+      onReactionAddPressed: onReactionAddPressed,
     );
   }
 }

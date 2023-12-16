@@ -121,20 +121,31 @@ final class _RelatedNote extends ConsumerWidget {
 
     switch (true) {
       case true when relatedNote != null:
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox.square(
-              dimension: 56,
-              child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(relatedNote.user.avatarUrl ?? '')),
-            ),
-            const SizedBox(width: 12),
-            Column(
-              children: [
-                MisskeyText(text: relatedNote.text ?? '', externalTextEmojiUrlMap: relatedNote.externalTextEmojiUrlMap),
-              ],
-            ).expanded(),
-          ],
+        return Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: context.dividerColorWithOpacity30),
+          ),
+          child: Column(
+            children: [
+              const SizedBox(height: 32),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox.square(
+                    dimension: 56,
+                    child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(relatedNote.user.avatarUrl ?? '')),
+                  ),
+                  const SizedBox(width: 12),
+                  Column(
+                    children: [
+                      MisskeyText(text: relatedNote.text ?? '', externalTextEmojiUrlMap: relatedNote.externalTextEmojiUrlMap),
+                    ],
+                  ).expanded(),
+                ],
+              ),
+            ],
+          ).padding(const EdgeInsets.all(16)),
         );
       default:
         return const SizedBox.shrink();
