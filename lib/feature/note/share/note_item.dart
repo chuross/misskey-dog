@@ -226,10 +226,12 @@ final class _Image extends HookWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: GestureDetector(
-        onTap: () => isSensitiveRemoved.value ? context.pushRoute(ImageDetailRoute(imageUrl: file.url)) : isSensitiveRemoved.value = true,
+        onTap: () => isSensitiveRemoved.value
+            ? context.pushRoute(ImageDetailRoute(imageUrl: file.url, thumbnailUrl: file.thumbnailUrl))
+            : isSensitiveRemoved.value = true,
         child: isSensitiveRemoved.value.takeIfTrue().mapOrElse(
             (_) => Hero(
-                  tag: file.url,
+                  tag: file.thumbnailUrl ?? file.url,
                   child: CachedNetworkImage(
                     imageUrl: file.thumbnailUrl ?? file.url,
                     width: double.infinity,

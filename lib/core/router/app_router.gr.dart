@@ -56,6 +56,7 @@ abstract class $AppRouter extends _i11.RootStackRouter {
         child: _i4.ImageDetailScreen(
           key: args.key,
           imageUrl: args.imageUrl,
+          thumbnailUrl: args.thumbnailUrl,
         ),
       );
     },
@@ -197,12 +198,14 @@ class ImageDetailRoute extends _i11.PageRouteInfo<ImageDetailRouteArgs> {
   ImageDetailRoute({
     _i12.Key? key,
     required String imageUrl,
+    String? thumbnailUrl,
     List<_i11.PageRouteInfo>? children,
   }) : super(
           ImageDetailRoute.name,
           args: ImageDetailRouteArgs(
             key: key,
             imageUrl: imageUrl,
+            thumbnailUrl: thumbnailUrl,
           ),
           initialChildren: children,
         );
@@ -217,15 +220,18 @@ class ImageDetailRouteArgs {
   const ImageDetailRouteArgs({
     this.key,
     required this.imageUrl,
+    this.thumbnailUrl,
   });
 
   final _i12.Key? key;
 
   final String imageUrl;
 
+  final String? thumbnailUrl;
+
   @override
   String toString() {
-    return 'ImageDetailRouteArgs{key: $key, imageUrl: $imageUrl}';
+    return 'ImageDetailRouteArgs{key: $key, imageUrl: $imageUrl, thumbnailUrl: $thumbnailUrl}';
   }
 }
 
