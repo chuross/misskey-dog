@@ -21,6 +21,29 @@ final class HomeMediaTimeline extends HookConsumerWidget {
     final controller = PrimaryScrollController.of(context);
 
     ref.listen(streamingProvider, (_, next) {
+      if (controller.positions.isEmpty) {
+        return;
+      }
+
+      switch (next) {
+        case AsyncData(:final value):
+          final targetFiles = value.renote?.files ?? value.files;
+          if (targetFiles.every((element) => element.isImage) == false) {
+            return;
+          }
+
+          final isScrolling = controller.offset > 0;
+          if (!isScrolling && !shouldManualReload.value) {
+            ref.read(provider.notifier).onNoteCreated(value);
+          } else {
+            shouldManualReload.value = true;
+          }
+        case AsyncError():
+          shouldManualReload.value = true;
+      }
+    });
+
+    ref.listen(streamingProvider, (_, next) {
       if (next.hasError) {
         shouldManualReload.value = true;
         return;
