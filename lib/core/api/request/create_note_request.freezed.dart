@@ -20,7 +20,7 @@ CreateNoteRequest _$CreateNoteRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CreateNoteRequest {
-  String get text => throw _privateConstructorUsedError;
+  String? get text => throw _privateConstructorUsedError;
   String? get replyId => throw _privateConstructorUsedError;
   String? get renoteId => throw _privateConstructorUsedError;
 
@@ -36,7 +36,7 @@ abstract class $CreateNoteRequestCopyWith<$Res> {
           CreateNoteRequest value, $Res Function(CreateNoteRequest) then) =
       _$CreateNoteRequestCopyWithImpl<$Res, CreateNoteRequest>;
   @useResult
-  $Res call({String text, String? replyId, String? renoteId});
+  $Res call({String? text, String? replyId, String? renoteId});
 }
 
 /// @nodoc
@@ -52,15 +52,15 @@ class _$CreateNoteRequestCopyWithImpl<$Res, $Val extends CreateNoteRequest>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = null,
+    Object? text = freezed,
     Object? replyId = freezed,
     Object? renoteId = freezed,
   }) {
     return _then(_value.copyWith(
-      text: null == text
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       replyId: freezed == replyId
           ? _value.replyId
           : replyId // ignore: cast_nullable_to_non_nullable
@@ -81,7 +81,7 @@ abstract class _$$CreateNoteRequestImplCopyWith<$Res>
       __$$CreateNoteRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String text, String? replyId, String? renoteId});
+  $Res call({String? text, String? replyId, String? renoteId});
 }
 
 /// @nodoc
@@ -95,15 +95,15 @@ class __$$CreateNoteRequestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = null,
+    Object? text = freezed,
     Object? replyId = freezed,
     Object? renoteId = freezed,
   }) {
     return _then(_$CreateNoteRequestImpl(
-      text: null == text
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       replyId: freezed == replyId
           ? _value.replyId
           : replyId // ignore: cast_nullable_to_non_nullable
@@ -119,14 +119,13 @@ class __$$CreateNoteRequestImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$CreateNoteRequestImpl implements _CreateNoteRequest {
-  const _$CreateNoteRequestImpl(
-      {required this.text, this.replyId, this.renoteId});
+  const _$CreateNoteRequestImpl({this.text, this.replyId, this.renoteId});
 
   factory _$CreateNoteRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$CreateNoteRequestImplFromJson(json);
 
   @override
-  final String text;
+  final String? text;
   @override
   final String? replyId;
   @override
@@ -169,7 +168,7 @@ class _$CreateNoteRequestImpl implements _CreateNoteRequest {
 
 abstract class _CreateNoteRequest implements CreateNoteRequest {
   const factory _CreateNoteRequest(
-      {required final String text,
+      {final String? text,
       final String? replyId,
       final String? renoteId}) = _$CreateNoteRequestImpl;
 
@@ -177,7 +176,7 @@ abstract class _CreateNoteRequest implements CreateNoteRequest {
       _$CreateNoteRequestImpl.fromJson;
 
   @override
-  String get text;
+  String? get text;
   @override
   String? get replyId;
   @override

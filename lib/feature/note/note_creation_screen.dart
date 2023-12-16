@@ -111,7 +111,7 @@ final class NoteCreationScreen extends HookConsumerWidget {
         final client = await ref.read(misskeyClientProvider().future);
         await client.createNote(
           request: CreateNoteRequest(
-            text: text,
+            text: text.isNotEmpty ? text : null,
             replyId: !isRenoted ? relatedNoteId : null,
             renoteId: isRenoted ? relatedNoteId : null,
           ).toJson().removeAllNullValueKeys(),

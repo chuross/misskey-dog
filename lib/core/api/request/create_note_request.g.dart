@@ -9,7 +9,7 @@ part of 'create_note_request.dart';
 _$CreateNoteRequestImpl _$$CreateNoteRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$CreateNoteRequestImpl(
-      text: json['text'] as String,
+      text: json['text'] as String?,
       replyId: json['replyId'] as String?,
       renoteId: json['renoteId'] as String?,
     );
