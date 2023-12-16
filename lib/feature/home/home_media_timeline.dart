@@ -28,7 +28,7 @@ final class HomeMediaTimeline extends HookConsumerWidget {
       switch (next) {
         case AsyncData(:final value):
           final targetFiles = value.renote?.files ?? value.files;
-          if (targetFiles.every((element) => element.isImage) == false) {
+          if (targetFiles.any((element) => element.isImage) == false) {
             return;
           }
 
