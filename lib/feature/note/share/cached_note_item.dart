@@ -10,8 +10,8 @@ final class CachedNoteItem extends HookConsumerWidget {
   final Function(Emoji) onReactionPressed;
   final Function(String) onHashtagPressed;
   final Function(String) onUrlPressed;
-  final Function() onReplyPressed;
-  final Function() onRenotePressed;
+  final Function(String noteId) onReplyPressed;
+  final Function(String noteId) onRenotePressed;
   final Function() onReactionAddPressed;
 
   const CachedNoteItem({
@@ -43,8 +43,8 @@ final class CachedNoteItem extends HookConsumerWidget {
       onReactionPressed: onReactionPressed,
       onHashtagPressed: onHashtagPressed,
       onUrlPressed: onUrlPressed,
-      onReplyPressed: onReplyPressed,
-      onRenotePressed: onRenotePressed,
+      onReplyPressed: () => onReplyPressed(note.renote?.id ?? note.id),
+      onRenotePressed: () => onRenotePressed(note.renote?.id ?? note.id),
       onReactionAddPressed: onReactionAddPressed,
     );
   }

@@ -58,8 +58,8 @@ final class NoteTimeline extends HookConsumerWidget {
                               onReactionPressed: (emoji) => ref.read(cachedNoteProvider(id: noteId).notifier).reaction(emoji),
                               onHashtagPressed: (hashtag) => context.pushRoute(HashtagNotesRoute(hashtag: hashtag)),
                               onUrlPressed: (url) => launchUrl(Uri.parse(url)),
-                              onReplyPressed: () => context.pushRoute(NoteCreationRoute(relatedNoteId: noteId)),
-                              onRenotePressed: () => context.pushRoute(NoteCreationRoute(relatedNoteId: noteId, isRenoted: true)),
+                              onReplyPressed: (noteId) => context.pushRoute(NoteCreationRoute(relatedNoteId: noteId)),
+                              onRenotePressed: (noteId) => context.pushRoute(NoteCreationRoute(relatedNoteId: noteId, isRenoted: true)),
                               onReactionAddPressed: () => showModalBottomSheet(
                                 context: context,
                                 isScrollControlled: true,
