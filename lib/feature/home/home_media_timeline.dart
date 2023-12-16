@@ -43,29 +43,6 @@ final class HomeMediaTimeline extends HookConsumerWidget {
       }
     });
 
-    ref.listen(streamingProvider, (_, next) {
-      if (next.hasError) {
-        shouldManualReload.value = true;
-        return;
-      }
-
-      if (controller.positions.isEmpty) {
-        return;
-      }
-
-      final targetFiles = next.value?.renote?.files ?? next.value?.files ?? [];
-      if (targetFiles.any((element) => element.isImage) == false) {
-        return;
-      }
-
-      final isScrolling = controller.offset > 0;
-      if (!isScrolling && !shouldManualReload.value) {
-        ref.read(provider.notifier).onNoteCreated(next.requireValue);
-      } else {
-        shouldManualReload.value = true;
-      }
-    });
-
     return NoteTimeline(
       noteIds: noteIds,
       shouldManualReload: shouldManualReload.value,
