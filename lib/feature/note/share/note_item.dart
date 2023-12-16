@@ -206,7 +206,7 @@ Widget _files(List<NoteFile> files) {
   return GridView.count(
     crossAxisCount: 2,
     shrinkWrap: true,
-    primary: false,
+    physics: const NeverScrollableScrollPhysics(),
     mainAxisSpacing: 8,
     crossAxisSpacing: 8,
     children: imageFiles.map((e) => _Image(file: e, height: 300)).toList(),
