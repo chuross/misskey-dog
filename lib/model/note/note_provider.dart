@@ -13,6 +13,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'note_provider.g.dart';
 
 @riverpod
+Future<Note> note(NoteRef ref, {required String id}) async {
+  final client = await ref.watch(misskeyClientProvider().future);
+  return client.getNote(request: GetNoteRequest(noteId: id).toJson());
+}
+
+@riverpod
 final class CachedNote extends _$CachedNote {
   @override
   Note? build({required String id}) {

@@ -12,7 +12,6 @@ import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
 import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
-import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
 
 @RoutePage()
@@ -117,35 +116,37 @@ final class _RelatedNote extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final relatedNote = ref.watch(cachedNoteProvider(id: relatedNoteId));
+    final relatedNote = ref.watch(NoteProvider(id: relatedNoteId));
 
-    switch (true) {
-      case true when relatedNote != null:
+    switch (relatedNote) {
+      case AsyncData(:final value):
         return Container(
+          padding: const EdgeInsets.all(8),
+          margin: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: context.dividerColorWithOpacity30),
           ),
-          child: Column(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 32),
-              Row(
+              SizedBox.square(
+                dimension: 56,
+                child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(value.user.avatarUrl ?? '')),
+              ),
+              const SizedBox(width: 12),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox.square(
-                    dimension: 56,
-                    child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(relatedNote.user.avatarUrl ?? '')),
+                  MisskeyText(
+                    text: value.text ?? '',
+                    baseTextStyle: context.textTheme.bodyMedium,
+                    externalTextEmojiUrlMap: value.externalTextEmojiUrlMap,
                   ),
-                  const SizedBox(width: 12),
-                  Column(
-                    children: [
-                      MisskeyText(text: relatedNote.text ?? '', externalTextEmojiUrlMap: relatedNote.externalTextEmojiUrlMap),
-                    ],
-                  ).expanded(),
                 ],
-              ),
+              ).expanded(),
             ],
-          ).padding(const EdgeInsets.all(16)),
+          ),
         );
       default:
         return const SizedBox.shrink();

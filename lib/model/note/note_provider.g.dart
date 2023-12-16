@@ -6,8 +6,7 @@ part of 'note_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$noteCreationStreamingHash() =>
-    r'5a789a5c6ffff7c117f19ecc6799ae796b253ab2';
+String _$noteHash() => r'd10823afaf0dfc1e8d35de6fb2e7ecfaa7c90a2e';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,6 +28,132 @@ class _SystemHash {
     return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
   }
 }
+
+/// See also [note].
+@ProviderFor(note)
+const noteProvider = NoteFamily();
+
+/// See also [note].
+class NoteFamily extends Family<AsyncValue<Note>> {
+  /// See also [note].
+  const NoteFamily();
+
+  /// See also [note].
+  NoteProvider call({
+    required String id,
+  }) {
+    return NoteProvider(
+      id: id,
+    );
+  }
+
+  @override
+  NoteProvider getProviderOverride(
+    covariant NoteProvider provider,
+  ) {
+    return call(
+      id: provider.id,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'noteProvider';
+}
+
+/// See also [note].
+class NoteProvider extends AutoDisposeFutureProvider<Note> {
+  /// See also [note].
+  NoteProvider({
+    required String id,
+  }) : this._internal(
+          (ref) => note(
+            ref as NoteRef,
+            id: id,
+          ),
+          from: noteProvider,
+          name: r'noteProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product') ? null : _$noteHash,
+          dependencies: NoteFamily._dependencies,
+          allTransitiveDependencies: NoteFamily._allTransitiveDependencies,
+          id: id,
+        );
+
+  NoteProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.id,
+  }) : super.internal();
+
+  final String id;
+
+  @override
+  Override overrideWith(
+    FutureOr<Note> Function(NoteRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: NoteProvider._internal(
+        (ref) => create(ref as NoteRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        id: id,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<Note> createElement() {
+    return _NoteProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is NoteProvider && other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, id.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin NoteRef on AutoDisposeFutureProviderRef<Note> {
+  /// The parameter `id` of this provider.
+  String get id;
+}
+
+class _NoteProviderElement extends AutoDisposeFutureProviderElement<Note>
+    with NoteRef {
+  _NoteProviderElement(super.provider);
+
+  @override
+  String get id => (origin as NoteProvider).id;
+}
+
+String _$noteCreationStreamingHash() =>
+    r'5a789a5c6ffff7c117f19ecc6799ae796b253ab2';
 
 /// See also [noteCreationStreaming].
 @ProviderFor(noteCreationStreaming)
