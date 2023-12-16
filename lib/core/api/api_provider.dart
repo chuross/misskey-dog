@@ -137,6 +137,5 @@ Stream<dynamic> misskeyChannelStreaming(MisskeyChannelStreamingRef ref, {require
       .flatten()
       .map((event) => jsonDecode(event))
       .where((event) => event['body']['id'] == streamingId)
-      .map((event) => event['body'])
-      .asBroadcastStream();
+      .map((event) => event['body']);
 }
