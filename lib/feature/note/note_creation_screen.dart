@@ -12,6 +12,7 @@ import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
 import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
+import 'package:misskey_dog/model/note/note_file.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
 
 @RoutePage()
@@ -43,48 +44,50 @@ final class NoteCreationScreen extends HookConsumerWidget {
           ).padding(const EdgeInsets.only(right: 16))
         ],
       ),
-      body: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: textController,
-              style: context.textTheme.bodyMedium,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: 'いまどうしてる?'.i18n,
-              ),
-              keyboardType: TextInputType.multiline,
-              autofocus: true,
-              maxLines: null,
-            ).padding(const EdgeInsets.all(16)),
-            relatedNoteId?.map((id) => _RelatedNote(relatedNoteId: id)) ?? const SizedBox(),
-            const Spacer(),
-            Divider(height: 1, color: context.dividerColorWithOpacity30),
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.attach_file),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: textController,
+                style: context.textTheme.bodyMedium,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'いまどうしてる?'.i18n,
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.visibility_off_outlined),
-                ),
-                IconButton(
-                  onPressed: () => showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    showDragHandle: true,
-                    builder: (_) => EmojiReactionCreationModal(onEmojiSelected: (emoji) {
-                      textController.text += emoji.safeCast<LocalEmoji>()?.map((p) => ':${p.name}:') ?? '';
-                    }),
+                keyboardType: TextInputType.multiline,
+                autofocus: true,
+                maxLines: null,
+              ).padding(const EdgeInsets.all(16)),
+              relatedNoteId?.map((id) => _RelatedNote(relatedNoteId: id)) ?? const SizedBox(),
+              const Spacer(),
+              Divider(height: 1, color: context.dividerColorWithOpacity30),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.attach_file),
                   ),
-                  icon: const Icon(Icons.emoji_emotions_outlined),
-                ),
-              ],
-            ).padding(const EdgeInsets.only(left: 8, right: 8, bottom: 16)),
-          ],
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.visibility_off_outlined),
+                  ),
+                  IconButton(
+                    onPressed: () => showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      showDragHandle: true,
+                      builder: (_) => EmojiReactionCreationModal(onEmojiSelected: (emoji) {
+                        textController.text += emoji.safeCast<LocalEmoji>()?.map((p) => ':${p.name}:') ?? '';
+                      }),
+                    ),
+                    icon: const Icon(Icons.emoji_emotions_outlined),
+                  ),
+                ],
+              ).padding(const EdgeInsets.only(left: 8, right: 8, bottom: 16)),
+            ],
+          ),
         ),
       ),
     );
@@ -151,5 +154,32 @@ final class _RelatedNote extends ConsumerWidget {
       default:
         return const SizedBox.shrink();
     }
+  }
+}
+
+final class _RelatedNoteFiles extends StatelessWidget {
+  final List<NoteFile> files;
+
+  const _RelatedNoteFiles({required this.files});
+
+  @override
+  Widget build(BuildContext context) {
+    final imageFiles = files.where((file) => file.isImage).toList();
+
+    if (imageFiles.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return ListView(
+      shrinkWrap: true,
+      children: imageFiles.map((file) {
+        return CachedNetworkImage(
+          imageUrl: file.url,
+          fit: BoxFit.contain,
+          width: double.infinity,
+          height: 200,
+        );
+      }).toList(),
+    );
   }
 }
