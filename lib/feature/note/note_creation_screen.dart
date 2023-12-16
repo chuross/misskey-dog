@@ -30,7 +30,7 @@ final class NoteCreationScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textController = useTextEditingController();
-    final createNote = _useNoteCreation(context, ref);
+    final createNote = _useNoteCreation(context, ref, relatedNoteId: relatedNoteId, isRenoted: isRenoted);
     final value = useValueListenable(textController);
 
     return Scaffold(
@@ -60,7 +60,7 @@ final class NoteCreationScreen extends HookConsumerWidget {
                       hintText: '書きたいこと'.i18n,
                     ),
                     keyboardType: TextInputType.multiline,
-                    autofocus: true,
+                    autofocus: !isRenoted,
                     maxLines: null,
                   ).padding(const EdgeInsets.all(16)),
                   relatedNoteId?.map((id) => _RelatedNote(relatedNoteId: id)) ?? const SizedBox(),
