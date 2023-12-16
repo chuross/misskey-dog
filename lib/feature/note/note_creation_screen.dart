@@ -7,6 +7,7 @@ import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/api/api_provider.dart';
 import 'package:misskey_dog/core/api/request/create_note_request.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
+import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/core/extension/object.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
@@ -36,11 +37,11 @@ final class NoteCreationScreen extends HookConsumerWidget {
       appBar: AppBar(
         actions: [
           FilledButton.icon(
-            onPressed: value.text.takeIf((p) => p.isNotEmpty)?.map((text) {
+            onPressed: value.text.takeIf((p) => p.isNotEmpty || isRenoted)?.map((text) {
               return () => createNote(text);
             }),
-            icon: const Icon(Icons.send),
-            label: Text('ノート'.i18n),
+            icon: Icon(isRenoted ? Icons.repeat_rounded : Icons.send),
+            label: Text(isRenoted ? 'リノート'.i18n : 'ノート'.i18n),
           ).padding(const EdgeInsets.only(right: 16))
         ],
       ),
@@ -48,19 +49,24 @@ final class NoteCreationScreen extends HookConsumerWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(
-              controller: textController,
-              style: context.textTheme.bodyMedium,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: 'いまどうしてる?'.i18n,
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  TextField(
+                    controller: textController,
+                    style: context.textTheme.bodyMedium,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: '書きたいこと'.i18n,
+                    ),
+                    keyboardType: TextInputType.multiline,
+                    autofocus: true,
+                    maxLines: null,
+                  ).padding(const EdgeInsets.all(16)),
+                  relatedNoteId?.map((id) => _RelatedNote(relatedNoteId: id)) ?? const SizedBox(),
+                ],
               ),
-              keyboardType: TextInputType.multiline,
-              autofocus: true,
-              maxLines: null,
-            ).padding(const EdgeInsets.all(16)),
-            relatedNoteId?.map((id) => _RelatedNote(relatedNoteId: id)) ?? const SizedBox(),
-            const Spacer(),
+            ).expanded(),
             Divider(height: 1, color: context.dividerColorWithOpacity30),
             Row(
               children: [
@@ -103,7 +109,13 @@ final class NoteCreationScreen extends HookConsumerWidget {
     return useMemoized(
       () => (String text) async {
         final client = await ref.read(misskeyClientProvider().future);
-        await client.createNote(request: CreateNoteRequest(text: text).toJson());
+        await client.createNote(
+          request: CreateNoteRequest(
+            text: text,
+            replyId: !isRenoted ? relatedNoteId : null,
+            renoteId: isRenoted ? relatedNoteId : null,
+          ).toJson().removeAllNullValueKeys(),
+        );
         created.value = true;
       },
     );
@@ -172,7 +184,7 @@ final class _RelatedNoteFiles extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 16),
+        const SizedBox(height: 20),
         ListView(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),

@@ -7,6 +7,8 @@ part 'create_note_request.g.dart';
 class CreateNoteRequest with _$CreateNoteRequest {
   const factory CreateNoteRequest({
     required String text,
+    String? replyId,
+    String? renoteId,
   }) = _CreateNoteRequest;
 
   factory CreateNoteRequest.fromJson(Map<String, dynamic> json) => _$CreateNoteRequestFromJson(json);
