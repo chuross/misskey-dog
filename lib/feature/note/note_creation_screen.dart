@@ -44,50 +44,48 @@ final class NoteCreationScreen extends HookConsumerWidget {
           ).padding(const EdgeInsets.only(right: 16))
         ],
       ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: textController,
-                style: context.textTheme.bodyMedium,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'いまどうしてる?'.i18n,
+      body: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: textController,
+              style: context.textTheme.bodyMedium,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: 'いまどうしてる?'.i18n,
+              ),
+              keyboardType: TextInputType.multiline,
+              autofocus: true,
+              maxLines: null,
+            ).padding(const EdgeInsets.all(16)),
+            relatedNoteId?.map((id) => _RelatedNote(relatedNoteId: id)) ?? const SizedBox(),
+            const Spacer(),
+            Divider(height: 1, color: context.dividerColorWithOpacity30),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.attach_file),
                 ),
-                keyboardType: TextInputType.multiline,
-                autofocus: true,
-                maxLines: null,
-              ).padding(const EdgeInsets.all(16)),
-              relatedNoteId?.map((id) => _RelatedNote(relatedNoteId: id)) ?? const SizedBox(),
-              const Spacer(),
-              Divider(height: 1, color: context.dividerColorWithOpacity30),
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.attach_file),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.visibility_off_outlined),
+                ),
+                IconButton(
+                  onPressed: () => showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    showDragHandle: true,
+                    builder: (_) => EmojiReactionCreationModal(onEmojiSelected: (emoji) {
+                      textController.text += emoji.safeCast<LocalEmoji>()?.map((p) => ':${p.name}:') ?? '';
+                    }),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.visibility_off_outlined),
-                  ),
-                  IconButton(
-                    onPressed: () => showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      showDragHandle: true,
-                      builder: (_) => EmojiReactionCreationModal(onEmojiSelected: (emoji) {
-                        textController.text += emoji.safeCast<LocalEmoji>()?.map((p) => ':${p.name}:') ?? '';
-                      }),
-                    ),
-                    icon: const Icon(Icons.emoji_emotions_outlined),
-                  ),
-                ],
-              ).padding(const EdgeInsets.only(left: 8, right: 8, bottom: 16)),
-            ],
-          ),
+                  icon: const Icon(Icons.emoji_emotions_outlined),
+                ),
+              ],
+            ).padding(const EdgeInsets.only(left: 8, right: 8, bottom: 16)),
+          ],
         ),
       ),
     );
@@ -146,6 +144,7 @@ final class _RelatedNote extends ConsumerWidget {
                     baseTextStyle: context.textTheme.bodyMedium,
                     externalTextEmojiUrlMap: value.externalTextEmojiUrlMap,
                   ),
+                  _RelatedNoteFiles(files: value.files),
                 ],
               ).expanded(),
             ],
@@ -170,16 +169,21 @@ final class _RelatedNoteFiles extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    return ListView(
-      shrinkWrap: true,
-      children: imageFiles.map((file) {
-        return CachedNetworkImage(
-          imageUrl: file.url,
-          fit: BoxFit.contain,
-          width: double.infinity,
-          height: 200,
-        );
-      }).toList(),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 16),
+        ListView(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          children: imageFiles.map((file) {
+            return CachedNetworkImage(
+              imageUrl: file.url,
+              fit: BoxFit.contain,
+            ).padding(const EdgeInsets.only(bottom: 8));
+          }).toList(),
+        ),
+      ],
     );
   }
 }
