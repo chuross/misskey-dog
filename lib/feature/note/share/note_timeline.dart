@@ -85,12 +85,11 @@ final class NoteTimeline extends HookConsumerWidget {
                 ),
               ),
             ),
-            shouldManualReload
-                ? ElevatedButton(
-                    onPressed: () => onManualReloadPressed?.call(),
-                    child: Text('最新の投稿を見る'.i18n),
-                  ).align(Alignment.topCenter)
-                : const SizedBox.shrink(),
+            if (shouldManualReload)
+              ElevatedButton(
+                onPressed: () => onManualReloadPressed?.call(),
+                child: Text('最新の投稿を見る'.i18n),
+              ).align(Alignment.topCenter),
           ],
         );
       default:

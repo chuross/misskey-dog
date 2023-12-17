@@ -37,9 +37,7 @@ final class NoteCreationScreen extends HookConsumerWidget {
       appBar: AppBar(
         actions: [
           FilledButton.icon(
-            onPressed: value.text.takeIf((p) => p.isNotEmpty || isRenoted)?.map((text) {
-              return () => createNote(text);
-            }),
+            onPressed: value.text.isNotEmpty || isRenoted ? () => createNote(value.text) : null,
             icon: Icon(isRenoted ? Icons.repeat_rounded : Icons.send),
             label: Text(isRenoted ? 'リノート'.i18n : 'ノート'.i18n),
           ).padding(const EdgeInsets.only(right: 16))
@@ -63,7 +61,7 @@ final class NoteCreationScreen extends HookConsumerWidget {
                     autofocus: !isRenoted,
                     maxLines: null,
                   ).padding(const EdgeInsets.all(16)),
-                  relatedNoteId?.map((id) => _RelatedNote(relatedNoteId: id)) ?? const SizedBox(),
+                  if (relatedNoteId != null) _RelatedNote(relatedNoteId: relatedNoteId!),
                 ],
               ),
             ).expanded(),
@@ -188,12 +186,13 @@ final class _RelatedNoteFiles extends StatelessWidget {
         ListView(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          children: imageFiles.map((file) {
-            return CachedNetworkImage(
-              imageUrl: file.url,
-              fit: BoxFit.contain,
-            ).padding(const EdgeInsets.only(bottom: 8));
-          }).toList(),
+          children: [
+            for (final file in imageFiles)
+              CachedNetworkImage(
+                imageUrl: file.url,
+                fit: BoxFit.contain,
+              ).padding(const EdgeInsets.only(bottom: 8)),
+          ],
         ),
       ],
     );
