@@ -2,8 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:i18n_extension/default.i18n.dart';
-import 'package:misskey_dog/core/extension/bool.dart';
-import 'package:misskey_dog/core/extension/object.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 
 @RoutePage()
@@ -29,20 +27,18 @@ final class SearchScreen extends HookWidget {
               decoration: InputDecoration(
                 hintText: 'キーワード'.i18n,
                 border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(32))),
-                suffixIcon: searchTextValue.text.isNotEmpty.takeIfTrue()?.map((_) {
-                  return IconButton(
-                    icon: const Icon(Icons.cancel),
-                    onPressed: () => searchTextController.text = '',
-                  );
-                }),
+                suffixIcon: searchTextValue.text.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.cancel),
+                        onPressed: () => searchTextController.text = '',
+                      )
+                    : null,
               ),
               onSubmitted: (_) => _search(context: context, keyword: searchTextValue.text),
             ),
             const SizedBox(height: 24),
             FilledButton(
-              onPressed: searchTextController.text.isNotEmpty.takeIfTrue()?.map((_) {
-                return () => _search(context: context, keyword: searchTextValue.text);
-              }),
+              onPressed: searchTextValue.text.isNotEmpty ? () => _search(context: context, keyword: searchTextValue.text) : null,
               child: Text('検索'.i18n),
             )
           ],
