@@ -70,10 +70,12 @@ final class ImageDetailScreen extends HookWidget {
                   child: CachedNetworkImage(
                     imageUrl: imageUrl,
                     filterQuality: FilterQuality.high,
-                    placeholder: (_, __) {
-                      return thumbnailUrl.mapOrElse((thumbnailUrl) {
-                        return CachedNetworkImage(imageUrl: thumbnailUrl);
-                      }, elseValue: const CircularProgressIndicator());
+                    placeholder: (_, __) => switch (thumbnailUrl) {
+                      final thumbnailUrl? => CachedNetworkImage(
+                          imageUrl: thumbnailUrl,
+                          fit: BoxFit.contain,
+                        ),
+                      _ => const CircularProgressIndicator(),
                     },
                   ),
                 ),
