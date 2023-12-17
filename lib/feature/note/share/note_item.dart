@@ -57,7 +57,11 @@ final class NoteItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _RenotedInfo(note: note),
-        _MainContent(note: note),
+        _MainContent(
+          note: note,
+          onHashtagPressed: onHashtagPressed,
+          onUrlPressed: onUrlPressed,
+        ),
         const SizedBox(height: 12),
         _reactions(onReactionPressed),
         _ActionButtons(
@@ -126,9 +130,16 @@ final class _RenotedInfo extends StatelessWidget {
 
 final class _MainContent extends StatelessWidget {
   final Note note;
+  final Function(String) onHashtagPressed;
+  final Function(String) onUrlPressed;
+
   Note get _mainNote => note.renote ?? note;
 
-  const _MainContent({required this.note});
+  const _MainContent({
+    required this.note,
+    required this.onHashtagPressed,
+    required this.onUrlPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -158,24 +169,21 @@ final class _MainContent extends StatelessWidget {
                 ),
               ],
             ),
-            _mainNote.user.instance.mapOrElse((instance) {
-              return Row(
+            if (_mainNote.user.instance case final instance?)
+              Row(
                 children: [
                   CachedNetworkImage(imageUrl: instance.iconUrl, fit: BoxFit.cover, width: 12, height: 12),
                   const SizedBox(width: 2),
                   Text(
-                    instance.name ?? '',
+                    _mainNote.user.instance?.name ?? '',
                     style: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade700),
                     overflow: TextOverflow.ellipsis,
                   ).flexible(),
                 ],
-              );
-            }, elseValue: const SizedBox.shrink()),
+              ),
             const SizedBox(height: 4),
-            _mainNote.cw.mapOrElse(
-              (cw) => Text(cw, style: context.textTheme.labelSmall?.copyWith(color: context.theme.colorScheme.secondary)),
-              elseValue: const SizedBox.shrink(),
-            ),
+            if (_mainNote.cw case final cw?)
+              Text(cw, style: context.textTheme.labelSmall?.copyWith(color: context.theme.colorScheme.secondary)),
             MisskeyText(
               text: _mainNote.text ?? '',
               baseTextStyle: context.textTheme.bodyMedium,
