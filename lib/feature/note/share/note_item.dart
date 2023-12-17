@@ -3,10 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:i18n_extension/default.i18n.dart';
-import 'package:misskey_dog/core/extension/bool.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/date_time.dart';
-import 'package:misskey_dog/core/extension/object.dart';
 import 'package:misskey_dog/core/extension/string.dart';
 
 import 'package:misskey_dog/core/extension/widget.dart';
@@ -224,23 +222,24 @@ final class _Image extends HookWidget {
         onTap: () => isSensitiveRemoved.value
             ? context.pushRoute(ImageDetailRoute(imageUrl: file.url, thumbnailUrl: file.thumbnailUrl))
             : isSensitiveRemoved.value = true,
-        child: isSensitiveRemoved.value.takeIfTrue().mapOrElse(
-            (_) => Hero(
-                  tag: file.thumbnailUrl ?? file.url,
-                  child: CachedNetworkImage(
-                    imageUrl: file.thumbnailUrl ?? file.url,
-                    width: double.infinity,
-                    height: height,
-                    fit: BoxFit.cover,
-                    fadeInDuration: const Duration(milliseconds: 200),
-                  ),
-                ),
-            elseValue: Container(
+        child: switch (isSensitiveRemoved.value) {
+          true => Hero(
+              tag: file.thumbnailUrl ?? file.url,
+              child: CachedNetworkImage(
+                imageUrl: file.thumbnailUrl ?? file.url,
+                width: double.infinity,
+                height: height,
+                fit: BoxFit.cover,
+                fadeInDuration: const Duration(milliseconds: 200),
+              ),
+            ),
+          _ => Container(
               alignment: Alignment.center,
               color: Colors.blueGrey.shade100,
               height: height,
               child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
-            )),
+            )
+        },
       ),
     );
   }
