@@ -63,7 +63,7 @@ final class NoteItem extends StatelessWidget {
           onUrlPressed: onUrlPressed,
         ),
         const SizedBox(height: 12),
-        _reactions(onReactionPressed),
+        _Reactions(note: note, onReactionPressed: onReactionPressed),
         _ActionButtons(
           onReplyPressed: onReplyPressed,
           onRenotePressed: onRenotePressed,
@@ -71,29 +71,6 @@ final class NoteItem extends StatelessWidget {
         ),
       ],
     ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
-  }
-
-  Widget _reactions(Function(Emoji emoji) onReactionPressed) {
-    return mainNote.reactions.isNotEmpty.mapOrElse(
-      (_) => Row(
-        children: [
-          const SizedBox(width: 68),
-          Wrap(
-            spacing: 8,
-            runSpacing: 4,
-            children: mainNote.reactions.map((reaction) {
-              return _Reaction(
-                key: "${note.id}_${reaction.emoji.id}".toKey(),
-                reaction: reaction,
-                isReacted: reaction.emoji.id == mainNote.myReactionEmoji?.id,
-                onReactionPressed: onReactionPressed,
-              );
-            }).toList(),
-          ).expanded(),
-        ],
-      ),
-      elseValue: const SizedBox.shrink(),
-    );
   }
 }
 
@@ -255,6 +232,41 @@ final class _Image extends HookWidget {
               child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
             )),
       ),
+    );
+  }
+}
+
+final class _Reactions extends StatelessWidget {
+  final Note note;
+  final Function(Emoji emoji) onReactionPressed;
+
+  Note get _mainNote => note.renote ?? note;
+
+  const _Reactions({required this.note, required this.onReactionPressed});
+
+  @override
+  Widget build(Object context) {
+    if (_mainNote.reactions.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return Row(
+      children: [
+        const SizedBox(width: 68),
+        Wrap(
+          spacing: 8,
+          runSpacing: 4,
+          children: [
+            for (final reaction in _mainNote.reactions)
+              _Reaction(
+                key: "${note.id}_${reaction.emoji.id}".toKey(),
+                reaction: reaction,
+                isReacted: reaction.emoji.id == _mainNote.myReactionEmoji?.id,
+                onReactionPressed: onReactionPressed,
+              ),
+          ],
+        ).expanded(),
+      ],
     );
   }
 }
