@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
-import 'package:i18n_extension/i18n_widget.dart';
 import 'package:misskey_dog/core/api/api_provider.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
@@ -16,7 +15,7 @@ import 'package:misskey_dog/model/streaming/streaming_channel.dart';
 import 'package:misskey_dog/model/streaming/streaming_event_kind.dart';
 
 @RoutePage()
-final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
+final class HomeScreen extends HookConsumerWidget {
   static final _tabs = [
     (title: 'ローカル'.i18n, child: const HomeLocalTimeline()),
     (title: 'メディア'.i18n, child: const HomeMediaTimeline()),
@@ -93,10 +92,5 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
       default:
         return ScreenLoadingView(value: account, onRetry: () => ref.invalidate(accountStateProvider));
     }
-  }
-
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return I18n(child: this);
   }
 }

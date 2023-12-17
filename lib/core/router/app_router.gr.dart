@@ -46,7 +46,7 @@ abstract class $AppRouter extends _i11.RootStackRouter {
     HomeRoute.name: (routeData) {
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i11.WrappedRoute(child: const _i3.HomeScreen()),
+        child: const _i3.HomeScreen(),
       );
     },
     ImageDetailRoute.name: (routeData) {
@@ -85,18 +85,17 @@ abstract class $AppRouter extends _i11.RootStackRouter {
               ));
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i11.WrappedRoute(
-            child: _i6.LoginCallbackScreen(
+        child: _i6.LoginCallbackScreen(
           key: args.key,
           host: args.host,
           session: args.session,
-        )),
+        ),
       );
     },
     LoginRoute.name: (routeData) {
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i11.WrappedRoute(child: const _i7.LoginScreen()),
+        child: const _i7.LoginScreen(),
       );
     },
     NoteCreationRoute.name: (routeData) {

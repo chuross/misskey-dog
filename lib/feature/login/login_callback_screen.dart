@@ -1,14 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:i18n_extension/i18n_widget.dart';
 import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 
 @RoutePage()
-final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapper {
+final class LoginCallbackScreen extends ConsumerWidget {
   final String host;
   final String session;
 
@@ -41,10 +40,5 @@ final class LoginCallbackScreen extends ConsumerWidget implements AutoRouteWrapp
               ref.invalidate(accountAuthorizationProvider(host: host, session: session));
             });
     }
-  }
-
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return I18n(child: this);
   }
 }
