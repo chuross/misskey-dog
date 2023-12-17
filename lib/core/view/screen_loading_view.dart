@@ -13,7 +13,7 @@ final class ScreenLoadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (value) {
-      AsyncError() => _ErrorView(onRetry: onRetry),
+      AsyncError(:final error) => _ErrorView(error: error, onRetry: onRetry),
       _ => const CircularProgressIndicator(
           strokeWidth: 4.0,
         ).align(Alignment.center),
@@ -22,9 +22,10 @@ final class ScreenLoadingView extends StatelessWidget {
 }
 
 final class _ErrorView extends StatelessWidget {
+  final Object error;
   final Function onRetry;
 
-  const _ErrorView({required this.onRetry});
+  const _ErrorView({required this.error, required this.onRetry});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +36,7 @@ final class _ErrorView extends StatelessWidget {
           'エラーが発生しました'.i18n,
           style: context.textTheme.headlineSmall,
         ),
+        Text(error.toString(), style: context.textTheme.labelSmall),
         const SizedBox(height: 64),
         ElevatedButton(
           onPressed: () => onRetry(),
