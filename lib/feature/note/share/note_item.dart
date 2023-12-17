@@ -169,7 +169,7 @@ final class _MainContent extends StatelessWidget {
               onUrlPressed: onUrlPressed,
             ),
             SizedBox(height: _mainNote.text?.isNotEmpty == true ? 8 : 0),
-            _files(_mainNote.files),
+            _NoteFiles(files: _mainNote.files),
           ],
         ).expanded()
       ],
@@ -177,25 +177,35 @@ final class _MainContent extends StatelessWidget {
   }
 }
 
-Widget _files(List<NoteFile> files) {
-  if (files.isEmpty) {
-    return const SizedBox.shrink();
+final class _NoteFiles extends StatelessWidget {
+  final List<NoteFile> files;
+
+  const _NoteFiles({required this.files});
+
+  @override
+  Widget build(BuildContext context) {
+    if (files.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    final imageFiles = files.where((e) => e.isImage).toList();
+
+    if (imageFiles.length == 1) {
+      return _Image(file: files.first, height: 300);
+    }
+
+    return GridView.count(
+      padding: EdgeInsets.zero,
+      crossAxisCount: 2,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      mainAxisSpacing: 8,
+      crossAxisSpacing: 8,
+      children: [
+        for (final file in imageFiles) _Image(file: file, height: 300),
+      ],
+    );
   }
-
-  final imageFiles = files.where((e) => e.isImage).toList();
-
-  if (imageFiles.length == 1) {
-    return _Image(file: files.first, height: 300);
-  }
-
-  return GridView.count(
-    crossAxisCount: 2,
-    shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
-    mainAxisSpacing: 8,
-    crossAxisSpacing: 8,
-    children: imageFiles.map((e) => _Image(file: e, height: 300)).toList(),
-  );
 }
 
 final class _Image extends HookWidget {
