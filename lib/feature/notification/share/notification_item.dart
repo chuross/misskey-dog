@@ -87,8 +87,8 @@ Widget _item({
               foregroundImage: CachedNetworkImageProvider(imageUrl),
             ),
           ),
-          subImageUrl.mapOrElse(
-            (subImageUrl) => Positioned(
+          if (subImageUrl != null)
+            Positioned(
               bottom: -16,
               right: 0,
               left: 0,
@@ -101,8 +101,6 @@ Widget _item({
                 child: CachedNetworkImage(imageUrl: subImageUrl, height: 20, fit: BoxFit.contain),
               ),
             ),
-            elseValue: const SizedBox.shrink(),
-          ),
         ],
       ),
       const SizedBox(width: 16),
@@ -114,13 +112,13 @@ Widget _item({
             baseTextStyle: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
             externalTextEmojiUrlMap: externalEmojiUrlMap,
           ),
-          SizedBox(height: subText?.map((_) => 8) ?? 0),
-          subText.mapOrElse((text) {
-            return MisskeyText(
-                text: text,
-                baseTextStyle: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade700),
-                externalTextEmojiUrlMap: subExternalEmojiUrlMap);
-          }, elseValue: const SizedBox.shrink())
+          SizedBox(height: subText != null ? 8 : 0),
+          if (subText != null)
+            MisskeyText(
+              text: text,
+              baseTextStyle: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade700),
+              externalTextEmojiUrlMap: subExternalEmojiUrlMap,
+            )
         ],
       ).expanded(),
       const SizedBox(width: 24),
