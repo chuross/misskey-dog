@@ -51,12 +51,12 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
                 SliverAppBar(
                   title: const Text('Misskey Dog'),
                   leading: IconButton(
-                    icon: account.mapOrElse(
-                      (account) => CircleAvatar(
-                        foregroundImage: CachedNetworkImageProvider(account.user.avatarUrl ?? ''),
-                      ),
-                      elseValue: const Icon(Icons.person),
-                    ),
+                    icon: switch (account.user.avatarUrl) {
+                      final avatarUrl? => CircleAvatar(
+                          foregroundImage: CachedNetworkImageProvider(avatarUrl),
+                        ),
+                      _ => const Icon(Icons.person)
+                    },
                     onPressed: () => context.router.push(const AccountRoute()),
                   ),
                   actions: [
