@@ -55,7 +55,7 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
                       final avatarUrl? => CircleAvatar(
                           foregroundImage: CachedNetworkImageProvider(avatarUrl),
                         ),
-                      _ => const Icon(Icons.person)
+                      _ => const Icon(Icons.person),
                     },
                     onPressed: () => context.router.push(const AccountRoute()),
                   ),
