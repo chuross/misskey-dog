@@ -56,8 +56,8 @@ final class NoteItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _renotedInfo(),
-        _mainContent(context),
+        _RenotedInfo(note: note),
+        _MainContent(note: note),
         const SizedBox(height: 12),
         _reactions(onReactionPressed),
         _ActionButtons(
@@ -67,78 +67,6 @@ final class NoteItem extends StatelessWidget {
         ),
       ],
     ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
-  }
-
-  Widget _renotedInfo() {
-    return note.renote.mapOrElse(
-      (_) => Column(
-        children: [
-          _RenotedInfo(note: note),
-          const SizedBox(height: 12),
-        ],
-      ),
-      elseValue: const SizedBox.shrink(),
-    );
-  }
-
-  Widget _mainContent(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox.square(
-          dimension: 56,
-          child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(mainNote.user.avatarUrl ?? '')),
-        ),
-        const SizedBox(width: 12),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                MisskeyText(
-                  text: mainNote.user.displayName,
-                  baseTextStyle: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
-                  externalTextEmojiUrlMap: mainNote.user.externalEmojiUrlMap,
-                ).flexible(),
-                const SizedBox(width: 8),
-                Text(
-                  mainNote.createdAt.elapsedTimeLabel,
-                  style: context.textTheme.labelSmall,
-                ),
-              ],
-            ),
-            mainNote.user.instance.mapOrElse((instance) {
-              return Row(
-                children: [
-                  CachedNetworkImage(imageUrl: instance.iconUrl, fit: BoxFit.cover, width: 12, height: 12),
-                  const SizedBox(width: 2),
-                  Text(
-                    instance.name ?? '',
-                    style: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade700),
-                    overflow: TextOverflow.ellipsis,
-                  ).flexible(),
-                ],
-              );
-            }, elseValue: const SizedBox.shrink()),
-            const SizedBox(height: 4),
-            mainNote.cw.mapOrElse(
-              (cw) => Text(cw, style: context.textTheme.labelSmall?.copyWith(color: context.theme.colorScheme.secondary)),
-              elseValue: const SizedBox.shrink(),
-            ),
-            MisskeyText(
-              text: mainNote.text ?? '',
-              baseTextStyle: context.textTheme.bodyMedium,
-              externalTextEmojiUrlMap: note.externalTextEmojiUrlMap,
-              onHashtagPressed: onHashtagPressed,
-              onUrlPressed: onUrlPressed,
-            ),
-            SizedBox(height: mainNote.text?.isNotEmpty == true ? 8 : 0),
-            _files(mainNote.files),
-          ],
-        ).expanded()
-      ],
-    );
   }
 
   Widget _reactions(Function(Emoji emoji) onReactionPressed) {
@@ -172,6 +100,10 @@ final class _RenotedInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (note.renote == null) {
+      return const SizedBox.shrink();
+    }
+
     return Row(
       children: [
         const SizedBox(width: 12),
@@ -187,6 +119,74 @@ final class _RenotedInfo extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           externalTextEmojiUrlMap: note.user.externalEmojiUrlMap,
         ).flexible(),
+      ],
+    );
+  }
+}
+
+final class _MainContent extends StatelessWidget {
+  final Note note;
+  Note get _mainNote => note.renote ?? note;
+
+  const _MainContent({required this.note});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox.square(
+          dimension: 56,
+          child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(_mainNote.user.avatarUrl ?? '')),
+        ),
+        const SizedBox(width: 12),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                MisskeyText(
+                  text: _mainNote.user.displayName,
+                  baseTextStyle: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+                  externalTextEmojiUrlMap: _mainNote.user.externalEmojiUrlMap,
+                ).flexible(),
+                const SizedBox(width: 8),
+                Text(
+                  _mainNote.createdAt.elapsedTimeLabel,
+                  style: context.textTheme.labelSmall,
+                ),
+              ],
+            ),
+            _mainNote.user.instance.mapOrElse((instance) {
+              return Row(
+                children: [
+                  CachedNetworkImage(imageUrl: instance.iconUrl, fit: BoxFit.cover, width: 12, height: 12),
+                  const SizedBox(width: 2),
+                  Text(
+                    instance.name ?? '',
+                    style: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade700),
+                    overflow: TextOverflow.ellipsis,
+                  ).flexible(),
+                ],
+              );
+            }, elseValue: const SizedBox.shrink()),
+            const SizedBox(height: 4),
+            _mainNote.cw.mapOrElse(
+              (cw) => Text(cw, style: context.textTheme.labelSmall?.copyWith(color: context.theme.colorScheme.secondary)),
+              elseValue: const SizedBox.shrink(),
+            ),
+            MisskeyText(
+              text: _mainNote.text ?? '',
+              baseTextStyle: context.textTheme.bodyMedium,
+              externalTextEmojiUrlMap: note.externalTextEmojiUrlMap,
+              onHashtagPressed: onHashtagPressed,
+              onUrlPressed: onUrlPressed,
+            ),
+            SizedBox(height: _mainNote.text?.isNotEmpty == true ? 8 : 0),
+            _files(_mainNote.files),
+          ],
+        ).expanded()
       ],
     );
   }
