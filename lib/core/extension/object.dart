@@ -11,9 +11,3 @@ extension ObjectExt<T> on T {
     return (this is R) ? this as R : null;
   }
 }
-
-extension ObjectNullExt<T> on T? {
-  R mapOrElse<R>(R Function(T) func, {required R elseValue}) {
-    return this == null ? elseValue : func(this as T);
-  }
-}
