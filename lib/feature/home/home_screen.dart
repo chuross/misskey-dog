@@ -2,12 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:i18n_extension/i18n_widget.dart';
 import 'package:misskey_dog/core/api/api_provider.dart';
-import 'package:misskey_dog/core/extension/object.dart';
 import 'package:misskey_dog/core/router/app_router.gr.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/feature/home/home_global_timeline.dart';
@@ -17,14 +15,12 @@ import 'package:misskey_dog/model/account/account_provider.dart';
 import 'package:misskey_dog/model/streaming/streaming_channel.dart';
 import 'package:misskey_dog/model/streaming/streaming_event_kind.dart';
 
-part 'home_screen.freezed.dart';
-
 @RoutePage()
 final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
   static final _tabs = [
-    _HomeTab(title: 'ローカル'.i18n, child: const HomeLocalTimeline()),
-    _HomeTab(title: 'メディア'.i18n, child: const HomeMediaTimeline()),
-    _HomeTab(title: 'グローバル'.i18n, child: const HomeGlobalTimeline()),
+    (title: 'ローカル'.i18n, child: const HomeLocalTimeline()),
+    (title: 'メディア'.i18n, child: const HomeMediaTimeline()),
+    (title: 'グローバル'.i18n, child: const HomeGlobalTimeline()),
   ];
 
   const HomeScreen({super.key});
@@ -77,10 +73,14 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
                       },
                     ),
                   ],
-                  bottom: TabBar(tabs: _tabs.map((tab) => Tab(text: tab.title)).toList()),
+                  bottom: TabBar(tabs: [
+                    for (final tab in _tabs) Tab(text: tab.title),
+                  ]),
                 ),
               ],
-              body: TabBarView(children: _tabs.map((tab) => tab.child).toList()),
+              body: TabBarView(children: [
+                for (final tab in _tabs) tab.child,
+              ]),
             ),
             floatingActionButton: FloatingActionButton(
               child: const Icon(Icons.edit),
@@ -99,12 +99,4 @@ final class HomeScreen extends HookConsumerWidget implements AutoRouteWrapper {
   Widget wrappedRoute(BuildContext context) {
     return I18n(child: this);
   }
-}
-
-@freezed
-class HomeTab with _$HomeTab {
-  const factory HomeTab({
-    required String title,
-    required Widget child,
-  }) = _HomeTab;
 }
