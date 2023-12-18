@@ -17,15 +17,12 @@ final class LoginCallbackScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final log = ref.watch(logProvider);
     final authentication = ref.watch(accountAuthorizationProvider(host: host, session: session));
 
     switch (authentication) {
       case AsyncData():
         HomeRoute().replace(context);
     }
-
-    log.d("@@@authorize: host=$host, session=$session");
 
     switch (authentication) {
       case AsyncData():

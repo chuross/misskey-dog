@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:misskey_dog/core/api/api_provider.dart';
 import 'package:misskey_dog/core/data/data_provider.dart';
+import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/model/account/account.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -15,6 +16,9 @@ Future<Account?> accountAuthorization(
 }) async {
   if (host.isEmpty) throw ArgumentError.value(host, 'host is empty');
   if (session.isEmpty) throw ArgumentError.value(session, 'session is empty');
+
+  final log = ref.watch(logProvider);
+  log.d('@@@authorize: host=$host, session=$session');
 
   final apiBaseUrl = "https://$host";
 
