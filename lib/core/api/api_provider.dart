@@ -55,7 +55,7 @@ Future<MisskeyClient> misskeyClient(MisskeyClientRef ref, {String? baseUrl}) asy
 }
 
 @riverpod
-Future<(WebSocketChannel, Stream<dynamic>)> _misskeyStreamingConnection(_MisskeyStreamingConnectionRef ref) async {
+Future<(WebSocketChannel, Stream<dynamic>)> misskeyStreaming(MisskeyStreamingRef ref) async {
   final log = ref.watch(logProvider);
   final account = await ref.watch(accountStateProvider.future);
   if (account == null) throw StateError('account is null');
@@ -65,10 +65,6 @@ Future<(WebSocketChannel, Stream<dynamic>)> _misskeyStreamingConnection(_Misskey
   log.d('@@@streaming:connect:start:url=$streamingUrl');
   final webSocket = WebSocketChannel.connect(streamingUrl);
 
-  ref.onDispose(() {
-    webSocket.sink.close();
-  });
-
   try {
     await webSocket.ready;
     log.d('@@@streaming:connect:ready');
@@ -77,27 +73,19 @@ Future<(WebSocketChannel, Stream<dynamic>)> _misskeyStreamingConnection(_Misskey
     rethrow;
   }
 
-  return (webSocket, webSocket.stream.asBroadcastStream());
-}
+  final stream = webSocket.stream.asBroadcastStream();
 
-@riverpod
-Stream<(WebSocketChannel, Stream<dynamic>)> misskeyStreaming(MisskeyStreamingRef ref) {
-  final log = ref.watch(logProvider);
-
-  return ref.watch(_misskeyStreamingConnectionProvider.future).asStream().map((connection) {
-    final (_, stream) = connection;
-
-    final subscriber = stream.listen(null, onDone: () {
-      log.d('@@@streaming:connect:retry');
-      ref.invalidate(_misskeyStreamingConnectionProvider);
-    });
-
-    ref.onDispose(() {
-      subscriber.cancel();
-    });
-
-    return connection;
+  final subscriber = stream.listen(null, onDone: () {
+    log.d('@@@streaming:connect:retry');
+    ref.invalidateSelf();
   });
+
+  ref.onDispose(() {
+    subscriber.cancel();
+    webSocket.sink.close();
+  });
+
+  return (webSocket, stream);
 }
 
 @riverpod
