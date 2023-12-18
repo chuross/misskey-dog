@@ -22,21 +22,17 @@ final class LoginCallbackScreen extends ConsumerWidget {
 
     log.d("@@@authorize: host=$host, session=$session");
 
-    ref.listen(accountStateProvider, (_, next) {
-      if (next.value != null) {
-        HomeRoute().go(context);
-      }
-    });
-
     switch (authentication) {
-      case AsyncData(value: final _):
+      case AsyncData():
         return const SizedBox.shrink();
       default:
-        return ScreenLoadingView(
-            value: authentication,
-            onRetry: () {
-              ref.invalidate(accountAuthorizationProvider(host: host, session: session));
-            });
+        return Scaffold(
+          body: ScreenLoadingView(
+              value: authentication,
+              onRetry: () {
+                ref.invalidate(accountAuthorizationProvider(host: host, session: session));
+              }),
+        );
     }
   }
 }

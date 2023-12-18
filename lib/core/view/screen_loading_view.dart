@@ -13,7 +13,11 @@ final class ScreenLoadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (value) {
-      AsyncError(:final error) => _ErrorView(error: error, onRetry: onRetry),
+      AsyncError(:final error, :final stackTrace) => _ErrorView(
+          error: error,
+          stackTrace: stackTrace,
+          onRetry: onRetry,
+        ),
       _ => const CircularProgressIndicator(
           strokeWidth: 4.0,
         ).align(Alignment.center),
@@ -23,9 +27,10 @@ final class ScreenLoadingView extends StatelessWidget {
 
 final class _ErrorView extends StatelessWidget {
   final Object error;
+  final StackTrace stackTrace;
   final Function onRetry;
 
-  const _ErrorView({required this.error, required this.onRetry});
+  const _ErrorView({required this.error, required this.stackTrace, required this.onRetry});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +42,7 @@ final class _ErrorView extends StatelessWidget {
           style: context.textTheme.headlineSmall,
         ),
         Text(error.toString(), style: context.textTheme.labelSmall),
+        Text(stackTrace.toString(), style: context.textTheme.labelSmall),
         const SizedBox(height: 64),
         ElevatedButton(
           onPressed: () => onRetry(),

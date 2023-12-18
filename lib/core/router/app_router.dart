@@ -120,6 +120,6 @@ final class LoginCallbackRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return LoginCallbackScreen(host: host ?? '', session: host ?? '');
+    return LoginCallbackScreen(host: host ?? '', session: session ?? '');
   }
 }
