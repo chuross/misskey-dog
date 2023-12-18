@@ -20,14 +20,10 @@ final class LoginCallbackScreen extends ConsumerWidget {
     final log = ref.watch(logProvider);
     final authentication = ref.watch(accountAuthorizationProvider(host: host, session: session));
 
-    ref.listen(accountStateProvider, (_, next) {
-      switch (next) {
-        case AsyncData(:final value):
-          if (value != null) {
-            HomeRoute().replace(context);
-          }
-      }
-    });
+    switch (authentication) {
+      case AsyncData():
+        HomeRoute().replace(context);
+    }
 
     log.d("@@@authorize: host=$host, session=$session");
 
