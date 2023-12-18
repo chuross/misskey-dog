@@ -40,17 +40,6 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(accountStateProvider, (_, next) {
-      switch (next) {
-        case AsyncData(:final value):
-          if (value != null) {
-            HomeRoute().replace(context);
-          } else {
-            LoginRoute().replace(context);
-          }
-      }
-    });
-
     return MaterialApp.router(
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
