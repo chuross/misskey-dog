@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/core/router/app_router.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
