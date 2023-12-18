@@ -19,9 +19,8 @@ final class LoginCallbackScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authentication = ref.watch(accountAuthorizationProvider(host: host, session: session));
 
-    switch (authentication) {
-      case AsyncData():
-        HomeRoute().replace(context);
+    if (authentication.value != null) {
+      HomeRoute().replace(context);
     }
 
     switch (authentication) {
