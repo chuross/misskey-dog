@@ -1,7 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/api/api_provider.dart';
@@ -16,7 +16,6 @@ import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note_file.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
 
-@RoutePage()
 final class NoteCreationScreen extends HookConsumerWidget {
   final String? relatedNoteId;
   final bool isRenoted;
@@ -100,7 +99,7 @@ final class NoteCreationScreen extends HookConsumerWidget {
 
     useEffect(() {
       if (!created.value) return;
-      context.popRoute();
+      context.pop();
       return null;
     }, [created.value]);
 

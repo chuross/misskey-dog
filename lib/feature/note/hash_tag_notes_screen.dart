@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -6,7 +5,6 @@ import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/feature/note/share/note_timeline.dart';
 import 'package:misskey_dog/model/note/notes_provider.dart';
 
-@RoutePage()
 final class HashtagNotesScreen extends HookWidget {
   final String hashtag;
 

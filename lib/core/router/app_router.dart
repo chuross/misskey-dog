@@ -1,32 +1,123 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:misskey_dog/core/router/app_router.gr.dart';
-import 'package:misskey_dog/core/router/guard/auth_guard.dart';
-import 'package:misskey_dog/core/router/guard/initial_screen_guard.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:misskey_dog/feature/account/account_screen.dart';
+import 'package:misskey_dog/feature/home/home_screen.dart';
+import 'package:misskey_dog/feature/image/image_detail_screen.dart';
+import 'package:misskey_dog/feature/login/login_callback_screen.dart';
+import 'package:misskey_dog/feature/login/login_screen.dart';
+import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart';
+import 'package:misskey_dog/feature/note/note_creation_screen.dart';
+import 'package:misskey_dog/feature/note/search_keyword_screen.dart';
+import 'package:misskey_dog/feature/notification/notifications_screen.dart';
+import 'package:misskey_dog/feature/search/search_screen.dart';
 
-@AutoRouterConfig()
-final class AppRouter extends $AppRouter {
-  final WidgetRef _ref;
+part 'app_router.g.dart';
 
-  AppRouter(this._ref);
+@TypedGoRoute<HomeRoute>(path: '/', routes: [
+  TypedGoRoute<AccountRoute>(path: 'account'),
+  TypedGoRoute<ImageDetailRoute>(path: 'image_detail'),
+  TypedGoRoute<SearchRoute>(path: 'notes/search'),
+  TypedGoRoute<KeywordNotesRoute>(path: 'notes/keyword'),
+  TypedGoRoute<HashtagNotesRoute>(path: 'notes/hashtag'),
+  TypedGoRoute<NoteCreationRoute>(path: 'notes/create'),
+  TypedGoRoute<NotificationsRoute>(path: 'notifications'),
+])
+final class HomeRoute extends GoRouteData {
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const HomeScreen();
+  }
+}
+
+final class AccountRoute extends GoRouteData {
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const AccountScreen();
+  }
+}
+
+final class ImageDetailRoute extends GoRouteData {
+  final String imageUrl;
+  final String? thumbnailUrl;
+
+  const ImageDetailRoute({
+    required this.imageUrl,
+    this.thumbnailUrl,
+  });
 
   @override
-  List<AutoRoute> get routes {
-    final authGuard = AuthGuard(_ref);
+  Widget build(BuildContext context, GoRouterState state) {
+    return ImageDetailScreen(imageUrl: imageUrl, thumbnailUrl: thumbnailUrl);
+  }
+}
 
-    return [
-      AutoRoute(page: HomeRoute.page, initial: true, guards: [InitialScreenGuard(), authGuard]),
-      AutoRoute(page: NoteCreationRoute.page, guards: [authGuard], fullscreenDialog: true),
-      AutoRoute(page: AccountRoute.page, guards: [authGuard]),
-      AutoRoute(page: NotificationsRoute.page, guards: [authGuard]),
-      AutoRoute(page: SearchRoute.page, guards: [authGuard]),
-      AutoRoute(page: HashtagNotesRoute.page, guards: [authGuard]),
-      AutoRoute(page: KeywordNotesRoute.page, guards: [authGuard]),
-      CustomRoute(
-          page: ImageDetailRoute.page, guards: [AuthGuard(_ref)], fullscreenDialog: true, transitionsBuilder: TransitionsBuilders.fadeIn),
-      // Login
-      AutoRoute(page: LoginRoute.page),
-      AutoRoute(page: LoginCallbackRoute.page, path: '/auth/callback', fullMatch: true),
-    ];
+final class KeywordNotesRoute extends GoRouteData {
+  final String keyword;
+
+  const KeywordNotesRoute({required this.keyword});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return KeywordNotesScreen(keyword: keyword);
+  }
+}
+
+final class HashtagNotesRoute extends GoRouteData {
+  final String hashtag;
+
+  const HashtagNotesRoute({required this.hashtag});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return HashtagNotesScreen(hashtag: hashtag);
+  }
+}
+
+final class NoteCreationRoute extends GoRouteData {
+  final String? relatedNoteId;
+  final bool isRenoted;
+
+  const NoteCreationRoute({this.relatedNoteId, this.isRenoted = false});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return NoteCreationScreen(relatedNoteId: relatedNoteId, isRenoted: isRenoted);
+  }
+}
+
+final class NotificationsRoute extends GoRouteData {
+  const NotificationsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const NotificationsScreen();
+  }
+}
+
+final class SearchRoute extends GoRouteData {
+  const SearchRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const SearchScreen();
+  }
+}
+
+@TypedGoRoute<LoginRoute>(path: '/login')
+final class LoginRoute extends GoRouteData {
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const LoginScreen();
+  }
+}
+
+@TypedGoRoute<LoginCallbackRoute>(path: '/auth/callback')
+final class LoginCallbackRoute extends GoRouteData {
+  String? host;
+  String? session;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return LoginCallbackScreen(host: host ?? '', session: session ?? '');
   }
 }

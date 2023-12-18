@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,7 +8,6 @@ import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/feature/notification/share/notification_item.dart';
 import 'package:misskey_dog/model/notification/notification_provider.dart';
 
-@RoutePage()
 final class NotificationsScreen extends HookConsumerWidget {
   const NotificationsScreen({super.key});
 

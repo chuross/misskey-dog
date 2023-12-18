@@ -1,10 +1,8 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 
-@RoutePage()
 final class AccountScreen extends ConsumerWidget {
   const AccountScreen({super.key});
 

@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:i18n_extension/default.i18n.dart';
@@ -8,7 +7,6 @@ import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/core/config/config.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-@RoutePage()
 class LoginScreen extends HookWidget {
   const LoginScreen({super.key});
 

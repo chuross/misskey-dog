@@ -1,11 +1,11 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/string.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
-import 'package:misskey_dog/core/router/app_router.gr.dart';
+import 'package:misskey_dog/core/router/app_router.dart';
+
 import 'package:misskey_dog/core/view/load_more_view.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
@@ -56,10 +56,10 @@ final class NoteTimeline extends HookConsumerWidget {
                               key: noteId.toKey(),
                               noteId: noteId,
                               onReactionPressed: (emoji) => ref.read(cachedNoteProvider(id: noteId).notifier).reaction(emoji),
-                              onHashtagPressed: (hashtag) => context.pushRoute(HashtagNotesRoute(hashtag: hashtag)),
+                              onHashtagPressed: (hashtag) => HashtagNotesRoute(hashtag: hashtag).go(context),
                               onUrlPressed: (url) => launchUrl(Uri.parse(url)),
-                              onReplyPressed: (noteId) => context.pushRoute(NoteCreationRoute(relatedNoteId: noteId)),
-                              onRenotePressed: (noteId) => context.pushRoute(NoteCreationRoute(relatedNoteId: noteId, isRenoted: true)),
+                              onReplyPressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId).go(context),
+                              onRenotePressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId, isRenoted: true).go(context),
                               onReactionAddPressed: () => showModalBottomSheet(
                                 context: context,
                                 isScrollControlled: true,

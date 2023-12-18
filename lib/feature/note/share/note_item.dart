@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -8,7 +7,8 @@ import 'package:misskey_dog/core/extension/date_time.dart';
 import 'package:misskey_dog/core/extension/string.dart';
 
 import 'package:misskey_dog/core/extension/widget.dart';
-import 'package:misskey_dog/core/router/app_router.gr.dart';
+import 'package:misskey_dog/core/router/app_router.dart';
+
 import 'package:misskey_dog/feature/emoji/share/emoji_view.dart';
 import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
@@ -220,7 +220,7 @@ final class _Image extends HookWidget {
       borderRadius: BorderRadius.circular(16),
       child: GestureDetector(
         onTap: () => isSensitiveRemoved.value
-            ? context.pushRoute(ImageDetailRoute(imageUrl: file.url, thumbnailUrl: file.thumbnailUrl))
+            ? ImageDetailRoute(imageUrl: file.url, thumbnailUrl: file.thumbnailUrl).go(context)
             : isSensitiveRemoved.value = true,
         child: switch (isSensitiveRemoved.value) {
           true => Hero(
