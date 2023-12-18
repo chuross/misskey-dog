@@ -253,16 +253,23 @@ extension $LoginRouteExtension on LoginRoute {
 }
 
 RouteBase get $loginCallbackRoute => GoRouteData.$route(
-      path: '/auth/callback',
+      path: '/auth_callback',
       factory: $LoginCallbackRouteExtension._fromState,
     );
 
 extension $LoginCallbackRouteExtension on LoginCallbackRoute {
   static LoginCallbackRoute _fromState(GoRouterState state) =>
-      LoginCallbackRoute();
+      LoginCallbackRoute(
+        host: state.uri.queryParameters['host'],
+        session: state.uri.queryParameters['session'],
+      );
 
   String get location => GoRouteData.$location(
-        '/auth/callback',
+        '/auth_callback',
+        queryParams: {
+          if (host != null) 'host': host,
+          if (session != null) 'session': session,
+        },
       );
 
   void go(BuildContext context) => context.go(location);

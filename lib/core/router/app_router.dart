@@ -111,13 +111,15 @@ final class LoginRoute extends GoRouteData {
   }
 }
 
-@TypedGoRoute<LoginCallbackRoute>(path: '/auth/callback')
+@TypedGoRoute<LoginCallbackRoute>(path: '/auth_callback')
 final class LoginCallbackRoute extends GoRouteData {
-  String? host;
-  String? session;
+  final String? host;
+  final String? session;
+
+  LoginCallbackRoute({this.host, this.session});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return LoginCallbackScreen(host: host ?? '', session: session ?? '');
+    return LoginCallbackScreen(host: host ?? '', session: host ?? '');
   }
 }
