@@ -7,7 +7,7 @@ part 'instance.g.dart';
 abstract class Instance with _$Instance {
   const factory Instance({
     required String? name,
-    required String iconUrl,
+    required String? iconUrl,
     required String? themeColor,
   }) = _Instance;
 

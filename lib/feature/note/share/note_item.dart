@@ -150,7 +150,7 @@ final class _MainContent extends StatelessWidget {
             if (_mainNote.user.instance case final instance?)
               Row(
                 children: [
-                  CachedNetworkImage(imageUrl: instance.iconUrl, fit: BoxFit.cover, width: 12, height: 12),
+                  CachedNetworkImage(imageUrl: instance.iconUrl ?? '', fit: BoxFit.cover, width: 12, height: 12),
                   const SizedBox(width: 2),
                   Text(
                     _mainNote.user.instance?.name ?? '',
