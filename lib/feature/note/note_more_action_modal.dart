@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/api/api_provider.dart';
@@ -19,16 +20,18 @@ final class NoteMoreActionModal extends HookConsumerWidget {
         ListTile(
           title: Text('ユーザーをミュート'.i18n),
           onTap: () => _muteUser(
-            context: context,
             ref: ref,
-            onSuccess: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('ミュートしました'.i18n))),
+            onSuccess: () {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('ミュートしました'.i18n)));
+              context.pop();
+            },
           ),
         ),
       ],
     );
   }
 
-  void _muteUser({required BuildContext context, required WidgetRef ref, required onSuccess}) async {
+  void _muteUser({required WidgetRef ref, required onSuccess}) async {
     final Note note = await ref.watch(noteProvider(id: noteId).future);
 
     final client = await ref.watch(misskeyClientProvider().future);
