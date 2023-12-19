@@ -22,7 +22,7 @@ Future<Account?> accountAuthorization(
 
   final apiBaseUrl = "https://$host";
 
-  final client = await ref.watch(misskeyClientProvider(baseUrl: apiBaseUrl).future);
+  final client = await ref.read(misskeyClientProvider(baseUrl: apiBaseUrl).future);
   final account = await client.authorize(session);
 
   await ref.watch(accountStateProvider.notifier).setAccount(account.copyWith(host: host));
