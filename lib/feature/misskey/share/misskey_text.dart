@@ -28,10 +28,10 @@ List<InlineSpan> _separateInlineSpans({
   required Function(String) onHashtagPressed,
   required Function(String) onUrlPressed,
 }) {
-  var replacedText = Bidi.stripHtmlIfNeeded(text);
+  final strippedText = Bidi.stripHtmlIfNeeded(text);
 
   // RegExpはマルチバイト文字のインデックスが計算できないので、サロゲートペアをシングルバイトの文字に変換する
-  replacedText = text.replaceAllMapped(_surrogateRegex, (match) {
+  final replacedText = strippedText.replaceAllMapped(_surrogateRegex, (match) {
     return '_';
   });
 
@@ -46,10 +46,10 @@ List<InlineSpan> _separateInlineSpans({
   ].sortedBy<num>((e) => e.$2.start);
 
   if (matches.isEmpty) {
-    return [TextSpan(text: text)];
+    return [TextSpan(text: strippedText)];
   }
 
-  final textChars = text.characters;
+  final textChars = strippedText.characters;
 
   final spans = matches.foldIndexed(<InlineSpan>[], (index, spans, curr) {
     final prevMatch = index > 0 ? matches.elementAtOrNull(index - 1) : null;
