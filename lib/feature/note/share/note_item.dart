@@ -179,7 +179,7 @@ final class _MainContent extends StatelessWidget {
   }
 }
 
-final class _NoteFiles extends StatelessWidget {
+final class _NoteFiles extends HookWidget {
   final List<NoteFile> files;
 
   const _NoteFiles({required this.files});
@@ -191,9 +191,15 @@ final class _NoteFiles extends StatelessWidget {
     }
 
     final imageFiles = files.where((e) => e.isImage).toList();
+    final isSensitiveRemoved = useState(imageFiles.every((e) => !e.isSensitive));
 
     if (imageFiles.length == 1) {
-      return _Image(file: files.first, height: 300);
+      return _Image(
+        file: files.first,
+        height: 300,
+        isSensitiveRemoved: isSensitiveRemoved.value,
+        onSensitiveRemove: () => isSensitiveRemoved.value = true,
+      );
     }
 
     return GridView.count(
@@ -204,46 +210,55 @@ final class _NoteFiles extends StatelessWidget {
       mainAxisSpacing: 8,
       crossAxisSpacing: 8,
       children: [
-        for (final file in imageFiles) _Image(file: file, height: 300),
+        for (final file in imageFiles)
+          _Image(
+            file: file,
+            height: 300,
+            isSensitiveRemoved: isSensitiveRemoved.value,
+            onSensitiveRemove: () => isSensitiveRemoved.value = true,
+          )
       ],
     );
   }
 }
 
-final class _Image extends HookWidget {
+final class _Image extends StatelessWidget {
   final NoteFile file;
   final double? height;
+  final bool isSensitiveRemoved;
+  void Function() onSensitiveRemove;
 
-  const _Image({required this.file, required this.height});
+  _Image({
+    required this.file,
+    required this.height,
+    required this.isSensitiveRemoved,
+    required this.onSensitiveRemove,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final isSensitiveRemoved = useState(!file.isSensitive);
-
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: GestureDetector(
-        onTap: () => isSensitiveRemoved.value
-            ? ImageDetailRoute(imageUrl: file.url, thumbnailUrl: file.thumbnailUrl).push(context)
-            : isSensitiveRemoved.value = true,
-        child: switch (isSensitiveRemoved.value) {
-          true => Hero(
-              tag: file.thumbnailUrl ?? file.url,
-              child: CachedNetworkImage(
-                imageUrl: file.thumbnailUrl ?? file.url,
-                width: double.infinity,
+        onTap: () =>
+            isSensitiveRemoved ? ImageDetailRoute(imageUrl: file.url, thumbnailUrl: file.thumbnailUrl).push(context) : onSensitiveRemove(),
+        child: isSensitiveRemoved
+            ? Hero(
+                tag: file.thumbnailUrl ?? file.url,
+                child: CachedNetworkImage(
+                  imageUrl: file.thumbnailUrl ?? file.url,
+                  width: double.infinity,
+                  height: height,
+                  fit: BoxFit.cover,
+                  fadeInDuration: const Duration(milliseconds: 200),
+                ),
+              )
+            : Container(
+                alignment: Alignment.center,
+                color: Colors.blueGrey.shade100,
                 height: height,
-                fit: BoxFit.cover,
-                fadeInDuration: const Duration(milliseconds: 200),
+                child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
               ),
-            ),
-          _ => Container(
-              alignment: Alignment.center,
-              color: Colors.blueGrey.shade100,
-              height: height,
-              child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
-            )
-        },
       ),
     );
   }
