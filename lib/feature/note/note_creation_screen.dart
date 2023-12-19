@@ -131,7 +131,7 @@ final class _RelatedNote extends ConsumerWidget {
     switch (relatedNote) {
       case AsyncData(:final value):
         return Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(12),
           margin: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
