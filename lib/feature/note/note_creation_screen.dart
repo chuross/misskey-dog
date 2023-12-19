@@ -16,6 +16,21 @@ import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note_file.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
 
+final class NoteCreationRoute extends GoRouteData {
+  final String? relatedNoteId;
+  final bool isRenoted;
+
+  const NoteCreationRoute({this.relatedNoteId, this.isRenoted = false});
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return MaterialPage(
+      fullscreenDialog: true,
+      child: NoteCreationScreen(relatedNoteId: relatedNoteId, isRenoted: isRenoted),
+    );
+  }
+}
+
 final class NoteCreationScreen extends HookConsumerWidget {
   final String? relatedNoteId;
   final bool isRenoted;

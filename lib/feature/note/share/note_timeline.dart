@@ -4,12 +4,13 @@ import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/string.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
-import 'package:misskey_dog/core/router/app_router.dart';
 
 import 'package:misskey_dog/core/view/load_more_view.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
 import 'package:misskey_dog/feature/home/home_screen.dart';
+import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart';
+import 'package:misskey_dog/feature/note/note_creation_screen.dart';
 import 'package:misskey_dog/feature/note/note_more_action_modal.dart';
 import 'package:misskey_dog/feature/note/share/cached_note_item.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';

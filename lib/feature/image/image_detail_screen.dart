@@ -5,6 +5,27 @@ import 'package:go_router/go_router.dart';
 import 'package:misskey_dog/core/extension/string.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 
+final class ImageDetailRoute extends GoRouteData {
+  final String imageUrl;
+  final String? thumbnailUrl;
+
+  const ImageDetailRoute({
+    required this.imageUrl,
+    this.thumbnailUrl,
+  });
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return CustomTransitionPage(
+      fullscreenDialog: true,
+      child: ImageDetailScreen(imageUrl: imageUrl, thumbnailUrl: thumbnailUrl),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(opacity: animation, child: child);
+      },
+    );
+  }
+}
+
 final class ImageDetailScreen extends HookWidget {
   final String imageUrl;
   final String? thumbnailUrl;
