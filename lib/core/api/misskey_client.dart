@@ -26,6 +26,7 @@ abstract class MisskeyClient {
         'write:reactions',
         'read:notifications',
         'write:notifications',
+        'write:mutes',
       ].join(','),
     });
   }
