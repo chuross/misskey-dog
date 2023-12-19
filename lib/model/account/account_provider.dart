@@ -9,7 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'account_provider.g.dart';
 
 @riverpod
-Future<Account?> accountAuthorization(
+Future<Account> accountAuthorization(
   AccountAuthorizationRef ref, {
   required String host,
   required String session,

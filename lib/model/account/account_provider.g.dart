@@ -7,7 +7,7 @@ part of 'account_provider.dart';
 // **************************************************************************
 
 String _$accountAuthorizationHash() =>
-    r'89c870c5cce8eb372bcbd96e4490fada13424a5f';
+    r'5e78d913f1b7a06f22f3cb9ddaed1faaf8940862';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -35,7 +35,7 @@ class _SystemHash {
 const accountAuthorizationProvider = AccountAuthorizationFamily();
 
 /// See also [accountAuthorization].
-class AccountAuthorizationFamily extends Family<AsyncValue<Account?>> {
+class AccountAuthorizationFamily extends Family<AsyncValue<Account>> {
   /// See also [accountAuthorization].
   const AccountAuthorizationFamily();
 
@@ -76,7 +76,7 @@ class AccountAuthorizationFamily extends Family<AsyncValue<Account?>> {
 }
 
 /// See also [accountAuthorization].
-class AccountAuthorizationProvider extends AutoDisposeFutureProvider<Account?> {
+class AccountAuthorizationProvider extends AutoDisposeFutureProvider<Account> {
   /// See also [accountAuthorization].
   AccountAuthorizationProvider({
     required String host,
@@ -116,7 +116,7 @@ class AccountAuthorizationProvider extends AutoDisposeFutureProvider<Account?> {
 
   @override
   Override overrideWith(
-    FutureOr<Account?> Function(AccountAuthorizationRef provider) create,
+    FutureOr<Account> Function(AccountAuthorizationRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -134,7 +134,7 @@ class AccountAuthorizationProvider extends AutoDisposeFutureProvider<Account?> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<Account?> createElement() {
+  AutoDisposeFutureProviderElement<Account> createElement() {
     return _AccountAuthorizationProviderElement(this);
   }
 
@@ -155,7 +155,7 @@ class AccountAuthorizationProvider extends AutoDisposeFutureProvider<Account?> {
   }
 }
 
-mixin AccountAuthorizationRef on AutoDisposeFutureProviderRef<Account?> {
+mixin AccountAuthorizationRef on AutoDisposeFutureProviderRef<Account> {
   /// The parameter `host` of this provider.
   String get host;
 
@@ -164,7 +164,7 @@ mixin AccountAuthorizationRef on AutoDisposeFutureProviderRef<Account?> {
 }
 
 class _AccountAuthorizationProviderElement
-    extends AutoDisposeFutureProviderElement<Account?>
+    extends AutoDisposeFutureProviderElement<Account>
     with AccountAuthorizationRef {
   _AccountAuthorizationProviderElement(super.provider);
 
