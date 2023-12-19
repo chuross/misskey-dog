@@ -13,7 +13,7 @@ final class Notifications extends _$Notifications {
     final client = await ref.watch(misskeyClientProvider().future);
 
     return await client.getNotifications(GetNotificationsRequest(
-      limit: 30,
+      limit: 100,
     ).toJson().removeAllNullValueKeys());
   }
 
