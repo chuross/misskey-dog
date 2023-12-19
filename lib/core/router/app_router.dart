@@ -46,8 +46,14 @@ final class ImageDetailRoute extends GoRouteData {
   });
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return ImageDetailScreen(imageUrl: imageUrl, thumbnailUrl: thumbnailUrl);
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return CustomTransitionPage(
+      fullscreenDialog: true,
+      child: ImageDetailScreen(imageUrl: imageUrl, thumbnailUrl: thumbnailUrl),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(opacity: animation, child: child);
+      },
+    );
   }
 }
 
@@ -80,8 +86,11 @@ final class NoteCreationRoute extends GoRouteData {
   const NoteCreationRoute({this.relatedNoteId, this.isRenoted = false});
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return NoteCreationScreen(relatedNoteId: relatedNoteId, isRenoted: isRenoted);
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return MaterialPage(
+      fullscreenDialog: true,
+      child: NoteCreationScreen(relatedNoteId: relatedNoteId, isRenoted: isRenoted),
+    );
   }
 }
 
