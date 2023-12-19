@@ -90,6 +90,7 @@ final class ImageDetailScreen extends HookWidget {
                     imageUrl: imageUrl,
                     width: double.infinity,
                     height: double.infinity,
+                    fadeInDuration: Duration.zero,
                     filterQuality: FilterQuality.high,
                     placeholder: (_, __) => switch (thumbnailUrl) {
                       final thumbnailUrl? => CachedNetworkImage(
