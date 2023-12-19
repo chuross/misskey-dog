@@ -88,6 +88,8 @@ final class ImageDetailScreen extends HookWidget {
                   onDismissed: (_) => context.pop(),
                   child: CachedNetworkImage(
                     imageUrl: imageUrl,
+                    width: double.infinity,
+                    height: double.infinity,
                     filterQuality: FilterQuality.high,
                     placeholder: (_, __) => switch (thumbnailUrl) {
                       final thumbnailUrl? => CachedNetworkImage(
