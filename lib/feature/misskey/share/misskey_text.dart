@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/logger/logger_provider.dart';
 import 'package:misskey_dog/feature/emoji/share/emoji_view.dart';
@@ -27,8 +28,10 @@ List<InlineSpan> _separateInlineSpans({
   required Function(String) onHashtagPressed,
   required Function(String) onUrlPressed,
 }) {
+  var replacedText = Bidi.stripHtmlIfNeeded(text);
+
   // RegExpはマルチバイト文字のインデックスが計算できないので、サロゲートペアをシングルバイトの文字に変換する
-  final replacedText = text.replaceAllMapped(_surrogateRegex, (match) {
+  replacedText = text.replaceAllMapped(_surrogateRegex, (match) {
     return '_';
   });
 
