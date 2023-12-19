@@ -7,7 +7,7 @@ import 'package:misskey_dog/feature/login/login_callback_screen.dart';
 import 'package:misskey_dog/feature/login/login_screen.dart';
 import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart';
 import 'package:misskey_dog/feature/note/note_creation_screen.dart';
-import 'package:misskey_dog/feature/note/search_keyword_screen.dart';
+import 'package:misskey_dog/feature/note/keyword_notes_screen.dart';
 import 'package:misskey_dog/feature/notification/notifications_screen.dart';
 import 'package:misskey_dog/feature/search/search_screen.dart';
 
