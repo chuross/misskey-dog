@@ -115,7 +115,7 @@ Widget _item({
           SizedBox(height: subText != null ? 8 : 0),
           if (subText != null)
             MisskeyText(
-              text: text,
+              text: subText,
               baseTextStyle: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade700),
               externalTextEmojiUrlMap: subExternalEmojiUrlMap,
             )
