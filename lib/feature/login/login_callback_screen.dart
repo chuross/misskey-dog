@@ -18,7 +18,7 @@ final class LoginCallbackScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authentication = ref.watch(accountAuthorizationProvider(host: host, session: session));
 
-    if (authentication.value is AsyncData) {
+    if (authentication is AsyncData) {
       HomeRoute().replace(context);
     }
 
