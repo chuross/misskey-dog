@@ -24,6 +24,7 @@ final class NoteItem extends StatelessWidget {
   final Function() onReplyPressed;
   final Function() onRenotePressed;
   final Function() onReactionAddPressed;
+  final Function() onMoreActionPressed;
 
   Note get mainNote => note.renote ?? note;
   bool get maybeIndifferenceNote => mainNote.text?.contains('\$[') == true;
@@ -37,6 +38,7 @@ final class NoteItem extends StatelessWidget {
     required this.onReplyPressed,
     required this.onRenotePressed,
     required this.onReactionAddPressed,
+    required this.onMoreActionPressed,
   });
 
   @override
@@ -66,6 +68,7 @@ final class NoteItem extends StatelessWidget {
           onReplyPressed: onReplyPressed,
           onRenotePressed: onRenotePressed,
           onReactionAddPressed: onReactionAddPressed,
+          onMoreActionPressed: onMoreActionPressed,
         ),
       ],
     ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
@@ -327,11 +330,13 @@ final class _ActionButtons extends StatelessWidget {
   final Function() onReplyPressed;
   final Function() onRenotePressed;
   final Function() onReactionAddPressed;
+  final Function() onMoreActionPressed;
 
   const _ActionButtons({
     required this.onReplyPressed,
     required this.onRenotePressed,
     required this.onReactionAddPressed,
+    required this.onMoreActionPressed,
   });
 
   @override
@@ -356,7 +361,7 @@ final class _ActionButtons extends StatelessWidget {
           icon: const Icon(Icons.add),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: onMoreActionPressed,
           iconSize: 20,
           icon: const Icon(Icons.more_horiz_rounded),
         ),

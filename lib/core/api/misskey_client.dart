@@ -66,4 +66,7 @@ abstract class MisskeyClient {
 
   @POST('/api/i/notifications')
   Future<List<Notification>> getNotifications(@Body() Map<String, dynamic> request);
+
+  @POST('/api/mute/create')
+  Future<void> createMuteUser(@Body() Map<String, dynamic> request);
 }

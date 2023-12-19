@@ -9,6 +9,7 @@ import 'package:misskey_dog/core/router/app_router.dart';
 import 'package:misskey_dog/core/view/load_more_view.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
+import 'package:misskey_dog/feature/note/note_more_action_modal.dart';
 import 'package:misskey_dog/feature/note/share/cached_note_item.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -67,6 +68,11 @@ final class NoteTimeline extends HookConsumerWidget {
                                 builder: (_) => EmojiReactionCreationModal(onEmojiSelected: (emoji) {
                                   ref.read(cachedNoteProvider(id: noteId).notifier).reaction(emoji);
                                 }),
+                              ),
+                              onMoreActionPressed: () => showModalBottomSheet(
+                                context: context,
+                                showDragHandle: true,
+                                builder: (_) => NoteMoreActionModal(noteId: noteId),
                               ),
                             ),
                           );

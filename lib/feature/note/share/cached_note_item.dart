@@ -13,6 +13,7 @@ final class CachedNoteItem extends HookConsumerWidget {
   final Function(String noteId) onReplyPressed;
   final Function(String noteId) onRenotePressed;
   final Function() onReactionAddPressed;
+  final Function() onMoreActionPressed;
 
   const CachedNoteItem({
     super.key,
@@ -23,6 +24,7 @@ final class CachedNoteItem extends HookConsumerWidget {
     required this.onReplyPressed,
     required this.onRenotePressed,
     required this.onReactionAddPressed,
+    required this.onMoreActionPressed,
   });
 
   @override
@@ -35,9 +37,8 @@ final class CachedNoteItem extends HookConsumerWidget {
     }
 
     ref.listen(noteUpdateStreamingProvider(noteId: noteId), (_, next) {
-      switch (next) {
-        case AsyncData():
-          ref.read(provider.notifier).sync();
+      if (next is AsyncData) {
+        ref.read(provider.notifier).sync();
       }
     });
 
@@ -49,6 +50,7 @@ final class CachedNoteItem extends HookConsumerWidget {
       onReplyPressed: () => onReplyPressed(note.renote?.id ?? note.id),
       onRenotePressed: () => onRenotePressed(note.renote?.id ?? note.id),
       onReactionAddPressed: onReactionAddPressed,
+      onMoreActionPressed: onMoreActionPressed,
     );
   }
 }
