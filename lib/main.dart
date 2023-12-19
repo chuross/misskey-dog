@@ -3,11 +3,19 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:i18n_extension/i18n_extension.dart';
-import 'package:misskey_dog/core/router/app_router.dart';
+import 'package:misskey_dog/feature/home/home_screen.dart' as home;
+import 'package:misskey_dog/feature/login/login_callback_screen.dart' as login_callback;
+import 'package:misskey_dog/feature/login/login_callback_screen.dart';
+import 'package:misskey_dog/feature/login/login_screen.dart' as login;
+import 'package:misskey_dog/feature/login/login_screen.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 
 final _router = GoRouter(
-  routes: $appRoutes,
+  routes: [
+    ...home.$appRoutes,
+    ...login.$appRoutes,
+    ...login_callback.$appRoutes,
+  ],
   redirect: (context, state) async {
     final account = await ProviderScope.containerOf(context).read(accountStateProvider.future);
 

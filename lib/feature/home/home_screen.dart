@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/api/api_provider.dart';
@@ -12,6 +13,24 @@ import 'package:misskey_dog/feature/home/home_media_timeline.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 import 'package:misskey_dog/model/streaming/streaming_channel.dart';
 import 'package:misskey_dog/model/streaming/streaming_event_kind.dart';
+
+part 'home_screen.g.dart';
+
+@TypedGoRoute<HomeRoute>(path: '/', routes: [
+  TypedGoRoute<AccountRoute>(path: 'account'),
+  TypedGoRoute<ImageDetailRoute>(path: 'image_detail'),
+  TypedGoRoute<SearchRoute>(path: 'notes/search'),
+  TypedGoRoute<KeywordNotesRoute>(path: 'notes/keyword'),
+  TypedGoRoute<HashtagNotesRoute>(path: 'notes/hashtag'),
+  TypedGoRoute<NoteCreationRoute>(path: 'notes/create'),
+  TypedGoRoute<NotificationsRoute>(path: 'notifications'),
+])
+final class HomeRoute extends GoRouteData {
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const HomeScreen();
+  }
+}
 
 final class HomeScreen extends HookConsumerWidget {
   static final _tabs = [

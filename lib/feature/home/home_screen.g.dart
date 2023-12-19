@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_router.dart';
+part of 'home_screen.dart';
 
 // **************************************************************************
 // GoRouterGenerator
@@ -8,8 +8,6 @@ part of 'app_router.dart';
 
 List<RouteBase> get $appRoutes => [
       $homeRoute,
-      $loginRoute,
-      $loginCallbackRoute,
     ];
 
 RouteBase get $homeRoute => GoRouteData.$route(
@@ -54,11 +52,12 @@ extension $HomeRouteExtension on HomeRoute {
         '/',
       );
 
-  void go(BuildContext context) => context.push(location);
+  void go(BuildContext context) => context.go(location);
 
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
-  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
 }
@@ -70,11 +69,12 @@ extension $AccountRouteExtension on AccountRoute {
         '/account',
       );
 
-  void go(BuildContext context) => context.push(location);
+  void go(BuildContext context) => context.go(location);
 
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
-  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
 }
@@ -93,11 +93,12 @@ extension $ImageDetailRouteExtension on ImageDetailRoute {
         },
       );
 
-  void go(BuildContext context) => context.push(location);
+  void go(BuildContext context) => context.go(location);
 
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
-  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
 }
@@ -109,11 +110,12 @@ extension $SearchRouteExtension on SearchRoute {
         '/notes/search',
       );
 
-  void go(BuildContext context) => context.push(location);
+  void go(BuildContext context) => context.go(location);
 
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
-  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
 }
@@ -130,11 +132,12 @@ extension $KeywordNotesRouteExtension on KeywordNotesRoute {
         },
       );
 
-  void go(BuildContext context) => context.push(location);
+  void go(BuildContext context) => context.go(location);
 
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
-  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
 }
@@ -151,11 +154,12 @@ extension $HashtagNotesRouteExtension on HashtagNotesRoute {
         },
       );
 
-  void go(BuildContext context) => context.push(location);
+  void go(BuildContext context) => context.go(location);
 
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
-  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
 }
@@ -163,7 +167,9 @@ extension $HashtagNotesRouteExtension on HashtagNotesRoute {
 extension $NoteCreationRouteExtension on NoteCreationRoute {
   static NoteCreationRoute _fromState(GoRouterState state) => NoteCreationRoute(
         relatedNoteId: state.uri.queryParameters['related-note-id'],
-        isRenoted: _$convertMapValue('is-renoted', state.uri.queryParameters, _$boolConverter) ?? false,
+        isRenoted: _$convertMapValue(
+                'is-renoted', state.uri.queryParameters, _$boolConverter) ??
+            false,
       );
 
   String get location => GoRouteData.$location(
@@ -174,27 +180,30 @@ extension $NoteCreationRouteExtension on NoteCreationRoute {
         },
       );
 
-  void go(BuildContext context) => context.push(location);
+  void go(BuildContext context) => context.go(location);
 
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
-  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
 }
 
 extension $NotificationsRouteExtension on NotificationsRoute {
-  static NotificationsRoute _fromState(GoRouterState state) => const NotificationsRoute();
+  static NotificationsRoute _fromState(GoRouterState state) =>
+      const NotificationsRoute();
 
   String get location => GoRouteData.$location(
         '/notifications',
       );
 
-  void go(BuildContext context) => context.push(location);
+  void go(BuildContext context) => context.go(location);
 
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
-  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
 }
@@ -217,53 +226,4 @@ bool _$boolConverter(String value) {
     default:
       throw UnsupportedError('Cannot convert "$value" into a bool.');
   }
-}
-
-RouteBase get $loginRoute => GoRouteData.$route(
-      path: '/login',
-      factory: $LoginRouteExtension._fromState,
-    );
-
-extension $LoginRouteExtension on LoginRoute {
-  static LoginRoute _fromState(GoRouterState state) => LoginRoute();
-
-  String get location => GoRouteData.$location(
-        '/login',
-      );
-
-  void go(BuildContext context) => context.push(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) => context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $loginCallbackRoute => GoRouteData.$route(
-      path: '/auth_callback',
-      factory: $LoginCallbackRouteExtension._fromState,
-    );
-
-extension $LoginCallbackRouteExtension on LoginCallbackRoute {
-  static LoginCallbackRoute _fromState(GoRouterState state) => LoginCallbackRoute(
-        host: state.uri.queryParameters['host'],
-        session: state.uri.queryParameters['session'],
-      );
-
-  String get location => GoRouteData.$location(
-        '/auth_callback',
-        queryParams: {
-          if (host != null) 'host': host,
-          if (session != null) 'session': session,
-        },
-      );
-
-  void go(BuildContext context) => context.push(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) => context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
 }

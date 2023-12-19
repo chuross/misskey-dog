@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
-import 'package:misskey_dog/core/router/app_router.dart';
+import 'package:misskey_dog/feature/login/login_screen.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 
 final class AccountScreen extends ConsumerWidget {
