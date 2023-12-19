@@ -47,9 +47,9 @@ final class SearchScreen extends HookWidget {
 
   void _search({required BuildContext context, required String keyword}) {
     if (keyword.startsWith('#')) {
-      HashtagNotesRoute(hashtag: keyword).go(context);
+      HashtagNotesRoute(hashtag: keyword).push(context);
     } else {
-      KeywordNotesRoute(keyword: keyword).go(context);
+      KeywordNotesRoute(keyword: keyword).push(context);
     }
   }
 }

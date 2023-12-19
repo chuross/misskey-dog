@@ -223,7 +223,7 @@ final class _Image extends HookWidget {
       borderRadius: BorderRadius.circular(16),
       child: GestureDetector(
         onTap: () => isSensitiveRemoved.value
-            ? ImageDetailRoute(imageUrl: file.url, thumbnailUrl: file.thumbnailUrl).go(context)
+            ? ImageDetailRoute(imageUrl: file.url, thumbnailUrl: file.thumbnailUrl).push(context)
             : isSensitiveRemoved.value = true,
         child: switch (isSensitiveRemoved.value) {
           true => Hero(

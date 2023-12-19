@@ -50,12 +50,12 @@ final class HomeScreen extends HookConsumerWidget {
                         ),
                       _ => const Icon(Icons.person),
                     },
-                    onPressed: () => AccountRoute().go(context),
+                    onPressed: () => AccountRoute().push(context),
                   ),
                   actions: [
                     IconButton(
                       icon: const Icon(Icons.search),
-                      onPressed: () => const SearchRoute().go(context),
+                      onPressed: () => const SearchRoute().push(context),
                     ),
                     IconButton(
                       icon: Badge(
@@ -64,7 +64,7 @@ final class HomeScreen extends HookConsumerWidget {
                       ),
                       onPressed: () {
                         hasUnreadNotifications.value = false;
-                        const NotificationsRoute().go(context);
+                        const NotificationsRoute().push(context);
                       },
                     ),
                   ],
@@ -79,7 +79,7 @@ final class HomeScreen extends HookConsumerWidget {
             ),
             floatingActionButton: FloatingActionButton(
               child: const Icon(Icons.edit),
-              onPressed: () => const NoteCreationRoute().go(context),
+              onPressed: () => const NoteCreationRoute().push(context),
             ),
           ),
         );
