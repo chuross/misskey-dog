@@ -206,7 +206,12 @@ final class _NoteFiles extends HookWidget {
     }
 
     if (videoFiles.length == 1) {
-      return _Video(file: files.first, withPlaying: true);
+      return _Video(
+        file: files.first,
+        withPlaying: true,
+        isSensitiveRemoved: isSensitiveRemoved.value,
+        onSensitiveRemove: () => isSensitiveRemoved.value = true,
+      );
     }
 
     return GridView.count(
@@ -274,8 +279,15 @@ final class _Image extends StatelessWidget {
 final class _Video extends HookWidget {
   final NoteFile file;
   final bool withPlaying;
+  final bool isSensitiveRemoved;
+  final void Function() onSensitiveRemove;
 
-  const _Video({required this.file, required this.withPlaying});
+  const _Video({
+    required this.file,
+    required this.withPlaying,
+    required this.isSensitiveRemoved,
+    required this.onSensitiveRemove,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -295,20 +307,32 @@ final class _Video extends HookWidget {
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
-      child: AspectRatio(
-        aspectRatio: isReady ? controller.value.aspectRatio : 16 / 9,
-        child: isReady
-            ? Stack(
-                children: [
-                  VideoPlayer(controller),
-                  IconButton(
-                    onPressed: () => isMute.value = !isMute.value,
-                    icon: Icon(isMute.value ? Icons.volume_off : Icons.volume_up),
-                    iconSize: 20,
-                  ),
-                ],
-              )
-            : const CircularProgressIndicator(strokeWidth: 2),
+      child: GestureDetector(
+        onTap: () => isSensitiveRemoved ? null : onSensitiveRemove(),
+        child: AspectRatio(
+          aspectRatio: isReady ? controller.value.aspectRatio : 16 / 9,
+          child: isReady
+              ? Stack(
+                  children: [
+                    VideoPlayer(controller),
+                    IconButton(
+                      onPressed: () => isMute.value = !isMute.value,
+                      icon: Icon(isMute.value ? Icons.volume_off : Icons.volume_up),
+                      iconSize: 20,
+                    ),
+                    if (!isSensitiveRemoved)
+                      Positioned.fill(
+                        child: Container(
+                          alignment: Alignment.center,
+                          color: Colors.blueGrey.shade100,
+                          child: Text('センシティブ'.i18n,
+                              style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                  ],
+                )
+              : const CircularProgressIndicator(strokeWidth: 2),
+        ),
       ),
     );
   }
