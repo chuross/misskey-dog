@@ -201,7 +201,6 @@ final class _NoteFiles extends HookWidget {
       return _FileView(
         file: supportedFiles.first,
         imageHeight: 300,
-        withPlaying: true,
         isSensitiveRemoved: isSensitiveRemoved.value,
         onSensitiveRemove: () => isSensitiveRemoved.value = true,
         onTapped: (file) => NoteFileDetailRoute($extra: (files: files, initialFile: file)).push(context),
@@ -219,8 +218,10 @@ final class _NoteFiles extends HookWidget {
         for (final file in imageFiles)
           _FileView(
             file: file,
-            imageHeight: 300,
-            withPlaying: false,
+            imageHeight: null,
+            withPlayingVideo: false,
+            isPlayableVideo: false,
+            videoAspectRatio: 1,
             isSensitiveRemoved: isSensitiveRemoved.value,
             onSensitiveRemove: () => isSensitiveRemoved.value = true,
             onTapped: (file) => NoteFileDetailRoute($extra: (files: files, initialFile: file)).push(context),
@@ -233,7 +234,9 @@ final class _NoteFiles extends HookWidget {
 final class _FileView extends StatelessWidget {
   final NoteFile file;
   final double? imageHeight;
-  final bool withPlaying;
+  final bool withPlayingVideo;
+  final bool isPlayableVideo;
+  final double? videoAspectRatio;
   final bool isSensitiveRemoved;
   final void Function() onSensitiveRemove;
   final void Function(NoteFile) onTapped;
@@ -241,7 +244,9 @@ final class _FileView extends StatelessWidget {
   const _FileView({
     required this.file,
     required this.imageHeight,
-    required this.withPlaying,
+    this.withPlayingVideo = true,
+    this.isPlayableVideo = true,
+    this.videoAspectRatio,
     required this.isSensitiveRemoved,
     required this.onSensitiveRemove,
     required this.onTapped,
@@ -259,7 +264,9 @@ final class _FileView extends StatelessWidget {
         ),
       final file when file.isVideo => _VideoView(
           file: file,
-          withPlaying: withPlaying,
+          withPlaying: withPlayingVideo,
+          isPlayable: isPlayableVideo,
+          aspectRatio: videoAspectRatio,
           isSensitiveRemoved: isSensitiveRemoved,
           onSensitiveRemove: onSensitiveRemove,
         ),
@@ -317,13 +324,17 @@ final class _ImageView extends StatelessWidget {
 final class _VideoView extends HookWidget {
   final NoteFile file;
   final bool withPlaying;
+  final bool isPlayable;
   final bool isSensitiveRemoved;
+  final double? aspectRatio;
   final void Function() onSensitiveRemove;
 
   const _VideoView({
     required this.file,
     required this.withPlaying,
+    required this.isPlayable,
     required this.isSensitiveRemoved,
+    required this.aspectRatio,
     required this.onSensitiveRemove,
   });
 
@@ -348,7 +359,7 @@ final class _VideoView extends HookWidget {
       child: GestureDetector(
         onTap: () => isSensitiveRemoved ? null : onSensitiveRemove(),
         child: AspectRatio(
-          aspectRatio: isReady ? controller.value.aspectRatio : 16 / 9,
+          aspectRatio: aspectRatio ?? (isReady ? controller.value.aspectRatio : 16 / 9),
           child: isReady
               ? Hero(
                   tag: file.url,
@@ -362,7 +373,7 @@ final class _VideoView extends HookWidget {
                       ),
                       if (!controller.value.isPlaying)
                         IconButton(
-                          onPressed: () => controller.play(),
+                          onPressed: () => isPlayable ? controller.play() : null,
                           iconSize: 56,
                           color: context.theme.primaryColor,
                           icon: const Icon(Icons.play_circle_outline),
