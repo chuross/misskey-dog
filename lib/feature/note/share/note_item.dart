@@ -226,9 +226,9 @@ final class _Image extends StatelessWidget {
   final NoteFile file;
   final double? height;
   final bool isSensitiveRemoved;
-  void Function() onSensitiveRemove;
+  final void Function() onSensitiveRemove;
 
-  _Image({
+  const _Image({
     required this.file,
     required this.height,
     required this.isSensitiveRemoved,
