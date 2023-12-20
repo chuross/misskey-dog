@@ -69,7 +69,7 @@ final class _ImageView extends HookWidget {
   final String url;
   final String? thumbnailUrl;
 
-  const _ImageView({super.key, required this.url, this.thumbnailUrl});
+  const _ImageView({required this.url, this.thumbnailUrl});
 
   @override
   Widget build(BuildContext context) {
