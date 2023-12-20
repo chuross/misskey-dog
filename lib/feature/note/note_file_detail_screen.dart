@@ -32,12 +32,14 @@ final class NoteFileDetailScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = usePageController(initialPage: files.indexOf(initialFile));
+    final isScaleChanging = useState(false);
 
     return Stack(
       children: [
         Container(color: Colors.blueGrey[700]),
         PageView.builder(
           controller: controller,
+          physics: isScaleChanging.value ? const NeverScrollableScrollPhysics() : null,
           itemCount: files.length,
           itemBuilder: (context, index) {
             final file = files[index];
@@ -46,6 +48,7 @@ final class NoteFileDetailScreen extends HookWidget {
               final file when file.isImage => _ImageView(
                   url: file.url,
                   thumbnailUrl: file.thumbnailUrl,
+                  onScaleChanged: (scale) => isScaleChanging.value = scale != 1.0,
                 ),
               _ => const SizedBox.shrink(),
             };
@@ -68,8 +71,9 @@ final class NoteFileDetailScreen extends HookWidget {
 final class _ImageView extends HookWidget {
   final String url;
   final String? thumbnailUrl;
+  final void Function(double) onScaleChanged;
 
-  const _ImageView({required this.url, this.thumbnailUrl});
+  const _ImageView({required this.url, this.thumbnailUrl, required this.onScaleChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +85,7 @@ final class _ImageView extends HookWidget {
       transformationController: controller,
       minScale: 1.0,
       maxScale: 5.0,
+      onInteractionEnd: (details) => onScaleChanged(controller.value.getMaxScaleOnAxis()),
       child: Hero(
         tag: url,
         flightShuttleBuilder: (flightContext, animation, flightDirection, fromHeroContext, toHeroContext) {
@@ -97,11 +102,13 @@ final class _ImageView extends HookWidget {
           onDoubleTapDown: (doubleTapDetails) {
             if (controller.value != Matrix4.identity()) {
               controller.value = Matrix4.identity();
+              onScaleChanged(controller.value.getMaxScaleOnAxis());
             } else {
               final position = doubleTapDetails.globalPosition;
               controller.value = Matrix4.identity()
                 ..translate(-position.dx, -position.dy)
                 ..scale(2.0);
+              onScaleChanged(controller.value.getMaxScaleOnAxis());
             }
           },
           child: AbsorbPointer(
