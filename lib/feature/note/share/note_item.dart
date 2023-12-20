@@ -194,20 +194,13 @@ final class _NoteFiles extends HookWidget {
 
     final imageFiles = files.where((e) => e.isImage).toList();
     final videoFiles = files.where((e) => e.isVideo).toList();
-    final isSensitiveRemoved = useState(imageFiles.every((e) => !e.isSensitive) && videoFiles.every((e) => !e.isSensitive));
+    final supportedFiles = [...imageFiles, ...videoFiles];
+    final isSensitiveRemoved = useState(supportedFiles.every((e) => !e.isSensitive));
 
-    if (imageFiles.length == 1) {
-      return _Image(
-        file: files.first,
-        height: 300,
-        isSensitiveRemoved: isSensitiveRemoved.value,
-        onSensitiveRemove: () => isSensitiveRemoved.value = true,
-      );
-    }
-
-    if (videoFiles.length == 1) {
-      return _Video(
-        file: files.first,
+    if (supportedFiles.length == 1) {
+      return _FileView(
+        file: supportedFiles.first,
+        imageHeight: 300,
         withPlaying: true,
         isSensitiveRemoved: isSensitiveRemoved.value,
         onSensitiveRemove: () => isSensitiveRemoved.value = true,
@@ -223,9 +216,10 @@ final class _NoteFiles extends HookWidget {
       crossAxisSpacing: 8,
       children: [
         for (final file in imageFiles)
-          _Image(
+          _FileView(
             file: file,
-            height: 300,
+            imageHeight: 300,
+            withPlaying: false,
             isSensitiveRemoved: isSensitiveRemoved.value,
             onSensitiveRemove: () => isSensitiveRemoved.value = true,
           )
@@ -234,13 +228,48 @@ final class _NoteFiles extends HookWidget {
   }
 }
 
-final class _Image extends StatelessWidget {
+final class _FileView extends StatelessWidget {
+  final NoteFile file;
+  final double? imageHeight;
+  final bool withPlaying;
+  final bool isSensitiveRemoved;
+  final void Function() onSensitiveRemove;
+
+  const _FileView({
+    required this.file,
+    required this.imageHeight,
+    required this.withPlaying,
+    required this.isSensitiveRemoved,
+    required this.onSensitiveRemove,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return switch (file) {
+      final file when file.isImage => _ImageView(
+          file: file,
+          height: imageHeight,
+          isSensitiveRemoved: isSensitiveRemoved,
+          onSensitiveRemove: onSensitiveRemove,
+        ),
+      final file when file.isVideo => _VideoView(
+          file: file,
+          withPlaying: withPlaying,
+          isSensitiveRemoved: isSensitiveRemoved,
+          onSensitiveRemove: onSensitiveRemove,
+        ),
+      _ => const SizedBox.shrink(),
+    };
+  }
+}
+
+final class _ImageView extends StatelessWidget {
   final NoteFile file;
   final double? height;
   final bool isSensitiveRemoved;
   final void Function() onSensitiveRemove;
 
-  const _Image({
+  const _ImageView({
     required this.file,
     required this.height,
     required this.isSensitiveRemoved,
@@ -279,13 +308,13 @@ final class _Image extends StatelessWidget {
   }
 }
 
-final class _Video extends HookWidget {
+final class _VideoView extends HookWidget {
   final NoteFile file;
   final bool withPlaying;
   final bool isSensitiveRemoved;
   final void Function() onSensitiveRemove;
 
-  const _Video({
+  const _VideoView({
     required this.file,
     required this.withPlaying,
     required this.isSensitiveRemoved,
