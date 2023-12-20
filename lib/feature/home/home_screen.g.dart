@@ -82,7 +82,7 @@ extension $AccountRouteExtension on AccountRoute {
 extension $NoteFileDetailRouteExtension on NoteFileDetailRoute {
   static NoteFileDetailRoute _fromState(GoRouterState state) =>
       NoteFileDetailRoute(
-        $extra: state.extra as ({List<NoteFile> files, NoteFile initialFile})?,
+        $extra: state.extra as ({List<NoteFile> files, NoteFile initialFile}),
       );
 
   String get location => GoRouteData.$location(

@@ -7,15 +7,15 @@ import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/model/note/note_file.dart';
 
 final class NoteFileDetailRoute extends GoRouteData {
-  final ({List<NoteFile> files, NoteFile initialFile})? $extra;
+  final ({List<NoteFile> files, NoteFile initialFile}) $extra;
 
-  NoteFileDetailRoute({this.$extra});
+  NoteFileDetailRoute({required this.$extra});
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return CustomTransitionPage(
       fullscreenDialog: true,
-      child: NoteFileDetailScreen(files: $extra?.files ?? [], initialFile: $extra!.initialFile),
+      child: NoteFileDetailScreen(files: $extra.files, initialFile: $extra.initialFile),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(opacity: animation, child: child);
       },
