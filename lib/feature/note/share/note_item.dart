@@ -331,7 +331,7 @@ final class _Video extends HookWidget {
                       ),
                   ],
                 )
-              : const CircularProgressIndicator(strokeWidth: 2),
+              : const SizedBox.square(dimension: 24, child: CircularProgressIndicator(strokeWidth: 2)),
         ),
       ),
     );
