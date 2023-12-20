@@ -291,7 +291,7 @@ final class _ImageView extends StatelessWidget {
         onTap: () => isSensitiveRemoved ? onTapped(file) : onSensitiveRemove(),
         child: AspectRatio(
           aspectRatio: switch (file.properties) {
-            final properties? when properties.width != null && properties.height != null => properties.width! / properties.height!,
+            final properties? => (properties.width ?? 1) / (properties.height ?? 1),
             _ => 1 / 1,
           },
           child: Stack(
