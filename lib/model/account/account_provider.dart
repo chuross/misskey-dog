@@ -8,6 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'account_provider.g.dart';
 
+// memo: トークン取得はセッション単位で一回のみ有効なので、リフレッシュされないようにref.readを用いる
 @riverpod
 Future<Account> accountAuthorization(
   AccountAuthorizationRef ref, {
@@ -17,7 +18,7 @@ Future<Account> accountAuthorization(
   if (host.isEmpty) throw ArgumentError.value(host, 'host is empty');
   if (session.isEmpty) throw ArgumentError.value(session, 'session is empty');
 
-  final log = ref.watch(logProvider);
+  final log = ref.read(logProvider);
   log.d('@@@authorize: host=$host, session=$session');
 
   final apiBaseUrl = "https://$host";
@@ -25,7 +26,7 @@ Future<Account> accountAuthorization(
   final client = await ref.read(misskeyClientProvider(baseUrl: apiBaseUrl).future);
   final account = await client.authorize(session);
 
-  await ref.watch(accountStateProvider.notifier).setAccount(account.copyWith(host: host));
+  await ref.read(accountStateProvider.notifier).setAccount(account.copyWith(host: host));
 
   return account;
 }

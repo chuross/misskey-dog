@@ -14,6 +14,7 @@ import 'package:misskey_dog/feature/image/image_detail_screen.dart';
 import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart';
 import 'package:misskey_dog/feature/note/keyword_notes_screen.dart';
 import 'package:misskey_dog/feature/note/note_creation_screen.dart';
+import 'package:misskey_dog/feature/note/note_detail_screen.dart';
 import 'package:misskey_dog/feature/notification/notifications_screen.dart';
 import 'package:misskey_dog/feature/search/search_screen.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
@@ -24,6 +25,7 @@ part 'home_screen.g.dart';
 
 @TypedGoRoute<HomeRoute>(path: '/', routes: [
   TypedGoRoute<AccountRoute>(path: 'account'),
+  TypedGoRoute<NoteDetailRoute>(path: 'notes/:noteId'),
   TypedGoRoute<ImageDetailRoute>(path: 'image_detail'),
   TypedGoRoute<SearchRoute>(path: 'notes/search'),
   TypedGoRoute<KeywordNotesRoute>(path: 'notes/keyword'),
