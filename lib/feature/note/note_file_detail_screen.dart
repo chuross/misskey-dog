@@ -73,7 +73,7 @@ final class _ImageView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = useMemoized(() => TransformationController(), const []);
+    final controller = useListenable(useMemoized(() => TransformationController(), const []));
 
     useEffect(() => () => controller.dispose(), [controller]);
 
@@ -105,7 +105,7 @@ final class _ImageView extends HookWidget {
             }
           },
           child: AbsorbPointer(
-            absorbing: controller.value == Matrix4.identity(),
+            absorbing: controller.value != Matrix4.identity(),
             child: Dismissible(
               key: url.toKey(),
               resizeDuration: null,
