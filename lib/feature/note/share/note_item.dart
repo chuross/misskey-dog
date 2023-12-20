@@ -327,7 +327,7 @@ final class _VideoView extends HookWidget {
     final isMute = useState(true);
 
     useEffect(() {
-      if (isReady && withPlaying) controller.play();
+      if (isReady && withPlaying && isSensitiveRemoved) controller.play();
 
       return null;
     }, [isReady]);
@@ -438,9 +438,7 @@ final class _Reaction extends StatelessWidget {
         decoration: BoxDecoration(
           color: isReacted ? context.theme.primaryColor.withOpacity(0.15) : null,
           border: reaction.isReactionable
-              ? Border.all(
-                  color: isReacted ? context.theme.primaryColor.withOpacity(0.3) : context.dividerColorWithOpacity20,
-                )
+              ? Border.all(color: isReacted ? context.theme.primaryColor.withOpacity(0.3) : context.dividerColorWithOpacity20)
               : null,
           borderRadius: BorderRadius.circular(4),
         ),
