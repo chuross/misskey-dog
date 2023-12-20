@@ -19,10 +19,6 @@ RouteBase get $homeRoute => GoRouteData.$route(
           factory: $AccountRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'image_detail',
-          factory: $ImageDetailRouteExtension._fromState,
-        ),
-        GoRouteData.$route(
           path: 'note_files/detail',
           factory: $NoteFileDetailRouteExtension._fromState,
         ),
@@ -71,30 +67,6 @@ extension $AccountRouteExtension on AccountRoute {
 
   String get location => GoRouteData.$location(
         '/account',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $ImageDetailRouteExtension on ImageDetailRoute {
-  static ImageDetailRoute _fromState(GoRouterState state) => ImageDetailRoute(
-        imageUrl: state.uri.queryParameters['image-url']!,
-        thumbnailUrl: state.uri.queryParameters['thumbnail-url'],
-      );
-
-  String get location => GoRouteData.$location(
-        '/image_detail',
-        queryParams: {
-          'image-url': imageUrl,
-          if (thumbnailUrl != null) 'thumbnail-url': thumbnailUrl,
-        },
       );
 
   void go(BuildContext context) => context.go(location);

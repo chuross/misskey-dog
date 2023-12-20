@@ -11,7 +11,6 @@ import 'package:misskey_dog/core/hook/use_video_player_controller.dart';
 
 import 'package:misskey_dog/feature/emoji/share/emoji_view.dart';
 import 'package:misskey_dog/feature/home/home_screen.dart';
-import 'package:misskey_dog/feature/image/image_detail_screen.dart';
 import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
 import 'package:misskey_dog/feature/note/note_file_detail_screen.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';

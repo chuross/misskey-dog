@@ -10,7 +10,6 @@ import 'package:misskey_dog/feature/account/account_screen.dart';
 import 'package:misskey_dog/feature/home/home_global_timeline.dart';
 import 'package:misskey_dog/feature/home/home_local_timeline.dart';
 import 'package:misskey_dog/feature/home/home_media_timeline.dart';
-import 'package:misskey_dog/feature/image/image_detail_screen.dart';
 import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart';
 import 'package:misskey_dog/feature/note/keyword_notes_screen.dart';
 import 'package:misskey_dog/feature/note/note_creation_screen.dart';
@@ -26,7 +25,6 @@ part 'home_screen.g.dart';
 
 @TypedGoRoute<HomeRoute>(path: '/', routes: [
   TypedGoRoute<AccountRoute>(path: 'account'),
-  TypedGoRoute<ImageDetailRoute>(path: 'image_detail'),
   TypedGoRoute<NoteFileDetailRoute>(path: 'note_files/detail'),
   TypedGoRoute<SearchRoute>(path: 'notes/search'),
   TypedGoRoute<KeywordNotesRoute>(path: 'notes/search/keyword'),
