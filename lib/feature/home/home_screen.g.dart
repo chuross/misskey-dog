@@ -19,10 +19,6 @@ RouteBase get $homeRoute => GoRouteData.$route(
           factory: $AccountRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'notes/:noteId',
-          factory: $NoteDetailRouteExtension._fromState,
-        ),
-        GoRouteData.$route(
           path: 'image_detail',
           factory: $ImageDetailRouteExtension._fromState,
         ),
@@ -71,25 +67,6 @@ extension $AccountRouteExtension on AccountRoute {
 
   String get location => GoRouteData.$location(
         '/account',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $NoteDetailRouteExtension on NoteDetailRoute {
-  static NoteDetailRoute _fromState(GoRouterState state) => NoteDetailRoute(
-        noteId: state.pathParameters['noteId']!,
-      );
-
-  String get location => GoRouteData.$location(
-        '/notes/${Uri.encodeComponent(noteId)}',
       );
 
   void go(BuildContext context) => context.go(location);
