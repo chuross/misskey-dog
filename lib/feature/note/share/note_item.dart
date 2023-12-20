@@ -200,7 +200,6 @@ final class _NoteFiles extends HookWidget {
     if (supportedFiles.length == 1) {
       return _FileView(
         file: supportedFiles.first,
-        imageHeight: 300,
         isSensitiveRemoved: isSensitiveRemoved.value,
         onSensitiveRemove: () => isSensitiveRemoved.value = true,
         onTapped: (file) => NoteFileDetailRoute($extra: (files: files, initialFile: file)).push(context),
@@ -218,7 +217,6 @@ final class _NoteFiles extends HookWidget {
         for (final file in imageFiles)
           _FileView(
             file: file,
-            imageHeight: null,
             withPlayingVideo: false,
             isPlayableVideo: false,
             videoAspectRatio: 1,
@@ -243,7 +241,7 @@ final class _FileView extends StatelessWidget {
 
   const _FileView({
     required this.file,
-    required this.imageHeight,
+    this.imageHeight,
     this.withPlayingVideo = true,
     this.isPlayableVideo = true,
     this.videoAspectRatio,
