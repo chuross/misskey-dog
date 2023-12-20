@@ -297,7 +297,7 @@ final class _ImageView extends StatelessWidget {
                 imageUrl: file.thumbnailUrl ?? file.url,
                 width: double.infinity,
                 fit: BoxFit.cover,
-                fadeInDuration: const Duration(milliseconds: 200),
+                fadeInDuration: Duration.zero,
               ),
             ),
             if (!isSensitiveRemoved)
