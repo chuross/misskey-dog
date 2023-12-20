@@ -13,6 +13,7 @@ import 'package:misskey_dog/feature/emoji/share/emoji_view.dart';
 import 'package:misskey_dog/feature/home/home_screen.dart';
 import 'package:misskey_dog/feature/image/image_detail_screen.dart';
 import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
+import 'package:misskey_dog/feature/note/note_file_detail_screen.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/note/note_file.dart';
@@ -204,6 +205,7 @@ final class _NoteFiles extends HookWidget {
         withPlaying: true,
         isSensitiveRemoved: isSensitiveRemoved.value,
         onSensitiveRemove: () => isSensitiveRemoved.value = true,
+        onTapped: (file) => NoteFileDetailRoute($extra: (files: files, initialFile: file)).push(context),
       );
     }
 
@@ -222,6 +224,7 @@ final class _NoteFiles extends HookWidget {
             withPlaying: false,
             isSensitiveRemoved: isSensitiveRemoved.value,
             onSensitiveRemove: () => isSensitiveRemoved.value = true,
+            onTapped: (file) => NoteFileDetailRoute($extra: (files: files, initialFile: file)).push(context),
           )
       ],
     );
@@ -234,6 +237,7 @@ final class _FileView extends StatelessWidget {
   final bool withPlaying;
   final bool isSensitiveRemoved;
   final void Function() onSensitiveRemove;
+  final void Function(NoteFile) onTapped;
 
   const _FileView({
     required this.file,
@@ -241,6 +245,7 @@ final class _FileView extends StatelessWidget {
     required this.withPlaying,
     required this.isSensitiveRemoved,
     required this.onSensitiveRemove,
+    required this.onTapped,
   });
 
   @override
@@ -251,6 +256,7 @@ final class _FileView extends StatelessWidget {
           height: imageHeight,
           isSensitiveRemoved: isSensitiveRemoved,
           onSensitiveRemove: onSensitiveRemove,
+          onTapped: onTapped,
         ),
       final file when file.isVideo => _VideoView(
           file: file,
@@ -268,12 +274,14 @@ final class _ImageView extends StatelessWidget {
   final double? height;
   final bool isSensitiveRemoved;
   final void Function() onSensitiveRemove;
+  final void Function(NoteFile) onTapped;
 
   const _ImageView({
     required this.file,
     required this.height,
     required this.isSensitiveRemoved,
     required this.onSensitiveRemove,
+    required this.onTapped,
   });
 
   @override
@@ -281,11 +289,10 @@ final class _ImageView extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: GestureDetector(
-        onTap: () =>
-            isSensitiveRemoved ? ImageDetailRoute(imageUrl: file.url, thumbnailUrl: file.thumbnailUrl).push(context) : onSensitiveRemove(),
+        onTap: () => isSensitiveRemoved ? onTapped(file) : onSensitiveRemove(),
         child: isSensitiveRemoved
             ? Hero(
-                tag: file.thumbnailUrl ?? file.url,
+                tag: file.url,
                 child: CachedNetworkImage(
                   imageUrl: file.thumbnailUrl ?? file.url,
                   width: double.infinity,

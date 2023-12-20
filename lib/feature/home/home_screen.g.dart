@@ -23,15 +23,19 @@ RouteBase get $homeRoute => GoRouteData.$route(
           factory: $ImageDetailRouteExtension._fromState,
         ),
         GoRouteData.$route(
+          path: 'note_files/detail',
+          factory: $NoteFileDetailRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: 'notes/search',
           factory: $SearchRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'notes/keyword',
+          path: 'notes/search/keyword',
           factory: $KeywordNotesRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'notes/hashtag',
+          path: 'notes/search/hashtag',
           factory: $HashtagNotesRouteExtension._fromState,
         ),
         GoRouteData.$route(
@@ -103,6 +107,28 @@ extension $ImageDetailRouteExtension on ImageDetailRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+extension $NoteFileDetailRouteExtension on NoteFileDetailRoute {
+  static NoteFileDetailRoute _fromState(GoRouterState state) =>
+      NoteFileDetailRoute(
+        $extra: state.extra as ({List<NoteFile> files, NoteFile initialFile})?,
+      );
+
+  String get location => GoRouteData.$location(
+        '/note_files/detail',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
+
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
+}
+
 extension $SearchRouteExtension on SearchRoute {
   static SearchRoute _fromState(GoRouterState state) => const SearchRoute();
 
@@ -126,7 +152,7 @@ extension $KeywordNotesRouteExtension on KeywordNotesRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/notes/keyword',
+        '/notes/search/keyword',
         queryParams: {
           'keyword': keyword,
         },
@@ -148,7 +174,7 @@ extension $HashtagNotesRouteExtension on HashtagNotesRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/notes/hashtag',
+        '/notes/search/hashtag',
         queryParams: {
           'hashtag': hashtag,
         },

@@ -111,7 +111,7 @@ class _$GetEmojiRequestImpl implements _GetEmojiRequest {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetEmojiRequestImpl &&

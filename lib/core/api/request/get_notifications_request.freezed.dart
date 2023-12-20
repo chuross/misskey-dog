@@ -129,7 +129,7 @@ class _$GetNotificationsRequestImpl implements _GetNotificationsRequest {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetNotificationsRequestImpl &&

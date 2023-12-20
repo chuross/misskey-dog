@@ -120,7 +120,7 @@ class _$NoteReactionLocalEmojiImpl extends _NoteReactionLocalEmoji {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NoteReactionLocalEmojiImpl &&

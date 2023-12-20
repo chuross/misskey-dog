@@ -125,7 +125,7 @@ class _$LocalEmojiImpl extends _LocalEmoji {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LocalEmojiImpl &&
@@ -296,7 +296,7 @@ class _$ExternalEmojiImpl extends _ExternalEmoji {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ExternalEmojiImpl &&
@@ -442,7 +442,7 @@ class _$PlainEmojiImpl extends _PlainEmoji {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PlainEmojiImpl &&

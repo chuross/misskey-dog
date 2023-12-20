@@ -14,9 +14,11 @@ import 'package:misskey_dog/feature/image/image_detail_screen.dart';
 import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart';
 import 'package:misskey_dog/feature/note/keyword_notes_screen.dart';
 import 'package:misskey_dog/feature/note/note_creation_screen.dart';
+import 'package:misskey_dog/feature/note/note_file_detail_screen.dart';
 import 'package:misskey_dog/feature/notification/notifications_screen.dart';
 import 'package:misskey_dog/feature/search/search_screen.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
+import 'package:misskey_dog/model/note/note_file.dart';
 import 'package:misskey_dog/model/streaming/streaming_channel.dart';
 import 'package:misskey_dog/model/streaming/streaming_event_kind.dart';
 
@@ -25,9 +27,10 @@ part 'home_screen.g.dart';
 @TypedGoRoute<HomeRoute>(path: '/', routes: [
   TypedGoRoute<AccountRoute>(path: 'account'),
   TypedGoRoute<ImageDetailRoute>(path: 'image_detail'),
+  TypedGoRoute<NoteFileDetailRoute>(path: 'note_files/detail'),
   TypedGoRoute<SearchRoute>(path: 'notes/search'),
-  TypedGoRoute<KeywordNotesRoute>(path: 'notes/keyword'),
-  TypedGoRoute<HashtagNotesRoute>(path: 'notes/hashtag'),
+  TypedGoRoute<KeywordNotesRoute>(path: 'notes/search/keyword'),
+  TypedGoRoute<HashtagNotesRoute>(path: 'notes/search/hashtag'),
   TypedGoRoute<NoteCreationRoute>(path: 'notes/create'),
   TypedGoRoute<NotificationsRoute>(path: 'notifications'),
 ])
