@@ -269,7 +269,10 @@ final class _Image extends StatelessWidget {
                 alignment: Alignment.center,
                 color: Colors.blueGrey.shade100,
                 height: height,
-                child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
+                child: Text(
+                  'センシティブ'.i18n,
+                  style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                ),
               ),
       ),
     );
@@ -325,8 +328,10 @@ final class _Video extends HookWidget {
                         child: Container(
                           alignment: Alignment.center,
                           color: Colors.blueGrey.shade100,
-                          child: Text('センシティブ'.i18n,
-                              style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
+                          child: Text(
+                            'センシティブ'.i18n,
+                            style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                   ],
