@@ -11,7 +11,6 @@ import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
 import 'package:misskey_dog/feature/home/home_screen.dart';
 import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart';
 import 'package:misskey_dog/feature/note/note_creation_screen.dart';
-import 'package:misskey_dog/feature/note/note_detail_screen.dart';
 import 'package:misskey_dog/feature/note/note_more_action_modal.dart';
 import 'package:misskey_dog/feature/note/share/cached_note_item.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
