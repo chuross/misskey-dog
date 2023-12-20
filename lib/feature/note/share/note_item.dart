@@ -126,7 +126,7 @@ final class _MainContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox.square(
-          dimension: 56,
+          dimension: 48,
           child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(_mainNote.user.avatarUrl ?? '')),
         ),
         const SizedBox(width: 12),

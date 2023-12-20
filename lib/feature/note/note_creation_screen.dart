@@ -156,7 +156,7 @@ final class _RelatedNote extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox.square(
-                dimension: 56,
+                dimension: 48,
                 child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(value.user.avatarUrl ?? '')),
               ),
               const SizedBox(width: 12),
