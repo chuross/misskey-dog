@@ -45,44 +45,36 @@ final class NoteTimeline extends HookConsumerWidget {
                 onNext: onFetchNext,
                 child: CustomScrollView(
                   slivers: [
-                    SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          final noteId = value[index];
+                    SliverList.separated(
+                      itemCount: value.length,
+                      separatorBuilder: (_, __) => Divider(color: context.dividerColorWithOpacity30),
+                      itemBuilder: (context, index) {
+                        final noteId = value[index];
 
-                          return Container(
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: Divider.createBorderSide(context, color: context.dividerColorWithOpacity30),
-                              ),
-                            ),
-                            child: CachedNoteItem(
-                              key: noteId.toKey(),
-                              noteId: noteId,
-                              onBodyPressed: () => NoteDetailRoute(noteId: noteId).push(context),
-                              onReactionPressed: (emoji) => ref.read(cachedNoteProvider(id: noteId).notifier).reaction(emoji),
-                              onHashtagPressed: (hashtag) => HashtagNotesRoute(hashtag: hashtag).push(context),
-                              onUrlPressed: (url) => launchUrl(Uri.parse(url)),
-                              onReplyPressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId).push(context),
-                              onRenotePressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId, isRenoted: true).push(context),
-                              onReactionAddPressed: () => showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                showDragHandle: true,
-                                builder: (_) => EmojiReactionCreationModal(onEmojiSelected: (emoji) {
-                                  ref.read(cachedNoteProvider(id: noteId).notifier).reaction(emoji);
-                                }),
-                              ),
-                              onMoreActionPressed: () => showModalBottomSheet(
-                                context: context,
-                                showDragHandle: true,
-                                builder: (_) => NoteMoreActionModal(noteId: noteId),
-                              ),
-                            ),
-                          );
-                        },
-                        childCount: value.length,
-                      ),
+                        return CachedNoteItem(
+                          key: noteId.toKey(),
+                          noteId: noteId,
+                          onBodyPressed: () => NoteDetailRoute(noteId: noteId).push(context),
+                          onReactionPressed: (emoji) => ref.read(cachedNoteProvider(id: noteId).notifier).reaction(emoji),
+                          onHashtagPressed: (hashtag) => HashtagNotesRoute(hashtag: hashtag).push(context),
+                          onUrlPressed: (url) => launchUrl(Uri.parse(url)),
+                          onReplyPressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId).push(context),
+                          onRenotePressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId, isRenoted: true).push(context),
+                          onReactionAddPressed: () => showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            showDragHandle: true,
+                            builder: (_) => EmojiReactionCreationModal(onEmojiSelected: (emoji) {
+                              ref.read(cachedNoteProvider(id: noteId).notifier).reaction(emoji);
+                            }),
+                          ),
+                          onMoreActionPressed: () => showModalBottomSheet(
+                            context: context,
+                            showDragHandle: true,
+                            builder: (_) => NoteMoreActionModal(noteId: noteId),
+                          ),
+                        );
+                      },
                     ),
                     SliverToBoxAdapter(
                       child: const SizedBox(
