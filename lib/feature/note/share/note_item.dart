@@ -56,28 +56,25 @@ final class NoteItem extends StatelessWidget {
       );
     }
 
-    return GestureDetector(
-      onTap: onBodyPressed,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _RenotedInfo(note: note),
-          _MainContent(
-            note: note,
-            onHashtagPressed: onHashtagPressed,
-            onUrlPressed: onUrlPressed,
-          ),
-          const SizedBox(height: 12),
-          _Reactions(note: note, onReactionPressed: onReactionPressed),
-          _ActionButtons(
-            onReplyPressed: onReplyPressed,
-            onRenotePressed: onRenotePressed,
-            onReactionAddPressed: onReactionAddPressed,
-            onMoreActionPressed: onMoreActionPressed,
-          ),
-        ],
-      ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16)),
-    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _RenotedInfo(note: note),
+        _MainContent(
+          note: note,
+          onHashtagPressed: onHashtagPressed,
+          onUrlPressed: onUrlPressed,
+        ),
+        const SizedBox(height: 12),
+        _Reactions(note: note, onReactionPressed: onReactionPressed),
+        _ActionButtons(
+          onReplyPressed: onReplyPressed,
+          onRenotePressed: onRenotePressed,
+          onReactionAddPressed: onReactionAddPressed,
+          onMoreActionPressed: onMoreActionPressed,
+        ),
+      ],
+    ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
   }
 }
 
