@@ -16,6 +16,7 @@ abstract class NoteFile with _$NoteFile {
   }) = _NoteFile;
 
   bool get isImage => type.startsWith('image/');
+  bool get isVideo => type.startsWith('video/');
 
   factory NoteFile.fromJson(Map<String, dynamic> json) => _$NoteFileFromJson(json);
 }

@@ -130,6 +130,7 @@ final class NoteCreationScreen extends HookConsumerWidget {
         );
         created.value = true;
       },
+      const [],
     );
   }
 }

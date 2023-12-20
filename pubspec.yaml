@@ -30,6 +30,7 @@ dependencies:
   universal_platform: ^1.0.0+1
   url_launcher: ^6.2.1
   uuid: ^4.2.1
+  video_player: ^2.8.1
   web_socket_channel: ^2.4.0
 
 dev_dependencies:

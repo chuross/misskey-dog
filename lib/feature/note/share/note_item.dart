@@ -7,6 +7,7 @@ import 'package:misskey_dog/core/extension/date_time.dart';
 import 'package:misskey_dog/core/extension/string.dart';
 
 import 'package:misskey_dog/core/extension/widget.dart';
+import 'package:misskey_dog/core/hook/use_video_player_controller.dart';
 
 import 'package:misskey_dog/feature/emoji/share/emoji_view.dart';
 import 'package:misskey_dog/feature/home/home_screen.dart';
@@ -16,6 +17,7 @@ import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/note/note_file.dart';
 import 'package:misskey_dog/model/note/note_reaction.dart';
+import 'package:video_player/video_player.dart';
 
 final class NoteItem extends StatelessWidget {
   final Note note;
@@ -191,6 +193,7 @@ final class _NoteFiles extends HookWidget {
     }
 
     final imageFiles = files.where((e) => e.isImage).toList();
+    final videoFiles = files.where((e) => e.isVideo).toList();
     final isSensitiveRemoved = useState(imageFiles.every((e) => !e.isSensitive));
 
     if (imageFiles.length == 1) {
@@ -200,6 +203,10 @@ final class _NoteFiles extends HookWidget {
         isSensitiveRemoved: isSensitiveRemoved.value,
         onSensitiveRemove: () => isSensitiveRemoved.value = true,
       );
+    }
+
+    if (videoFiles.length == 1) {
+      return _Video(file: files.first, withPlaying: true);
     }
 
     return GridView.count(
@@ -260,6 +267,30 @@ final class _Image extends StatelessWidget {
                 child: Text('センシティブ'.i18n, style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
               ),
       ),
+    );
+  }
+}
+
+final class _Video extends HookWidget {
+  final NoteFile file;
+  final bool withPlaying;
+
+  const _Video({required this.file, required this.withPlaying});
+
+  @override
+  Widget build(BuildContext context) {
+    final (controller, isReady) = useVideoPlayerController(file.url);
+
+    useEffect(() {
+      controller.setVolume(0);
+
+      if (isReady && withPlaying) controller.play();
+      return null;
+    }, [isReady]);
+
+    return AspectRatio(
+      aspectRatio: isReady ? controller.value.aspectRatio : 16 / 9,
+      child: isReady ? VideoPlayer(controller) : const CircularProgressIndicator(strokeWidth: 2),
     );
   }
 }

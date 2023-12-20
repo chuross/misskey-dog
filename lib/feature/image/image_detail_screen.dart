@@ -38,7 +38,7 @@ final class ImageDetailScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = useMemoized(() => TransformationController());
+    final controller = useMemoized(() => TransformationController(), const []);
     final currentScale = useState(1.0);
 
     useEffect(() {
