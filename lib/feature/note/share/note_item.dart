@@ -315,26 +315,29 @@ final class _Video extends HookWidget {
         child: AspectRatio(
           aspectRatio: isReady ? controller.value.aspectRatio : 16 / 9,
           child: isReady
-              ? Stack(
-                  children: [
-                    VideoPlayer(controller),
-                    IconButton(
-                      onPressed: () => isMute.value = !isMute.value,
-                      icon: Icon(isMute.value ? Icons.volume_off : Icons.volume_up),
-                      iconSize: 20,
-                    ),
-                    if (!isSensitiveRemoved)
-                      Positioned.fill(
-                        child: Container(
-                          alignment: Alignment.center,
-                          color: Colors.blueGrey.shade100,
-                          child: Text(
-                            'センシティブ'.i18n,
-                            style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+              ? Hero(
+                  tag: file.url,
+                  child: Stack(
+                    children: [
+                      VideoPlayer(controller),
+                      IconButton(
+                        onPressed: () => isMute.value = !isMute.value,
+                        icon: Icon(isMute.value ? Icons.volume_off : Icons.volume_up),
+                        iconSize: 20,
+                      ),
+                      if (!isSensitiveRemoved)
+                        Positioned.fill(
+                          child: Container(
+                            alignment: Alignment.center,
+                            color: Colors.blueGrey.shade100,
+                            child: Text(
+                              'センシティブ'.i18n,
+                              style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 )
               : const SizedBox.square(dimension: 24, child: CircularProgressIndicator(strokeWidth: 2)),
         ),
