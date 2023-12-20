@@ -231,7 +231,6 @@ final class _NoteFiles extends HookWidget {
 
 final class _FileView extends StatelessWidget {
   final NoteFile file;
-  final double? imageHeight;
   final bool withPlayingVideo;
   final bool isPlayableVideo;
   final double? videoAspectRatio;
@@ -241,7 +240,6 @@ final class _FileView extends StatelessWidget {
 
   const _FileView({
     required this.file,
-    this.imageHeight,
     this.withPlayingVideo = true,
     this.isPlayableVideo = true,
     this.videoAspectRatio,
@@ -255,7 +253,6 @@ final class _FileView extends StatelessWidget {
     return switch (file) {
       final file when file.isImage => _ImageView(
           file: file,
-          height: imageHeight,
           isSensitiveRemoved: isSensitiveRemoved,
           onSensitiveRemove: onSensitiveRemove,
           onTapped: onTapped,
@@ -275,14 +272,12 @@ final class _FileView extends StatelessWidget {
 
 final class _ImageView extends StatelessWidget {
   final NoteFile file;
-  final double? height;
   final bool isSensitiveRemoved;
   final void Function() onSensitiveRemove;
   final void Function(NoteFile) onTapped;
 
   const _ImageView({
     required this.file,
-    required this.height,
     required this.isSensitiveRemoved,
     required this.onSensitiveRemove,
     required this.onTapped,
@@ -294,26 +289,30 @@ final class _ImageView extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
       child: GestureDetector(
         onTap: () => isSensitiveRemoved ? onTapped(file) : onSensitiveRemove(),
-        child: isSensitiveRemoved
-            ? Hero(
-                tag: file.url,
-                child: CachedNetworkImage(
-                  imageUrl: file.thumbnailUrl ?? file.url,
-                  width: double.infinity,
-                  height: height,
-                  fit: BoxFit.cover,
-                  fadeInDuration: const Duration(milliseconds: 200),
+        child: Stack(
+          children: [
+            Hero(
+              tag: file.url,
+              child: CachedNetworkImage(
+                imageUrl: file.thumbnailUrl ?? file.url,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                fadeInDuration: const Duration(milliseconds: 200),
+              ),
+            ),
+            if (!isSensitiveRemoved)
+              Positioned.fill(
+                child: Container(
+                  alignment: Alignment.center,
+                  color: Colors.blueGrey.shade100,
+                  child: Text(
+                    'センシティブ'.i18n,
+                    style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
                 ),
               )
-            : Container(
-                alignment: Alignment.center,
-                color: Colors.blueGrey.shade100,
-                height: height,
-                child: Text(
-                  'センシティブ'.i18n,
-                  style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-              ),
+          ],
+        ),
       ),
     );
   }
