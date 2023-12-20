@@ -122,6 +122,7 @@ final class _ImageView extends HookWidget {
                 imageUrl: url,
                 width: double.infinity,
                 height: double.infinity,
+                fit: BoxFit.contain,
                 fadeInDuration: Duration.zero,
                 filterQuality: FilterQuality.high,
                 placeholder: (_, __) => switch (thumbnailUrl) {
