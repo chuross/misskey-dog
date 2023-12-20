@@ -280,17 +280,36 @@ final class _Video extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final (controller, isReady) = useVideoPlayerController(file.url);
+    final isMute = useState(true);
 
     useEffect(() {
-      controller.setVolume(0);
-
       if (isReady && withPlaying) controller.play();
+
       return null;
     }, [isReady]);
 
-    return AspectRatio(
-      aspectRatio: isReady ? controller.value.aspectRatio : 16 / 9,
-      child: isReady ? VideoPlayer(controller) : const CircularProgressIndicator(strokeWidth: 2),
+    useEffect(() {
+      controller.setVolume(isMute.value ? 0 : 1);
+      return null;
+    }, [isMute.value]);
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: AspectRatio(
+        aspectRatio: isReady ? controller.value.aspectRatio : 16 / 9,
+        child: isReady
+            ? Stack(
+                children: [
+                  VideoPlayer(controller),
+                  IconButton(
+                    onPressed: () => isMute.value = !isMute.value,
+                    icon: Icon(isMute.value ? Icons.volume_off : Icons.volume_up),
+                    iconSize: 20,
+                  ),
+                ],
+              )
+            : const CircularProgressIndicator(strokeWidth: 2),
+      ),
     );
   }
 }
