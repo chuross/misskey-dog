@@ -354,6 +354,13 @@ final class _VideoView extends HookWidget {
                         icon: Icon(isMute.value ? Icons.volume_off : Icons.volume_up),
                         iconSize: 20,
                       ),
+                      if (!controller.value.isPlaying)
+                        IconButton(
+                          onPressed: () => controller.play(),
+                          iconSize: 56,
+                          color: context.theme.primaryColor,
+                          icon: const Icon(Icons.play_circle_outline),
+                        ).align(Alignment.center),
                       if (!isSensitiveRemoved)
                         Positioned.fill(
                           child: Container(

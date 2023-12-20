@@ -10,5 +10,5 @@ import 'package:video_player/video_player.dart';
     return () => controller.dispose();
   }, [controller]);
 
-  return (controller, isReady.value);
+  return (useListenable(controller), isReady.value);
 }
