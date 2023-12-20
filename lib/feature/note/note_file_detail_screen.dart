@@ -74,15 +74,8 @@ final class _ImageView extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = useMemoized(() => TransformationController(), const []);
-    final currentScale = useState(1.0);
 
-    useEffect(() {
-      controller.addListener(() {
-        currentScale.value = controller.value.getMaxScaleOnAxis();
-      });
-
-      return () => controller.dispose();
-    }, const []);
+    useEffect(() => () => controller.dispose(), [controller]);
 
     return InteractiveViewer(
       transformationController: controller,
@@ -112,7 +105,7 @@ final class _ImageView extends HookWidget {
             }
           },
           child: AbsorbPointer(
-            absorbing: currentScale.value != 1.0,
+            absorbing: controller.value == Matrix4.identity(),
             child: Dismissible(
               key: url.toKey(),
               resizeDuration: null,
