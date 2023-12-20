@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:misskey_dog/model/note/note_file_properties.dart';
 
 part 'note_file.freezed.dart';
 part 'note_file.g.dart';
@@ -13,6 +14,7 @@ abstract class NoteFile with _$NoteFile {
     required String url,
     required String? thumbnailUrl,
     required bool isSensitive,
+    required NoteFileProperties? properties,
   }) = _NoteFile;
 
   bool get isImage => type.startsWith('image/');

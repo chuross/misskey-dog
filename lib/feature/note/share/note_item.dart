@@ -289,29 +289,35 @@ final class _ImageView extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
       child: GestureDetector(
         onTap: () => isSensitiveRemoved ? onTapped(file) : onSensitiveRemove(),
-        child: Stack(
-          children: [
-            Hero(
-              tag: file.url,
-              child: CachedNetworkImage(
-                imageUrl: file.thumbnailUrl ?? file.url,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                fadeInDuration: Duration.zero,
-              ),
-            ),
-            if (!isSensitiveRemoved)
-              Positioned.fill(
-                child: Container(
-                  alignment: Alignment.center,
-                  color: Colors.blueGrey.shade100,
-                  child: Text(
-                    'センシティブ'.i18n,
-                    style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
+        child: AspectRatio(
+          aspectRatio: switch (file.properties) {
+            final properties? when properties.width != null && properties.height != null => properties.width! / properties.height!,
+            _ => 1 / 1,
+          },
+          child: Stack(
+            children: [
+              Hero(
+                tag: file.url,
+                child: CachedNetworkImage(
+                  imageUrl: file.thumbnailUrl ?? file.url,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  fadeInDuration: Duration.zero,
                 ),
-              )
-          ],
+              ),
+              if (!isSensitiveRemoved)
+                Positioned.fill(
+                  child: Container(
+                    alignment: Alignment.center,
+                    color: Colors.blueGrey.shade100,
+                    child: Text(
+                      'センシティブ'.i18n,
+                      style: context.textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                )
+            ],
+          ),
         ),
       ),
     );

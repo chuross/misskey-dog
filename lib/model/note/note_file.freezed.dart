@@ -25,6 +25,7 @@ mixin _$NoteFile {
   String get url => throw _privateConstructorUsedError;
   String? get thumbnailUrl => throw _privateConstructorUsedError;
   bool get isSensitive => throw _privateConstructorUsedError;
+  NoteFileProperties? get properties => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +43,10 @@ abstract class $NoteFileCopyWith<$Res> {
       String type,
       String url,
       String? thumbnailUrl,
-      bool isSensitive});
+      bool isSensitive,
+      NoteFileProperties? properties});
+
+  $NoteFilePropertiesCopyWith<$Res>? get properties;
 }
 
 /// @nodoc
@@ -63,6 +67,7 @@ class _$NoteFileCopyWithImpl<$Res, $Val extends NoteFile>
     Object? url = null,
     Object? thumbnailUrl = freezed,
     Object? isSensitive = null,
+    Object? properties = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -85,7 +90,23 @@ class _$NoteFileCopyWithImpl<$Res, $Val extends NoteFile>
           ? _value.isSensitive
           : isSensitive // ignore: cast_nullable_to_non_nullable
               as bool,
+      properties: freezed == properties
+          ? _value.properties
+          : properties // ignore: cast_nullable_to_non_nullable
+              as NoteFileProperties?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $NoteFilePropertiesCopyWith<$Res>? get properties {
+    if (_value.properties == null) {
+      return null;
+    }
+
+    return $NoteFilePropertiesCopyWith<$Res>(_value.properties!, (value) {
+      return _then(_value.copyWith(properties: value) as $Val);
+    });
   }
 }
 
@@ -102,7 +123,11 @@ abstract class _$$NoteFileImplCopyWith<$Res>
       String type,
       String url,
       String? thumbnailUrl,
-      bool isSensitive});
+      bool isSensitive,
+      NoteFileProperties? properties});
+
+  @override
+  $NoteFilePropertiesCopyWith<$Res>? get properties;
 }
 
 /// @nodoc
@@ -121,6 +146,7 @@ class __$$NoteFileImplCopyWithImpl<$Res>
     Object? url = null,
     Object? thumbnailUrl = freezed,
     Object? isSensitive = null,
+    Object? properties = freezed,
   }) {
     return _then(_$NoteFileImpl(
       id: null == id
@@ -143,6 +169,10 @@ class __$$NoteFileImplCopyWithImpl<$Res>
           ? _value.isSensitive
           : isSensitive // ignore: cast_nullable_to_non_nullable
               as bool,
+      properties: freezed == properties
+          ? _value.properties
+          : properties // ignore: cast_nullable_to_non_nullable
+              as NoteFileProperties?,
     ));
   }
 }
@@ -155,7 +185,8 @@ class _$NoteFileImpl extends _NoteFile {
       required this.type,
       required this.url,
       required this.thumbnailUrl,
-      required this.isSensitive})
+      required this.isSensitive,
+      required this.properties})
       : super._();
 
   factory _$NoteFileImpl.fromJson(Map<String, dynamic> json) =>
@@ -171,10 +202,12 @@ class _$NoteFileImpl extends _NoteFile {
   final String? thumbnailUrl;
   @override
   final bool isSensitive;
+  @override
+  final NoteFileProperties? properties;
 
   @override
   String toString() {
-    return 'NoteFile(id: $id, type: $type, url: $url, thumbnailUrl: $thumbnailUrl, isSensitive: $isSensitive)';
+    return 'NoteFile(id: $id, type: $type, url: $url, thumbnailUrl: $thumbnailUrl, isSensitive: $isSensitive, properties: $properties)';
   }
 
   @override
@@ -188,13 +221,15 @@ class _$NoteFileImpl extends _NoteFile {
             (identical(other.thumbnailUrl, thumbnailUrl) ||
                 other.thumbnailUrl == thumbnailUrl) &&
             (identical(other.isSensitive, isSensitive) ||
-                other.isSensitive == isSensitive));
+                other.isSensitive == isSensitive) &&
+            (identical(other.properties, properties) ||
+                other.properties == properties));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, type, url, thumbnailUrl, isSensitive);
+  int get hashCode => Object.hash(
+      runtimeType, id, type, url, thumbnailUrl, isSensitive, properties);
 
   @JsonKey(ignore: true)
   @override
@@ -216,7 +251,8 @@ abstract class _NoteFile extends NoteFile {
       required final String type,
       required final String url,
       required final String? thumbnailUrl,
-      required final bool isSensitive}) = _$NoteFileImpl;
+      required final bool isSensitive,
+      required final NoteFileProperties? properties}) = _$NoteFileImpl;
   const _NoteFile._() : super._();
 
   factory _NoteFile.fromJson(Map<String, dynamic> json) =
@@ -232,6 +268,8 @@ abstract class _NoteFile extends NoteFile {
   String? get thumbnailUrl;
   @override
   bool get isSensitive;
+  @override
+  NoteFileProperties? get properties;
   @override
   @JsonKey(ignore: true)
   _$$NoteFileImplCopyWith<_$NoteFileImpl> get copyWith =>

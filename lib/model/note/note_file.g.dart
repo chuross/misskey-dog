@@ -13,6 +13,10 @@ _$NoteFileImpl _$$NoteFileImplFromJson(Map<String, dynamic> json) =>
       url: json['url'] as String,
       thumbnailUrl: json['thumbnailUrl'] as String?,
       isSensitive: json['isSensitive'] as bool,
+      properties: json['properties'] == null
+          ? null
+          : NoteFileProperties.fromJson(
+              json['properties'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$NoteFileImplToJson(_$NoteFileImpl instance) =>
@@ -22,4 +26,5 @@ Map<String, dynamic> _$$NoteFileImplToJson(_$NoteFileImpl instance) =>
       'url': instance.url,
       'thumbnailUrl': instance.thumbnailUrl,
       'isSensitive': instance.isSensitive,
+      'properties': instance.properties,
     };
