@@ -300,7 +300,6 @@ final class _ImageView extends StatelessWidget {
                 tag: file.url,
                 child: CachedNetworkImage(
                   imageUrl: file.thumbnailUrl ?? file.url,
-                  width: double.infinity,
                   fit: BoxFit.cover,
                   fadeInDuration: Duration.zero,
                 ),
