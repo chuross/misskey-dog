@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -46,10 +47,30 @@ final class UserDetailScreen extends HookConsumerWidget {
             body: NestedScrollView(
               headerSliverBuilder: (_, __) => [
                 SliverAppBar(
-                  title: MisskeyText(
-                    text: value.displayName,
-                    baseTextStyle: context.textTheme.titleSmall,
-                    externalTextEmojiUrlMap: value.externalEmojiUrlMap,
+                  expandedHeight: 250,
+                  flexibleSpace: Stack(
+                    children: [
+                      if (value.bannerUrl != null)
+                        Positioned.fill(
+                          child: CachedNetworkImage(
+                            imageUrl: value.bannerUrl ?? '',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      if (value.bannerUrl == null)
+                        Positioned.fill(
+                          child: Container(color: context.theme.primaryColor.withOpacity(0.5)),
+                        ),
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.center,
+                            end: Alignment.bottomCenter,
+                            colors: [Colors.white.withOpacity(0.0), Colors.white],
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                   bottom: TabBar(tabs: [
                     for (final tab in tabs) Tab(text: tab.title),
