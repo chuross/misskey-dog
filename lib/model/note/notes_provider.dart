@@ -3,6 +3,7 @@ import 'package:misskey_dog/core/api/request/get_global_notes_request.dart';
 import 'package:misskey_dog/core/api/request/get_hash_tag_notes_request.dart';
 import 'package:misskey_dog/core/api/request/get_local_notes_request.dart';
 import 'package:misskey_dog/core/api/request/get_notes_request.dart';
+import 'package:misskey_dog/core/api/request/get_user_notes_request.dart';
 import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
@@ -223,6 +224,55 @@ final class HashtagNoteIdsWithCache extends _$HashtagNoteIdsWithCache {
     }
 
     state = AsyncData([...state.value!, ...newNotes.map((note) => note.id)]);
+  }
+
+  void _bindNoteCache(Note note) {
+    ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+    ref.listen(cachedNoteProvider(id: note.id), (_, __) {});
+  }
+}
+
+@riverpod
+final class UserNotesIdsWithCache extends _$UserNotesIdsWithCache {
+  @override
+  Future<List<String>> build({required String userId, bool? hasFiles}) async {
+    final client = await ref.watch(misskeyClientProvider().future);
+
+    final notes = await client.getUserNotes(
+      request: GetUserNotesRequest(
+        userId: userId,
+        limit: 100,
+      ).toJson().removeAllNullValueKeys(),
+    );
+
+    for (final note in notes) {
+      _bindNoteCache(note);
+    }
+
+    return notes.map((note) => note.id).toList();
+  }
+
+  Future<void> fetchNext() async {
+    if (state.isLoading) return;
+
+    final lastNoteId = state.value?.lastOrNull;
+    if (lastNoteId == null) return;
+
+    final client = await ref.watch(misskeyClientProvider().future);
+
+    final newNotes = await client.getUserNotes(
+      request: GetUserNotesRequest(
+        userId: userId,
+        untilId: lastNoteId,
+        limit: 100,
+      ).toJson().removeAllNullValueKeys(),
+    );
+
+    for (final note in newNotes) {
+      _bindNoteCache(note);
+    }
+
+    state = AsyncData([...state.requireValue, ...newNotes.map((note) => note.id)]);
   }
 
   void _bindNoteCache(Note note) {

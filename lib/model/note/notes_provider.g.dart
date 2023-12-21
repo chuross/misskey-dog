@@ -661,5 +661,175 @@ class _HashtagNoteIdsWithCacheProviderElement
   @override
   bool? get hasFiles => (origin as HashtagNoteIdsWithCacheProvider).hasFiles;
 }
+
+String _$userNotesIdsWithCacheHash() =>
+    r'6cd88a23c810d8068d33866ff33440fc495ed1a6';
+
+abstract class _$UserNotesIdsWithCache
+    extends BuildlessAutoDisposeAsyncNotifier<List<String>> {
+  late final String userId;
+  late final bool? hasFiles;
+
+  FutureOr<List<String>> build({
+    required String userId,
+    bool? hasFiles,
+  });
+}
+
+/// See also [UserNotesIdsWithCache].
+@ProviderFor(UserNotesIdsWithCache)
+const userNotesIdsWithCacheProvider = UserNotesIdsWithCacheFamily();
+
+/// See also [UserNotesIdsWithCache].
+class UserNotesIdsWithCacheFamily extends Family<AsyncValue<List<String>>> {
+  /// See also [UserNotesIdsWithCache].
+  const UserNotesIdsWithCacheFamily();
+
+  /// See also [UserNotesIdsWithCache].
+  UserNotesIdsWithCacheProvider call({
+    required String userId,
+    bool? hasFiles,
+  }) {
+    return UserNotesIdsWithCacheProvider(
+      userId: userId,
+      hasFiles: hasFiles,
+    );
+  }
+
+  @override
+  UserNotesIdsWithCacheProvider getProviderOverride(
+    covariant UserNotesIdsWithCacheProvider provider,
+  ) {
+    return call(
+      userId: provider.userId,
+      hasFiles: provider.hasFiles,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'userNotesIdsWithCacheProvider';
+}
+
+/// See also [UserNotesIdsWithCache].
+class UserNotesIdsWithCacheProvider
+    extends AutoDisposeAsyncNotifierProviderImpl<UserNotesIdsWithCache,
+        List<String>> {
+  /// See also [UserNotesIdsWithCache].
+  UserNotesIdsWithCacheProvider({
+    required String userId,
+    bool? hasFiles,
+  }) : this._internal(
+          () => UserNotesIdsWithCache()
+            ..userId = userId
+            ..hasFiles = hasFiles,
+          from: userNotesIdsWithCacheProvider,
+          name: r'userNotesIdsWithCacheProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$userNotesIdsWithCacheHash,
+          dependencies: UserNotesIdsWithCacheFamily._dependencies,
+          allTransitiveDependencies:
+              UserNotesIdsWithCacheFamily._allTransitiveDependencies,
+          userId: userId,
+          hasFiles: hasFiles,
+        );
+
+  UserNotesIdsWithCacheProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.userId,
+    required this.hasFiles,
+  }) : super.internal();
+
+  final String userId;
+  final bool? hasFiles;
+
+  @override
+  FutureOr<List<String>> runNotifierBuild(
+    covariant UserNotesIdsWithCache notifier,
+  ) {
+    return notifier.build(
+      userId: userId,
+      hasFiles: hasFiles,
+    );
+  }
+
+  @override
+  Override overrideWith(UserNotesIdsWithCache Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: UserNotesIdsWithCacheProvider._internal(
+        () => create()
+          ..userId = userId
+          ..hasFiles = hasFiles,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        userId: userId,
+        hasFiles: hasFiles,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeAsyncNotifierProviderElement<UserNotesIdsWithCache, List<String>>
+      createElement() {
+    return _UserNotesIdsWithCacheProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is UserNotesIdsWithCacheProvider &&
+        other.userId == userId &&
+        other.hasFiles == hasFiles;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, userId.hashCode);
+    hash = _SystemHash.combine(hash, hasFiles.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin UserNotesIdsWithCacheRef
+    on AutoDisposeAsyncNotifierProviderRef<List<String>> {
+  /// The parameter `userId` of this provider.
+  String get userId;
+
+  /// The parameter `hasFiles` of this provider.
+  bool? get hasFiles;
+}
+
+class _UserNotesIdsWithCacheProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<UserNotesIdsWithCache,
+        List<String>> with UserNotesIdsWithCacheRef {
+  _UserNotesIdsWithCacheProviderElement(super.provider);
+
+  @override
+  String get userId => (origin as UserNotesIdsWithCacheProvider).userId;
+  @override
+  bool? get hasFiles => (origin as UserNotesIdsWithCacheProvider).hasFiles;
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

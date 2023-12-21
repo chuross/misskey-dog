@@ -44,6 +44,9 @@ abstract class MisskeyClient {
   @POST('/api/notes/search')
   Future<List<Note>> getNotes({@Body() required Map<String, dynamic> request});
 
+  @POST('/api/users/notes')
+  Future<List<Note>> getUserNotes({@Body() required Map<String, dynamic> request});
+
   @POST('/api/notes/search-by-tag')
   Future<List<Note>> getHashTagNotes({@Body() required Map<String, dynamic> request});
 
