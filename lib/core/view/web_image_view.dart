@@ -25,7 +25,7 @@ final class WebImageView extends HookWidget {
           ..width = width?.map((p) => p.toInt())
           ..height = height?.map((p) => p.toInt())
           ..style.objectFit = 'contain'
-          ..style.width = 'auto'
+          ..style.width = '100%'
           ..style.height = '100%',
       );
 
@@ -33,7 +33,7 @@ final class WebImageView extends HookWidget {
     }, [imageUrl]);
 
     return SizedBox(
-      width: width,
+      width: width ?? 40,
       height: height,
       child: HtmlElementView(
         viewType: viewId,
