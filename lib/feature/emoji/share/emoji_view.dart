@@ -37,6 +37,7 @@ final class _LocalEmojiView extends ConsumerWidget {
           height: height,
           fit: BoxFit.fitHeight,
           fadeInDuration: Duration.zero,
+          matchTextDirection: true,
         );
       case AsyncError():
         return SizedBox.square(dimension: height);
