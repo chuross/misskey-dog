@@ -32,12 +32,10 @@ final class _LocalEmojiView extends ConsumerWidget {
 
     switch (localEmoji) {
       case AsyncData(value: final localEmoji):
-        return CachedNetworkImage(
-          imageUrl: localEmoji.url ?? '',
+        return Image(
+          image: CachedNetworkImageProvider(localEmoji.url ?? ''),
           height: height,
           fit: BoxFit.fitHeight,
-          fadeInDuration: Duration.zero,
-          matchTextDirection: true,
         );
       case AsyncError():
         return SizedBox.square(dimension: height);
