@@ -48,6 +48,15 @@ final class UserDetailScreen extends HookConsumerWidget {
               headerSliverBuilder: (_, __) => [
                 SliverAppBar(
                   expandedHeight: 280,
+                  leading: Container(
+                    alignment: Alignment.centerRight,
+                    margin: const EdgeInsets.only(left: 4),
+                    decoration: BoxDecoration(color: Colors.black.withOpacity(0.2), shape: BoxShape.circle),
+                    child: BackButton(
+                      onPressed: () => context.pop(),
+                      color: Colors.white,
+                    ),
+                  ),
                   flexibleSpace: Stack(
                     children: [
                       if (value.bannerUrl != null)
