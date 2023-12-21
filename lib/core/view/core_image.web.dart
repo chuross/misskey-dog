@@ -22,7 +22,9 @@ final class CoreImageWeb extends HookWidget {
         viewId,
         (_) => ImageElement()
           ..src = imageUrl
-          ..style.objectFit = 'contain',
+          ..style.objectFit = 'contain'
+          ..style.width = 'auto'
+          ..style.height = 'auto',
       );
 
       return null;
