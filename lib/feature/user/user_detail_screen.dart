@@ -61,8 +61,8 @@ final class UserDetailScreen extends HookConsumerWidget {
                     children: [
                       if (value.bannerUrl != null)
                         Positioned.fill(
-                          child: CachedNetworkImage(
-                            imageUrl: value.bannerUrl ?? '',
+                          child: Image(
+                            image: CachedNetworkImageProvider(value.bannerUrl ?? ''),
                             fit: BoxFit.cover,
                           ),
                         ),

@@ -98,7 +98,7 @@ Widget _item({
                   borderRadius: BorderRadius.circular(16),
                   color: Colors.grey.shade200.withOpacity(0.6),
                 ),
-                child: CachedNetworkImage(imageUrl: subImageUrl, height: 20, fit: BoxFit.contain),
+                child: Image(image: CachedNetworkImageProvider(subImageUrl), height: 20, fit: BoxFit.contain),
               ),
             ),
         ],
