@@ -79,16 +79,6 @@ final class UserDetailScreen extends HookConsumerWidget {
                           ),
                         ),
                       ),
-                      Positioned(
-                        bottom: 80,
-                        left: 16,
-                        child: SizedBox.square(
-                          dimension: 80,
-                          child: CircleAvatar(
-                            foregroundImage: CachedNetworkImageProvider(value.avatarUrl ?? ''),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                   bottom: TabBar(tabs: [

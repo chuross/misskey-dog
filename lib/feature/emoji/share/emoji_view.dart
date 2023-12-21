@@ -36,6 +36,7 @@ final class _LocalEmojiView extends ConsumerWidget {
           imageUrl: localEmoji.url ?? '',
           height: height,
           fit: BoxFit.fitHeight,
+          fadeInDuration: Duration.zero,
         );
       case AsyncError():
         return SizedBox.square(dimension: height, child: const SizedBox.shrink());

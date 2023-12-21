@@ -317,6 +317,7 @@ final class _ImageView extends StatelessWidget {
                   width: double.infinity,
                   height: double.infinity,
                   fit: BoxFit.cover,
+                  fadeInDuration: Duration.zero,
                 ),
               ),
               if (!isSensitiveRemoved)
