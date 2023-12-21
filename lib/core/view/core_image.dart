@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:misskey_dog/core/view/core_image.stub.dart' if (dart.library.html) 'package:misskey_dog/core/view/web_image_view.dart';
+import 'package:misskey_dog/core/view/core_image.stub.dart' if (dart.library.html) 'package:misskey_dog/core/view/core_image.web.dart';
 
 final class CoreImage extends StatelessWidget {
   final String imageUrl;
