@@ -17,7 +17,6 @@ final class UserDetailScreen extends StatelessWidget {
   final String userId;
 
   static final _tabs = [
-    (title: '概要'.i18n, child: const Text('a')),
     (title: 'ノート'.i18n, child: const Text('b')),
   ];
 
