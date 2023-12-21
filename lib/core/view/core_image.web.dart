@@ -20,13 +20,11 @@ final class CoreImageWeb extends HookWidget {
     useEffect(() {
       ui.platformViewRegistry.registerViewFactory(
         viewId,
-        (_) => ImageElement()
-          ..src = imageUrl
-          ..width = width?.map((p) => p.toInt())
-          ..height = height?.map((p) => p.toInt())
-          ..style.objectFit = 'contain'
-          ..style.width = '100%'
-          ..style.height = '100%',
+        (_) => ImageElement(
+          src: imageUrl,
+          width: width?.map((p) => p.toInt()),
+          height: height?.map((p) => p.toInt()),
+        )..style.objectFit = 'contain',
       );
 
       return null;
