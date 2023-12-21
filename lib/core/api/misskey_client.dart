@@ -5,6 +5,7 @@ import 'package:misskey_dog/model/account/account.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/notification/notification.dart';
+import 'package:misskey_dog/model/user/user.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:uuid/uuid.dart';
 
@@ -37,6 +38,9 @@ abstract class MisskeyClient {
 
   @POST('/api/miauth/{session}/check')
   Future<Account> authorize(@Path('session') String session);
+
+  @POST('/api/users/show')
+  Future<User> getUser({@Body() required Map<String, dynamic> request});
 
   @POST('/api/notes/show')
   Future<Note> getNote({@Body() required Map<String, dynamic> request});

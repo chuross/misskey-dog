@@ -46,7 +46,7 @@ final class CachedNoteItem extends HookConsumerWidget {
 
     return NoteItem(
       note: note,
-      onUserIconPressed: () => onUserIconPressed(note.user.id),
+      onUserIconPressed: () => onUserIconPressed(note.renote?.user.id ?? note.user.id),
       onReactionPressed: onReactionPressed,
       onHashtagPressed: onHashtagPressed,
       onUrlPressed: onUrlPressed,
