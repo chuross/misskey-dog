@@ -132,9 +132,9 @@ final class _MainContent extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        IconButton(
-          onPressed: onUserIconPressed,
-          icon: SizedBox.square(
+        GestureDetector(
+          onTap: onUserIconPressed,
+          child: SizedBox.square(
             dimension: 48,
             child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(_mainNote.user.avatarUrl ?? '')),
           ),
