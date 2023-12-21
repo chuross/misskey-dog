@@ -26,6 +26,7 @@ abstract class User with _$User {
   }) = _User;
 
   String get displayName => name ?? username;
+  bool get isLocal => instance == null;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }

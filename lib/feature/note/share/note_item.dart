@@ -181,7 +181,7 @@ final class _MainContent extends StatelessWidget {
               onUrlPressed: onUrlPressed,
             ),
             SizedBox(height: _mainNote.text?.isNotEmpty == true ? 8 : 0),
-            _NoteFiles(files: _mainNote.files),
+            _NoteFiles(files: _mainNote.files, isLocal: _mainNote.isLocal),
           ],
         ).expanded()
       ],
@@ -191,8 +191,9 @@ final class _MainContent extends StatelessWidget {
 
 final class _NoteFiles extends HookWidget {
   final List<NoteFile> files;
+  final bool isLocal;
 
-  const _NoteFiles({required this.files});
+  const _NoteFiles({required this.files, required this.isLocal});
 
   @override
   Widget build(BuildContext context) {
@@ -208,6 +209,7 @@ final class _NoteFiles extends HookWidget {
     if (supportedFiles.length == 1) {
       return _FileView(
         file: supportedFiles.first,
+        isLocal: isLocal,
         isSensitiveRemoved: isSensitiveRemoved.value,
         onSensitiveRemove: () => isSensitiveRemoved.value = true,
         onTapped: (file) => NoteFileDetailRoute($extra: (files: files, initialFile: file)).push(context),
@@ -225,6 +227,7 @@ final class _NoteFiles extends HookWidget {
         for (final file in imageFiles)
           _FileView(
             file: file,
+            isLocal: isLocal,
             withPlayingVideo: false,
             isPlayableVideo: false,
             videoAspectRatio: 1,
@@ -239,6 +242,7 @@ final class _NoteFiles extends HookWidget {
 
 final class _FileView extends StatelessWidget {
   final NoteFile file;
+  final bool isLocal;
   final bool withPlayingVideo;
   final bool isPlayableVideo;
   final double? videoAspectRatio;
@@ -248,6 +252,7 @@ final class _FileView extends StatelessWidget {
 
   const _FileView({
     required this.file,
+    required this.isLocal,
     this.withPlayingVideo = true,
     this.isPlayableVideo = true,
     this.videoAspectRatio,
@@ -267,6 +272,7 @@ final class _FileView extends StatelessWidget {
         ),
       final file when file.isVideo => _VideoView(
           file: file,
+          isLocal: isLocal,
           withPlaying: withPlayingVideo,
           isPlayable: isPlayableVideo,
           aspectRatio: videoAspectRatio,
@@ -335,6 +341,7 @@ final class _ImageView extends StatelessWidget {
 
 final class _VideoView extends HookWidget {
   final NoteFile file;
+  final bool isLocal;
   final bool withPlaying;
   final bool isPlayable;
   final bool isSensitiveRemoved;
@@ -343,6 +350,7 @@ final class _VideoView extends HookWidget {
 
   const _VideoView({
     required this.file,
+    required this.isLocal,
     required this.withPlaying,
     required this.isPlayable,
     required this.isSensitiveRemoved,
@@ -352,7 +360,14 @@ final class _VideoView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (controller, isReady) = useVideoPlayerController(file.url);
+    final resolvedUrl = useMemoized(
+      () => switch (file) {
+        final file when !isLocal && file.url.contains('image.webp') => Uri.parse(file.url).queryParameters['url'] ?? file.url,
+        _ => file.url,
+      },
+      [file.url],
+    );
+    final (controller, isReady) = useVideoPlayerController(resolvedUrl);
     final isMute = useState(true);
 
     useEffect(() {

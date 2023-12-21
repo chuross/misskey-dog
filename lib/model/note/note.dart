@@ -28,6 +28,8 @@ abstract class Note with _$Note {
     required int renoteCount,
   }) = _Note;
 
+  bool get isLocal => user.isLocal;
+
   List<NoteReaction> get reactions => reactionCountMap.keys.map((key) {
         return NoteReaction.resolved(
           key,
