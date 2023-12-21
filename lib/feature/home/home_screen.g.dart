@@ -23,6 +23,10 @@ RouteBase get $homeRoute => GoRouteData.$route(
           factory: $NoteFileDetailRouteExtension._fromState,
         ),
         GoRouteData.$route(
+          path: 'users/:userId',
+          factory: $UserDetailRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: 'notes/search',
           factory: $SearchRouteExtension._fromState,
         ),
@@ -99,6 +103,25 @@ extension $NoteFileDetailRouteExtension on NoteFileDetailRoute {
 
   void replace(BuildContext context) =>
       context.replace(location, extra: $extra);
+}
+
+extension $UserDetailRouteExtension on UserDetailRoute {
+  static UserDetailRoute _fromState(GoRouterState state) => UserDetailRoute(
+        userId: state.pathParameters['userId']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/users/${Uri.encodeComponent(userId)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
 
 extension $SearchRouteExtension on SearchRoute {

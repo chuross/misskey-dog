@@ -21,6 +21,7 @@ import 'package:video_player/video_player.dart';
 
 final class NoteItem extends StatelessWidget {
   final Note note;
+  final Function() onUserIconPressed;
   final Function(String) onHashtagPressed;
   final Function(String) onUrlPressed;
   final Function(Emoji emoji) onReactionPressed;
@@ -35,6 +36,7 @@ final class NoteItem extends StatelessWidget {
   const NoteItem({
     super.key,
     required this.note,
+    required this.onUserIconPressed,
     required this.onHashtagPressed,
     required this.onUrlPressed,
     required this.onReactionPressed,
@@ -62,6 +64,7 @@ final class NoteItem extends StatelessWidget {
         _RenotedInfo(note: note),
         _MainContent(
           note: note,
+          onUserIconPressed: onUserIconPressed,
           onHashtagPressed: onHashtagPressed,
           onUrlPressed: onUrlPressed,
         ),
@@ -111,6 +114,7 @@ final class _RenotedInfo extends StatelessWidget {
 
 final class _MainContent extends StatelessWidget {
   final Note note;
+  final Function() onUserIconPressed;
   final Function(String) onHashtagPressed;
   final Function(String) onUrlPressed;
 
@@ -118,6 +122,7 @@ final class _MainContent extends StatelessWidget {
 
   const _MainContent({
     required this.note,
+    required this.onUserIconPressed,
     required this.onHashtagPressed,
     required this.onUrlPressed,
   });
@@ -127,9 +132,12 @@ final class _MainContent extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox.square(
-          dimension: 48,
-          child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(_mainNote.user.avatarUrl ?? '')),
+        IconButton(
+          onPressed: onUserIconPressed,
+          icon: SizedBox.square(
+            dimension: 48,
+            child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(_mainNote.user.avatarUrl ?? '')),
+          ),
         ),
         const SizedBox(width: 12),
         Column(
