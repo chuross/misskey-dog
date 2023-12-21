@@ -511,7 +511,7 @@ final class _ActionButtons extends StatelessWidget {
         IconButton(
           onPressed: onReactionAddPressed,
           iconSize: 20,
-          icon: const Icon(Icons.add),
+          icon: const Icon(Icons.emoji_emotions_outlined),
         ),
         IconButton(
           onPressed: onMoreActionPressed,
