@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:misskey_dog/core/view/misskey_dog_image.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/emoji/emoji_provider.dart';
 
@@ -32,8 +33,8 @@ final class _LocalEmojiView extends ConsumerWidget {
 
     switch (localEmoji) {
       case AsyncData(value: final localEmoji):
-        return Image(
-          image: CachedNetworkImageProvider(localEmoji.url ?? ''),
+        return CoreImageView(
+          imageUrl: localEmoji.url ?? '',
           height: height,
           fit: BoxFit.fitHeight,
         );
