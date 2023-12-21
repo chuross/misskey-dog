@@ -33,7 +33,7 @@ final class _LocalEmojiView extends ConsumerWidget {
 
     switch (localEmoji) {
       case AsyncData(value: final localEmoji):
-        return CoreImageView(
+        return CachedNetworkImage(
           imageUrl: localEmoji.url ?? '',
           height: height,
           fit: BoxFit.fitHeight,
