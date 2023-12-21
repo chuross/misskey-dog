@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-final class WebImageView extends StatelessWidget {
+final class CoreImageWeb extends StatelessWidget {
   final String imageUrl;
   final double? width;
   final double? height;
 
-  const WebImageView({super.key, required this.imageUrl, this.width, this.height});
+  const CoreImageWeb({super.key, required this.imageUrl, this.width, this.height});
 
   @override
   Widget build(BuildContext context) {

@@ -1,15 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:misskey_dog/core/view/web_image_view.stub.dart' if (dart.library.html) 'package:misskey_dog/core/view/web_image_view.dart';
+import 'package:misskey_dog/core/view/core_image.stub.dart' if (dart.library.html) 'package:misskey_dog/core/view/web_image_view.dart';
 
-final class CoreImageView extends StatelessWidget {
+final class CoreImage extends StatelessWidget {
   final String imageUrl;
   final double? width;
   final double? height;
   final BoxFit fit;
 
-  const CoreImageView({
+  const CoreImage({
     super.key,
     required this.imageUrl,
     this.width,
@@ -20,7 +20,7 @@ final class CoreImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return kIsWeb
-        ? WebImageView(
+        ? CoreImageWeb(
             imageUrl: imageUrl,
             width: width,
             height: height,

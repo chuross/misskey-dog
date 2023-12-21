@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:misskey_dog/core/extension/object.dart';
 
-final class WebImageView extends HookWidget {
+final class CoreImageWeb extends HookWidget {
   final String imageUrl;
   final double? width;
   final double? height;
 
-  const WebImageView({super.key, required this.imageUrl, required this.width, required this.height});
+  const CoreImageWeb({super.key, required this.imageUrl, required this.width, required this.height});
 
   @override
   Widget build(BuildContext context) {

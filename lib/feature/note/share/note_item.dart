@@ -8,7 +8,7 @@ import 'package:misskey_dog/core/extension/string.dart';
 
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/core/hook/use_video_player_controller.dart';
-import 'package:misskey_dog/core/view/misskey_dog_image.dart';
+import 'package:misskey_dog/core/view/core_image.dart';
 
 import 'package:misskey_dog/feature/emoji/share/emoji_view.dart';
 import 'package:misskey_dog/feature/home/home_screen.dart';
@@ -313,7 +313,7 @@ final class _ImageView extends StatelessWidget {
             children: [
               Hero(
                 tag: file.url,
-                child: CoreImageView(
+                child: CoreImage(
                   imageUrl: file.thumbnailUrl ?? file.url,
                   width: double.infinity,
                   height: double.infinity,
