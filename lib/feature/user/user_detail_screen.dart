@@ -47,14 +47,14 @@ final class UserDetailScreen extends HookConsumerWidget {
             body: NestedScrollView(
               headerSliverBuilder: (_, __) => [
                 SliverAppBar(
-                  expandedHeight: 250,
+                  expandedHeight: 300,
                   flexibleSpace: Stack(
                     children: [
                       if (value.bannerUrl != null)
                         Positioned.fill(
                           child: CachedNetworkImage(
                             imageUrl: value.bannerUrl ?? '',
-                            fit: BoxFit.contain,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       if (value.bannerUrl == null)
@@ -69,7 +69,17 @@ final class UserDetailScreen extends HookConsumerWidget {
                             colors: [Colors.white.withOpacity(0.0), Colors.white],
                           ),
                         ),
-                      )
+                      ),
+                      Positioned(
+                        bottom: 80,
+                        left: 16,
+                        child: SizedBox.square(
+                          dimension: 80,
+                          child: CircleAvatar(
+                            foregroundImage: CachedNetworkImageProvider(value.avatarUrl ?? ''),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   bottom: TabBar(tabs: [
