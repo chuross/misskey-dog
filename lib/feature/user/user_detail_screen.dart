@@ -47,7 +47,7 @@ final class UserDetailScreen extends HookConsumerWidget {
             body: NestedScrollView(
               headerSliverBuilder: (_, __) => [
                 SliverAppBar(
-                  expandedHeight: 300,
+                  expandedHeight: 280,
                   flexibleSpace: Stack(
                     children: [
                       if (value.bannerUrl != null)
