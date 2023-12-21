@@ -33,7 +33,7 @@ final class CoreImageWeb extends HookWidget {
     }, [imageUrl]);
 
     return SizedBox(
-      width: width ?? 40,
+      width: width,
       height: height,
       child: HtmlElementView(
         viewType: viewId,
