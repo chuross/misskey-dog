@@ -47,7 +47,7 @@ final class UserDetailScreen extends HookConsumerWidget {
             body: NestedScrollView(
               headerSliverBuilder: (_, __) => [
                 SliverAppBar(
-                  expandedHeight: 280,
+                  expandedHeight: 200,
                   leading: Container(
                     alignment: Alignment.centerRight,
                     margin: const EdgeInsets.only(left: 4),
