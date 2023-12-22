@@ -21,6 +21,8 @@ GetUserNotesRequest _$GetUserNotesRequestFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$GetUserNotesRequest {
   String get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'withFiles')
+  bool? get hasFiles => throw _privateConstructorUsedError;
   String? get untilId => throw _privateConstructorUsedError;
   int? get limit => throw _privateConstructorUsedError;
 
@@ -36,7 +38,11 @@ abstract class $GetUserNotesRequestCopyWith<$Res> {
           GetUserNotesRequest value, $Res Function(GetUserNotesRequest) then) =
       _$GetUserNotesRequestCopyWithImpl<$Res, GetUserNotesRequest>;
   @useResult
-  $Res call({String userId, String? untilId, int? limit});
+  $Res call(
+      {String userId,
+      @JsonKey(name: 'withFiles') bool? hasFiles,
+      String? untilId,
+      int? limit});
 }
 
 /// @nodoc
@@ -53,6 +59,7 @@ class _$GetUserNotesRequestCopyWithImpl<$Res, $Val extends GetUserNotesRequest>
   @override
   $Res call({
     Object? userId = null,
+    Object? hasFiles = freezed,
     Object? untilId = freezed,
     Object? limit = freezed,
   }) {
@@ -61,6 +68,10 @@ class _$GetUserNotesRequestCopyWithImpl<$Res, $Val extends GetUserNotesRequest>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      hasFiles: freezed == hasFiles
+          ? _value.hasFiles
+          : hasFiles // ignore: cast_nullable_to_non_nullable
+              as bool?,
       untilId: freezed == untilId
           ? _value.untilId
           : untilId // ignore: cast_nullable_to_non_nullable
@@ -81,7 +92,11 @@ abstract class _$$GetUserNotesRequestImplCopyWith<$Res>
       __$$GetUserNotesRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String userId, String? untilId, int? limit});
+  $Res call(
+      {String userId,
+      @JsonKey(name: 'withFiles') bool? hasFiles,
+      String? untilId,
+      int? limit});
 }
 
 /// @nodoc
@@ -96,6 +111,7 @@ class __$$GetUserNotesRequestImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
+    Object? hasFiles = freezed,
     Object? untilId = freezed,
     Object? limit = freezed,
   }) {
@@ -104,6 +120,10 @@ class __$$GetUserNotesRequestImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      hasFiles: freezed == hasFiles
+          ? _value.hasFiles
+          : hasFiles // ignore: cast_nullable_to_non_nullable
+              as bool?,
       untilId: freezed == untilId
           ? _value.untilId
           : untilId // ignore: cast_nullable_to_non_nullable
@@ -119,7 +139,11 @@ class __$$GetUserNotesRequestImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$GetUserNotesRequestImpl implements _GetUserNotesRequest {
-  _$GetUserNotesRequestImpl({required this.userId, this.untilId, this.limit});
+  _$GetUserNotesRequestImpl(
+      {required this.userId,
+      @JsonKey(name: 'withFiles') this.hasFiles,
+      this.untilId,
+      this.limit});
 
   factory _$GetUserNotesRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$GetUserNotesRequestImplFromJson(json);
@@ -127,13 +151,16 @@ class _$GetUserNotesRequestImpl implements _GetUserNotesRequest {
   @override
   final String userId;
   @override
+  @JsonKey(name: 'withFiles')
+  final bool? hasFiles;
+  @override
   final String? untilId;
   @override
   final int? limit;
 
   @override
   String toString() {
-    return 'GetUserNotesRequest(userId: $userId, untilId: $untilId, limit: $limit)';
+    return 'GetUserNotesRequest(userId: $userId, hasFiles: $hasFiles, untilId: $untilId, limit: $limit)';
   }
 
   @override
@@ -142,13 +169,16 @@ class _$GetUserNotesRequestImpl implements _GetUserNotesRequest {
         (other.runtimeType == runtimeType &&
             other is _$GetUserNotesRequestImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.hasFiles, hasFiles) ||
+                other.hasFiles == hasFiles) &&
             (identical(other.untilId, untilId) || other.untilId == untilId) &&
             (identical(other.limit, limit) || other.limit == limit));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, untilId, limit);
+  int get hashCode =>
+      Object.hash(runtimeType, userId, hasFiles, untilId, limit);
 
   @JsonKey(ignore: true)
   @override
@@ -168,6 +198,7 @@ class _$GetUserNotesRequestImpl implements _GetUserNotesRequest {
 abstract class _GetUserNotesRequest implements GetUserNotesRequest {
   factory _GetUserNotesRequest(
       {required final String userId,
+      @JsonKey(name: 'withFiles') final bool? hasFiles,
       final String? untilId,
       final int? limit}) = _$GetUserNotesRequestImpl;
 
@@ -176,6 +207,9 @@ abstract class _GetUserNotesRequest implements GetUserNotesRequest {
 
   @override
   String get userId;
+  @override
+  @JsonKey(name: 'withFiles')
+  bool? get hasFiles;
   @override
   String? get untilId;
   @override

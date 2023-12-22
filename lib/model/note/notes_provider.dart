@@ -241,6 +241,7 @@ final class UserNotesIdsWithCache extends _$UserNotesIdsWithCache {
     final notes = await client.getUserNotes(
       request: GetUserNotesRequest(
         userId: userId,
+        hasFiles: hasFiles,
         limit: 100,
       ).toJson().removeAllNullValueKeys(),
     );
@@ -263,6 +264,7 @@ final class UserNotesIdsWithCache extends _$UserNotesIdsWithCache {
     final newNotes = await client.getUserNotes(
       request: GetUserNotesRequest(
         userId: userId,
+        hasFiles: hasFiles,
         untilId: lastNoteId,
         limit: 100,
       ).toJson().removeAllNullValueKeys(),

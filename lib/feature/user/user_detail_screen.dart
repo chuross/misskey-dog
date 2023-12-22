@@ -43,6 +43,7 @@ final class UserDetailScreen extends HookConsumerWidget {
           () => [
             (title: '概要'.i18n, child: _UserSummary(user: value)),
             (title: 'ノート'.i18n, child: _UserNotes(userId: userId)),
+            (title: 'メディア'.i18n, child: _UserNotes(userId: userId, hasFiles: true)),
           ],
           [user.value],
         );
@@ -167,12 +168,13 @@ final class _UserInfomation extends StatelessWidget {
 
 final class _UserNotes extends ConsumerWidget {
   final String userId;
+  final bool hasFiles;
 
-  const _UserNotes({required this.userId});
+  const _UserNotes({required this.userId, this.hasFiles = false});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = UserNotesIdsWithCacheProvider(userId: userId);
+    final provider = userNotesIdsWithCacheProvider(userId: userId, hasFiles: hasFiles);
     final noteIds = ref.watch(provider);
 
     return NoteTimeline(
