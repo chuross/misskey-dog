@@ -163,7 +163,7 @@ final class MisskeyText extends HookConsumerWidget {
       overflow: overflow,
       textAlign: textAlign,
       text: TextSpan(
-        style: baseTextStyle,
+        style: baseTextStyle ?? context.textTheme.bodySmall,
         children: inlineSpans,
       ),
     );

@@ -25,6 +25,7 @@ mixin _$User {
   String get username => throw _privateConstructorUsedError;
   String? get avatarUrl => throw _privateConstructorUsedError;
   Instance? get instance => throw _privateConstructorUsedError;
+  String? get host => throw _privateConstructorUsedError;
   bool get isBot => throw _privateConstructorUsedError;
   String? get bannerUrl => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -51,6 +52,7 @@ abstract class $UserCopyWith<$Res> {
       String username,
       String? avatarUrl,
       Instance? instance,
+      String? host,
       bool isBot,
       String? bannerUrl,
       String? description,
@@ -81,6 +83,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? username = null,
     Object? avatarUrl = freezed,
     Object? instance = freezed,
+    Object? host = freezed,
     Object? isBot = null,
     Object? bannerUrl = freezed,
     Object? description = freezed,
@@ -110,6 +113,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.instance
           : instance // ignore: cast_nullable_to_non_nullable
               as Instance?,
+      host: freezed == host
+          ? _value.host
+          : host // ignore: cast_nullable_to_non_nullable
+              as String?,
       isBot: null == isBot
           ? _value.isBot
           : isBot // ignore: cast_nullable_to_non_nullable
@@ -167,6 +174,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String username,
       String? avatarUrl,
       Instance? instance,
+      String? host,
       bool isBot,
       String? bannerUrl,
       String? description,
@@ -195,6 +203,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? username = null,
     Object? avatarUrl = freezed,
     Object? instance = freezed,
+    Object? host = freezed,
     Object? isBot = null,
     Object? bannerUrl = freezed,
     Object? description = freezed,
@@ -224,6 +233,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.instance
           : instance // ignore: cast_nullable_to_non_nullable
               as Instance?,
+      host: freezed == host
+          ? _value.host
+          : host // ignore: cast_nullable_to_non_nullable
+              as String?,
       isBot: null == isBot
           ? _value.isBot
           : isBot // ignore: cast_nullable_to_non_nullable
@@ -265,6 +278,7 @@ class _$UserImpl extends _User {
       required this.username,
       this.avatarUrl,
       this.instance,
+      this.host,
       required this.isBot,
       this.bannerUrl,
       this.description,
@@ -290,6 +304,8 @@ class _$UserImpl extends _User {
   @override
   final Instance? instance;
   @override
+  final String? host;
+  @override
   final bool isBot;
   @override
   final String? bannerUrl;
@@ -313,7 +329,7 @@ class _$UserImpl extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, username: $username, avatarUrl: $avatarUrl, instance: $instance, isBot: $isBot, bannerUrl: $bannerUrl, description: $description, followersCount: $followersCount, followingCount: $followingCount, notesCount: $notesCount, externalEmojiUrlMap: $externalEmojiUrlMap)';
+    return 'User(id: $id, name: $name, username: $username, avatarUrl: $avatarUrl, instance: $instance, host: $host, isBot: $isBot, bannerUrl: $bannerUrl, description: $description, followersCount: $followersCount, followingCount: $followingCount, notesCount: $notesCount, externalEmojiUrlMap: $externalEmojiUrlMap)';
   }
 
   @override
@@ -329,6 +345,7 @@ class _$UserImpl extends _User {
                 other.avatarUrl == avatarUrl) &&
             (identical(other.instance, instance) ||
                 other.instance == instance) &&
+            (identical(other.host, host) || other.host == host) &&
             (identical(other.isBot, isBot) || other.isBot == isBot) &&
             (identical(other.bannerUrl, bannerUrl) ||
                 other.bannerUrl == bannerUrl) &&
@@ -353,6 +370,7 @@ class _$UserImpl extends _User {
       username,
       avatarUrl,
       instance,
+      host,
       isBot,
       bannerUrl,
       description,
@@ -382,6 +400,7 @@ abstract class _User extends User {
       required final String username,
       final String? avatarUrl,
       final Instance? instance,
+      final String? host,
       required final bool isBot,
       final String? bannerUrl,
       final String? description,
@@ -404,6 +423,8 @@ abstract class _User extends User {
   String? get avatarUrl;
   @override
   Instance? get instance;
+  @override
+  String? get host;
   @override
   bool get isBot;
   @override

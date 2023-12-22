@@ -5,11 +5,16 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
+import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
+import 'package:misskey_dog/feature/home/home_screen.dart';
 import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
+import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart';
 import 'package:misskey_dog/feature/note/share/note_timeline.dart';
 import 'package:misskey_dog/feature/user/user_provider.dart';
 import 'package:misskey_dog/model/note/notes_provider.dart';
+import 'package:misskey_dog/model/user/user.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final class UserDetailRoute extends GoRouteData {
   final String userId;
@@ -29,18 +34,19 @@ final class UserDetailScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tabs = useMemoized(
-      () => [
-        (title: 'ノート'.i18n, child: _UserNotes(userId: userId)),
-      ],
-      [userId],
-    );
-
     final provider = userProvider(id: userId);
     final user = ref.watch(provider);
 
     switch (user) {
       case AsyncData(:final value):
+        final tabs = useMemoized(
+          () => [
+            (title: '概要'.i18n, child: _UserSummary(user: value)),
+            (title: 'ノート'.i18n, child: _UserNotes(userId: userId)),
+          ],
+          [user.value],
+        );
+
         return DefaultTabController(
           length: tabs.length,
           child: Scaffold(
@@ -95,6 +101,67 @@ final class UserDetailScreen extends HookConsumerWidget {
       default:
         return Scaffold(body: ScreenLoadingView(value: user, onRetry: () => ref.invalidate(provider)));
     }
+  }
+}
+
+final class _UserSummary extends StatelessWidget {
+  final User user;
+
+  const _UserSummary({required this.user});
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(child: _UserInfomation(user: user)),
+      ],
+    );
+  }
+}
+
+final class _UserInfomation extends StatelessWidget {
+  final User user;
+
+  const _UserInfomation({required this.user});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            SizedBox.square(
+              dimension: 72,
+              child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(user.avatarUrl ?? '')),
+            ),
+            const SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MisskeyText(
+                  text: user.displayName,
+                  baseTextStyle: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                  externalTextEmojiUrlMap: user.externalEmojiUrlMap,
+                ),
+                Text('@${user.username}@${user.host ?? '.'}', style: context.textTheme.bodySmall),
+              ],
+            ).expanded(),
+          ],
+        ),
+        if (user.description != null) const SizedBox(height: 16),
+        if (user.description != null)
+          MisskeyText(
+            text: user.description ?? '',
+            baseTextStyle: context.textTheme.bodySmall,
+            externalTextEmojiUrlMap: user.externalEmojiUrlMap,
+            onHashtagPressed: (hashtag) => HashtagNotesRoute(hashtag: hashtag).push(context),
+            onUrlPressed: (url) => launchUrl(Uri.parse(url)),
+          ),
+        const SizedBox(height: 16),
+        Divider(color: context.dividerColorWithOpacity30),
+      ],
+    ).padding(const EdgeInsets.all(16));
   }
 }
 

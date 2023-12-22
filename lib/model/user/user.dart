@@ -16,6 +16,7 @@ abstract class User with _$User {
     required String username,
     String? avatarUrl,
     Instance? instance,
+    String? host,
     required bool isBot,
     String? bannerUrl,
     String? description,
