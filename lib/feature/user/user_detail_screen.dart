@@ -153,7 +153,7 @@ final class _UserInfomation extends StatelessWidget {
         if (user.description != null)
           MisskeyText(
             text: user.description ?? '',
-            baseTextStyle: context.textTheme.bodySmall,
+            baseTextStyle: context.textTheme.bodyMedium,
             externalTextEmojiUrlMap: user.externalEmojiUrlMap,
             onHashtagPressed: (hashtag) => HashtagNotesRoute(hashtag: hashtag).push(context),
             onUrlPressed: (url) => launchUrl(Uri.parse(url)),
