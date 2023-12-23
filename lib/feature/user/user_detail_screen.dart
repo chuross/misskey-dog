@@ -116,7 +116,8 @@ final class _UserSummary extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(child: _UserInfomation(user: user)),
-        SliverToBoxAdapter(child: _UserPinnedNoteCard(user: user).padding(const EdgeInsets.symmetric(horizontal: 16))),
+        if (user.pinnedNotes?.isNotEmpty == true)
+          SliverToBoxAdapter(child: _UserPinnedNoteCard(user: user).padding(const EdgeInsets.symmetric(horizontal: 16))),
       ],
     );
   }
