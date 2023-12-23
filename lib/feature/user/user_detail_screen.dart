@@ -82,9 +82,9 @@ final class UserDetailScreen extends HookConsumerWidget {
                       Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            begin: Alignment.center,
+                            begin: const Alignment(0.0, 0.5),
                             end: Alignment.bottomCenter,
-                            colors: [Colors.white.withOpacity(0.0), Colors.white],
+                            colors: [Colors.white.withOpacity(0.0), Colors.white.withOpacity(0.85), Colors.white],
                           ),
                         ),
                       ),
