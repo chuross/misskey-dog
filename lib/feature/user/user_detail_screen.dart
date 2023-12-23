@@ -14,14 +14,25 @@ import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart';
 import 'package:misskey_dog/feature/note/note_creation_screen.dart';
 import 'package:misskey_dog/feature/note/note_more_action_modal.dart';
 import 'package:misskey_dog/feature/note/share/cached_note_item.dart';
-import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/feature/note/share/note_timeline.dart';
 import 'package:misskey_dog/feature/user/user_provider.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
 import 'package:misskey_dog/model/note/notes_provider.dart';
 import 'package:misskey_dog/model/user/user.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+part 'user_detail_screen.g.dart';
+
+@riverpod
+Future<User> _userDetail(_UserDetailRef ref, {required String userId}) async {
+  final user = await ref.watch(userProvider(id: userId).future);
+  for (final note in user.pinnedNotes ?? []) {
+    ref.watch(cachedNoteProvider(id: note.id).notifier).update(note);
+  }
+  return user;
+}
 
 final class UserDetailRoute extends GoRouteData {
   final String userId;
@@ -41,7 +52,7 @@ final class UserDetailScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = userProvider(id: userId);
+    final provider = _userDetailProvider(userId: userId);
     final user = ref.watch(provider);
 
     switch (user) {
@@ -178,7 +189,7 @@ final class _UserInfomation extends StatelessWidget {
   }
 }
 
-final class _UserPinnedNoteCard extends HookConsumerWidget {
+final class _UserPinnedNoteCard extends ConsumerWidget {
   final User user;
   final List<Note> pinnedNotes;
 
@@ -186,15 +197,6 @@ final class _UserPinnedNoteCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    useEffect(() {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        for (final note in pinnedNotes) {
-          ref.read(cachedNoteProvider(id: note.id).notifier).update(note);
-        }
-      });
-      return null;
-    }, [pinnedNotes]);
-
     return Card(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
