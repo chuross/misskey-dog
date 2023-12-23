@@ -34,6 +34,7 @@ mixin _$User {
   int? get followersCount => throw _privateConstructorUsedError;
   int? get followingCount => throw _privateConstructorUsedError;
   int? get notesCount => throw _privateConstructorUsedError;
+  bool? get isFollowing => throw _privateConstructorUsedError;
   @JsonKey(name: 'emojis', defaultValue: {})
   Map<String, String> get externalEmojiUrlMap =>
       throw _privateConstructorUsedError;
@@ -63,6 +64,7 @@ abstract class $UserCopyWith<$Res> {
       int? followersCount,
       int? followingCount,
       int? notesCount,
+      bool? isFollowing,
       @JsonKey(name: 'emojis', defaultValue: {})
       Map<String, String> externalEmojiUrlMap});
 
@@ -96,6 +98,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? followersCount = freezed,
     Object? followingCount = freezed,
     Object? notesCount = freezed,
+    Object? isFollowing = freezed,
     Object? externalEmojiUrlMap = null,
   }) {
     return _then(_value.copyWith(
@@ -155,6 +158,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.notesCount
           : notesCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      isFollowing: freezed == isFollowing
+          ? _value.isFollowing
+          : isFollowing // ignore: cast_nullable_to_non_nullable
+              as bool?,
       externalEmojiUrlMap: null == externalEmojiUrlMap
           ? _value.externalEmojiUrlMap
           : externalEmojiUrlMap // ignore: cast_nullable_to_non_nullable
@@ -197,6 +204,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       int? followersCount,
       int? followingCount,
       int? notesCount,
+      bool? isFollowing,
       @JsonKey(name: 'emojis', defaultValue: {})
       Map<String, String> externalEmojiUrlMap});
 
@@ -228,6 +236,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? followersCount = freezed,
     Object? followingCount = freezed,
     Object? notesCount = freezed,
+    Object? isFollowing = freezed,
     Object? externalEmojiUrlMap = null,
   }) {
     return _then(_$UserImpl(
@@ -287,6 +296,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.notesCount
           : notesCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      isFollowing: freezed == isFollowing
+          ? _value.isFollowing
+          : isFollowing // ignore: cast_nullable_to_non_nullable
+              as bool?,
       externalEmojiUrlMap: null == externalEmojiUrlMap
           ? _value._externalEmojiUrlMap
           : externalEmojiUrlMap // ignore: cast_nullable_to_non_nullable
@@ -313,6 +326,7 @@ class _$UserImpl extends _User {
       this.followersCount,
       this.followingCount,
       this.notesCount,
+      this.isFollowing,
       @JsonKey(name: 'emojis', defaultValue: {})
       required final Map<String, String> externalEmojiUrlMap})
       : _pinnedNotes = pinnedNotes,
@@ -358,6 +372,8 @@ class _$UserImpl extends _User {
   final int? followingCount;
   @override
   final int? notesCount;
+  @override
+  final bool? isFollowing;
   final Map<String, String> _externalEmojiUrlMap;
   @override
   @JsonKey(name: 'emojis', defaultValue: {})
@@ -370,7 +386,7 @@ class _$UserImpl extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, createdAt: $createdAt, name: $name, username: $username, avatarUrl: $avatarUrl, instance: $instance, host: $host, isBot: $isBot, bannerUrl: $bannerUrl, description: $description, pinnedNotes: $pinnedNotes, followersCount: $followersCount, followingCount: $followingCount, notesCount: $notesCount, externalEmojiUrlMap: $externalEmojiUrlMap)';
+    return 'User(id: $id, createdAt: $createdAt, name: $name, username: $username, avatarUrl: $avatarUrl, instance: $instance, host: $host, isBot: $isBot, bannerUrl: $bannerUrl, description: $description, pinnedNotes: $pinnedNotes, followersCount: $followersCount, followingCount: $followingCount, notesCount: $notesCount, isFollowing: $isFollowing, externalEmojiUrlMap: $externalEmojiUrlMap)';
   }
 
   @override
@@ -402,6 +418,8 @@ class _$UserImpl extends _User {
                 other.followingCount == followingCount) &&
             (identical(other.notesCount, notesCount) ||
                 other.notesCount == notesCount) &&
+            (identical(other.isFollowing, isFollowing) ||
+                other.isFollowing == isFollowing) &&
             const DeepCollectionEquality()
                 .equals(other._externalEmojiUrlMap, _externalEmojiUrlMap));
   }
@@ -424,6 +442,7 @@ class _$UserImpl extends _User {
       followersCount,
       followingCount,
       notesCount,
+      isFollowing,
       const DeepCollectionEquality().hash(_externalEmojiUrlMap));
 
   @JsonKey(ignore: true)
@@ -456,6 +475,7 @@ abstract class _User extends User {
       final int? followersCount,
       final int? followingCount,
       final int? notesCount,
+      final bool? isFollowing,
       @JsonKey(name: 'emojis', defaultValue: {})
       required final Map<String, String> externalEmojiUrlMap}) = _$UserImpl;
   const _User._() : super._();
@@ -490,6 +510,8 @@ abstract class _User extends User {
   int? get followingCount;
   @override
   int? get notesCount;
+  @override
+  bool? get isFollowing;
   @override
   @JsonKey(name: 'emojis', defaultValue: {})
   Map<String, String> get externalEmojiUrlMap;

@@ -27,6 +27,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       followersCount: json['followersCount'] as int?,
       followingCount: json['followingCount'] as int?,
       notesCount: json['notesCount'] as int?,
+      isFollowing: json['isFollowing'] as bool?,
       externalEmojiUrlMap: (json['emojis'] as Map<String, dynamic>?)?.map(
             (k, e) => MapEntry(k, e as String),
           ) ??
@@ -49,5 +50,6 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'followersCount': instance.followersCount,
       'followingCount': instance.followingCount,
       'notesCount': instance.notesCount,
+      'isFollowing': instance.isFollowing,
       'emojis': instance.externalEmojiUrlMap,
     };

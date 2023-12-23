@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/date_time.dart';
@@ -13,6 +14,7 @@ import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart';
 import 'package:misskey_dog/feature/note/note_creation_screen.dart';
 import 'package:misskey_dog/feature/note/note_more_action_modal.dart';
 import 'package:misskey_dog/feature/note/share/cached_note_item.dart';
+import 'package:misskey_dog/feature/user/hook/use_user_following.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
 import 'package:misskey_dog/model/user/user.dart';
@@ -72,10 +74,7 @@ final class _UserInfomation extends StatelessWidget {
                         Text('@${user.username}@${user.host ?? '.'}', style: context.textTheme.bodySmall),
                       ],
                     ).expanded(),
-                    FilledButton(
-                      onPressed: () {},
-                      child: Text('フォロー'.i18n),
-                    ),
+                    _UserFollowingButton(userId: user.id, initialFollowing: user.isFollowing ?? false),
                   ],
                 ),
                 const SizedBox(height: 2),
@@ -99,6 +98,28 @@ final class _UserInfomation extends StatelessWidget {
           ),
       ],
     ).padding(const EdgeInsets.all(16));
+  }
+}
+
+final class _UserFollowingButton extends HookConsumerWidget {
+  final String userId;
+  final bool initialFollowing;
+
+  const _UserFollowingButton({required this.userId, required this.initialFollowing});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final (isFollowing, toggle) = useUserFollowing(ref: ref, userId: userId, defaultFollowing: initialFollowing);
+
+    return isFollowing
+        ? OutlinedButton(
+            onPressed: () => toggle(),
+            child: Text('フォロー解除'.i18n),
+          )
+        : FilledButton(
+            onPressed: () => toggle(),
+            child: Text('フォロー'.i18n),
+          );
   }
 }
 

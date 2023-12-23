@@ -26,6 +26,7 @@ abstract class User with _$User {
     int? followersCount,
     int? followingCount,
     int? notesCount,
+    bool? isFollowing,
     @JsonKey(name: 'emojis', defaultValue: {}) required Map<String, String> externalEmojiUrlMap,
   }) = _User;
 

@@ -28,6 +28,7 @@ abstract class MisskeyClient {
         'read:notifications',
         'write:notifications',
         'write:mutes',
+        'write:following',
       ].join(','),
     });
   }
@@ -41,6 +42,12 @@ abstract class MisskeyClient {
 
   @POST('/api/users/show')
   Future<User> getUser({@Body() required Map<String, dynamic> request});
+
+  @POST('/api/following/create')
+  Future<void> createUserFollowing(@Body() Map<String, dynamic> request);
+
+  @POST('/api/following/delete')
+  Future<void> removeUserFollowing(@Body() Map<String, dynamic> request);
 
   @POST('/api/notes/show')
   Future<Note> getNote({@Body() required Map<String, dynamic> request});
