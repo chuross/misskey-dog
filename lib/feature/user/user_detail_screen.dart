@@ -7,13 +7,18 @@ import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
+import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
 import 'package:misskey_dog/feature/home/home_screen.dart';
 import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
 import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart';
+import 'package:misskey_dog/feature/note/note_creation_screen.dart';
+import 'package:misskey_dog/feature/note/note_more_action_modal.dart';
+import 'package:misskey_dog/feature/note/share/cached_note_item.dart';
 import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/feature/note/share/note_timeline.dart';
 import 'package:misskey_dog/feature/user/user_provider.dart';
 import 'package:misskey_dog/model/note/note.dart';
+import 'package:misskey_dog/model/note/note_provider.dart';
 import 'package:misskey_dog/model/note/notes_provider.dart';
 import 'package:misskey_dog/model/user/user.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -173,14 +178,23 @@ final class _UserInfomation extends StatelessWidget {
   }
 }
 
-final class _UserPinnedNoteCard extends StatelessWidget {
+final class _UserPinnedNoteCard extends HookConsumerWidget {
   final User user;
   final List<Note> pinnedNotes;
 
   const _UserPinnedNoteCard({required this.user, required this.pinnedNotes});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        for (final note in pinnedNotes) {
+          ref.read(cachedNoteProvider(id: note.id).notifier).update(note);
+        }
+      });
+      return null;
+    }, [pinnedNotes]);
+
     return Card(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,17 +213,27 @@ final class _UserPinnedNoteCard extends StatelessWidget {
             itemBuilder: (_, index) {
               final note = pinnedNotes[index];
 
-              return NoteItem(
-                note: note,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                onUserIconPressed: () {},
-                onHashtagPressed: (_) {},
-                onUrlPressed: (_) {},
-                onReactionPressed: (_) {},
-                onReplyPressed: () {},
-                onRenotePressed: () {},
-                onReactionAddPressed: () {},
-                onMoreActionPressed: () {},
+              return CachedNoteItem(
+                noteId: note.id,
+                onUserIconPressed: (userId) => null,
+                onReactionPressed: (emoji) => ref.read(cachedNoteProvider(id: note.id).notifier).reaction(emoji),
+                onHashtagPressed: (hashtag) => HashtagNotesRoute(hashtag: hashtag).push(context),
+                onUrlPressed: (url) => launchUrl(Uri.parse(url)),
+                onReplyPressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId).push(context),
+                onRenotePressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId, isRenoted: true).push(context),
+                onReactionAddPressed: () => showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  showDragHandle: true,
+                  builder: (_) => EmojiReactionCreationModal(onEmojiSelected: (emoji) {
+                    ref.read(cachedNoteProvider(id: note.id).notifier).reaction(emoji);
+                  }),
+                ),
+                onMoreActionPressed: () => showModalBottomSheet(
+                  context: context,
+                  showDragHandle: true,
+                  builder: (_) => NoteMoreActionModal(noteId: note.id),
+                ),
               );
             },
             separatorBuilder: (_, __) {
