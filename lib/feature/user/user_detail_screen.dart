@@ -193,6 +193,10 @@ final class _UserInfomation extends StatelessWidget {
                 ),
               ],
             ).expanded(),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.person_add, color: context.theme.primaryColor),
+            ),
           ],
         ),
         if (user.description != null) const SizedBox(height: 16),
