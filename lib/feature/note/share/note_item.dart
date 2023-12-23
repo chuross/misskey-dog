@@ -21,6 +21,7 @@ import 'package:video_player/video_player.dart';
 
 final class NoteItem extends StatelessWidget {
   final Note note;
+  final EdgeInsets? padding;
   final Function() onUserIconPressed;
   final Function(String) onHashtagPressed;
   final Function(String) onUrlPressed;
@@ -44,6 +45,7 @@ final class NoteItem extends StatelessWidget {
     required this.onRenotePressed,
     required this.onReactionAddPressed,
     required this.onMoreActionPressed,
+    this.padding,
   });
 
   @override
@@ -77,7 +79,7 @@ final class NoteItem extends StatelessWidget {
           onMoreActionPressed: onMoreActionPressed,
         ),
       ],
-    ).padding(const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
+    ).padding(padding ?? const EdgeInsets.only(top: 16, bottom: 0, left: 16, right: 16));
   }
 }
 

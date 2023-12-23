@@ -116,6 +116,7 @@ final class _UserSummary extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(child: _UserInfomation(user: user)),
+        SliverToBoxAdapter(child: _UserPinnedNoteCard(user: user).padding(const EdgeInsets.symmetric(horizontal: 16))),
       ],
     );
   }
@@ -160,30 +161,58 @@ final class _UserInfomation extends StatelessWidget {
             onHashtagPressed: (hashtag) => HashtagNotesRoute(hashtag: hashtag).push(context),
             onUrlPressed: (url) => launchUrl(Uri.parse(url)),
           ),
-        const SizedBox(height: 16),
-        if (user.pinnedNotes?.isNotEmpty == true)
-          Card(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(title: Text('ピン留めされたノート'.i18n)).padding(const EdgeInsets.only(top: 8)),
-                for (final note in user.pinnedNotes ?? [])
-                  NoteItem(
-                    note: note,
-                    onUserIconPressed: () {},
-                    onHashtagPressed: (_) {},
-                    onUrlPressed: (_) {},
-                    onReactionPressed: (_) {},
-                    onReplyPressed: () {},
-                    onRenotePressed: () {},
-                    onReactionAddPressed: () {},
-                    onMoreActionPressed: () {},
-                  )
-              ],
-            ),
-          ),
       ],
     ).padding(const EdgeInsets.all(16));
+  }
+}
+
+final class _UserPinnedNoteCard extends HookWidget {
+  final User user;
+
+  const _UserPinnedNoteCard({required this.user});
+
+  @override
+  Widget build(BuildContext context) {
+    final pinnedNotes = useMemoized(() => user.pinnedNotes ?? [], [user.pinnedNotes]);
+
+    return Card(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ListTile(
+            title: Text('ピン留めされたノート'.i18n),
+            leading: const Icon(Icons.pin_drop_rounded),
+          ).padding(
+            const EdgeInsets.only(top: 8),
+          ),
+          ListView.separated(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: pinnedNotes.length,
+            itemBuilder: (_, index) {
+              final note = pinnedNotes[index];
+
+              return NoteItem(
+                note: note,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                onUserIconPressed: () {},
+                onHashtagPressed: (_) {},
+                onUrlPressed: (_) {},
+                onReactionPressed: (_) {},
+                onReplyPressed: () {},
+                onRenotePressed: () {},
+                onReactionAddPressed: () {},
+                onMoreActionPressed: () {},
+              );
+            },
+            separatorBuilder: (_, __) {
+              return Divider(color: context.dividerColorWithOpacity20).padding(const EdgeInsets.symmetric(vertical: 8));
+            },
+          )
+        ],
+      ),
+    );
   }
 }
 
