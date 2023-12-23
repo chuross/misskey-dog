@@ -10,6 +10,7 @@ import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/feature/home/home_screen.dart';
 import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
 import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart';
+import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/feature/note/share/note_timeline.dart';
 import 'package:misskey_dog/feature/user/user_provider.dart';
 import 'package:misskey_dog/model/note/notes_provider.dart';
@@ -160,7 +161,27 @@ final class _UserInfomation extends StatelessWidget {
             onUrlPressed: (url) => launchUrl(Uri.parse(url)),
           ),
         const SizedBox(height: 16),
-        Divider(color: context.dividerColorWithOpacity30),
+        if (user.pinnedNotes?.isNotEmpty == true)
+          Card(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(title: Text('ピン留めされたノート'.i18n)).padding(const EdgeInsets.only(top: 8)),
+                for (final note in user.pinnedNotes ?? [])
+                  NoteItem(
+                    note: note,
+                    onUserIconPressed: () {},
+                    onHashtagPressed: (_) {},
+                    onUrlPressed: (_) {},
+                    onReactionPressed: (_) {},
+                    onReplyPressed: () {},
+                    onRenotePressed: () {},
+                    onReactionAddPressed: () {},
+                    onMoreActionPressed: () {},
+                  )
+              ],
+            ),
+          ),
       ],
     ).padding(const EdgeInsets.all(16));
   }
