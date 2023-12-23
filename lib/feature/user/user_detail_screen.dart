@@ -13,6 +13,7 @@ import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart';
 import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/feature/note/share/note_timeline.dart';
 import 'package:misskey_dog/feature/user/user_provider.dart';
+import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/note/notes_provider.dart';
 import 'package:misskey_dog/model/user/user.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -117,7 +118,12 @@ final class _UserSummary extends StatelessWidget {
       slivers: [
         SliverToBoxAdapter(child: _UserInfomation(user: user)),
         if (user.pinnedNotes?.isNotEmpty == true)
-          SliverToBoxAdapter(child: _UserPinnedNoteCard(user: user).padding(const EdgeInsets.symmetric(horizontal: 16))),
+          SliverToBoxAdapter(
+            child: _UserPinnedNoteCard(
+              user: user,
+              pinnedNotes: user.pinnedNotes ?? [],
+            ).padding(const EdgeInsets.symmetric(horizontal: 16)),
+          ),
       ],
     );
   }
@@ -167,15 +173,14 @@ final class _UserInfomation extends StatelessWidget {
   }
 }
 
-final class _UserPinnedNoteCard extends HookWidget {
+final class _UserPinnedNoteCard extends StatelessWidget {
   final User user;
+  final List<Note> pinnedNotes;
 
-  const _UserPinnedNoteCard({required this.user});
+  const _UserPinnedNoteCard({required this.user, required this.pinnedNotes});
 
   @override
   Widget build(BuildContext context) {
-    final pinnedNotes = useMemoized(() => user.pinnedNotes ?? [], [user.pinnedNotes]);
-
     return Card(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
