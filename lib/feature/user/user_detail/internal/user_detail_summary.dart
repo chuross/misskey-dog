@@ -78,7 +78,7 @@ final class _UserInfomation extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 2),
                 MisskeyText(
                   text: user.displayName,
                   baseTextStyle: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
