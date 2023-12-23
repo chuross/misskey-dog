@@ -16,7 +16,7 @@ import 'package:misskey_dog/feature/note/note_creation_screen.dart';
 import 'package:misskey_dog/feature/note/note_file_detail_screen.dart';
 import 'package:misskey_dog/feature/notification/notifications_screen.dart';
 import 'package:misskey_dog/feature/search/search_screen.dart';
-import 'package:misskey_dog/feature/user/user_detail_screen.dart';
+import 'package:misskey_dog/feature/user/user_detail/user_detail_screen.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 import 'package:misskey_dog/model/note/note_file.dart';
 import 'package:misskey_dog/model/streaming/streaming_channel.dart';
