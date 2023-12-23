@@ -18,10 +18,10 @@ import 'package:misskey_dog/model/note/note_provider.dart';
 import 'package:misskey_dog/model/user/user.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-final class UserSummary extends StatelessWidget {
+final class UserDetailSummary extends StatelessWidget {
   final User user;
 
-  const UserSummary({super.key, required this.user});
+  const UserDetailSummary({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {

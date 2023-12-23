@@ -6,8 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
-import 'package:misskey_dog/feature/user/user_detail/user_notes.dart';
-import 'package:misskey_dog/feature/user/user_detail/user_summary.dart';
+import 'package:misskey_dog/feature/user/user_detail/internal/user_detail_notes.dart';
+import 'package:misskey_dog/feature/user/user_detail/internal/user_detail_summary.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
 import 'package:misskey_dog/model/user/user.dart';
 import 'package:misskey_dog/model/user/user_provider.dart';
@@ -49,9 +49,9 @@ final class UserDetailScreen extends HookConsumerWidget {
       case AsyncData(:final value):
         final tabs = useMemoized(
           () => [
-            (title: '概要'.i18n, child: UserSummary(user: value)),
-            (title: 'ノート'.i18n, child: UserNotes(userId: userId)),
-            (title: 'メディア'.i18n, child: UserNotes(userId: userId, hasFiles: true)),
+            (title: '概要'.i18n, child: UserDetailSummary(user: value)),
+            (title: 'ノート'.i18n, child: UserDetailNotes(userId: userId)),
+            (title: 'メディア'.i18n, child: UserDetailNotes(userId: userId, hasFiles: true)),
           ],
           [user.value],
         );
