@@ -174,7 +174,7 @@ class _AccountAuthorizationProviderElement
   String get session => (origin as AccountAuthorizationProvider).session;
 }
 
-String _$accountStateHash() => r'72a8b68d7bb14d1f744762ac501a20a486d9a724';
+String _$accountStateHash() => r'1df5cf6def8472cd8d007527c124908bb00c5aa0';
 
 /// See also [AccountState].
 @ProviderFor(AccountState)

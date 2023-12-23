@@ -37,10 +37,15 @@ final class AccountState extends _$AccountState {
 
   @override
   Future<Account?> build() async {
-    final json = await ref.watch(secureStorageProvider).read(key: _key);
-    if (json == null) return null;
+    try {
+      final json = await ref.watch(secureStorageProvider).read(key: _key);
+      if (json == null) return null;
 
-    return Account.fromJson(jsonDecode(json));
+      return Account.fromJson(jsonDecode(json));
+    } catch (e) {
+      ref.watch(logProvider).e('@@@accountState: failed to read account: $e');
+      return null;
+    }
   }
 
   Future<void> setAccount(Account account) async {

@@ -29,6 +29,7 @@ mixin _$User {
   bool get isBot => throw _privateConstructorUsedError;
   String? get bannerUrl => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  List<Note>? get pinnedNotes => throw _privateConstructorUsedError;
   int? get followersCount => throw _privateConstructorUsedError;
   int? get followingCount => throw _privateConstructorUsedError;
   int? get notesCount => throw _privateConstructorUsedError;
@@ -56,6 +57,7 @@ abstract class $UserCopyWith<$Res> {
       bool isBot,
       String? bannerUrl,
       String? description,
+      List<Note>? pinnedNotes,
       int? followersCount,
       int? followingCount,
       int? notesCount,
@@ -87,6 +89,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? isBot = null,
     Object? bannerUrl = freezed,
     Object? description = freezed,
+    Object? pinnedNotes = freezed,
     Object? followersCount = freezed,
     Object? followingCount = freezed,
     Object? notesCount = freezed,
@@ -129,6 +132,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      pinnedNotes: freezed == pinnedNotes
+          ? _value.pinnedNotes
+          : pinnedNotes // ignore: cast_nullable_to_non_nullable
+              as List<Note>?,
       followersCount: freezed == followersCount
           ? _value.followersCount
           : followersCount // ignore: cast_nullable_to_non_nullable
@@ -178,6 +185,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       bool isBot,
       String? bannerUrl,
       String? description,
+      List<Note>? pinnedNotes,
       int? followersCount,
       int? followingCount,
       int? notesCount,
@@ -207,6 +215,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? isBot = null,
     Object? bannerUrl = freezed,
     Object? description = freezed,
+    Object? pinnedNotes = freezed,
     Object? followersCount = freezed,
     Object? followingCount = freezed,
     Object? notesCount = freezed,
@@ -249,6 +258,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      pinnedNotes: freezed == pinnedNotes
+          ? _value._pinnedNotes
+          : pinnedNotes // ignore: cast_nullable_to_non_nullable
+              as List<Note>?,
       followersCount: freezed == followersCount
           ? _value.followersCount
           : followersCount // ignore: cast_nullable_to_non_nullable
@@ -282,12 +295,14 @@ class _$UserImpl extends _User {
       required this.isBot,
       this.bannerUrl,
       this.description,
+      final List<Note>? pinnedNotes,
       this.followersCount,
       this.followingCount,
       this.notesCount,
       @JsonKey(name: 'emojis', defaultValue: {})
       required final Map<String, String> externalEmojiUrlMap})
-      : _externalEmojiUrlMap = externalEmojiUrlMap,
+      : _pinnedNotes = pinnedNotes,
+        _externalEmojiUrlMap = externalEmojiUrlMap,
         super._();
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
@@ -311,6 +326,16 @@ class _$UserImpl extends _User {
   final String? bannerUrl;
   @override
   final String? description;
+  final List<Note>? _pinnedNotes;
+  @override
+  List<Note>? get pinnedNotes {
+    final value = _pinnedNotes;
+    if (value == null) return null;
+    if (_pinnedNotes is EqualUnmodifiableListView) return _pinnedNotes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final int? followersCount;
   @override
@@ -329,7 +354,7 @@ class _$UserImpl extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, username: $username, avatarUrl: $avatarUrl, instance: $instance, host: $host, isBot: $isBot, bannerUrl: $bannerUrl, description: $description, followersCount: $followersCount, followingCount: $followingCount, notesCount: $notesCount, externalEmojiUrlMap: $externalEmojiUrlMap)';
+    return 'User(id: $id, name: $name, username: $username, avatarUrl: $avatarUrl, instance: $instance, host: $host, isBot: $isBot, bannerUrl: $bannerUrl, description: $description, pinnedNotes: $pinnedNotes, followersCount: $followersCount, followingCount: $followingCount, notesCount: $notesCount, externalEmojiUrlMap: $externalEmojiUrlMap)';
   }
 
   @override
@@ -351,6 +376,8 @@ class _$UserImpl extends _User {
                 other.bannerUrl == bannerUrl) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            const DeepCollectionEquality()
+                .equals(other._pinnedNotes, _pinnedNotes) &&
             (identical(other.followersCount, followersCount) ||
                 other.followersCount == followersCount) &&
             (identical(other.followingCount, followingCount) ||
@@ -374,6 +401,7 @@ class _$UserImpl extends _User {
       isBot,
       bannerUrl,
       description,
+      const DeepCollectionEquality().hash(_pinnedNotes),
       followersCount,
       followingCount,
       notesCount,
@@ -404,6 +432,7 @@ abstract class _User extends User {
       required final bool isBot,
       final String? bannerUrl,
       final String? description,
+      final List<Note>? pinnedNotes,
       final int? followersCount,
       final int? followingCount,
       final int? notesCount,
@@ -431,6 +460,8 @@ abstract class _User extends User {
   String? get bannerUrl;
   @override
   String? get description;
+  @override
+  List<Note>? get pinnedNotes;
   @override
   int? get followersCount;
   @override

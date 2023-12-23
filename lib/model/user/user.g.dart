@@ -18,6 +18,9 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       isBot: json['isBot'] as bool,
       bannerUrl: json['bannerUrl'] as String?,
       description: json['description'] as String?,
+      pinnedNotes: (json['pinnedNotes'] as List<dynamic>?)
+          ?.map((e) => Note.fromJson(e as Map<String, dynamic>))
+          .toList(),
       followersCount: json['followersCount'] as int?,
       followingCount: json['followingCount'] as int?,
       notesCount: json['notesCount'] as int?,
@@ -38,6 +41,7 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'isBot': instance.isBot,
       'bannerUrl': instance.bannerUrl,
       'description': instance.description,
+      'pinnedNotes': instance.pinnedNotes,
       'followersCount': instance.followersCount,
       'followingCount': instance.followingCount,
       'notesCount': instance.notesCount,
