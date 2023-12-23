@@ -17,14 +17,14 @@ import 'package:misskey_dog/feature/user/user_detail/user_detail_screen.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-final class NoteTimeline extends HookConsumerWidget {
+final class NoteListView extends HookConsumerWidget {
   final AsyncValue<List<String>> noteIds;
   final bool shouldManualReload;
   final Function onFetchNext;
   final Function onRefresh;
   final Function? onManualReloadPressed;
 
-  const NoteTimeline({
+  const NoteListView({
     super.key,
     required this.noteIds,
     required this.onFetchNext,

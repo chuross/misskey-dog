@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:misskey_dog/feature/note/share/note_timeline.dart';
+import 'package:misskey_dog/feature/note/share/note_list_view.dart';
 import 'package:misskey_dog/model/note/notes_provider.dart';
 
 final class UserNotes extends ConsumerWidget {
@@ -14,7 +14,7 @@ final class UserNotes extends ConsumerWidget {
     final provider = userNotesIdsWithCacheProvider(userId: userId, hasFiles: hasFiles);
     final noteIds = ref.watch(provider);
 
-    return NoteTimeline(
+    return NoteListView(
       noteIds: noteIds,
       onFetchNext: () => ref.read(provider.notifier).fetchNext(),
       onRefresh: () => ref.invalidate(provider),

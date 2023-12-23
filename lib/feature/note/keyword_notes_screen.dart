@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:misskey_dog/feature/note/share/note_timeline.dart';
+import 'package:misskey_dog/feature/note/share/note_list_view.dart';
 import 'package:misskey_dog/model/note/notes_provider.dart';
 
 final class KeywordNotesRoute extends GoRouteData {
@@ -27,7 +27,7 @@ final class KeywordNotesScreen extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(keyword)),
-      body: NoteTimeline(
+      body: NoteListView(
         noteIds: noteIds,
         onFetchNext: () => ref.read(provider.notifier).fetchNext(),
         onRefresh: () => ref.invalidate(provider),

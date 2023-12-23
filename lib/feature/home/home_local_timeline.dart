@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:misskey_dog/feature/note/share/note_timeline.dart';
+import 'package:misskey_dog/feature/note/share/note_list_view.dart';
 import 'package:misskey_dog/model/note/note_provider.dart';
 import 'package:misskey_dog/model/note/notes_provider.dart';
 import 'package:misskey_dog/model/streaming/streaming_channel.dart';
@@ -37,7 +37,7 @@ final class HomeLocalTimeline extends HookConsumerWidget {
       }
     });
 
-    return NoteTimeline(
+    return NoteListView(
       noteIds: noteIds,
       shouldManualReload: shouldManualReload.value,
       onFetchNext: () => ref.read(provider.notifier).fetchNext(),
