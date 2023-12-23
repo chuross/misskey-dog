@@ -188,7 +188,7 @@ final class _UserInfomation extends StatelessWidget {
                 Text('@${user.username}@${user.host ?? '.'}', style: context.textTheme.bodySmall),
                 const SizedBox(height: 4),
                 Text(
-                  user.createdAt?.dateLabel.map((p) => '$pに作成') ?? '',
+                  user.createdAt?.dateLabel.map((p) => '%sに作成'.i18n.fill([p])) ?? '',
                   style: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
                 ),
               ],
