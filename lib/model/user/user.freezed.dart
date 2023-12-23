@@ -21,6 +21,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$User {
   String get id => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String? get avatarUrl => throw _privateConstructorUsedError;
@@ -49,6 +50,7 @@ abstract class $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      DateTime? createdAt,
       String? name,
       String username,
       String? avatarUrl,
@@ -81,6 +83,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? id = null,
+    Object? createdAt = freezed,
     Object? name = freezed,
     Object? username = null,
     Object? avatarUrl = freezed,
@@ -100,6 +103,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -177,6 +184,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      DateTime? createdAt,
       String? name,
       String username,
       String? avatarUrl,
@@ -207,6 +215,7 @@ class __$$UserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? createdAt = freezed,
     Object? name = freezed,
     Object? username = null,
     Object? avatarUrl = freezed,
@@ -226,6 +235,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -287,6 +300,7 @@ class __$$UserImplCopyWithImpl<$Res>
 class _$UserImpl extends _User {
   const _$UserImpl(
       {required this.id,
+      this.createdAt,
       this.name,
       required this.username,
       this.avatarUrl,
@@ -310,6 +324,8 @@ class _$UserImpl extends _User {
 
   @override
   final String id;
+  @override
+  final DateTime? createdAt;
   @override
   final String? name;
   @override
@@ -354,7 +370,7 @@ class _$UserImpl extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, username: $username, avatarUrl: $avatarUrl, instance: $instance, host: $host, isBot: $isBot, bannerUrl: $bannerUrl, description: $description, pinnedNotes: $pinnedNotes, followersCount: $followersCount, followingCount: $followingCount, notesCount: $notesCount, externalEmojiUrlMap: $externalEmojiUrlMap)';
+    return 'User(id: $id, createdAt: $createdAt, name: $name, username: $username, avatarUrl: $avatarUrl, instance: $instance, host: $host, isBot: $isBot, bannerUrl: $bannerUrl, description: $description, pinnedNotes: $pinnedNotes, followersCount: $followersCount, followingCount: $followingCount, notesCount: $notesCount, externalEmojiUrlMap: $externalEmojiUrlMap)';
   }
 
   @override
@@ -363,6 +379,8 @@ class _$UserImpl extends _User {
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.username, username) ||
                 other.username == username) &&
@@ -393,6 +411,7 @@ class _$UserImpl extends _User {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      createdAt,
       name,
       username,
       avatarUrl,
@@ -424,6 +443,7 @@ class _$UserImpl extends _User {
 abstract class _User extends User {
   const factory _User(
       {required final String id,
+      final DateTime? createdAt,
       final String? name,
       required final String username,
       final String? avatarUrl,
@@ -444,6 +464,8 @@ abstract class _User extends User {
 
   @override
   String get id;
+  @override
+  DateTime? get createdAt;
   @override
   String? get name;
   @override

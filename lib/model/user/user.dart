@@ -13,6 +13,7 @@ abstract class User with _$User {
 
   const factory User({
     required String id,
+    DateTime? createdAt,
     String? name,
     required String username,
     String? avatarUrl,

@@ -3,6 +3,9 @@ import 'package:intl/intl.dart';
 
 extension DateTimeExt on DateTime {
   static final DateFormat _dateFormat = DateFormat('yyyy/MM/dd');
+  static final DateFormat _dateTimeFormat = DateFormat('yyyy/MM/dd HH:mm:ss');
+
+  String get dateTimeLabel => _dateTimeFormat.format(this);
 
   String get elapsedTimeLabel {
     final difference = DateTime.now().difference(this);

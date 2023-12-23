@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
+import 'package:misskey_dog/core/extension/date_time.dart';
+import 'package:misskey_dog/core/extension/object.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
@@ -171,6 +173,11 @@ final class _UserInfomation extends StatelessWidget {
                   externalTextEmojiUrlMap: user.externalEmojiUrlMap,
                 ),
                 Text('@${user.username}@${user.host ?? '.'}', style: context.textTheme.bodySmall),
+                const SizedBox(height: 4),
+                Text(
+                  user.createdAt?.dateTimeLabel.map((p) => '$p 作成') ?? '',
+                  style: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
+                ),
               ],
             ).expanded(),
           ],
