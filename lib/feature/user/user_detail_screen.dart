@@ -84,6 +84,19 @@ final class UserDetailScreen extends HookConsumerWidget {
                       color: Colors.white,
                     ),
                   ),
+                  actions: [
+                    Container(
+                      margin: const EdgeInsets.only(right: 4),
+                      decoration: BoxDecoration(color: Colors.black.withOpacity(0.2), shape: BoxShape.circle),
+                      child: const IconButton(
+                        onPressed: null,
+                        icon: Icon(
+                          Icons.more_horiz,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
                   flexibleSpace: Stack(
                     children: [
                       if (value.bannerUrl != null)
