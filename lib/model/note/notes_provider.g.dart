@@ -6,8 +6,8 @@ part of 'notes_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localNoteIdsWithCacheHash() =>
-    r'd8bb1d62efdb13cadd300fcd7308d835c5dc9912';
+String _$homeNoteIdsWithCacheHash() =>
+    r'683bdbe040c951f441c7b958271e6d5754288174';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,6 +29,152 @@ class _SystemHash {
     return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
   }
 }
+
+abstract class _$HomeNoteIdsWithCache
+    extends BuildlessAutoDisposeAsyncNotifier<List<String>> {
+  late final bool? hasFiles;
+
+  FutureOr<List<String>> build({
+    bool? hasFiles,
+  });
+}
+
+/// See also [HomeNoteIdsWithCache].
+@ProviderFor(HomeNoteIdsWithCache)
+const homeNoteIdsWithCacheProvider = HomeNoteIdsWithCacheFamily();
+
+/// See also [HomeNoteIdsWithCache].
+class HomeNoteIdsWithCacheFamily extends Family<AsyncValue<List<String>>> {
+  /// See also [HomeNoteIdsWithCache].
+  const HomeNoteIdsWithCacheFamily();
+
+  /// See also [HomeNoteIdsWithCache].
+  HomeNoteIdsWithCacheProvider call({
+    bool? hasFiles,
+  }) {
+    return HomeNoteIdsWithCacheProvider(
+      hasFiles: hasFiles,
+    );
+  }
+
+  @override
+  HomeNoteIdsWithCacheProvider getProviderOverride(
+    covariant HomeNoteIdsWithCacheProvider provider,
+  ) {
+    return call(
+      hasFiles: provider.hasFiles,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'homeNoteIdsWithCacheProvider';
+}
+
+/// See also [HomeNoteIdsWithCache].
+class HomeNoteIdsWithCacheProvider extends AutoDisposeAsyncNotifierProviderImpl<
+    HomeNoteIdsWithCache, List<String>> {
+  /// See also [HomeNoteIdsWithCache].
+  HomeNoteIdsWithCacheProvider({
+    bool? hasFiles,
+  }) : this._internal(
+          () => HomeNoteIdsWithCache()..hasFiles = hasFiles,
+          from: homeNoteIdsWithCacheProvider,
+          name: r'homeNoteIdsWithCacheProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$homeNoteIdsWithCacheHash,
+          dependencies: HomeNoteIdsWithCacheFamily._dependencies,
+          allTransitiveDependencies:
+              HomeNoteIdsWithCacheFamily._allTransitiveDependencies,
+          hasFiles: hasFiles,
+        );
+
+  HomeNoteIdsWithCacheProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.hasFiles,
+  }) : super.internal();
+
+  final bool? hasFiles;
+
+  @override
+  FutureOr<List<String>> runNotifierBuild(
+    covariant HomeNoteIdsWithCache notifier,
+  ) {
+    return notifier.build(
+      hasFiles: hasFiles,
+    );
+  }
+
+  @override
+  Override overrideWith(HomeNoteIdsWithCache Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: HomeNoteIdsWithCacheProvider._internal(
+        () => create()..hasFiles = hasFiles,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        hasFiles: hasFiles,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeAsyncNotifierProviderElement<HomeNoteIdsWithCache, List<String>>
+      createElement() {
+    return _HomeNoteIdsWithCacheProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is HomeNoteIdsWithCacheProvider && other.hasFiles == hasFiles;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, hasFiles.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin HomeNoteIdsWithCacheRef
+    on AutoDisposeAsyncNotifierProviderRef<List<String>> {
+  /// The parameter `hasFiles` of this provider.
+  bool? get hasFiles;
+}
+
+class _HomeNoteIdsWithCacheProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<HomeNoteIdsWithCache,
+        List<String>> with HomeNoteIdsWithCacheRef {
+  _HomeNoteIdsWithCacheProviderElement(super.provider);
+
+  @override
+  bool? get hasFiles => (origin as HomeNoteIdsWithCacheProvider).hasFiles;
+}
+
+String _$localNoteIdsWithCacheHash() =>
+    r'd8bb1d62efdb13cadd300fcd7308d835c5dc9912';
 
 abstract class _$LocalNoteIdsWithCache
     extends BuildlessAutoDisposeAsyncNotifier<List<String>> {

@@ -7,9 +7,10 @@ import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/api/api_provider.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/feature/account/account_screen.dart';
-import 'package:misskey_dog/feature/home/home_global_timeline.dart';
-import 'package:misskey_dog/feature/home/home_local_timeline.dart';
-import 'package:misskey_dog/feature/home/home_media_timeline.dart';
+import 'package:misskey_dog/feature/home/internal/home_global_timeline.dart';
+import 'package:misskey_dog/feature/home/internal/home_local_timeline.dart';
+import 'package:misskey_dog/feature/home/internal/home_media_timeline.dart';
+import 'package:misskey_dog/feature/home/internal/home_timeline.dart';
 import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart';
 import 'package:misskey_dog/feature/note/keyword_notes_screen.dart';
 import 'package:misskey_dog/feature/note/note_creation_screen.dart';
@@ -43,6 +44,7 @@ final class HomeRoute extends GoRouteData {
 
 final class HomeScreen extends HookConsumerWidget {
   static final _tabs = [
+    (title: 'ホーム'.i18n, child: const HomeTimeline()),
     (title: 'ローカル'.i18n, child: const HomeLocalTimeline()),
     (title: 'メディア'.i18n, child: const HomeMediaTimeline()),
     (title: 'グローバル'.i18n, child: const HomeGlobalTimeline()),

@@ -1,5 +1,6 @@
 enum StreamingChannel {
   main('main'),
+  homeTimeline('homeTimeline'),
   localTimeline('localTimeline'),
   globalTimeline('globalTimeline');
 

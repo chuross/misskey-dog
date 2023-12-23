@@ -244,6 +244,37 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
+  Future<List<Note>> getHomeNotes(
+      {required Map<String, dynamic> request}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request);
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Note>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/notes/timeline',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) => Note.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
   Future<List<Note>> getLocalNotes(
       {required Map<String, dynamic> request}) async {
     const _extra = <String, dynamic>{};
