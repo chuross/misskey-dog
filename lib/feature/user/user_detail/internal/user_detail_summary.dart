@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -114,6 +115,10 @@ final class _UserFollowingButton extends HookConsumerWidget {
     return isFollowing
         ? OutlinedButton(
             onPressed: () => toggle(),
+            style: OutlinedButton.styleFrom(
+              foregroundColor: CupertinoColors.destructiveRed,
+              side: const BorderSide(color: CupertinoColors.destructiveRed),
+            ),
             child: Text('フォロー解除'.i18n),
           )
         : FilledButton(
