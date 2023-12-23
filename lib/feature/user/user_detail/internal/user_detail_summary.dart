@@ -53,33 +53,42 @@ final class _UserInfomation extends StatelessWidget {
         Row(
           children: [
             SizedBox.square(
-              dimension: 72,
+              dimension: 86,
               child: CircleAvatar(foregroundImage: CachedNetworkImageProvider(user.avatarUrl ?? '')),
             ),
             const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          user.createdAt?.dateLabel.map((p) => '%sに作成'.i18n.fill([p])) ?? '',
+                          style: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
+                        ),
+                        Text('@${user.username}@${user.host ?? '.'}', style: context.textTheme.bodySmall),
+                      ],
+                    ).expanded(),
+                    FilledButton(
+                      onPressed: () {},
+                      child: Text('フォロー'.i18n),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
                 MisskeyText(
                   text: user.displayName,
                   baseTextStyle: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                   externalTextEmojiUrlMap: user.externalEmojiUrlMap,
                 ),
-                Text('@${user.username}@${user.host ?? '.'}', style: context.textTheme.bodySmall),
-                const SizedBox(height: 4),
-                Text(
-                  user.createdAt?.dateLabel.map((p) => '%sに作成'.i18n.fill([p])) ?? '',
-                  style: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
-                ),
               ],
             ).expanded(),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.person_add, color: context.theme.primaryColor),
-            ),
           ],
         ),
-        if (user.description != null) const SizedBox(height: 16),
+        if (user.description != null) const SizedBox(height: 24),
         if (user.description != null)
           MisskeyText(
             text: user.description ?? '',
