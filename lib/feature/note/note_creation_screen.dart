@@ -83,14 +83,6 @@ final class NoteCreationScreen extends HookConsumerWidget {
             Row(
               children: [
                 IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.attach_file),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.visibility_off_outlined),
-                ),
-                IconButton(
                   onPressed: () => showModalBottomSheet(
                     context: context,
                     isScrollControlled: true,
