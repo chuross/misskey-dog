@@ -32,7 +32,7 @@ final class NoteItem extends StatelessWidget {
   final Function() onMoreActionPressed;
 
   Note get mainNote => note.renote ?? note;
-  bool get maybeIndifferenceNote => mainNote.text?.contains('\$[') == true;
+  bool get maybeIndifferenceNote => note.renote?.user.id == note.user.id || mainNote.text?.contains('\$[') == true;
 
   const NoteItem({
     super.key,
