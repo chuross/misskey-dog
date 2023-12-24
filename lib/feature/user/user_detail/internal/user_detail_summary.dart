@@ -36,14 +36,12 @@ final class UserDetailSummary extends StatelessWidget {
             title: Text('ピン留めされたノート'.i18n),
             leading: const Icon(Icons.pin_drop_rounded),
           ).padding(const EdgeInsets.only(top: 8))),
-        SliverList.separated(
+        SliverList.builder(
           itemCount: user.pinnedNotes?.length ?? 0,
           itemBuilder: (_, index) {
             final note = user.pinnedNotes![index];
             return _UserPinnedNoteItem(note: note);
           },
-          separatorBuilder: (_, __) =>
-              Divider(color: context.dividerColorWithOpacity20).padding(const EdgeInsets.symmetric(horizontal: 16)),
         )
       ],
     );
@@ -142,26 +140,31 @@ final class _UserPinnedNoteItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return CachedNoteItem(
-      noteId: note.id,
-      onUserIconPressed: (userId) => null,
-      onReactionPressed: (emoji) => ref.read(cachedNoteProvider(id: note.id).notifier).reaction(emoji),
-      onHashtagPressed: (hashtag) => HashtagNotesRoute(hashtag: hashtag).push(context),
-      onUrlPressed: (url) => launchUrl(Uri.parse(url)),
-      onReplyPressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId).push(context),
-      onRenotePressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId, isRenoted: true).push(context),
-      onReactionAddPressed: () => showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        showDragHandle: true,
-        builder: (_) => EmojiReactionCreationModal(onEmojiSelected: (emoji) {
-          ref.read(cachedNoteProvider(id: note.id).notifier).reaction(emoji);
-        }),
-      ),
-      onMoreActionPressed: () => showModalBottomSheet(
-        context: context,
-        showDragHandle: true,
-        builder: (_) => NoteMoreActionModal(noteId: note.id),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+      child: Card(
+        child: CachedNoteItem(
+          noteId: note.id,
+          onUserIconPressed: (userId) => null,
+          onReactionPressed: (emoji) => ref.read(cachedNoteProvider(id: note.id).notifier).reaction(emoji),
+          onHashtagPressed: (hashtag) => HashtagNotesRoute(hashtag: hashtag).push(context),
+          onUrlPressed: (url) => launchUrl(Uri.parse(url)),
+          onReplyPressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId).push(context),
+          onRenotePressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId, isRenoted: true).push(context),
+          onReactionAddPressed: () => showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            showDragHandle: true,
+            builder: (_) => EmojiReactionCreationModal(onEmojiSelected: (emoji) {
+              ref.read(cachedNoteProvider(id: note.id).notifier).reaction(emoji);
+            }),
+          ),
+          onMoreActionPressed: () => showModalBottomSheet(
+            context: context,
+            showDragHandle: true,
+            builder: (_) => NoteMoreActionModal(noteId: note.id),
+          ),
+        ),
       ),
     );
   }
