@@ -30,19 +30,21 @@ final class UserDetailSummary extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(child: _UserInfomation(user: user)),
+        SliverToBoxAdapter(child: Divider(color: context.dividerColorWithOpacity30)),
         if (user.pinnedNotes?.isNotEmpty == true)
           SliverToBoxAdapter(
               child: ListTile(
             title: Text('ピン留めされたノート'.i18n),
             leading: const Icon(Icons.pin_drop_rounded),
           ).padding(const EdgeInsets.only(top: 8))),
-        SliverList.builder(
-          itemCount: user.pinnedNotes?.length ?? 0,
-          itemBuilder: (_, index) {
-            final note = user.pinnedNotes![index];
-            return _UserPinnedNoteItem(note: note);
-          },
-        )
+        if (user.pinnedNotes?.isNotEmpty == true)
+          SliverList.builder(
+            itemCount: user.pinnedNotes?.length ?? 0,
+            itemBuilder: (_, index) {
+              final note = user.pinnedNotes![index];
+              return _UserPinnedNoteItem(note: note);
+            },
+          )
       ],
     );
   }
