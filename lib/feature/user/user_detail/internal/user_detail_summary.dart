@@ -32,11 +32,19 @@ final class UserDetailSummary extends StatelessWidget {
         SliverToBoxAdapter(child: _UserInfomation(user: user)),
         if (user.pinnedNotes?.isNotEmpty == true)
           SliverToBoxAdapter(
-            child: _UserPinnedNoteCard(
-              user: user,
-              pinnedNotes: user.pinnedNotes ?? [],
-            ).padding(const EdgeInsets.only(top: 16)),
-          ),
+              child: ListTile(
+            title: Text('ピン留めされたノート'.i18n),
+            leading: const Icon(Icons.pin_drop_rounded),
+          ).padding(const EdgeInsets.only(top: 8))),
+        SliverList.separated(
+          itemCount: user.pinnedNotes?.length ?? 0,
+          itemBuilder: (_, index) {
+            final note = user.pinnedNotes![index];
+            return _UserPinnedNoteItem(note: note);
+          },
+          separatorBuilder: (_, __) =>
+              Divider(color: context.dividerColorWithOpacity20).padding(const EdgeInsets.symmetric(horizontal: 16)),
+        )
       ],
     );
   }
@@ -127,60 +135,33 @@ final class _UserFollowingButton extends HookConsumerWidget {
   }
 }
 
-final class _UserPinnedNoteCard extends ConsumerWidget {
-  final User user;
-  final List<Note> pinnedNotes;
+final class _UserPinnedNoteItem extends ConsumerWidget {
+  final Note note;
 
-  const _UserPinnedNoteCard({required this.user, required this.pinnedNotes});
+  const _UserPinnedNoteItem({required this.note});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Card(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListTile(
-            title: Text('ピン留めされたノート'.i18n),
-            leading: const Icon(Icons.pin_drop_rounded),
-          ).padding(
-            const EdgeInsets.only(top: 8),
-          ),
-          ListView.separated(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: pinnedNotes.length,
-            itemBuilder: (_, index) {
-              final note = pinnedNotes[index];
-
-              return CachedNoteItem(
-                noteId: note.id,
-                onUserIconPressed: (userId) => null,
-                onReactionPressed: (emoji) => ref.read(cachedNoteProvider(id: note.id).notifier).reaction(emoji),
-                onHashtagPressed: (hashtag) => HashtagNotesRoute(hashtag: hashtag).push(context),
-                onUrlPressed: (url) => launchUrl(Uri.parse(url)),
-                onReplyPressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId).push(context),
-                onRenotePressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId, isRenoted: true).push(context),
-                onReactionAddPressed: () => showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: true,
-                  showDragHandle: true,
-                  builder: (_) => EmojiReactionCreationModal(onEmojiSelected: (emoji) {
-                    ref.read(cachedNoteProvider(id: note.id).notifier).reaction(emoji);
-                  }),
-                ),
-                onMoreActionPressed: () => showModalBottomSheet(
-                  context: context,
-                  showDragHandle: true,
-                  builder: (_) => NoteMoreActionModal(noteId: note.id),
-                ),
-              );
-            },
-            separatorBuilder: (_, __) {
-              return Divider(color: context.dividerColorWithOpacity20).padding(const EdgeInsets.symmetric(vertical: 8));
-            },
-          )
-        ],
+    return CachedNoteItem(
+      noteId: note.id,
+      onUserIconPressed: (userId) => null,
+      onReactionPressed: (emoji) => ref.read(cachedNoteProvider(id: note.id).notifier).reaction(emoji),
+      onHashtagPressed: (hashtag) => HashtagNotesRoute(hashtag: hashtag).push(context),
+      onUrlPressed: (url) => launchUrl(Uri.parse(url)),
+      onReplyPressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId).push(context),
+      onRenotePressed: (noteId) => NoteCreationRoute(relatedNoteId: noteId, isRenoted: true).push(context),
+      onReactionAddPressed: () => showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        showDragHandle: true,
+        builder: (_) => EmojiReactionCreationModal(onEmojiSelected: (emoji) {
+          ref.read(cachedNoteProvider(id: note.id).notifier).reaction(emoji);
+        }),
+      ),
+      onMoreActionPressed: () => showModalBottomSheet(
+        context: context,
+        showDragHandle: true,
+        builder: (_) => NoteMoreActionModal(noteId: note.id),
       ),
     );
   }
