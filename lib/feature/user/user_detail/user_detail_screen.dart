@@ -65,8 +65,8 @@ final class UserDetailScreen extends HookConsumerWidget {
                   expandedHeight: 200,
                   leading: Container(
                     alignment: Alignment.centerRight,
-                    margin: const EdgeInsets.only(left: 16),
-                    padding: const EdgeInsets.only(left: 4),
+                    margin: const EdgeInsets.only(left: 8),
+                    padding: const EdgeInsets.only(left: 8),
                     decoration: BoxDecoration(color: Colors.black.withOpacity(0.2), shape: BoxShape.circle),
                     child: BackButton(
                       onPressed: () => context.pop(),
@@ -75,7 +75,7 @@ final class UserDetailScreen extends HookConsumerWidget {
                   ),
                   actions: [
                     SizedBox.square(
-                      dimension: 48,
+                      dimension: 52,
                       child: Container(
                         margin: const EdgeInsets.only(right: 4),
                         decoration: BoxDecoration(color: Colors.black.withOpacity(0.2), shape: BoxShape.circle),
