@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/api/api_provider.dart';
-import 'package:misskey_dog/core/api/request/create_mute_user_request.dart';
+import 'package:misskey_dog/core/api/request/create_mute_user_request/create_mute_user_request.dart';
 import 'package:misskey_dog/core/view/confirmation_dialog.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/note/provider/note_provider.dart';
@@ -46,7 +46,7 @@ final class NoteMoreActionModal extends HookConsumerWidget {
     final Note note = await ref.watch(noteProvider(id: noteId).future);
 
     final client = await ref.watch(misskeyClientProvider().future);
-    await client.createMuteUser(CreateMuteUser(userId: note.user.id).toJson());
+    await client.createMuteUser(CreateMuteUserRequest(userId: note.user.id).toJson());
 
     onSuccess();
   }

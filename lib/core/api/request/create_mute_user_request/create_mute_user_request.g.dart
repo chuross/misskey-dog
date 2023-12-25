@@ -6,13 +6,14 @@ part of 'create_mute_user_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CreateMuteUserImpl _$$CreateMuteUserImplFromJson(Map<String, dynamic> json) =>
-    _$CreateMuteUserImpl(
+_$CreateMuteUserRequestImpl _$$CreateMuteUserRequestImplFromJson(
+        Map<String, dynamic> json) =>
+    _$CreateMuteUserRequestImpl(
       userId: json['userId'] as String,
     );
 
-Map<String, dynamic> _$$CreateMuteUserImplToJson(
-        _$CreateMuteUserImpl instance) =>
+Map<String, dynamic> _$$CreateMuteUserRequestImplToJson(
+        _$CreateMuteUserRequestImpl instance) =>
     <String, dynamic>{
       'userId': instance.userId,
     };

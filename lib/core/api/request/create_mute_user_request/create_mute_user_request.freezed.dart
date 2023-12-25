@@ -14,33 +14,35 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-CreateMuteUser _$CreateMuteUserFromJson(Map<String, dynamic> json) {
-  return _CreateMuteUser.fromJson(json);
+CreateMuteUserRequest _$CreateMuteUserRequestFromJson(
+    Map<String, dynamic> json) {
+  return _CreateMuteUserRequest.fromJson(json);
 }
 
 /// @nodoc
-mixin _$CreateMuteUser {
+mixin _$CreateMuteUserRequest {
   String get userId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $CreateMuteUserCopyWith<CreateMuteUser> get copyWith =>
+  $CreateMuteUserRequestCopyWith<CreateMuteUserRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CreateMuteUserCopyWith<$Res> {
-  factory $CreateMuteUserCopyWith(
-          CreateMuteUser value, $Res Function(CreateMuteUser) then) =
-      _$CreateMuteUserCopyWithImpl<$Res, CreateMuteUser>;
+abstract class $CreateMuteUserRequestCopyWith<$Res> {
+  factory $CreateMuteUserRequestCopyWith(CreateMuteUserRequest value,
+          $Res Function(CreateMuteUserRequest) then) =
+      _$CreateMuteUserRequestCopyWithImpl<$Res, CreateMuteUserRequest>;
   @useResult
   $Res call({String userId});
 }
 
 /// @nodoc
-class _$CreateMuteUserCopyWithImpl<$Res, $Val extends CreateMuteUser>
-    implements $CreateMuteUserCopyWith<$Res> {
-  _$CreateMuteUserCopyWithImpl(this._value, this._then);
+class _$CreateMuteUserRequestCopyWithImpl<$Res,
+        $Val extends CreateMuteUserRequest>
+    implements $CreateMuteUserRequestCopyWith<$Res> {
+  _$CreateMuteUserRequestCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -62,22 +64,24 @@ class _$CreateMuteUserCopyWithImpl<$Res, $Val extends CreateMuteUser>
 }
 
 /// @nodoc
-abstract class _$$CreateMuteUserImplCopyWith<$Res>
-    implements $CreateMuteUserCopyWith<$Res> {
-  factory _$$CreateMuteUserImplCopyWith(_$CreateMuteUserImpl value,
-          $Res Function(_$CreateMuteUserImpl) then) =
-      __$$CreateMuteUserImplCopyWithImpl<$Res>;
+abstract class _$$CreateMuteUserRequestImplCopyWith<$Res>
+    implements $CreateMuteUserRequestCopyWith<$Res> {
+  factory _$$CreateMuteUserRequestImplCopyWith(
+          _$CreateMuteUserRequestImpl value,
+          $Res Function(_$CreateMuteUserRequestImpl) then) =
+      __$$CreateMuteUserRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String userId});
 }
 
 /// @nodoc
-class __$$CreateMuteUserImplCopyWithImpl<$Res>
-    extends _$CreateMuteUserCopyWithImpl<$Res, _$CreateMuteUserImpl>
-    implements _$$CreateMuteUserImplCopyWith<$Res> {
-  __$$CreateMuteUserImplCopyWithImpl(
-      _$CreateMuteUserImpl _value, $Res Function(_$CreateMuteUserImpl) _then)
+class __$$CreateMuteUserRequestImplCopyWithImpl<$Res>
+    extends _$CreateMuteUserRequestCopyWithImpl<$Res,
+        _$CreateMuteUserRequestImpl>
+    implements _$$CreateMuteUserRequestImplCopyWith<$Res> {
+  __$$CreateMuteUserRequestImplCopyWithImpl(_$CreateMuteUserRequestImpl _value,
+      $Res Function(_$CreateMuteUserRequestImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +89,7 @@ class __$$CreateMuteUserImplCopyWithImpl<$Res>
   $Res call({
     Object? userId = null,
   }) {
-    return _then(_$CreateMuteUserImpl(
+    return _then(_$CreateMuteUserRequestImpl(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -96,25 +100,25 @@ class __$$CreateMuteUserImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CreateMuteUserImpl implements _CreateMuteUser {
-  const _$CreateMuteUserImpl({required this.userId});
+class _$CreateMuteUserRequestImpl implements _CreateMuteUserRequest {
+  const _$CreateMuteUserRequestImpl({required this.userId});
 
-  factory _$CreateMuteUserImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CreateMuteUserImplFromJson(json);
+  factory _$CreateMuteUserRequestImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CreateMuteUserRequestImplFromJson(json);
 
   @override
   final String userId;
 
   @override
   String toString() {
-    return 'CreateMuteUser(userId: $userId)';
+    return 'CreateMuteUserRequest(userId: $userId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CreateMuteUserImpl &&
+            other is _$CreateMuteUserRequestImpl &&
             (identical(other.userId, userId) || other.userId == userId));
   }
 
@@ -125,29 +129,29 @@ class _$CreateMuteUserImpl implements _CreateMuteUser {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CreateMuteUserImplCopyWith<_$CreateMuteUserImpl> get copyWith =>
-      __$$CreateMuteUserImplCopyWithImpl<_$CreateMuteUserImpl>(
-          this, _$identity);
+  _$$CreateMuteUserRequestImplCopyWith<_$CreateMuteUserRequestImpl>
+      get copyWith => __$$CreateMuteUserRequestImplCopyWithImpl<
+          _$CreateMuteUserRequestImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CreateMuteUserImplToJson(
+    return _$$CreateMuteUserRequestImplToJson(
       this,
     );
   }
 }
 
-abstract class _CreateMuteUser implements CreateMuteUser {
-  const factory _CreateMuteUser({required final String userId}) =
-      _$CreateMuteUserImpl;
+abstract class _CreateMuteUserRequest implements CreateMuteUserRequest {
+  const factory _CreateMuteUserRequest({required final String userId}) =
+      _$CreateMuteUserRequestImpl;
 
-  factory _CreateMuteUser.fromJson(Map<String, dynamic> json) =
-      _$CreateMuteUserImpl.fromJson;
+  factory _CreateMuteUserRequest.fromJson(Map<String, dynamic> json) =
+      _$CreateMuteUserRequestImpl.fromJson;
 
   @override
   String get userId;
   @override
   @JsonKey(ignore: true)
-  _$$CreateMuteUserImplCopyWith<_$CreateMuteUserImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CreateMuteUserRequestImplCopyWith<_$CreateMuteUserRequestImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
