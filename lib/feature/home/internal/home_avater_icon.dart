@@ -43,15 +43,7 @@ final class HomeAvaterIcon extends HookConsumerWidget {
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
-                    colors: [
-                      Colors.red,
-                      Colors.orange,
-                      Colors.yellow,
-                      Colors.green,
-                      Colors.blue,
-                      Colors.indigo,
-                      Colors.purple,
-                    ],
+                    colors: [Colors.red, Colors.orange, Colors.yellow, Colors.green, Colors.blue, Colors.indigo, Colors.purple],
                   ),
                 ),
               ),
