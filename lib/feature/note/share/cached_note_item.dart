@@ -41,17 +41,17 @@ final class CachedNoteItem extends HookConsumerWidget {
       return const SizedBox.shrink();
     }
 
-    final mainNote = note.renote ?? note;
-
-    final maybeIndifferenceNote = useMemoized(() {
-      return note.renote?.user.id == note.user.id || mainNote.text?.contains('\$[') == true;
-    }, [note.id]);
-
     ref.listen(noteUpdateStreamingProvider(noteId: noteId), (_, next) {
       if (next is AsyncData) {
         ref.read(provider.notifier).sync();
       }
     });
+
+    final mainNote = note.renote ?? note;
+
+    final maybeIndifferenceNote = useMemoized(() {
+      return note.renote?.user.id == note.user.id || mainNote.text?.contains('\$[') == true;
+    }, [note.id]);
 
     return NoteItem(
       note: note,
