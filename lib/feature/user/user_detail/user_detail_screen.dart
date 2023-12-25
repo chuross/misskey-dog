@@ -8,7 +8,7 @@ import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/feature/user/user_detail/internal/user_detail_notes.dart';
 import 'package:misskey_dog/feature/user/user_detail/internal/user_detail_summary.dart';
-import 'package:misskey_dog/model/note/note_provider.dart';
+import 'package:misskey_dog/model/note/provider/note_provider.dart';
 import 'package:misskey_dog/model/user/user.dart';
 import 'package:misskey_dog/model/user/user_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

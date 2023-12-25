@@ -7,7 +7,7 @@ import 'package:misskey_dog/core/api/request/get_notes_request.dart';
 import 'package:misskey_dog/core/api/request/get_user_notes_request.dart';
 import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/model/note/note.dart';
-import 'package:misskey_dog/model/note/note_provider.dart';
+import 'package:misskey_dog/model/note/provider/note_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'notes_provider.g.dart';

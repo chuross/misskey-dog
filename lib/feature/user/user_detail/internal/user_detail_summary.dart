@@ -16,7 +16,7 @@ import 'package:misskey_dog/feature/note/note_more_action_modal.dart';
 import 'package:misskey_dog/feature/note/share/cached_note_item.dart';
 import 'package:misskey_dog/feature/user/hook/use_user_following.dart';
 import 'package:misskey_dog/model/note/note.dart';
-import 'package:misskey_dog/model/note/note_provider.dart';
+import 'package:misskey_dog/model/note/provider/note_provider.dart';
 import 'package:misskey_dog/model/user/user.dart';
 import 'package:url_launcher/url_launcher.dart';
 

@@ -7,7 +7,7 @@ import 'package:misskey_dog/core/api/api_provider.dart';
 import 'package:misskey_dog/core/api/request/create_mute_user_request.dart';
 import 'package:misskey_dog/core/view/confirmation_dialog.dart';
 import 'package:misskey_dog/model/note/note.dart';
-import 'package:misskey_dog/model/note/note_provider.dart';
+import 'package:misskey_dog/model/note/provider/note_provider.dart';
 
 final class NoteMoreActionModal extends HookConsumerWidget {
   final String noteId;

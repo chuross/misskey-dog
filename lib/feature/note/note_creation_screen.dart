@@ -14,7 +14,7 @@ import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
 import 'package:misskey_dog/feature/misskey/share/misskey_text.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note_file.dart';
-import 'package:misskey_dog/model/note/note_provider.dart';
+import 'package:misskey_dog/model/note/provider/note_provider.dart';
 
 final class NoteCreationRoute extends GoRouteData {
   final String? relatedNoteId;
@@ -134,7 +134,7 @@ final class _RelatedNote extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final relatedNote = ref.watch(NoteProvider(id: relatedNoteId));
+    final relatedNote = ref.watch(noteProvider(id: relatedNoteId));
 
     switch (relatedNote) {
       case AsyncData(:final value):

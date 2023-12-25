@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/feature/note/share/note_list_view.dart';
-import 'package:misskey_dog/model/note/notes_provider.dart';
+import 'package:misskey_dog/model/note/provider/notes_provider.dart';
 
 final class HashtagNotesRoute extends GoRouteData {
   final String hashtag;
