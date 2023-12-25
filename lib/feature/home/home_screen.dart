@@ -74,7 +74,6 @@ final class HomeScreen extends HookConsumerWidget {
               floatHeaderSlivers: true,
               headerSliverBuilder: (BuildContext _, bool __) => [
                 SliverAppBar(
-                  title: const Text('Misskey Dog'),
                   leading: GestureDetector(
                     onLongPress: () {
                       ScaffoldMessenger.of(context).showSnackBar(
