@@ -38,12 +38,15 @@ final class UserDetailSummary extends StatelessWidget {
             leading: const Icon(Icons.pin_drop_rounded),
           ).padding(const EdgeInsets.only(top: 8))),
         if (user.pinnedNotes?.isNotEmpty == true)
-          SliverList.builder(
-            itemCount: user.pinnedNotes?.length ?? 0,
-            itemBuilder: (_, index) {
-              final note = user.pinnedNotes![index];
-              return _UserPinnedNoteItem(note: note);
-            },
+          SliverSafeArea(
+            top: false,
+            sliver: SliverList.builder(
+              itemCount: user.pinnedNotes?.length ?? 0,
+              itemBuilder: (_, index) {
+                final note = user.pinnedNotes![index];
+                return _UserPinnedNoteItem(note: note);
+              },
+            ),
           )
       ],
     );
