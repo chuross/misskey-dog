@@ -44,7 +44,7 @@ final class CachedNoteItem extends HookConsumerWidget {
     final mainNote = note.renote ?? note;
 
     final maybeIndifferenceNote = useMemoized(() {
-      return isOmitEnabled && (note.renote?.user.id == note.user.id || mainNote.text?.contains('\$[') == true);
+      return note.renote?.user.id == note.user.id || mainNote.text?.contains('\$[') == true;
     }, [note.id]);
 
     ref.listen(noteUpdateStreamingProvider(noteId: noteId), (_, next) {
@@ -55,7 +55,7 @@ final class CachedNoteItem extends HookConsumerWidget {
 
     return NoteItem(
       note: note,
-      isOmmited: maybeIndifferenceNote || mainNote.myRawReactionEmoji != null,
+      isOmmited: isOmitEnabled && (maybeIndifferenceNote || mainNote.myRawReactionEmoji != null),
       onUserIconPressed: () => onUserIconPressed(note.renote?.user.id ?? note.user.id),
       onReactionPressed: onReactionPressed,
       onHashtagPressed: onHashtagPressed,
