@@ -79,6 +79,7 @@ final class HomeScreen extends HookConsumerWidget {
                     onLongPress: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
+                          duration: const Duration(milliseconds: 400),
                           content: Text(ref.read(noteForceSensitiveRemovedProvider) ? '解除！'.i18n : 'NSFWオーバードライブ!'.i18n),
                         ),
                       );
