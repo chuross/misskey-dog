@@ -221,7 +221,7 @@ final class _NoteFiles extends HookWidget {
     final isSensitiveRemoved = useState(isForceSensitiveRemoved || !hasSensitive);
 
     useEffect(() {
-      isSensitiveRemoved.value = isForceSensitiveRemoved || hasSensitive;
+      isSensitiveRemoved.value = isForceSensitiveRemoved || !hasSensitive;
       return null;
     }, [isForceSensitiveRemoved]);
 
