@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:misskey_dog/feature/note/share/note_item.dart';
@@ -7,6 +8,7 @@ import 'package:misskey_dog/model/note/provider/note_provider.dart';
 
 final class CachedNoteItem extends HookConsumerWidget {
   final String noteId;
+  final bool isOmitEnabled;
   final Function(String userId) onUserIconPressed;
   final Function(Emoji) onReactionPressed;
   final Function(String) onHashtagPressed;
@@ -19,6 +21,7 @@ final class CachedNoteItem extends HookConsumerWidget {
   const CachedNoteItem({
     super.key,
     required this.noteId,
+    this.isOmitEnabled = true,
     required this.onUserIconPressed,
     required this.onReactionPressed,
     required this.onHashtagPressed,
@@ -38,6 +41,12 @@ final class CachedNoteItem extends HookConsumerWidget {
       return const SizedBox.shrink();
     }
 
+    final mainNote = note.renote ?? note;
+
+    final maybeIndifferenceNote = useMemoized(() {
+      return isOmitEnabled && (note.renote?.user.id == note.user.id || mainNote.text?.contains('\$[') == true);
+    }, [note.id]);
+
     ref.listen(noteUpdateStreamingProvider(noteId: noteId), (_, next) {
       if (next is AsyncData) {
         ref.read(provider.notifier).sync();
@@ -46,6 +55,7 @@ final class CachedNoteItem extends HookConsumerWidget {
 
     return NoteItem(
       note: note,
+      isOmmited: maybeIndifferenceNote || mainNote.myRawReactionEmoji != null,
       onUserIconPressed: () => onUserIconPressed(note.renote?.user.id ?? note.user.id),
       onReactionPressed: onReactionPressed,
       onHashtagPressed: onHashtagPressed,

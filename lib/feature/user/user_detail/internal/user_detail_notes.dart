@@ -16,6 +16,7 @@ final class UserDetailNotes extends ConsumerWidget {
 
     return NoteListView(
       noteIds: noteIds,
+      isOmitEnabled: false,
       onFetchNext: () => ref.read(provider.notifier).fetchNext(),
       onRefresh: () => ref.invalidate(provider),
     );

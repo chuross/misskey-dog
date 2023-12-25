@@ -22,6 +22,7 @@ import 'package:video_player/video_player.dart';
 final class NoteItem extends StatelessWidget {
   final Note note;
   final EdgeInsets? padding;
+  final bool? isOmmited;
   final Function() onUserIconPressed;
   final Function(String) onHashtagPressed;
   final Function(String) onUrlPressed;
@@ -32,11 +33,12 @@ final class NoteItem extends StatelessWidget {
   final Function() onMoreActionPressed;
 
   Note get mainNote => note.renote ?? note;
-  bool get maybeIndifferenceNote => note.renote?.user.id == note.user.id || mainNote.text?.contains('\$[') == true;
 
   const NoteItem({
     super.key,
     required this.note,
+    this.padding,
+    this.isOmmited,
     required this.onUserIconPressed,
     required this.onHashtagPressed,
     required this.onUrlPressed,
@@ -45,17 +47,16 @@ final class NoteItem extends StatelessWidget {
     required this.onRenotePressed,
     required this.onReactionAddPressed,
     required this.onMoreActionPressed,
-    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (maybeIndifferenceNote || note.renote?.myRawReactionEmoji != null) {
+    if (isOmmited == true) {
       return Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Text(
           '省略'.i18n,
-          style: context.textTheme.bodyMedium,
+          style: context.textTheme.labelSmall?.copyWith(color: Colors.grey.shade400),
         ).align(Alignment.center),
       );
     }

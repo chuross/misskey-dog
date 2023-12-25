@@ -20,6 +20,7 @@ import 'package:url_launcher/url_launcher.dart';
 final class NoteListView extends HookConsumerWidget {
   final AsyncValue<List<String>> noteIds;
   final bool shouldManualReload;
+  final bool isOmitEnabled;
   final Function onFetchNext;
   final Function onRefresh;
   final Function? onManualReloadPressed;
@@ -27,10 +28,11 @@ final class NoteListView extends HookConsumerWidget {
   const NoteListView({
     super.key,
     required this.noteIds,
+    this.shouldManualReload = false,
+    this.isOmitEnabled = true,
     required this.onFetchNext,
     required this.onRefresh,
     this.onManualReloadPressed,
-    this.shouldManualReload = false,
   });
 
   @override
@@ -54,6 +56,7 @@ final class NoteListView extends HookConsumerWidget {
                         return CachedNoteItem(
                           key: noteId.toKey(),
                           noteId: noteId,
+                          isOmitEnabled: isOmitEnabled,
                           onUserIconPressed: (userId) => UserDetailRoute(userId: userId).push(context),
                           onReactionPressed: (emoji) => ref.read(cachedNoteProvider(id: noteId).notifier).reaction(emoji),
                           onHashtagPressed: (hashtag) => HashtagNotesRoute(hashtag: hashtag).push(context),
