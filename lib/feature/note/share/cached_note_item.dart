@@ -58,7 +58,7 @@ final class CachedNoteItem extends HookConsumerWidget {
 
     return NoteItem(
       note: note,
-      isOmmited: isOmitEnabled && (maybeIndifferenceNote || mainNote.myRawReactionEmoji != null),
+      isOmmited: isOmitEnabled && (maybeIndifferenceNote || note.renote?.myRawReactionEmoji != null),
       isForceSensitiveRemoved: isForceSensitiveRemoved,
       onUserIconPressed: () => onUserIconPressed(note.renote?.user.id ?? note.user.id),
       onReactionPressed: onReactionPressed,
