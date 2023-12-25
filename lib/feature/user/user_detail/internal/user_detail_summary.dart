@@ -147,6 +147,7 @@ final class _UserPinnedNoteItem extends ConsumerWidget {
       child: Card(
         child: CachedNoteItem(
           noteId: note.id,
+          isOmitEnabled: false,
           onUserIconPressed: (userId) => null,
           onReactionPressed: (emoji) => ref.read(cachedNoteProvider(id: note.id).notifier).reaction(emoji),
           onHashtagPressed: (hashtag) => HashtagNotesRoute(hashtag: hashtag).push(context),
