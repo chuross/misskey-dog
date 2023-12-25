@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/api/api_provider.dart';
-import 'package:misskey_dog/core/api/request/create_note_request.dart';
+import 'package:misskey_dog/core/api/request/create_note_request/create_note_request.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/core/extension/object.dart';

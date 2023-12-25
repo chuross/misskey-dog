@@ -1,5 +1,5 @@
 import 'package:misskey_dog/core/api/api_provider.dart';
-import 'package:misskey_dog/core/api/request/get_notifications_request.dart';
+import 'package:misskey_dog/core/api/request/get_notifications_request/get_notifications_request.dart';
 import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/model/notification/notification.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:misskey_dog/core/api/api_provider.dart';
-import 'package:misskey_dog/core/api/request/create_note_reaction_request.dart';
-import 'package:misskey_dog/core/api/request/get_note_request.dart';
+import 'package:misskey_dog/core/api/request/create_note_reaction_request/create_note_reaction_request.dart';
+import 'package:misskey_dog/core/api/request/get_note_request/get_note_request.dart';
 import 'package:misskey_dog/core/extension/stream.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
 import 'package:misskey_dog/model/note/note.dart';

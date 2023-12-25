@@ -1,10 +1,10 @@
 import 'package:misskey_dog/core/api/api_provider.dart';
-import 'package:misskey_dog/core/api/request/get_global_notes_request.dart';
-import 'package:misskey_dog/core/api/request/get_hash_tag_notes_request.dart';
+import 'package:misskey_dog/core/api/request/get_global_notes_request/get_global_notes_request.dart';
+import 'package:misskey_dog/core/api/request/get_hash_tag_notes_request/get_hash_tag_notes_request.dart';
 import 'package:misskey_dog/core/api/request/get_home_notes_request/get_home_notes_request.dart';
-import 'package:misskey_dog/core/api/request/get_local_notes_request.dart';
-import 'package:misskey_dog/core/api/request/get_notes_request.dart';
-import 'package:misskey_dog/core/api/request/get_user_notes_request.dart';
+import 'package:misskey_dog/core/api/request/get_local_notes_request/get_local_notes_request.dart';
+import 'package:misskey_dog/core/api/request/get_notes_request/get_notes_request.dart';
+import 'package:misskey_dog/core/api/request/get_user_notes_request/get_user_notes_request.dart';
 import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/note/provider/note_provider.dart';
