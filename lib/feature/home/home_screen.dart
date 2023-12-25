@@ -1,16 +1,15 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/api/api_provider.dart';
+import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/feature/account/account_screen.dart';
 import 'package:misskey_dog/feature/home/internal/home_avater_icon.dart';
 import 'package:misskey_dog/feature/home/internal/home_global_timeline.dart';
 import 'package:misskey_dog/feature/home/internal/home_local_timeline.dart';
-import 'package:misskey_dog/feature/home/internal/home_media_timeline.dart';
 import 'package:misskey_dog/feature/home/internal/home_timeline.dart';
 import 'package:misskey_dog/feature/note/hash_tag_notes_screen.dart';
 import 'package:misskey_dog/feature/note/keyword_notes_screen.dart';
@@ -21,7 +20,7 @@ import 'package:misskey_dog/feature/search/search_screen.dart';
 import 'package:misskey_dog/feature/user/user_detail/user_detail_screen.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 import 'package:misskey_dog/model/note/note_file.dart';
-import 'package:misskey_dog/model/note/provider/note_force_sensitive_provider.dart';
+import 'package:misskey_dog/model/note/provider/note_global_flag_provider.dart';
 import 'package:misskey_dog/model/streaming/streaming_channel.dart';
 import 'package:misskey_dog/model/streaming/streaming_event_kind.dart';
 
@@ -48,7 +47,6 @@ final class HomeScreen extends HookConsumerWidget {
   static final _tabs = [
     (title: 'ホーム'.i18n, child: const HomeTimeline()),
     (title: 'ローカル'.i18n, child: const HomeLocalTimeline()),
-    (title: 'メディア'.i18n, child: const HomeMediaTimeline()),
     (title: 'グローバル'.i18n, child: const HomeGlobalTimeline()),
   ];
 
@@ -65,6 +63,8 @@ final class HomeScreen extends HookConsumerWidget {
       }
     });
 
+    final isNoteMediaOnly = ref.watch(noteMediaOnlyVisibleProvider);
+
     switch (account) {
       case AsyncData(value: final account) when account != null:
         return DefaultTabController(
@@ -74,6 +74,17 @@ final class HomeScreen extends HookConsumerWidget {
               floatHeaderSlivers: true,
               headerSliverBuilder: (BuildContext _, bool __) => [
                 SliverAppBar(
+                  title: Row(
+                    children: [
+                      Text('メディアのみ'.i18n, style: context.textTheme.labelMedium),
+                      Switch(
+                        value: isNoteMediaOnly,
+                        onChanged: (newFlag) {
+                          ref.read(noteMediaOnlyVisibleProvider.notifier).setMediaOnlyVisible(newFlag);
+                        },
+                      )
+                    ],
+                  ),
                   leading: GestureDetector(
                     onLongPress: () {
                       ScaffoldMessenger.of(context).showSnackBar(

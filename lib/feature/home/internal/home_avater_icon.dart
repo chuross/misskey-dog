@@ -6,7 +6,7 @@ import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/model/account/account.dart';
 import 'dart:math' as math;
 
-import 'package:misskey_dog/model/note/provider/note_force_sensitive_provider.dart';
+import 'package:misskey_dog/model/note/provider/note_global_flag_provider.dart';
 
 final class HomeAvaterIcon extends HookConsumerWidget {
   final Account account;

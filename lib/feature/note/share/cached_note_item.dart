@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
-import 'package:misskey_dog/model/note/provider/note_force_sensitive_provider.dart';
+import 'package:misskey_dog/model/note/provider/note_global_flag_provider.dart';
 import 'package:misskey_dog/model/note/provider/note_provider.dart';
 
 final class CachedNoteItem extends HookConsumerWidget {
