@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:misskey_dog/feature/note/share/note_item.dart';
 import 'package:misskey_dog/model/emoji/emoji.dart';
+import 'package:misskey_dog/model/note/provider/note_force_sensitive_provider.dart';
 import 'package:misskey_dog/model/note/provider/note_provider.dart';
 
 final class CachedNoteItem extends HookConsumerWidget {
@@ -53,9 +54,12 @@ final class CachedNoteItem extends HookConsumerWidget {
       return note.renote?.user.id == note.user.id || mainNote.text?.contains('\$[') == true;
     }, [note.id]);
 
+    final isForceSensitiveRemoved = ref.watch(noteForceSensitiveRemovedProvider);
+
     return NoteItem(
       note: note,
       isOmmited: isOmitEnabled && (maybeIndifferenceNote || mainNote.myRawReactionEmoji != null),
+      isForceSensitiveRemoved: isForceSensitiveRemoved,
       onUserIconPressed: () => onUserIconPressed(note.renote?.user.id ?? note.user.id),
       onReactionPressed: onReactionPressed,
       onHashtagPressed: onHashtagPressed,

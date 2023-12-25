@@ -22,7 +22,8 @@ import 'package:video_player/video_player.dart';
 final class NoteItem extends StatelessWidget {
   final Note note;
   final EdgeInsets? padding;
-  final bool? isOmmited;
+  final bool isOmmited;
+  final bool isForceSensitiveRemoved;
   final Function() onUserIconPressed;
   final Function(String) onHashtagPressed;
   final Function(String) onUrlPressed;
@@ -38,7 +39,8 @@ final class NoteItem extends StatelessWidget {
     super.key,
     required this.note,
     this.padding,
-    this.isOmmited,
+    this.isOmmited = false,
+    this.isForceSensitiveRemoved = false,
     required this.onUserIconPressed,
     required this.onHashtagPressed,
     required this.onUrlPressed,
@@ -67,6 +69,7 @@ final class NoteItem extends StatelessWidget {
         _RenotedInfo(note: note),
         _MainContent(
           note: note,
+          isForceSensitiveRemoved: isForceSensitiveRemoved,
           onUserIconPressed: onUserIconPressed,
           onHashtagPressed: onHashtagPressed,
           onUrlPressed: onUrlPressed,
@@ -117,6 +120,7 @@ final class _RenotedInfo extends StatelessWidget {
 
 final class _MainContent extends StatelessWidget {
   final Note note;
+  final bool isForceSensitiveRemoved;
   final Function() onUserIconPressed;
   final Function(String) onHashtagPressed;
   final Function(String) onUrlPressed;
@@ -125,6 +129,7 @@ final class _MainContent extends StatelessWidget {
 
   const _MainContent({
     required this.note,
+    required this.isForceSensitiveRemoved,
     required this.onUserIconPressed,
     required this.onHashtagPressed,
     required this.onUrlPressed,
@@ -184,7 +189,7 @@ final class _MainContent extends StatelessWidget {
               onUrlPressed: onUrlPressed,
             ),
             SizedBox(height: _mainNote.text?.isNotEmpty == true ? 8 : 0),
-            _NoteFiles(files: _mainNote.files, isLocal: _mainNote.isLocal),
+            _NoteFiles(files: _mainNote.files, isLocal: _mainNote.isLocal, isForceSensitiveRemoved: isForceSensitiveRemoved),
           ],
         ).expanded()
       ],
@@ -195,8 +200,13 @@ final class _MainContent extends StatelessWidget {
 final class _NoteFiles extends HookWidget {
   final List<NoteFile> files;
   final bool isLocal;
+  final bool isForceSensitiveRemoved;
 
-  const _NoteFiles({required this.files, required this.isLocal});
+  const _NoteFiles({
+    required this.files,
+    required this.isLocal,
+    required this.isForceSensitiveRemoved,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -207,7 +217,7 @@ final class _NoteFiles extends HookWidget {
     final imageFiles = files.where((e) => e.isImage).toList();
     final videoFiles = files.where((e) => e.isVideo).toList();
     final supportedFiles = [...imageFiles, ...videoFiles];
-    final isSensitiveRemoved = useState(supportedFiles.every((e) => !e.isSensitive));
+    final isSensitiveRemoved = useState(isForceSensitiveRemoved || supportedFiles.every((e) => !e.isSensitive));
 
     if (supportedFiles.length == 1) {
       return _FileView(

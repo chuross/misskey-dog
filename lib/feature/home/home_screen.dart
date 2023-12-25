@@ -20,6 +20,7 @@ import 'package:misskey_dog/feature/search/search_screen.dart';
 import 'package:misskey_dog/feature/user/user_detail/user_detail_screen.dart';
 import 'package:misskey_dog/model/account/account_provider.dart';
 import 'package:misskey_dog/model/note/note_file.dart';
+import 'package:misskey_dog/model/note/provider/note_force_sensitive_provider.dart';
 import 'package:misskey_dog/model/streaming/streaming_channel.dart';
 import 'package:misskey_dog/model/streaming/streaming_event_kind.dart';
 
@@ -73,14 +74,25 @@ final class HomeScreen extends HookConsumerWidget {
               headerSliverBuilder: (BuildContext _, bool __) => [
                 SliverAppBar(
                   title: const Text('Misskey Dog'),
-                  leading: IconButton(
-                    icon: switch (account.user.avatarUrl) {
-                      final avatarUrl? => CircleAvatar(
-                          foregroundImage: CachedNetworkImageProvider(avatarUrl),
+                  leading: GestureDetector(
+                    onLongPress: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(ref.read(noteForceSensitiveRemovedProvider) ? '解除！'.i18n : 'センシティブオーバードライブ！'.i18n),
                         ),
-                      _ => const Icon(Icons.person),
+                      );
+
+                      ref.read(noteForceSensitiveRemovedProvider.notifier).toggle();
                     },
-                    onPressed: () => AccountRoute().push(context),
+                    child: IconButton(
+                      icon: switch (account.user.avatarUrl) {
+                        final avatarUrl? => CircleAvatar(
+                            foregroundImage: CachedNetworkImageProvider(avatarUrl),
+                          ),
+                        _ => const Icon(Icons.person),
+                      },
+                      onPressed: () => AccountRoute().push(context),
+                    ),
                   ),
                   actions: [
                     IconButton(
