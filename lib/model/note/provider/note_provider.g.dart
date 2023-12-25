@@ -6,7 +6,7 @@ part of 'note_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$noteHash() => r'd10823afaf0dfc1e8d35de6fb2e7ecfaa7c90a2e';
+String _$noteHash() => r'3e0e2ed57bc9822ba9e2dd6912ca211dddc41393';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -413,7 +413,7 @@ class _NoteUpdateStreamingProviderElement
   String get noteId => (origin as NoteUpdateStreamingProvider).noteId;
 }
 
-String _$cachedNoteHash() => r'61ceaecfa748a53ccde7f24a20dacab8b391e37e';
+String _$cachedNoteHash() => r'210cc3323beecdd792b722b7a41a6932706c1e73';
 
 abstract class _$CachedNote extends BuildlessAutoDisposeNotifier<Note?> {
   late final String id;

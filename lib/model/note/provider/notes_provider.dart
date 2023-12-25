@@ -5,7 +5,6 @@ import 'package:misskey_dog/core/api/request/get_home_notes_request/get_home_not
 import 'package:misskey_dog/core/api/request/get_local_notes_request/get_local_notes_request.dart';
 import 'package:misskey_dog/core/api/request/get_notes_request/get_notes_request.dart';
 import 'package:misskey_dog/core/api/request/get_user_notes_request/get_user_notes_request.dart';
-import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/model/note/note.dart';
 import 'package:misskey_dog/model/note/provider/note_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -18,12 +17,10 @@ final class HomeNoteIdsWithCache extends _$HomeNoteIdsWithCache {
   Future<List<String>> build({bool? hasFiles}) async {
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final notes = await client.getHomeNotes(
-      request: GetHomeNotesRequest(
-        hasFiles: hasFiles,
-        limit: 100,
-      ).toJson().removeAllNullValueKeys(),
-    );
+    final notes = await client.getHomeNotes(GetHomeNotesRequest(
+      hasFiles: hasFiles,
+      limit: 100,
+    ));
 
     for (final note in notes) {
       _bindNoteCache(note);
@@ -40,13 +37,11 @@ final class HomeNoteIdsWithCache extends _$HomeNoteIdsWithCache {
 
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final newNotes = await client.getHomeNotes(
-      request: GetHomeNotesRequest(
-        hasFiles: hasFiles,
-        untilId: lastNoteId,
-        limit: 100,
-      ).toJson().removeAllNullValueKeys(),
-    );
+    final newNotes = await client.getHomeNotes(GetHomeNotesRequest(
+      hasFiles: hasFiles,
+      untilId: lastNoteId,
+      limit: 100,
+    ));
 
     for (final note in newNotes) {
       _bindNoteCache(note);
@@ -75,12 +70,10 @@ final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
   Future<List<String>> build({bool? hasFiles}) async {
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final notes = await client.getLocalNotes(
-      request: GetLocalNotesRequest(
-        hasFiles: hasFiles,
-        limit: 100,
-      ).toJson().removeAllNullValueKeys(),
-    );
+    final notes = await client.getLocalNotes(GetLocalNotesRequest(
+      hasFiles: hasFiles,
+      limit: 100,
+    ));
 
     for (final note in notes) {
       _bindNoteCache(note);
@@ -97,13 +90,11 @@ final class LocalNoteIdsWithCache extends _$LocalNoteIdsWithCache {
 
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final newNotes = await client.getLocalNotes(
-      request: GetLocalNotesRequest(
-        hasFiles: hasFiles,
-        untilId: lastNoteId,
-        limit: 100,
-      ).toJson().removeAllNullValueKeys(),
-    );
+    final newNotes = await client.getLocalNotes(GetLocalNotesRequest(
+      hasFiles: hasFiles,
+      untilId: lastNoteId,
+      limit: 100,
+    ));
 
     for (final note in newNotes) {
       _bindNoteCache(note);
@@ -134,12 +125,10 @@ final class GlobalNoteIdsWithCache extends _$GlobalNoteIdsWithCache {
   }) async {
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final notes = await client.getGlobalNotes(
-      request: GetGlobalNotesRequest(
-        hasFiles: hasFiles,
-        limit: 100,
-      ).toJson().removeAllNullValueKeys(),
-    );
+    final notes = await client.getGlobalNotes(GetGlobalNotesRequest(
+      hasFiles: hasFiles,
+      limit: 100,
+    ));
 
     for (final note in notes) {
       _bindNoteCache(note);
@@ -156,13 +145,11 @@ final class GlobalNoteIdsWithCache extends _$GlobalNoteIdsWithCache {
 
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final newNotes = await client.getGlobalNotes(
-      request: GetLocalNotesRequest(
-        hasFiles: hasFiles,
-        untilId: lastNoteId,
-        limit: 100,
-      ).toJson().removeAllNullValueKeys(),
-    );
+    final newNotes = await client.getGlobalNotes(GetGlobalNotesRequest(
+      hasFiles: hasFiles,
+      untilId: lastNoteId,
+      limit: 100,
+    ));
 
     for (final note in newNotes) {
       _bindNoteCache(note);
@@ -191,12 +178,10 @@ final class SearchNotesIdsWithCache extends _$SearchNotesIdsWithCache {
   Future<List<String>> build({required String keyword, bool? hasFiles}) async {
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final notes = await client.getNotes(
-      request: GetNotesRequest(
-        query: keyword,
-        limit: 100,
-      ).toJson().removeAllNullValueKeys(),
-    );
+    final notes = await client.getNotes(GetNotesRequest(
+      query: keyword,
+      limit: 100,
+    ));
 
     for (final note in notes) {
       _bindNoteCache(note);
@@ -213,13 +198,11 @@ final class SearchNotesIdsWithCache extends _$SearchNotesIdsWithCache {
 
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final newNotes = await client.getNotes(
-      request: GetNotesRequest(
-        query: keyword,
-        untilId: lastNoteId,
-        limit: 100,
-      ).toJson().removeAllNullValueKeys(),
-    );
+    final newNotes = await client.getNotes(GetNotesRequest(
+      query: keyword,
+      untilId: lastNoteId,
+      limit: 100,
+    ));
 
     for (final note in newNotes) {
       _bindNoteCache(note);
@@ -245,13 +228,11 @@ final class HashtagNoteIdsWithCache extends _$HashtagNoteIdsWithCache {
   }) async {
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final notes = await client.getHashTagNotes(
-      request: GetHashTagNotesRequest(
-        hashTag: _replacedHashTag,
-        hasFiles: hasFiles,
-        limit: 100,
-      ).toJson().removeAllNullValueKeys(),
-    );
+    final notes = await client.getHashTagNotes(GetHashTagNotesRequest(
+      hashTag: _replacedHashTag,
+      hasFiles: hasFiles,
+      limit: 100,
+    ));
 
     for (final note in notes) {
       _bindNoteCache(note);
@@ -268,14 +249,12 @@ final class HashtagNoteIdsWithCache extends _$HashtagNoteIdsWithCache {
 
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final newNotes = await client.getHashTagNotes(
-      request: GetHashTagNotesRequest(
-        hashTag: _replacedHashTag,
-        hasFiles: hasFiles,
-        untilId: lastNoteId,
-        limit: 100,
-      ).toJson().removeAllNullValueKeys(),
-    );
+    final newNotes = await client.getHashTagNotes(GetHashTagNotesRequest(
+      hashTag: _replacedHashTag,
+      hasFiles: hasFiles,
+      untilId: lastNoteId,
+      limit: 100,
+    ));
 
     for (final note in newNotes) {
       _bindNoteCache(note);
@@ -296,13 +275,11 @@ final class UserNotesIdsWithCache extends _$UserNotesIdsWithCache {
   Future<List<String>> build({required String userId, bool? hasFiles}) async {
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final notes = await client.getUserNotes(
-      request: GetUserNotesRequest(
-        userId: userId,
-        hasFiles: hasFiles,
-        limit: 100,
-      ).toJson().removeAllNullValueKeys(),
-    );
+    final notes = await client.getUserNotes(GetUserNotesRequest(
+      userId: userId,
+      hasFiles: hasFiles,
+      limit: 100,
+    ));
 
     for (final note in notes) {
       _bindNoteCache(note);
@@ -319,14 +296,12 @@ final class UserNotesIdsWithCache extends _$UserNotesIdsWithCache {
 
     final client = await ref.watch(misskeyClientProvider().future);
 
-    final newNotes = await client.getUserNotes(
-      request: GetUserNotesRequest(
-        userId: userId,
-        hasFiles: hasFiles,
-        untilId: lastNoteId,
-        limit: 100,
-      ).toJson().removeAllNullValueKeys(),
-    );
+    final newNotes = await client.getUserNotes(GetUserNotesRequest(
+      userId: userId,
+      hasFiles: hasFiles,
+      untilId: lastNoteId,
+      limit: 100,
+    ));
 
     for (final note in newNotes) {
       _bindNoteCache(note);

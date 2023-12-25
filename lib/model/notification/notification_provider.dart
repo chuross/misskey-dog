@@ -1,6 +1,5 @@
 import 'package:misskey_dog/core/api/api_provider.dart';
 import 'package:misskey_dog/core/api/request/get_notifications_request/get_notifications_request.dart';
-import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/model/notification/notification.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -14,7 +13,7 @@ final class Notifications extends _$Notifications {
 
     return await client.getNotifications(GetNotificationsRequest(
       limit: 100,
-    ).toJson().removeAllNullValueKeys());
+    ));
   }
 
   Future<void> fetchNext() async {
@@ -28,7 +27,7 @@ final class Notifications extends _$Notifications {
     final newNotifications = await client.getNotifications(GetNotificationsRequest(
       limit: 30,
       untilId: lastId,
-    ).toJson().removeAllNullValueKeys());
+    ));
 
     state = AsyncData([...state.value!, ...newNotifications]);
   }

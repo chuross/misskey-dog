@@ -15,9 +15,9 @@ import 'package:misskey_dog/core/api/request/remove_user_following_request/remov
     final client = await ref.read(misskeyClientProvider().future);
 
     if (isFollowing.value) {
-      await client.removeUserFollowing(RemoveUserFollowingRequest(userId: userId).toJson());
+      await client.removeUserFollowing(RemoveUserFollowingRequest(userId: userId));
     } else {
-      await client.createUserFollowing(CreateUserFollowingRequest(userId: userId).toJson());
+      await client.createUserFollowing(CreateUserFollowingRequest(userId: userId));
     }
 
     isFollowing.value = !isFollowing.value;

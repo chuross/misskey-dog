@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:misskey_dog/core/api/json_encodable.dart';
 import 'package:misskey_dog/core/api/misskey_client.dart';
 import 'package:misskey_dog/core/extension/stream.dart';
 import 'package:misskey_dog/core/logger/logger_provider.dart';
@@ -25,7 +27,10 @@ Dio dio(DioRef ref) {
   dio.interceptors.add(InterceptorsWrapper(
     onRequest: (options, handler) async {
       final account = await ref.read(accountStateProvider.future);
-      if (account != null && options.data is Map) {
+
+      if (account != null && options.data is JsonEncodable) {
+        options.headers['content-type'] = ContentType.json.mimeType;
+        options.data = options.data?.toJson();
         options.data['i'] = account.token;
       }
 

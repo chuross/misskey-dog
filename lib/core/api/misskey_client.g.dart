@@ -46,12 +46,11 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<User> getUser({required Map<String, dynamic> request}) async {
+  Future<User> getUser(GetUserRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final _data = request;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
       method: 'POST',
@@ -74,12 +73,11 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<void> createUserFollowing(Map<String, dynamic> request) async {
+  Future<void> createUserFollowing(CreateUserFollowingRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final _data = request;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'POST',
       headers: _headers,
@@ -99,12 +97,11 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<void> removeUserFollowing(Map<String, dynamic> request) async {
+  Future<void> removeUserFollowing(RemoveUserFollowingRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final _data = request;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'POST',
       headers: _headers,
@@ -124,12 +121,11 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<Note> getNote({required Map<String, dynamic> request}) async {
+  Future<Note> getNote(GetNoteRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final _data = request;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<Note>(Options(
       method: 'POST',
@@ -152,12 +148,11 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<List<Note>> getNotes({required Map<String, dynamic> request}) async {
+  Future<List<Note>> getNotes(GetNotesRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final _data = request;
     final _result =
         await _dio.fetch<List<dynamic>>(_setStreamType<List<Note>>(Options(
       method: 'POST',
@@ -182,13 +177,11 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<List<Note>> getUserNotes(
-      {required Map<String, dynamic> request}) async {
+  Future<List<Note>> getUserNotes(GetUserNotesRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final _data = request;
     final _result =
         await _dio.fetch<List<dynamic>>(_setStreamType<List<Note>>(Options(
       method: 'POST',
@@ -213,13 +206,11 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<List<Note>> getHashTagNotes(
-      {required Map<String, dynamic> request}) async {
+  Future<List<Note>> getHashTagNotes(GetHashTagNotesRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final _data = request;
     final _result =
         await _dio.fetch<List<dynamic>>(_setStreamType<List<Note>>(Options(
       method: 'POST',
@@ -244,13 +235,11 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<List<Note>> getHomeNotes(
-      {required Map<String, dynamic> request}) async {
+  Future<List<Note>> getHomeNotes(GetHomeNotesRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final _data = request;
     final _result =
         await _dio.fetch<List<dynamic>>(_setStreamType<List<Note>>(Options(
       method: 'POST',
@@ -275,13 +264,11 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<List<Note>> getLocalNotes(
-      {required Map<String, dynamic> request}) async {
+  Future<List<Note>> getLocalNotes(GetLocalNotesRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final _data = request;
     final _result =
         await _dio.fetch<List<dynamic>>(_setStreamType<List<Note>>(Options(
       method: 'POST',
@@ -306,13 +293,11 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<List<Note>> getGlobalNotes(
-      {required Map<String, dynamic> request}) async {
+  Future<List<Note>> getGlobalNotes(GetGlobalNotesRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final _data = request;
     final _result =
         await _dio.fetch<List<dynamic>>(_setStreamType<List<Note>>(Options(
       method: 'POST',
@@ -337,13 +322,11 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<CreateNoteResponse> createNote(
-      {required Map<String, dynamic> request}) async {
+  Future<CreateNoteResponse> createNote(CreateNoteRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final _data = request;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<CreateNoteResponse>(Options(
       method: 'POST',
@@ -366,13 +349,11 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<void> createNoteReaction(
-      {required Map<String, dynamic> request}) async {
+  Future<void> createNoteReaction(CreateNoteReactionRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final _data = request;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'POST',
       headers: _headers,
@@ -421,13 +402,11 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<LocalEmoji> getLocalEmoji(
-      {required Map<String, dynamic> request}) async {
+  Future<LocalEmoji> getLocalEmoji(GetEmojiRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final _data = request;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<LocalEmoji>(Options(
       method: 'POST',
@@ -451,12 +430,11 @@ class _MisskeyClient implements MisskeyClient {
 
   @override
   Future<List<Notification>> getNotifications(
-      Map<String, dynamic> request) async {
+      GetNotificationsRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final _data = request;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<Notification>>(Options(
       method: 'POST',
@@ -481,12 +459,11 @@ class _MisskeyClient implements MisskeyClient {
   }
 
   @override
-  Future<void> createMuteUser(Map<String, dynamic> request) async {
+  Future<void> createMuteUser(CreateMuteUserRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request);
+    final _data = request;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'POST',
       headers: _headers,

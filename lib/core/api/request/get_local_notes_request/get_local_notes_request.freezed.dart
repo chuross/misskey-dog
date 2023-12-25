@@ -125,7 +125,8 @@ class __$$GetLocalNotesRequestImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$GetLocalNotesRequestImpl implements _GetLocalNotesRequest {
   const _$GetLocalNotesRequestImpl(
       {@JsonKey(name: 'withFiles') this.hasFiles, this.untilId, this.limit});

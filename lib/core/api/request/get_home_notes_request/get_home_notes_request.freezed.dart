@@ -124,7 +124,8 @@ class __$$GetHomeNotesRequestImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$GetHomeNotesRequestImpl implements _GetHomeNotesRequest {
   const _$GetHomeNotesRequestImpl(
       {@JsonKey(name: 'withFiles') this.hasFiles, this.untilId, this.limit});

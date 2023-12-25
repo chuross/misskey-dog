@@ -46,7 +46,7 @@ final class NoteMoreActionModal extends HookConsumerWidget {
     final Note note = await ref.watch(noteProvider(id: noteId).future);
 
     final client = await ref.watch(misskeyClientProvider().future);
-    await client.createMuteUser(CreateMuteUserRequest(userId: note.user.id).toJson());
+    await client.createMuteUser(CreateMuteUserRequest(userId: note.user.id));
 
     onSuccess();
   }

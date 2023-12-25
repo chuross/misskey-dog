@@ -8,5 +8,5 @@ part 'user_provider.g.dart';
 @riverpod
 Future<User> user(UserRef ref, {required String id}) async {
   final client = await ref.watch(misskeyClientProvider().future);
-  return client.getUser(request: GetUserRequest(userId: id).toJson());
+  return client.getUser(GetUserRequest(userId: id));
 }

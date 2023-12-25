@@ -15,9 +15,17 @@ _$GetHomeNotesRequestImpl _$$GetHomeNotesRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$GetHomeNotesRequestImplToJson(
-        _$GetHomeNotesRequestImpl instance) =>
-    <String, dynamic>{
-      'withFiles': instance.hasFiles,
-      'untilId': instance.untilId,
-      'limit': instance.limit,
-    };
+    _$GetHomeNotesRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('withFiles', instance.hasFiles);
+  writeNotNull('untilId', instance.untilId);
+  writeNotNull('limit', instance.limit);
+  return val;
+}

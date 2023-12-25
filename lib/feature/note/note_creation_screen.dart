@@ -7,7 +7,6 @@ import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/api/api_provider.dart';
 import 'package:misskey_dog/core/api/request/create_note_request/create_note_request.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
-import 'package:misskey_dog/core/extension/map.dart';
 import 'package:misskey_dog/core/extension/object.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
@@ -113,13 +112,11 @@ final class NoteCreationScreen extends HookConsumerWidget {
     return useMemoized(
       () => (String text) async {
         final client = await ref.read(misskeyClientProvider().future);
-        await client.createNote(
-          request: CreateNoteRequest(
-            text: text.isNotEmpty ? text : null,
-            replyId: !isRenoted ? relatedNoteId : null,
-            renoteId: isRenoted ? relatedNoteId : null,
-          ).toJson().removeAllNullValueKeys(),
-        );
+        await client.createNote(CreateNoteRequest(
+          text: text.isNotEmpty ? text : null,
+          replyId: !isRenoted ? relatedNoteId : null,
+          renoteId: isRenoted ? relatedNoteId : null,
+        ));
         created.value = true;
       },
       const [],

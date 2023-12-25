@@ -15,7 +15,7 @@ part 'note_provider.g.dart';
 @riverpod
 Future<Note> note(NoteRef ref, {required String id}) async {
   final client = await ref.watch(misskeyClientProvider().future);
-  return client.getNote(request: GetNoteRequest(noteId: id).toJson());
+  return client.getNote(GetNoteRequest(noteId: id));
 }
 
 @riverpod
@@ -36,7 +36,7 @@ final class CachedNote extends _$CachedNote {
     final targetNote = note.renote ?? note;
 
     final client = await ref.watch(misskeyClientProvider().future);
-    await client.createNoteReaction(request: CreateNoteReactionRequest(noteId: targetNote.id, emojiId: emoji.id).toJson());
+    await client.createNoteReaction(CreateNoteReactionRequest(noteId: targetNote.id, emojiId: emoji.id));
 
     // リアクションが反映されるまでラグがあるので少し待つ
     await Future.delayed(const Duration(milliseconds: 500));
@@ -46,7 +46,7 @@ final class CachedNote extends _$CachedNote {
 
   Future<void> sync() async {
     final client = await ref.watch(misskeyClientProvider().future);
-    state = await client.getNote(request: GetNoteRequest(noteId: id).toJson());
+    state = await client.getNote(GetNoteRequest(noteId: id));
   }
 }
 
