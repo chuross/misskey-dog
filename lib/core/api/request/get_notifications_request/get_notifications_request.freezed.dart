@@ -111,9 +111,10 @@ class __$$GetNotificationsRequestImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$GetNotificationsRequestImpl implements _GetNotificationsRequest {
-  _$GetNotificationsRequestImpl({this.untilId, this.limit});
+  const _$GetNotificationsRequestImpl({this.untilId, this.limit});
 
   factory _$GetNotificationsRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$GetNotificationsRequestImplFromJson(json);
@@ -157,8 +158,9 @@ class _$GetNotificationsRequestImpl implements _GetNotificationsRequest {
 }
 
 abstract class _GetNotificationsRequest implements GetNotificationsRequest {
-  factory _GetNotificationsRequest({final String? untilId, final int? limit}) =
-      _$GetNotificationsRequestImpl;
+  const factory _GetNotificationsRequest(
+      {final String? untilId,
+      final int? limit}) = _$GetNotificationsRequestImpl;
 
   factory _GetNotificationsRequest.fromJson(Map<String, dynamic> json) =
       _$GetNotificationsRequestImpl.fromJson;

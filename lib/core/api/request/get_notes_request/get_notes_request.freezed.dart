@@ -117,7 +117,8 @@ class __$$GetNotesRequestImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$GetNotesRequestImpl implements _GetNotesRequest {
   const _$GetNotesRequestImpl({required this.query, this.untilId, this.limit});
 

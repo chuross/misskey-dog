@@ -8,6 +8,7 @@ part 'get_hash_tag_notes_request.g.dart';
 
 @freezed
 class GetHashTagNotesRequest with _$GetHashTagNotesRequest implements JsonEncodable {
+  @JsonSerializable(includeIfNull: false)
   const factory GetHashTagNotesRequest({
     @JsonKey(name: 'tag') required String hashTag,
     @JsonKey(name: 'withFiles') bool? hasFiles,

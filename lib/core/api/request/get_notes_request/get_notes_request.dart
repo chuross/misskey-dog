@@ -8,6 +8,7 @@ part 'get_notes_request.g.dart';
 
 @freezed
 class GetNotesRequest with _$GetNotesRequest implements JsonEncodable {
+  @JsonSerializable(includeIfNull: false)
   const factory GetNotesRequest({
     required String query,
     String? untilId,

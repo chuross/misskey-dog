@@ -16,10 +16,19 @@ _$GetHashTagNotesRequestImpl _$$GetHashTagNotesRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$GetHashTagNotesRequestImplToJson(
-        _$GetHashTagNotesRequestImpl instance) =>
-    <String, dynamic>{
-      'tag': instance.hashTag,
-      'withFiles': instance.hasFiles,
-      'limit': instance.limit,
-      'untilId': instance.untilId,
-    };
+    _$GetHashTagNotesRequestImpl instance) {
+  final val = <String, dynamic>{
+    'tag': instance.hashTag,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('withFiles', instance.hasFiles);
+  writeNotNull('limit', instance.limit);
+  writeNotNull('untilId', instance.untilId);
+  return val;
+}

@@ -137,7 +137,8 @@ class __$$GetUserNotesRequestImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$GetUserNotesRequestImpl implements _GetUserNotesRequest {
   _$GetUserNotesRequestImpl(
       {required this.userId,

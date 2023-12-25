@@ -143,7 +143,8 @@ class __$$GetHashTagNotesRequestImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$GetHashTagNotesRequestImpl implements _GetHashTagNotesRequest {
   const _$GetHashTagNotesRequestImpl(
       {@JsonKey(name: 'tag') required this.hashTag,

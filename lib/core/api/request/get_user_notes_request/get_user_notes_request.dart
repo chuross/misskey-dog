@@ -8,6 +8,7 @@ part 'get_user_notes_request.g.dart';
 
 @freezed
 class GetUserNotesRequest with _$GetUserNotesRequest implements JsonEncodable {
+  @JsonSerializable(includeIfNull: false)
   factory GetUserNotesRequest({
     required String userId,
     @JsonKey(name: 'withFiles') bool? hasFiles,

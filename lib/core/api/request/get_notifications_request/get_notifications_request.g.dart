@@ -14,8 +14,16 @@ _$GetNotificationsRequestImpl _$$GetNotificationsRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$GetNotificationsRequestImplToJson(
-        _$GetNotificationsRequestImpl instance) =>
-    <String, dynamic>{
-      'untilId': instance.untilId,
-      'limit': instance.limit,
-    };
+    _$GetNotificationsRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('untilId', instance.untilId);
+  writeNotNull('limit', instance.limit);
+  return val;
+}
