@@ -17,10 +17,10 @@ final class HomeAvaterIcon extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final animationController = useAnimationController(duration: const Duration(milliseconds: 500));
-    final isForceSensitiveRemoved = ref.watch(noteForceSensitiveRemovedProvider);
+    final isNoteForceSensitiveRemoved = ref.watch(noteForceSensitiveRemovedProvider);
 
     useEffect(() {
-      if (isForceSensitiveRemoved) {
+      if (isNoteForceSensitiveRemoved) {
         animationController.forward();
         animationController.repeat();
       } else {
@@ -28,12 +28,12 @@ final class HomeAvaterIcon extends HookConsumerWidget {
       }
 
       return null;
-    }, [isForceSensitiveRemoved]);
+    }, [isNoteForceSensitiveRemoved]);
 
     return IconButton(
       icon: Stack(
         children: [
-          if (isForceSensitiveRemoved)
+          if (isNoteForceSensitiveRemoved)
             AnimatedBuilder(
               animation: animationController,
               builder: (context, child) {
