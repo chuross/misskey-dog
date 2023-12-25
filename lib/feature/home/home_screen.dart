@@ -79,6 +79,8 @@ final class HomeScreen extends HookConsumerWidget {
                       Text('メディアのみ'.i18n, style: context.textTheme.labelMedium),
                       Switch(
                         value: isNoteMediaOnly,
+                        trackOutlineColor: MaterialStateProperty.all(context.dividerColorWithOpacity50),
+                        trackOutlineWidth: MaterialStateProperty.all(1),
                         onChanged: (newFlag) {
                           ref.read(noteMediaOnlyVisibleProvider.notifier).setMediaOnlyVisible(newFlag);
                         },
