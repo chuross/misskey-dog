@@ -217,7 +217,13 @@ final class _NoteFiles extends HookWidget {
     final imageFiles = files.where((e) => e.isImage).toList();
     final videoFiles = files.where((e) => e.isVideo).toList();
     final supportedFiles = [...imageFiles, ...videoFiles];
-    final isSensitiveRemoved = useState(isForceSensitiveRemoved || supportedFiles.every((e) => !e.isSensitive));
+    final hasSensitive = supportedFiles.any((e) => e.isSensitive);
+    final isSensitiveRemoved = useState(isForceSensitiveRemoved || !hasSensitive);
+
+    useEffect(() {
+      isSensitiveRemoved.value = isForceSensitiveRemoved || hasSensitive;
+      return null;
+    }, [isForceSensitiveRemoved]);
 
     if (supportedFiles.length == 1) {
       return _FileView(
