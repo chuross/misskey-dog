@@ -7,6 +7,7 @@ import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/api/api_provider.dart';
 import 'package:misskey_dog/core/view/screen_loading_view.dart';
 import 'package:misskey_dog/feature/account/account_screen.dart';
+import 'package:misskey_dog/feature/home/internal/home_avater_icon.dart';
 import 'package:misskey_dog/feature/home/internal/home_global_timeline.dart';
 import 'package:misskey_dog/feature/home/internal/home_local_timeline.dart';
 import 'package:misskey_dog/feature/home/internal/home_media_timeline.dart';
@@ -78,19 +79,14 @@ final class HomeScreen extends HookConsumerWidget {
                     onLongPress: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(ref.read(noteForceSensitiveRemovedProvider) ? '解除！'.i18n : 'センシティブオーバードライブ！'.i18n),
+                          content: Text(ref.read(noteForceSensitiveRemovedProvider) ? '解除！'.i18n : 'NSFWオーバードライブ!'.i18n),
                         ),
                       );
 
                       ref.read(noteForceSensitiveRemovedProvider.notifier).toggle();
                     },
-                    child: IconButton(
-                      icon: switch (account.user.avatarUrl) {
-                        final avatarUrl? => CircleAvatar(
-                            foregroundImage: CachedNetworkImageProvider(avatarUrl),
-                          ),
-                        _ => const Icon(Icons.person),
-                      },
+                    child: HomeAvaterIcon(
+                      account: account,
                       onPressed: () => AccountRoute().push(context),
                     ),
                   ),
