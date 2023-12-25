@@ -11,7 +11,7 @@ final class Notifications extends _$Notifications {
   Future<List<Notification>> build() async {
     final client = await ref.watch(misskeyClientProvider().future);
 
-    return await client.getNotifications(GetNotificationsRequest(
+    return await client.getNotifications(const GetNotificationsRequest(
       limit: 100,
     ));
   }
