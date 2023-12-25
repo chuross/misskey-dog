@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:i18n_extension/default.i18n.dart';
 import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/date_time.dart';
+import 'package:misskey_dog/core/extension/int.dart';
 import 'package:misskey_dog/core/extension/object.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/feature/emoji/emoji_reaction_creation_modal.dart';
@@ -107,6 +108,22 @@ final class _UserInfomation extends StatelessWidget {
             onHashtagPressed: (hashtag) => HashtagNotesRoute(hashtag: hashtag).push(context),
             onUrlPressed: (url) => launchUrl(Uri.parse(url)),
           ),
+        const SizedBox(height: 24),
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          decoration: BoxDecoration(
+            border: Border.all(color: context.dividerColorWithOpacity30),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _UserCountInfo(label: 'ノート'.i18n, count: user.notesCount ?? 0),
+              _UserCountInfo(label: 'フォロー'.i18n, count: user.followingCount ?? 0),
+              _UserCountInfo(label: 'フォロワー'.i18n, count: user.followersCount ?? 0),
+            ],
+          ),
+        )
       ],
     ).padding(const EdgeInsets.all(16));
   }
@@ -135,6 +152,23 @@ final class _UserFollowingButton extends HookConsumerWidget {
             onPressed: () => toggle(),
             child: Text('フォロー'.i18n),
           );
+  }
+}
+
+final class _UserCountInfo extends StatelessWidget {
+  final String label;
+  final int count;
+
+  const _UserCountInfo({required this.label, required this.count});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(count.withCommma, style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+        Text(label, style: context.textTheme.bodySmall?.copyWith(color: Colors.grey.shade700)),
+      ],
+    );
   }
 }
 
