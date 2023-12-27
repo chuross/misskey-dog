@@ -30,7 +30,7 @@ final class NotificationsScreen extends HookConsumerWidget {
         title: Text('通知'.i18n),
       ),
       body: switch (notifications) {
-        AsyncData(:final value) => RefreshIndicator(
+        AsyncData(:final value) => RefreshIndicator.adaptive(
             onRefresh: () async => ref.invalidate(notificationsProvider),
             child: LoadMoreView(
               onNext: () => ref.read(notificationsProvider.notifier).fetchNext(),

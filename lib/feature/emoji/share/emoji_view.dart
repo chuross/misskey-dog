@@ -40,7 +40,7 @@ final class _LocalEmojiView extends ConsumerWidget {
       case AsyncError():
         return SizedBox.square(dimension: height);
       default:
-        return SizedBox.square(dimension: height, child: const CircularProgressIndicator(strokeWidth: 1));
+        return SizedBox.square(dimension: height, child: const CircularProgressIndicator.adaptive(strokeWidth: 1));
     }
   }
 }

@@ -41,7 +41,7 @@ final class NoteListView extends HookConsumerWidget {
       case AsyncData(:final value) when !noteIds.isRefreshing:
         return Stack(
           children: [
-            RefreshIndicator(
+            RefreshIndicator.adaptive(
               onRefresh: () async => onRefresh(),
               child: LoadMoreView(
                 onNext: onFetchNext,
@@ -83,7 +83,7 @@ final class NoteListView extends HookConsumerWidget {
                       child: const SizedBox(
                         width: 24,
                         height: 24,
-                        child: CircularProgressIndicator(strokeWidth: 2),
+                        child: CircularProgressIndicator.adaptive(strokeWidth: 2),
                       ).align(Alignment.center).padding(const EdgeInsets.symmetric(vertical: 16)),
                     ),
                   ],

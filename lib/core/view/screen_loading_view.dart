@@ -18,7 +18,7 @@ final class ScreenLoadingView extends StatelessWidget {
           stackTrace: stackTrace,
           onRetry: onRetry,
         ),
-      _ => const CircularProgressIndicator(
+      _ => const CircularProgressIndicator.adaptive(
           strokeWidth: 4.0,
         ).align(Alignment.center),
     };

@@ -438,7 +438,10 @@ final class _VideoView extends HookWidget {
                     ],
                   ),
                 )
-              : const SizedBox.square(dimension: 24, child: CircularProgressIndicator(strokeWidth: 2)),
+              : Container(
+                  alignment: Alignment.center,
+                  child: const SizedBox.square(dimension: 32, child: CircularProgressIndicator.adaptive(strokeWidth: 2)),
+                ),
         ),
       ),
     );

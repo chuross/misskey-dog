@@ -31,21 +31,24 @@ final class AccountScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text('アカウント'.i18n)),
-      body: ListView(
-        children: [
-          ListTile(
-            onTap: () {
-              ref.read(accountStateProvider.future).then((value) {
-                UserDetailRoute(userId: value?.user.id ?? '').push(context);
-              });
-            },
-            title: Text('プロフィール'.i18n),
-          ),
-          Divider(color: context.dividerColorWithOpacity30),
-          ListTile(
-            onTap: () async => await ref.read(accountStateProvider.notifier).clear(),
-            title: Text('ログアウト'.i18n).align(Alignment.center),
-            textColor: CupertinoColors.destructiveRed,
+      body: CustomScrollView(
+        slivers: [
+          SliverList.list(children: [
+            ListTile(
+              onTap: () {
+                ref.read(accountStateProvider.future).then((value) {
+                  UserDetailRoute(userId: value?.user.id ?? '').push(context);
+                });
+              },
+              title: Text('プロフィール'.i18n),
+            ),
+          ]),
+          SliverToBoxAdapter(
+            child: TextButton(
+              onPressed: () async => await ref.read(accountStateProvider.notifier).clear(),
+              style: ButtonStyle(foregroundColor: MaterialStateProperty.all(CupertinoColors.destructiveRed)),
+              child: Text('ログアウト'.i18n).align(Alignment.center),
+            ),
           ),
         ],
       ),

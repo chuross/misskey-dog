@@ -130,7 +130,7 @@ final class _ImageView extends HookWidget {
                       imageUrl: thumbnailUrl,
                       fit: BoxFit.contain,
                     ),
-                  _ => const CircularProgressIndicator(),
+                  _ => const CircularProgressIndicator.adaptive(),
                 },
               ),
             ),
