@@ -77,7 +77,7 @@ final class HomeScreen extends HookConsumerWidget {
                   title: Row(
                     children: [
                       Text('メディアのみ'.i18n, style: context.textTheme.labelMedium),
-                      Switch(
+                      Switch.adaptive(
                         value: isNoteMediaOnly,
                         trackOutlineColor: MaterialStateProperty.all(context.dividerColorWithOpacity50),
                         trackOutlineWidth: MaterialStateProperty.all(1),
