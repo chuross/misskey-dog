@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:i18n_extension/default.i18n.dart';
-import 'package:misskey_dog/core/extension/build_context.dart';
 import 'package:misskey_dog/core/extension/widget.dart';
 import 'package:misskey_dog/feature/home/home_screen.dart';
 import 'package:misskey_dog/feature/login/login_screen.dart';
